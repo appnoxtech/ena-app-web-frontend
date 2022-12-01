@@ -1,0 +1,22 @@
+.count_pages{
+
+    font-size: 17px;
+    padding-right: 500px;
+    font-weight: 600
+
+}
+.sort_text{
+    font-size: 18px;
+    font-weight: 600
+
+}
+
+.search_bar{
+    border-radius: 6px;
+}
+.arow
+{
+  
+   z-index: 999;
+
+}

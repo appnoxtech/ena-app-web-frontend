@@ -3,19 +3,18 @@ import './Card.css'
 import Carrot from '../../assets/images/carrot.jpg'
 const Card = () => {
   return (
-    <div className='card_container '>
-      <div className='d-flex justify-content-center align-item-center'>
-        <div>
-          <p className="Off_container">10% off</p>
-        </div>
-        <div>
-          <a href='#' className='heart_container'>
+    <div className='card_container border'>
+      <div className='card'>
+        <img src={Carrot} className='card-img-top ' alt='...' />
+        <div className='fabDiv'>
+          <div className='rounded-end Off_container'>
+            <p className=' p-0 m-0 px-4 py-2'>10% off</p>
+          </div>
+
+          <a href='#' className='text-end px-2'>
             <i className='fa fa-heart-o heart_icon' aria-hidden='true'></i>
           </a>
         </div>
-      </div>
-      <div className='card'>
-        <img src={Carrot} className='card-img-top w-2' alt='...' />
         <div className='card-body'>
           <h5 className='card-title'>Carrot </h5>
           <p className='card-text w-2 '>kn 35.2/kg</p>
