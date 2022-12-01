@@ -3,9 +3,11 @@ import Card from '../card/Card'
 import Searchbar from '../searchbar/Searchbar'
 import Category from '../categorybar/Category'
 import Filterbar from '../filterbar/Filterbar'
+import DesktopFooter from '../desktopFooter/DesktopFooter'
 
 function Home() {
   return (
+    <div className='container'>
     <div className=' col-12'>
       <Searchbar />
       <div className='side-Part rounded-4 bg-white'></div>
@@ -24,6 +26,7 @@ function Home() {
           </div>
         </div>
       </div>
+    </div>
     </div>
   )
 }

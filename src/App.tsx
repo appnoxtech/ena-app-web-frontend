@@ -8,6 +8,7 @@ import Searchbar from './component/searchbar/Searchbar'
 import Category from './component/categorybar/Category'
 import Card from './component/card/Card'
 import Home from './component/Home'
+import DesktopFooter from './component/desktopFooter/DesktopFooter'
 
 
 const App = () => {
@@ -20,6 +21,7 @@ const App = () => {
             <Route path='/' element={<Home />} />
           </Routes>
         </BrowserRouter>
+        <DesktopFooter />
       </div>
     </>
   )

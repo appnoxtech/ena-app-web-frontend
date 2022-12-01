@@ -1,0 +1,24 @@
+ul li{
+    list-style: none;
+    color: white;
+}
+
+.copyright{
+    color: white;
+}
+.main{
+    background-color: rgb(74, 59, 58) !important;
+    font-size: large;
+    font-weight: 500;
+}
+
+.submain{
+    width: 100% !important;
+}
+
+
+.heading{
+    color: rgb(171, 149, 147);
+    font-weight: 500;
+    padding-bottom: 20px;
+}
