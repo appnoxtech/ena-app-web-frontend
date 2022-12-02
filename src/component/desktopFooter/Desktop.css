@@ -1,15 +1,25 @@
+
 ul li{
     list-style: none;
-    color: white;
+    padding: 3px;
 }
 
 .copyright{
-    color: white;
+    margin-bottom: 0;
+    padding-bottom:0;
 }
-.main{
-    background-color: rgb(74, 59, 58) !important;
-    font-size: large;
+footer{
+    margin-top: 10vh;
+    height: 58vh;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #4F4F4F !important;
+    font-size: 16px;
     font-weight: 500;
+    color: #FFFFFF;
+}
+
+.main{
+    padding-top: 9vh;
 }
 
 .submain{
@@ -18,7 +28,17 @@ ul li{
 
 
 .heading{
-    color: rgb(171, 149, 147);
-    font-weight: 500;
-    padding-bottom: 20px;
+    color: #BDBDBD;
+    font-size: 18px !important;
+    padding-bottom: 18px;
+}
+
+.sub_email{
+    width: 427.39px !important;
+    height: 40px !important;
+}
+
+.sub_button{
+    width: 112.01px !important;
+    height: 40px !important;
 }

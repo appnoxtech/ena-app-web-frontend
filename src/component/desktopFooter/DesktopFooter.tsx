@@ -5,8 +5,8 @@ import './Desktop.css'
 function DesktopFooter() {
   return (
     
-    <div className='container-fluid main'>
-        <div className='row container-fluid pt-4'>
+    <footer className='container-fluid'>
+        <div className='row container-fluid main'>
         <div className='col-sm-6 row container-fluid  d-flex justify-content-center'>
             <div className='col-sm-6 row d-flex justify-content-evenly submain'>
                 <div className='col-sm-4'>
@@ -45,9 +45,9 @@ function DesktopFooter() {
                <ul>
                    <li className='heading'>Join Our Newsletter</li>
                    <li>
-                       <div className="input-group mb-3">
+                       <div className="input-group mb-3 sub_email">
                            <input type="text" className="form-control" placeholder="Enter Your Email Address" aria-label="Recipient's username" aria-describedby="button-addon2" />
-                           <button className="btn btn-outline-secondary" type="button" id="button-addon2">Subscribe</button>
+                           <button className="btn btn-outline-secondary sub_button" type="button" id="button-addon2">Subscribe</button>
                        </div>
                    </li>
                </ul>
@@ -63,7 +63,7 @@ function DesktopFooter() {
             
         </div>
      </div>
-    </div>
+    </footer>
   )
 }
 
