@@ -9,13 +9,17 @@ import Category from './Component/Categorybar/Category'
 import Card from './Component/Common/Card/Card'
 import Home from './Screens/Home'
 import DesktopFooter from './Component/DsFooter/DesktopFooter'
-import Login from './Screens/Auth/Login/Login';
 
 
 
 // importing login screens 
-import SignIn from './Screens/Auth';
+import Login from './Screens/Auth/Login/Login';
+import Logincart from './Screens/Auth/Logincart/Logincart';
 import ForgetPass from './Screens/Auth/ForgetPass/ForgetPass';
+import OtpVerified from './Screens/Auth/OtpVerified/Otpverified';
+import OtpVar from './Screens/Auth/Otp/OtpVar';
+import Signup from './Screens/Auth/Signup/Signup';
+
 
 
 const App = () => {
@@ -28,8 +32,12 @@ const App = () => {
         <BrowserRouter>
           <Routes>
             <Route path='/' element={<Home />} />
-            <Route path='/login' element={<SignIn />} />
-            <Route path='/Signin' element={<Login />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/logincart' element={<Logincart />} />
+            <Route path='/signup' element={<Signup />} />
+            <Route path='/forgetPassword' element={<ForgetPass />} />
+            <Route path='/otp' element={<OtpVar />} />
+            <Route path='/otpVerified' element={<OtpVerified />} />
           </Routes>
         </BrowserRouter>
         {/* <DesktopFooter /> */}

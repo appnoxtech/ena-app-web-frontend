@@ -1,13 +1,54 @@
+a{
+    text-decoration: none !important;
+}
+
+
+/* css for body of the login screens  */
+
+
+.boody{
+    width: 100vw;
+    height: 100vh;
+    background: #fff !important;
+}
+
+.main{
+    height: 80vh !important;
+ }
+
+ /* css for form outer div  */
+
+ 
+.form{
+    width: fit-content;
+    border: 1px solid black;
+    border-radius: 20px;
+}
+
+
+/* css for headings of form  */
+
 .heading{
     font-weight: 700;
     font-size: 28px;
     margin-top: 20px;
 }
 
+/* css for go back img  */
+/* 
+.backimg{
+    margin-top: 40px;
+    cursor: pointer;
+} */
+
+/* css for sub heading of form */
+
 .subheading{
     font-weight: 500;
     font-size: 22px;
 }
+
+/* css for sub heading outer link  */
 
 .sign{
     font-weight: 700;
@@ -15,24 +56,16 @@
     color: #51BC4A;
 }
 
+/* css input field  */
+
 .inputs{
     margin-top: 40px;
+    margin-left: 50px;
 }
+
 .lable{
     font-weight: 500 !important;
     font-size: 16px !important;
-}
-
-
-.main{
-   /* border: 1px solid black; */
-   height: 80vh !important;
-   /* overflow: hidden; */
-   margin: 2.5% 0 ;
-}
-
-.backimg{
-    margin-top: 40px;
 }
 
 input{
@@ -45,17 +78,35 @@ input{
     border-radius: 8px;
 }
 
-.inputs{
-    margin-left: 50px;
-}
+/* css for button  */
 
 .button{
     background: #51BC4A;
-    width: 666px !important;
-    height: 56px !important;
     margin-top: 2%;
 }
 
 .button:hover{
     background: #4dc444;
+}
+
+/* css for forget password link  */
+
+.forget_pass{
+        font-weight: 500 !important;
+        font-size: 14px !important;
+        text-align: right !important;
+        color: #51BC4A !important;
+        margin-top: 10px !important;
+}
+
+/* otp field css  */
+
+.otp-field{
+    text-align: center;
+    width: 56px;
+    height: 56px;
+    margin: 5px;
+    font-weight: 700;
+    font-size: 22px;
+
 }
