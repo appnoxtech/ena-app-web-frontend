@@ -1,17 +1,17 @@
 .heading{
     font-weight: 700;
-    font-size: 28px;
+    font-size: 25px;
     margin-top: 20px;
 }
 
 .subheading{
     font-weight: 500;
-    font-size: 22px;
+    font-size: 19px;
 }
 
 .sign{
     font-weight: 700;
-    font-size: 22px;
+    font-size: 19px;
     color: #51BC4A;
 }
 
@@ -20,7 +20,7 @@
 }
 .lable{
     font-weight: 500 !important;
-    font-size: 16px !important;
+    font-size: 15px !important;
 }
 
 .boody{
@@ -37,16 +37,16 @@
 }
 
 .backimg{
-    margin-top: 40px;
+    margin-top: 10px;
 }
 
 input{
     width: 666px;
-    height: 56px;
+    height: 40px;
     background: #F8F9F7;
     padding: 12px;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 11px;
     border-radius: 8px;
 }
 

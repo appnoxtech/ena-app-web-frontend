@@ -1,6 +1,6 @@
 import React from 'react';
-import Backpng from '../../../assets/images/back.png';
-import './Forget.css';
+import Backpng from '../../../Assets/Images/back.png';
+import './ForgetPass.css';
 
 function Forget() {
   return (

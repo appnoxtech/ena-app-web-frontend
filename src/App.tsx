@@ -3,15 +3,19 @@ import logo from './logo.svg'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Navigation from './pages/Route/Navigation'
-import Navbar from './component/navbar/NavBar'
-import Searchbar from './component/searchbar/Searchbar'
-import Category from './component/categorybar/Category'
-import Card from './component/card/Card'
-import Home from './component/Home'
-import DesktopFooter from './component/desktopFooter/DesktopFooter'
-import Login from './component/loginPages/loginwithitemtocart/Loginwithitemincart';
-import SignIn from './component/loginPages';
+import Navbar2 from './Component/Navbar/NavBar'
+import Searchbar from './Component/Searchbar/Searchbar'
+import Category from './Component/Categorybar/Category'
+import Card from './Component/Common/Card/Card'
+import Home from './Screens/Home'
+import DesktopFooter from './Component/DsFooter/DesktopFooter'
+import Login from './Screens/Auth/Login/Login';
+
+
+
+// importing login screens 
+import SignIn from './Screens/Auth';
+import ForgetPass from './Screens/Auth/ForgetPass/ForgetPass';
 
 
 const App = () => {
@@ -19,11 +23,13 @@ const App = () => {
     <>
       <div className='main_screen'>
         {/* <Login /> */}
-        <SignIn />
-        {/* <Navbar /> */}
+        {/* <SignIn /> */}
+        {/* <Navbar2 /> */}
         <BrowserRouter>
           <Routes>
-            {/* <Route path='/' element={<Home />} /> */}
+            <Route path='/' element={<Home />} />
+            <Route path='/login' element={<SignIn />} />
+            <Route path='/Signin' element={<Login />} />
           </Routes>
         </BrowserRouter>
         {/* <DesktopFooter /> */}
@@ -31,4 +37,4 @@ const App = () => {
     </>
   )
 }
-export default App
+export default App;

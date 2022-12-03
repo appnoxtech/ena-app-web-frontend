@@ -1,14 +1,15 @@
 import React from 'react'
-import Card from '../card/Card'
-import Searchbar from '../searchbar/Searchbar'
-import Category from '../categorybar/Category'
-import Filterbar from '../filterbar/Filterbar'
-import DesktopFooter from '../desktopFooter/DesktopFooter'
+import Card from '../../Component/Common/Card/Card'
+import Searchbar from '../../Component/Searchbar/Searchbar'
+import Category from '../../Component/Categorybar/Category'
+import Filterbar from '../../Component/Filterbar/Filterbar'
+import DesktopFooter from '../../Component/DsFooter/DesktopFooter';
+import Navbar from '../../Component/Navbar/NavBar'
 
 function Home() {
   return (
-    <div className='container'>
     <div className=' col-12'>
+      <Navbar />
       <Searchbar />
       <div className='side-Part rounded-4 bg-white'></div>
       <div className='d-flex flex-column flex-md-row'>
@@ -26,7 +27,7 @@ function Home() {
           </div>
         </div>
       </div>
-    </div>
+      <DesktopFooter />
     </div>
   )
 }

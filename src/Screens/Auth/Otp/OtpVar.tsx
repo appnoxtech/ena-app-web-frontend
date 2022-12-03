@@ -1,5 +1,5 @@
 import React from 'react';
-import Backpng from '../../../assets/images/back.png';
+import Backpng from '../../../Assets/Images/back.png';
 import './OtpVar.css';
 
 function OtpVar() {

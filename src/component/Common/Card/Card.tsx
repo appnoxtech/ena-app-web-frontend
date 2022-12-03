@@ -1,9 +1,9 @@
 import React from 'react'
 import './Card.css'
-import Carrot from '../../assets/images/carrot.jpg'
+import Carrot from '../../../Assets/Images/carrot.jpg';
 const Card = () => {
   return (
-    <div className='card_container border'>
+    <div className='card_container'>
       <div className='card'>
         <img src={Carrot} className='card-img-top ' alt='...' />
         <div className='fabDiv'>

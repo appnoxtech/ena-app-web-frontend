@@ -1,21 +1,23 @@
 import React from 'react'
 import './Navbar.css'
-import Desktop from '../desktopnav/Desktop'
-import Mobilenav from '../mobilenav/Mobilenav'
+import Desktop from '../DeskNav/Desktop'
+import Mobilenav from '../MobileNav/Mobilenav'
 
-function Navbar() {
+function Navbar2() {
+  
   return (
     <div>
       <div className='d-none d-md-flex  '>
-      <Desktop/>
+        <Desktop/>
       </div>
 
-      <div className='d-flex d-md-none'>
+      {/* <div className='d-flex d-md-none'>
         <i className='fa fa-bars' aria-hidden='true'></i>
         <Mobilenav/>
-      </div>
+      </div> */}
+
     </div>
   )
 }
 
-export default Navbar
+export default Navbar2;

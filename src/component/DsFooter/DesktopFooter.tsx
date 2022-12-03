@@ -1,5 +1,5 @@
 import React from 'react';
-import Ena from '../../assets/images/enaLogo.jpg';
+import Ena from '../../Assets/Images/enaLogo.jpg';
 import './Desktop.css'
 
 function DesktopFooter() {

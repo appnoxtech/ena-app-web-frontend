@@ -1,10 +1,13 @@
 import React from 'react'
-import Ena from '../../assets/images/enaLogo.jpg'
+import Ena from '../../Assets/Images/enaLogo.jpg'
 import './Desktop.css'
+
+
 
 const Desktop = () => {
   return (
     <div className='col-12 p-4'>
+      
       <div className='  d-md-flex justify-content-between align-items-center  '>
         <div>
           <img className='imageProp ' src={Ena} alt='Ena' />
