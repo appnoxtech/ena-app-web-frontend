@@ -1,0 +1,61 @@
+.productSliderMain .image-gallery-slide {
+    padding: 2rem;
+    background: #F8F9F7;
+    border-radius: 17.5231px;
+}
+
+.productSliderMain .image-gallery-thumbnail-inner {
+    background: #F8F9F7;
+    border: 1px solid #51BC4A;
+    box-shadow: 0px 2px 4px rgba(81, 188, 74, 0.61);
+    border-radius: 8px;
+}
+
+.image-gallery-thumbnail.active,
+.image-gallery-thumbnail:focus,
+.image-gallery-thumbnail:hover,
+.image-gallery-thumbnail:hover {
+    outline: none !important;
+    border: none !important;
+}
+
+.CrossText {
+    color: #648966;
+    font-size: 18px;
+}
+
+.offerPercent {
+    width: 6.4rem;
+    font-size: 13px;
+    background-color: #51BC4A;
+    padding-right: 10px;
+    color: white;
+}
+
+.greentext {
+    color: #648966;
+    margin-bottom: 0;
+}
+
+.AddToCartBtnProduct {
+    width: 100%;
+    background: none;
+    color: #313131;
+    border: 0.50828px solid #313131;
+    border-radius: 8px;
+}
+.socialIconMain{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.socialIconMain img{
+    margin-left: 1.5rem;
+}
+.crossTextRelated{
+    color:  #828282;
+    font-size: 1rem;
+}
+.offContainerGreen{
+    background-color: #51BC4A;
+}
