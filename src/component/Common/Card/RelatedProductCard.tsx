@@ -1,5 +1,5 @@
-import Carrot from '../../assets/images/carrot.jpg'
-import heartIcon from '../../assets/images/hearticonred.svg'
+import Carrot from '../../../Assets/Images/product/carrot.png'
+import heartIcon from '../../../Assets/Images/hearticonred.svg'
 
 
 const RelatedProductCard = () => {
