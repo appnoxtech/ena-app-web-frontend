@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import Ena from '../../Assets/Images/enaLogoGreen.png'
+import Ena from '../../assets/images/enaLogoGreen.png'
 import './Desktop.css'
 
 const Desktop = () => {

@@ -1,12 +1,12 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Login from '../../Screens/Auth/login/Login'
-import Logincart from '../../Screens/Auth/logincart/Logincart'
-import ForgetPass from '../../Screens/Auth/forgetPass/ForgetPass'
-import Home from '../../Screens/home'
+import Login from '../../Screens/Auth/Login/Login'
+import Logincart from '../../Screens/Auth/Logincart/Logincart'
+import ForgetPass from '../../Screens/Auth/ForgetPass/ForgetPass'
+import Home from '../../Screens/Home'
 import OtpVar from '../../Screens/Auth/otpVar/OtpVar'
-import OtpVerified from '../../Screens/Auth/otpVerified/Otpverified'
-import Signup from '../../Screens/Auth/signup/Signup'
+import OtpVerified from '../../Screens/Auth/OtpVerified/Otpverified'
+import Signup from '../../Screens/Auth/Signup/Signup'
 
 function Navigations() {
   return (

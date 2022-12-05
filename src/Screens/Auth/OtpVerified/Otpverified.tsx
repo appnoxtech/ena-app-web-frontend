@@ -1,10 +1,10 @@
 import React from 'react'
-import Navbar from '../../../Component/navbar/NavBar'
+import Navbar from '../../../component/navbar/NavBar'
 import '../index.css'
-import banner from '../../../Assets/Images/bannerH.png'
-import bannerforphone from '../../../Assets/Images/banner.png'
-import DesktopFooter from '../../../Component/footer/Footer'
-import verifyImg from '../../../Assets/Images/114809-success.gif'
+import banner from '../../../assets/images/bannerH.png'
+import bannerforphone from '../../../assets/images/banner.png'
+import DesktopFooter from '../../../component/footer/Footer'
+import verifyImg from '../../../assets/images/114809-success.gif'
 import { NavLink } from 'react-router-dom'
 
 function Passchanged() {

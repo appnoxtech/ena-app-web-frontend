@@ -1,10 +1,10 @@
 import React from 'react'
-import Card from '../../Component/Common/card/Card'
-import Searchbar from '../../Component/searchbar/Searchbar'
-import Category from '../../Component/categorybar/Category'
-import Filterbar from '../../Component/filterbar/Filterbar'
-import Footer from '../../Component/footer/Footer'
-import Navbar from '../../Component/navbar/NavBar'
+import Card from '../../component/Common/Card/Card'
+import Searchbar from '../../component/searchbar/Searchbar'
+import Category from '../../component/categorybar/Category'
+import Filterbar from '../../component/filterbar/Filterbar'
+import Footer from '../../component/footer/Footer'
+import Navbar from '../../component/navbar/NavBar'
 
 function Home() {
   return (

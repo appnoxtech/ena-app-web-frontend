@@ -1,5 +1,5 @@
 import React from 'react'
-import Ena from '../../Assets/Images/enaLogo.png'
+import Ena from '../../assets/images/enaLogo.png'
 import './Footer.css'
 import { FaFacebook, FaInstagram } from 'react-icons/fa'
 
