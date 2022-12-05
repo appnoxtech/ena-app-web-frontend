@@ -1,24 +1,15 @@
 import React from 'react'
-import { IoIosArrowBack } from 'react-icons/all'
-
-// css imports 
-
-import '../index.css'
-
-// assets imports 
-
-import banner from '../../../Assets/Images/bannerH.png'
-
-import Navbar from '../../../Component/navbar/NavBar'
-
-
-import bannerforphone from '../../../Assets/Images/banner.png'
-
-import LoginInput from '../../../Component/Common/loginInput'
 import { NavLink, useNavigate } from 'react-router-dom'
+import { IoIosArrowBack } from 'react-icons/all'
+import '../Auth.css'
+import banner from '../../../Assets/Images/bannerH.png'
+import bannerforphone from '../../../Assets/Images/banner.png'
+import Navbar from '../../../Component/navbar/NavBar'
+import LoginInput from '../../../Component/Common/loginInput'
 import DesktopFooter from '../../../Component/footer/Footer'
 
 function ForgetPass() {
+  const heading = 'Forget Password ?'
   const history = useNavigate()
   return (
     <>
@@ -34,21 +25,20 @@ function ForgetPass() {
             </div>
             <div className='col-lg-8 col-md-8 col-sm-12'>
               <IoIosArrowBack
-                className='border mt-3 rounded-3 backicon'
+                className='border mt-3 rounded-3 backicon d-none d-md-block d-lg-block'
                 size={30}
                 onClick={() => history(-1)}
               />
               <div className='col-10 mx-auto mt-0 pt-0'>
-                <p className='heading mt-1'>Forget Password ?</p>
-                <p className='subheading'>
-                  Don't worry! it occurs. Please enter the email address <br />
-                  linked with your account.
+                <p className='mt-1 h3 fontWeight-700'>{heading}</p>
+                <p className='h6'>
+                  Don't worry! it occurs. Please enter the email address linked with your account.
                 </p>
-                <label className='form-label lable'>Email</label>
+                <label className='form-label mt-3 h6 d-none d-lg-block d-md-block'>Email</label>
                 <LoginInput type='email' name='email' id='email' placeholder='Enter your email' />
                 <button
                   type='button'
-                  className='btn w-100 h-100 mt-4 button'
+                  className='btn w-100 h-100 mt-4 fontWeight-600 button'
                   onClick={() => history('/otp_verification')}
                 >
                   Send Code

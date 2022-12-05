@@ -1,13 +1,15 @@
 import React from 'react'
-import Navbar from '../../../Component/navbar/NavBar'
-import '../index.css'
+import { NavLink } from 'react-router-dom'
+import '../Auth.css'
+import '../../../Assets/global/global.css'
+import verifyImg from '../../../Assets/Images/114809-success.gif'
 import banner from '../../../Assets/Images/bannerH.png'
 import bannerforphone from '../../../Assets/Images/banner.png'
+import Navbar from '../../../Component/navbar/NavBar'
 import DesktopFooter from '../../../Component/footer/Footer'
-import verifyImg from '../../../Assets/Images/114809-success.gif'
-import { NavLink } from 'react-router-dom'
 
 function Passchanged() {
+  const heading = 'Password Changed'
   return (
     <>
       <Navbar />
@@ -23,14 +25,14 @@ function Passchanged() {
             <div className='col-lg-8 col-md-8 col-sm-12'>
               <div className='col-10 mx-auto mt-0 pt-0 text-center'>
                 <img src={verifyImg} alt='verifyImg' width='20%' />
-                <p className='heading mt-1'>Password Changed</p>
-                <p className='subheading'>
+                <p className='mt-1 h3 fontWeight-700'>{heading}</p>
+                <p className='h6'>
                   Password has been changed
                   <br />
                   successfully.
                 </p>
                 <NavLink to='/login'>
-                  <button type='button' className='btn w-100 h-100 mt-4 button'>
+                  <button type='button' className='btn w-100 h-100 mt-4 fontWeight-600 button'>
                     Back to Login
                   </button>
                 </NavLink>

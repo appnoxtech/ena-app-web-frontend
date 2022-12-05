@@ -1,14 +1,16 @@
 import React from 'react'
-import Navbar from '../../../Component/navbar/NavBar'
-import '../index.css'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { IoIosArrowBack } from 'react-icons/all'
+import '../Auth.css'
+import '../../../Assets/global/global.css'
 import banner from '../../../Assets/Images/bannerH.png'
 import bannerforphone from '../../../Assets/Images/banner.png'
-import { IoIosArrowBack } from 'react-icons/all'
+import Navbar from '../../../Component/navbar/NavBar'
 import LoginInput from '../../../Component/Common/loginInput'
-import { NavLink, useNavigate } from 'react-router-dom'
 import DesktopFooter from '../../../Component/footer/Footer'
 
 function Login() {
+  const heading = 'Sign in'
   const history = useNavigate()
   return (
     <>
@@ -24,21 +26,21 @@ function Login() {
             </div>
             <div className='col-lg-8 col-md-8 col-sm-12'>
               <IoIosArrowBack
-                className='border mt-3 rounded-3 backicon'
+                className='border mt-3 rounded-3 backicon d-none d-md-block d-lg-block'
                 size={30}
                 onClick={() => history(-1)}
               />
               <div className='col-10 mx-auto mt-0 pt-0'>
-                <p className='heading mt-1'>Sign in</p>
-                <p className='subheading'>
+                <p className='mt-1 h3 fontWeight-700'>{heading}</p>
+                <p className='h6'>
                   Don't have a account ?
                   <NavLink to='/signup'>
-                    <span className='sign'> Sign up </span>
+                    <span className='font-green fontWeight-700'> Sign up </span>
                   </NavLink>
                 </p>
-                <label className='form-label lable'>Email</label>
+                <label className='form-label mt-3 h6 d-none d-lg-block d-md-block'>Email</label>
                 <LoginInput type='email' name='email' id='email' placeholder='Enter your email' />
-                <label className='form-label mt-3 lable'>Password</label>
+                <label className='form-label mt-3 h6 h3 d-none d-lg-block d-md-block'>Password</label>
                 <LoginInput
                   type='password'
                   name='password'
@@ -46,9 +48,9 @@ function Login() {
                   placeholder='Enter your password'
                 />
                 <NavLink to='/forget_password'>
-                  <div className='text-end forget_pass'>Forget Password?</div>
+                  <div className='text-end h6 mt-2 font-green'>Forget Password?</div>
                 </NavLink>
-                <button type='button' className='btn w-100 h-100 mt-4 button'>
+                <button type='button' className='btn w-100 h-100 mt-4 fontWeight-600 button'>
                   Login
                 </button>
               </div>

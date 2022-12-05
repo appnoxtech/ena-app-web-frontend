@@ -4,7 +4,7 @@ function LoginInput(prop:any) {
   return (
       <input
         type={prop.type}
-        className='form-control'
+        className='form-control mt-3'
         id={prop.id}
         placeholder={prop.placeholder}
         name={prop.name}

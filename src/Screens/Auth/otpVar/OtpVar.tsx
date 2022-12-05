@@ -1,15 +1,17 @@
 import React from 'react'
-import Navbar from '../../../Component/navbar/NavBar'
-import '../index.css'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { IoIosArrowBack } from 'react-icons/all'
+import '../Auth.css'
+import '../../../Assets/global/global.css'
 import banner from '../../../Assets/Images/bannerH.png'
 import bannerforphone from '../../../Assets/Images/banner.png'
-import { IoIosArrowBack } from 'react-icons/all'
-import { NavLink, useNavigate } from 'react-router-dom'
+import Navbar from '../../../Component/navbar/NavBar'
 import DesktopFooter from '../../../Component/footer/Footer'
 import OtpInput from '../../../Component/otpInput/OtpInput'
 
 
 function OtpVar() {
+  const heading = 'OTP Verification'
   const history = useNavigate()
 
   return (
@@ -26,20 +28,20 @@ function OtpVar() {
             </div>
             <div className='col-lg-8 col-md-8 col-sm-12'>
               <IoIosArrowBack
-                className='border mt-3 rounded-3 backicon'
+                className='border mt-3 rounded-3 backicon d-none d-md-block d-lg-block'
                 size={30}
                 onClick={() => history(-1)}
               />
               <div className='col-10 mx-auto mt-0 pt-0'>
-                <p className='heading mt-1'>OTP Verification</p>
-                <p className='subheading'>
+                <p className='mt-1 h3 fontWeight-700'>{heading}</p>
+                <p className='h6'>
                   Enter the verification code we just sent on your email <br /> address.
                 </p>
                 <div className='text-center'>
                   <OtpInput />
                 </div>
                 <NavLink to='/otp_verified'>
-                  <button type='button' className='btn w-100 h-100 mt-4 button'>
+                  <button type='button' className='btn w-100 h-100 mt-4 fontWeight-600 button'>
                     Verify
                   </button>
                 </NavLink>

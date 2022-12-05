@@ -1,0 +1,20 @@
+a{
+    text-decoration: none !important;
+}
+
+/* cssfor back icon */
+
+.backicon{
+    cursor: pointer;
+}
+
+/* css for button  */
+
+.button{
+    background: #51BC4A;
+}
+
+.button:hover{
+    background: #49c540;
+    color: #fff;
+}

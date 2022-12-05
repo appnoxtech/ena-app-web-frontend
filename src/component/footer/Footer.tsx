@@ -5,7 +5,7 @@ import Ena from '../../Assets/Images/enaLogo.png'
 
 function DesktopFooter() {
   return (
-    <div className='container-fluid footer mt-5'>
+    <div className='container-fluid footer mt-5 d-none d-lg-block d-md-block'>
       <div className='row py-5'>
         <div className='col-lg-8 row'>
           <div className='col'>
