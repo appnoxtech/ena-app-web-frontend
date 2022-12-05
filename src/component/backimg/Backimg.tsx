@@ -1,7 +1,8 @@
-import { useNavigate } from 'react-router-dom';
-import Backpng from '../../Assets/Images/back.png';
-import './Backimg.css'
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
+import './Backimg.css'
+import Backpng from '../../Assets/Images/back.png';
+
 
 function Backimg() {
     const history =useNavigate();

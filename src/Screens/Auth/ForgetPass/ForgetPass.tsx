@@ -1,9 +1,19 @@
 import React from 'react'
-import Navbar from '../../../Component/navbar/NavBar'
-import '../index.css'
-import banner from '../../../Assets/Images/bannerH.png'
-import bannerforphone from '../../../Assets/Images/banner.png'
 import { IoIosArrowBack } from 'react-icons/all'
+
+// css imports 
+
+import '../index.css'
+
+// assets imports 
+
+import banner from '../../../Assets/Images/bannerH.png'
+
+import Navbar from '../../../Component/navbar/NavBar'
+
+
+import bannerforphone from '../../../Assets/Images/banner.png'
+
 import LoginInput from '../../../Component/Common/loginInput'
 import { NavLink, useNavigate } from 'react-router-dom'
 import DesktopFooter from '../../../Component/footer/Footer'

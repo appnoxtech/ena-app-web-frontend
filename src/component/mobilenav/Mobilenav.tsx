@@ -4,7 +4,7 @@ import './Mobilenav.css'
 
 const Mobilenav = () => {
   return (
-    <div className=' d-flex-column'>
+    <div className=' d-flex-column w-100 border'>
       <div className=' d-flex-column '>
         <NavLink to='#' className='text-decoration-none  mx-4'>
           <li className='  '>Home</li>
