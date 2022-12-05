@@ -8,6 +8,7 @@ import Searchbar from './component/searchbar/Searchbar'
 import Category from './component/categorybar/Category'
 import Card from './component/card/Card'
 import Home from './component/Home'
+import Details from './pages/product/Details'
 
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
         <BrowserRouter>
           <Routes>
             <Route path='/' element={<Home />} />
+            <Route path='/product/details' element={<Details />} />
           </Routes>
         </BrowserRouter>
       </div>

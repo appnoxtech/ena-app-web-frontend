@@ -6,7 +6,7 @@ import Filterbar from '../filterbar/Filterbar'
 
 function Home() {
   return (
-    <div className=' col-12'>
+    <div className='col-12'>
       <Searchbar />
       <div className='side-Part rounded-4 bg-white'></div>
       <div className='d-flex flex-column flex-md-row'>
