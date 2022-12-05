@@ -1,3 +1,7 @@
-a{
-    text-decoration: none !important;
+a {
+  text-decoration: none !important;
+}
+.ls {
+  list-style: 'none';
+  color: '#000';
 }
