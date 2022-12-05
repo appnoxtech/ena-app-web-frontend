@@ -1,3 +1,4 @@
+import React from 'react'
 import ProductCom from '../../Component/product/ProductCom'
 import RelatedProduct from '../../Component/product/RelatedProduct'
 

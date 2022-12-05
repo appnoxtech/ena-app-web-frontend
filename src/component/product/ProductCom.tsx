@@ -1,3 +1,4 @@
+import React from 'react'
 import ProductSlider from './ProductSlider'
 import Searchbar from '../searchbar/Searchbar'
 import heartIcon from '../../Assets/Images/hearticonred.svg'

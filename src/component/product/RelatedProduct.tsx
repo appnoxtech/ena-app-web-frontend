@@ -1,3 +1,4 @@
+import React from 'react'
 import RelatedProductCard from '../Common/card/RelatedProductCard'
 const RelatedProduct = () => {
     return (
