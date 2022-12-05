@@ -4,12 +4,14 @@ import '../index.css'
 import banner from '../../../Assets/Images/bannerH.png'
 import bannerforphone from '../../../Assets/Images/banner.png'
 import { IoIosArrowBack } from 'react-icons/all'
-import LoginInput from '../../../Component/Common/loginInput'
 import { NavLink, useNavigate } from 'react-router-dom'
 import DesktopFooter from '../../../Component/footer/Footer'
+import OtpInput from '../../../Component/otpInput/OtpInput'
 
-function Login() {
+
+function OtpVar() {
   const history = useNavigate()
+
   return (
     <>
       <Navbar />
@@ -29,28 +31,18 @@ function Login() {
                 onClick={() => history(-1)}
               />
               <div className='col-10 mx-auto mt-0 pt-0'>
-                <p className='heading mt-1'>Sign in</p>
+                <p className='heading mt-1'>OTP Verification</p>
                 <p className='subheading'>
-                  Don't have a account ?
-                  <NavLink to='/signup'>
-                    <span className='sign'> Sign up </span>
-                  </NavLink>
+                  Enter the verification code we just sent on your email <br /> address.
                 </p>
-                <label className='form-label lable'>Email</label>
-                <LoginInput type='email' name='email' id='email' placeholder='Enter your email' />
-                <label className='form-label mt-3 lable'>Password</label>
-                <LoginInput
-                  type='password'
-                  name='password'
-                  id='password'
-                  placeholder='Enter your password'
-                />
-                <NavLink to='/forget_password'>
-                  <div className='text-end forget_pass'>Forget Password?</div>
+                <div className='text-center'>
+                  <OtpInput />
+                </div>
+                <NavLink to='/otp_verified'>
+                  <button type='button' className='btn w-100 h-100 mt-4 button'>
+                    Verify
+                  </button>
                 </NavLink>
-                <button type='button' className='btn w-100 h-100 mt-4 button'>
-                  Login
-                </button>
               </div>
             </div>
           </div>
@@ -61,4 +53,4 @@ function Login() {
   )
 }
 
-export default Login
+export default OtpVar

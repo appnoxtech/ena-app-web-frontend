@@ -1,6 +1,6 @@
 import React from 'react'
 import './Card.css'
-import Carrot from '../../../Assets/Images/carrot.jpg';
+import Carrot from '../../../Assets/Images/carrot.jpg'
 const Card = () => {
   return (
     <div className='card_container'>

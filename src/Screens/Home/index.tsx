@@ -1,10 +1,10 @@
 import React from 'react'
-import Card from '../../Component/Common/Card/Card'
-import Searchbar from '../../Component/Searchbar/Searchbar'
-import Category from '../../Component/Categorybar/Category'
-import Filterbar from '../../Component/Filterbar/Filterbar'
-import DesktopFooter from '../../Component/DsFooter/DesktopFooter';
-import Navbar from '../../Component/Navbar/NavBar'
+import Card from '../../Component/Common/card/Card'
+import Searchbar from '../../Component/searchbar/Searchbar'
+import Category from '../../Component/categorybar/Category'
+import Filterbar from '../../Component/filterbar/Filterbar'
+import Footer from '../../Component/footer/Footer'
+import Navbar from '../../Component/navbar/NavBar'
 
 function Home() {
   return (
@@ -18,7 +18,7 @@ function Home() {
         </div>
         <div className=' col-10'>
           <div className='row d-flex align-items-center justify-content-between px-1 bg-grey py-2 col-12 mt-5 '>
-            <Filterbar />
+            
             {Array.from({ length: 12 }).map(() => (
               <div className='col-12 col-md-3 my-2' key={1}>
                 <Card />
@@ -27,7 +27,7 @@ function Home() {
           </div>
         </div>
       </div>
-      <DesktopFooter />
+      <Footer />
     </div>
   )
 }

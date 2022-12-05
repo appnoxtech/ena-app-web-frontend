@@ -31,7 +31,6 @@ a{
 .heading{
     font-weight: 700;
     font-size: 28px;
-    margin-top: 20px;
 }
 
 /* css for go back img  */
@@ -58,35 +57,30 @@ a{
 
 /* css input field  */
 
-.inputs{
-    margin-top: 40px;
-    margin-left: 50px;
-}
 
 .lable{
     font-weight: 500 !important;
     font-size: 16px !important;
 }
 
-input{
-    width: 666px;
-    height: 56px;
-    background: #F8F9F7;
-    padding: 12px;
-    font-weight: 500;
-    font-size: 14px;
-    border-radius: 8px;
+/* cssfor back icon */
+
+.backicon{
+    cursor: pointer;
 }
 
 /* css for button  */
 
 .button{
     background: #51BC4A;
-    margin-top: 2%;
+    font-weight: 600;
+    font-size: 18px;
+    color: #fff;
 }
 
 .button:hover{
-    background: #4dc444;
+    background: #49c540;
+    color: #fff;
 }
 
 /* css for forget password link  */

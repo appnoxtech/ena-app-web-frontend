@@ -1,9 +1,9 @@
 import React from 'react'
 import './Navbar.css'
-import Desktop from '../DeskNav/Desktop'
-import Mobilenav from '../MobileNav/Mobilenav'
+import Desktop from '../desknavbar/Desktop'
+import Mobilenav from '../mobileNav/Mobilenav'
 
-function Navbar2() {
+function Navbar() {
   
   return (
     <div>
@@ -20,4 +20,4 @@ function Navbar2() {
   )
 }
 
-export default Navbar2;
+export default Navbar;

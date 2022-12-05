@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import Backpng from '../../../Assets/Images/back.png';
+import Backpng from '../../Assets/Images/back.png';
+import './Backimg.css'
 import React from 'react'
 
 function Backimg() {
