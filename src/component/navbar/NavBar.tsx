@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './Navbar.css'
 import Desktop from '../desknavbar/Desktop'
-import Mobilenav from '../mobileNav/Mobilenav'
+import Mobilenav from '../mobilenav/Mobilenav'
 
 function Navbar() {
   const [showMobileNav, setMobileNav] = useState(false)

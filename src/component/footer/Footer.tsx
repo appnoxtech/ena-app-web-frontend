@@ -1,7 +1,7 @@
 import React from 'react'
 import { FaFacebook, FaInstagram } from 'react-icons/fa'
 import './Footer.css'
-import Ena from '../../Assets/Images/enaLogo.png'
+import Ena from '../../assets/images/enaLogo.png'
 
 function DesktopFooter() {
   return (

@@ -1,7 +1,7 @@
 import React from 'react'
 import './Card.css'
-import Carrot from '../../../Assets/Images/carrot.jpg'
-import heartIcon from '../../../Assets/Images/hearticonred.svg'
+import Carrot from '../../../assets/images/carrot.jpg'
+import heartIcon from '../../../assets/images/hearticonred.svg'
 const Card = () => {
   return (
     <div className=''>
