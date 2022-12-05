@@ -9,7 +9,6 @@ import Navbar from '../../../Component/navbar/NavBar'
 import DesktopFooter from '../../../Component/footer/Footer'
 import OtpInput from '../../../Component/otpInput/OtpInput'
 
-
 function OtpVar() {
   const heading = 'OTP Verification'
   const history = useNavigate()

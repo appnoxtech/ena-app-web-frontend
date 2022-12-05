@@ -19,7 +19,7 @@ function Home() {
         </div>
         <div className=' col-11 mx-auto mx-md-0 col-md-10'>
           <div className='row d-flex align-items-center justify-content-between  mt-5 '>
-            
+            {/* <Filterbar/> */}
             {Array.from({ length: 12 }).map(() => (
               <div className='col-12 col-md-3 my-2' key={1}>
                 <Card />
