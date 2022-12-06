@@ -2,9 +2,11 @@ import React from 'react'
 import './Card.css'
 import Carrot from '../../../Assets/Images/carrot.jpg'
 import heartIcon from '../../../Assets/Images/hearticonred.svg'
+import { NavLink } from 'react-router-dom'
 const Card = () => {
   return (
     <div className=''>
+      <NavLink to='product/details'>
       <div className='card  '>
         <img src={Carrot} className='card-img-top ' alt='...' />
         <div className='fabDiv'>
@@ -34,6 +36,7 @@ const Card = () => {
           </div>
         </div>
       </div>
+      </NavLink>
     </div>
   )
 }

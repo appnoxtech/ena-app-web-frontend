@@ -71,8 +71,8 @@ function DesktopFooter(prop:any) {
           </ul>
         </div>
         <div className='col-12 col-md-6 text-end'>
-          <NavLink to=''><FaFacebook size={30} className='m-3' /></NavLink>
-          <NavLink to=''><FaInstagram size={30} className='mr-3' /></NavLink>
+          <NavLink to=''><FaFacebook size={30} className='m-3 icon_link' /></NavLink>
+          <NavLink to=''><FaInstagram size={30} className='me-3 icon_link' /></NavLink>
         </div>
       </div>
     </div>
