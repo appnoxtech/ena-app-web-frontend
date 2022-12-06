@@ -4,8 +4,8 @@ import Carrot from '../../../assets/images/carrot.jpg'
 import heartIcon from '../../../assets/images/hearticonred.svg'
 const Card = () => {
   return (
-    <div className='card_container border'>
-      <div className='card'>
+    <div className=''>
+      <div className='card  '>
         <img src={Carrot} className='card-img-top ' alt='...' />
         <div className='fabDiv'>
           <div className='rounded-end Off_container offContainerGreen'>

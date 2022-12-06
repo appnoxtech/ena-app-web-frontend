@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom'
 import Ena from '../../assets/images/enaLogoGreen.png'
 import './Desktop.css'
 
+
 const Desktop = () => {
   return (
     <div className='col-12 p-4'>
