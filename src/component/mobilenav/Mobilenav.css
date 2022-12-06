@@ -1,11 +1,8 @@
 a {
   text-decoration: none !important;
+  color: black;
+  font-weight: 700;
 }
-.ls {
-  list-style: 'none';
-  color: '#000';
-}
-
 
 .menu_bar{
     text-decoration: none;
