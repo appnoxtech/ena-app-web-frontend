@@ -1,3 +1,4 @@
+import React from 'react'
 import Carrot from '../../../assets/images/product/carrot.png'
 import heartIcon from '../../../assets/images/hearticonred.svg'
 

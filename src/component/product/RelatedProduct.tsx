@@ -1,4 +1,6 @@
+import React from 'react'
 import RelatedProductCard from '../Common/Card/RelatedProductCard'
+
 const RelatedProduct = () => {
     return (
         <div className="container-fluid py-4">
@@ -10,7 +12,7 @@ const RelatedProduct = () => {
                     <div className="row g-3">
                         {
                             Array.from({ length: 8 }).map((data, index) => (
-                                <div className="col-md-3" key={index}>
+                                <div className="col-6 col-md-3" key={index}>
                                     <RelatedProductCard />
                                 </div>
                             ))

@@ -1,6 +1,7 @@
 .search_background {
   background-image: url('../../assets/images/tomato.jpg');
-  height: 50vh;
+  height: auto;
+  padding-bottom: 70px;
   width: 100%;
   background-repeat: no-repeat;
   background-size: cover;

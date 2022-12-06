@@ -1,3 +1,4 @@
+import React from 'react'
 import ProductSlider from './ProductSlider'
 import Searchbar from '../searchbar/Searchbar'
 import heartIcon from '../../assets/images/hearticonred.svg'
@@ -11,12 +12,12 @@ const ProductCom = () => {
         <div className='container-fluid pb-5'>
             <Searchbar />
             <div className='side-Part rounded-4 bg-white'></div>
-            <div className="col-10">
-                <div className="row gx-5 mt-5">
-                    <div className="col-7">
+            <div className="col-10 mx-auto">
+                <div className="row gx-md-5 gy-md-0 mt-3 mt-md-5">
+                    <div className="col-12 col-md-7">
                         <ProductSlider />
                     </div>
-                    <div className="col-5">
+                    <div className="col-12 col-md-5 mt-3 mt-md-0">
                         <div className="prodcutDetailsData">
                             <div className="d-flex justify-content-between">
                                 <div className="productName">

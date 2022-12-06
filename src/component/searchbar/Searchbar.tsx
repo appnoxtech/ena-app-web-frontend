@@ -4,9 +4,9 @@ function Searchbar() {
   return (
     <div className='search_background d-flex justify-content-center align-item-center border bg-dark col-12'>
       <div>
-        <div className='text d-flex justify-content-center align-item-center w-75 mx-auto text-center py-1'>
+        <h2 className='text d-flex justify-content-center align-item-center w-75 mx-auto text-center py-1'>
           Get the best deal for your business
-        </div>
+        </h2>
         <div className='d-flex border_outer justify-content-center align-items-center w-75  mx-auto  bg-light'>
           <input
             type='text'
