@@ -13,7 +13,7 @@ function Searchbar() {
             placeholder='Search for products or brands.....'
             className='search_bar bg-light border-0'
           />
-          <i className='fa fa-search search-icon mt-3 ' aria-hidden='true'></i>
+          <i className='fa fa-search search-icon mt-3 mb-3 ' aria-hidden='true'></i>
         </div>
       </div>
     </div>
