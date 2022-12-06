@@ -1,4 +1,11 @@
 import React from 'react'
+
+// css imports 
+
+import '../index.css'
+
+// assets imports 
+
 import Navbar from '../../../component/navbar/NavBar'
 import '../index.css'
 import banner from '../../../assets/images/bannerH.png'
