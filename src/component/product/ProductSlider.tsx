@@ -6,7 +6,7 @@ import Image1 from '../../assets/images/product/1.png';
 import Image2 from '../../assets/images/product/2.png';
 import Image3 from '../../assets/images/product/3.png';
 import Image4 from '../../assets/images/product/4.png';
-import ImageBig from '../../assets/images/product/carrot.png';
+import ImageBig from '../../assets/images/carrot.jpg';
 
 const images = [
   {

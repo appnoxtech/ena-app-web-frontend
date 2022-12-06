@@ -1,27 +1,26 @@
 import React from 'react'
-import logo from './logo.svg'
 import './App.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import Routing from '../src/component/routing/Routing'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Navigation from './pages/Route/Navigation'
 import Navbar from './component/navbar/NavBar'
-import Searchbar from './component/searchbar/Searchbar'
-import Category from './component/categorybar/Category'
-import Card from './component/card/Card'
-import Home from './component/Home'
+import Home from './Screens/Home'
 import Details from './pages/product/Details'
+import Footer from './component/footer/Footer'
+import Login from './Screens/Auth/Login/Login'
+import Logincart from './Screens/Auth/Logincart/Logincart'
+import ForgetPass from './Screens/Auth/ForgetPass/ForgetPass'
+import OtpVar from './Screens/Auth/otpVar/OtpVar'
+import OtpVerified from './Screens/Auth/OtpVerified/Otpverified'
+import Signup from './Screens/Auth/Signup/Signup'
+
 
 
 const App = () => {
   return (
     <>
       <div className='main_screen'>
-        <Navbar />
-        <BrowserRouter>
-          <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/product/details' element={<Details />} />
-          </Routes>
-        </BrowserRouter>
+        <Routing />
       </div>
     </>
   )

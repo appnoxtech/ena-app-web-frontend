@@ -1,5 +1,4 @@
-import RelatedProductCard from '../card/RelatedProductCard'
-
+import RelatedProductCard from '../Common/Card/RelatedProductCard'
 const RelatedProduct = () => {
     return (
         <div className="container-fluid py-4">

@@ -1,3 +1,11 @@
 .main_screen{
-  background-color: rgb(214, 243, 233);
+  background-color: #fff;
+}
+
+*{
+  font-family: 'Montserrat', sans-serif;
+}
+
+a{
+  text-decoration: none;
 }

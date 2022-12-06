@@ -1,5 +1,5 @@
-import ProductSlider from '../../component/product/ProductSlider'
-import Searchbar from '../../component/searchbar/Searchbar'
+import ProductSlider from './ProductSlider'
+import Searchbar from '../searchbar/Searchbar'
 import heartIcon from '../../assets/images/hearticonred.svg'
 import facebookIcon from '../../assets/images/facebook.svg'
 import linkedInIcon from '../../assets/images/linkedin.svg'

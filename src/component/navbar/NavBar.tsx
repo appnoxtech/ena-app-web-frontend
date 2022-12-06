@@ -1,18 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Navbar.css'
-import Desktop from '../desktopnav/Desktop'
+import Desktop from '../desknavbar/Desktop'
 import Mobilenav from '../mobilenav/Mobilenav'
 
 function Navbar() {
+ 
   return (
     <div>
       <div className='d-none d-md-flex  '>
-      <Desktop/>
+        <Desktop />
       </div>
 
-      <div className='d-flex d-md-none'>
-        <i className='fa fa-bars' aria-hidden='true'></i>
-        <Mobilenav/>
+      <div className='d-flex d-md-none flex-column align-items-end'>
+        <Mobilenav />
       </div>
     </div>
   )
