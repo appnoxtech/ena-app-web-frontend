@@ -127,7 +127,7 @@ function Login() {
           </div>
         </div>
       </div>
-      <DesktopFooter />
+      <DesktopFooter class='container-fluid footer mt-5 d-none d-lg-block d-md-block' />
     </>
   )
 }

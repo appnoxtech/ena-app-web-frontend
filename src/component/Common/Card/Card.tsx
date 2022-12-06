@@ -27,7 +27,7 @@ const Card = () => {
               <p className='number_container bg-green'>10</p>
             </div>
             <div className='outer_button '>
-              <a href='#' className='btn'>
+              <a href='#' className='btn add_button'>
                 Add
               </a>
             </div>

@@ -7,6 +7,12 @@
   background-color: #12ad2b;
 }
 
+
+.add_button:hover{
+  background: #12ad2b;
+  color: white !important;
+}
+
 .radius_container {
   border-radius: 6px;
   overflow: hidden;

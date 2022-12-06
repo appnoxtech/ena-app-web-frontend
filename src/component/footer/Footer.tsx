@@ -2,10 +2,11 @@ import React from 'react'
 import { FaFacebook, FaInstagram } from 'react-icons/fa'
 import './Footer.css'
 import Ena from '../../Assets/Images/enaLogo.png'
+import { NavLink } from 'react-router-dom'
 
-function DesktopFooter() {
+function DesktopFooter(prop:any) {
   return (
-    <div className='container-fluid footer mt-5 d-none d-lg-block d-md-block'>
+    <div className={prop.class}> 
       <div className='row py-5'>
         <div className='col-lg-8 row'>
           <div className='col'>
@@ -70,8 +71,8 @@ function DesktopFooter() {
           </ul>
         </div>
         <div className='col-12 col-md-6 text-end'>
-          <FaFacebook size={30} className='m-3' />
-          <FaInstagram size={30} className='mr-3' />
+          <NavLink to=''><FaFacebook size={30} className='m-3' /></NavLink>
+          <NavLink to=''><FaInstagram size={30} className='mr-3' /></NavLink>
         </div>
       </div>
     </div>
@@ -79,3 +80,7 @@ function DesktopFooter() {
 }
 
 export default DesktopFooter
+
+
+
+//  container-fluid footer mt-5 d-none d-lg-block d-md-block
