@@ -1,6 +1,6 @@
 import React from 'react'
 //  import ProductSlider from './ProductSlider'
-import Searchbar from '../searchbar/Serachbar'
+import Searchbar from '../searchbar/Searchbar'
 import heartIcon from '../../Assets/Images/hearticonred.svg'
 import facebookIcon from '../../Assets/Images/facebook.svg'
 import linkedInIcon from '../../Assets/Images/linkedin.svg'
