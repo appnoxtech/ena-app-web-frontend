@@ -1,13 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ProductSlider from './ProductSlider'
 import Searchbar from '../searchbar/Searchbar'
 import heartIcon from '../../assets/images/hearticonred.svg'
 import facebookIcon from '../../assets/images/facebook.svg'
 import linkedInIcon from '../../assets/images/linkedin.svg'
 import twitterIcon from '../../assets/images/twitter.svg'
+import CartModal from '../cart/CartModal'
 
 
 const ProductCom = () => {
+    const [showCartModal, setShowCartModal] = useState(false)
+    const handleShowCartModal = () => {
+        setShowCartModal(true)
+    }
+    const closeCartModal = () => {
+        setShowCartModal(false)
+    }
     return (
         <div className='container-fluid pb-5'>
             <Searchbar />
@@ -48,7 +56,7 @@ const ProductCom = () => {
                                 <button className='btn AddToCartBtnProduct'>Add To  Cart</button>
                             </div>
                             <div className="mt-3">
-                                <button className='btn w-100'>Buy Now</button>
+                                <button className='btn w-100' onClick={handleShowCartModal}>Buy Now</button>
                             </div>
                             <div className="mt-3">
                                 <h6>Postage is calculated at checkout.</h6>
@@ -65,6 +73,10 @@ const ProductCom = () => {
                     </div>
                 </div>
             </div>
+            <CartModal
+            showCartModal ={showCartModal}
+            closeCartModal={closeCartModal}
+            />
         </div>
     )
 }

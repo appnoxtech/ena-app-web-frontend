@@ -1,4 +1,5 @@
 import React from 'react'
+import CartModal from '../cart/CartModal'
 import RelatedProductCard from '../Common/Card/RelatedProductCard'
 
 const RelatedProduct = () => {
@@ -12,7 +13,7 @@ const RelatedProduct = () => {
                     <div className="row g-3">
                         {
                             Array.from({ length: 8 }).map((data, index) => (
-                                <div className="col-6 col-md-3" key={index}>
+                                <div className="col-6 col-md-4 col-lg-3" key={index}>
                                     <RelatedProductCard />
                                 </div>
                             ))
