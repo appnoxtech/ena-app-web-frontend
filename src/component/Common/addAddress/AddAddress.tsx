@@ -5,9 +5,18 @@ import './AddAddress.css'
 function AddAddress() {
 
 
-    const contactInfoItem = [{
-
-    }]
+    const contactInfoItem = [
+        {
+            lable:'Name',
+            type:'text',
+            id:'username'
+        },
+        {
+            lable:'Phone Number',
+            type:'number',
+            id:''
+        },
+    ]
   return (
     <>
         <div className="container-fluid">
