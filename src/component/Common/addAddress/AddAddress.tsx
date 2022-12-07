@@ -54,12 +54,14 @@ function AddAddress() {
             lable:'Locality / Area / Street',
             type:'text',
             id:'address',
+            name:'address',
             placeholder:'Enter text here'
         },
         {
             lable:'Flat No. / Building Name',
             type:'text',
             id:'address',
+            name:'address',
             placeholder:'Enter text here'
         },
     ]
@@ -74,7 +76,7 @@ function AddAddress() {
                     {
                         contactInfoItem.map((item)=>(
                             <>
-                                <label className='form-label mt-3 h6 d-none d-lg-block d-md-block'>Email</label>
+                                <label className='form-label mt-3 h6 d-none d-lg-block d-md-block'>{item.lable}</label>
                 <LoginInput
                   type={item.type}
                   name={item.name}
