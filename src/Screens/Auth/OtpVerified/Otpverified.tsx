@@ -13,7 +13,6 @@ function Passchanged() {
   const heading = 'Password Changed'
   return (
     <>
-      <Navbar />
       <div className='container-fluid'>
         <div className='container'>
           <div className='row'>
@@ -45,7 +44,6 @@ function Passchanged() {
           </div>
         </div>
       </div>
-      <DesktopFooter class='container-fluid footer mt-5 d-none d-lg-block d-md-block' />
     </>
   )
 }

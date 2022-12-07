@@ -16,7 +16,6 @@ function OtpVar() {
 
   return (
     <>
-      <Navbar />
       <div className='container-fluid'>
         <div className='container'>
           <div className='row'>
@@ -53,7 +52,6 @@ function OtpVar() {
           </div>
         </div>
       </div>
-      <DesktopFooter class='container-fluid footer mt-5 d-none d-lg-block d-md-block' />
     </>
   )
 }

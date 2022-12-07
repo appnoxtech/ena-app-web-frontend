@@ -15,7 +15,6 @@ function Login() {
   const history = useNavigate()
   return (
     <>
-      <Navbar />
       <div className='container-fluid'>
         <div className='container'>
           <div className='row'>
@@ -127,7 +126,6 @@ function Login() {
           </div>
         </div>
       </div>
-      <DesktopFooter class='container-fluid footer mt-5 d-none d-lg-block d-md-block' />
     </>
   )
 }

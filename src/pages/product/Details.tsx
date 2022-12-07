@@ -7,10 +7,8 @@ import RelatedProduct from '../../Component/product/RelatedProduct'
 const Details = () => {
     return (
         <>
-            <Navbar />
             <ProductCom />
             <RelatedProduct />
-            <DesktopFooter/>
         </>
     )
 }

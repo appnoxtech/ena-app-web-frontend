@@ -1,5 +1,5 @@
 import React from 'react'
-import ProductSlider from './ProductSlider'
+//  import ProductSlider from './ProductSlider'
 import Searchbar from '../searchbar/Searchbar'
 import heartIcon from '../../Assets/Images/hearticonred.svg'
 import facebookIcon from '../../Assets/Images/facebook.svg'
@@ -15,7 +15,7 @@ const ProductCom = () => {
             <div className="col-10">
                 <div className="row gx-5 mt-5">
                     <div className="col-7">
-                        <ProductSlider />
+                        {/* <ProductSlider /> */}
                     </div>
                     <div className="col-5">
                         <div className="prodcutDetailsData">

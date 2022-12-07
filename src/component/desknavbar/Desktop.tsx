@@ -6,19 +6,19 @@ import Ena from '../../Assets/Images/enaLogoGreen.png'
 const Desktop = () => {
   const MenuItem = [
     {
-      navName: 'Home',
+      navName: '',
       path: '/',
     },
     {
-      navName: 'Shop',
+      navName: '',
       path: '/shop',
     },
     {
-      navName: 'About',
+      navName: '',
       path: '/about',
     },
     {
-      navName: 'Contact',
+      navName: '',
       path: '/contact',
     },
   ]
@@ -29,8 +29,8 @@ const Desktop = () => {
           <img className='imageProp ' src={Ena} alt='Ena' />
         </div>
         <div className='navOuter '>
-          {MenuItem.map((item) => (
-            <li className='navli  '>
+          {MenuItem.map((item,index) => (
+            <li className='navli  ' key={index}>
               <NavLink to={item.path} className='navli mx-4'>
                 {item.navName}
               </NavLink>

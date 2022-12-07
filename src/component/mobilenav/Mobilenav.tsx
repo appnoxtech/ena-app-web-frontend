@@ -54,8 +54,8 @@ const Mobilenav = ({}) => {
             <div className='offcanvas-body'>
               <div className='mt-3'>
                 <ul className=''>
-                  {MenuItem.map((item) => (
-                    <li className='py-2'>
+                  {MenuItem.map((item, index) => (
+                    <li className='py-2' key={index}>
                       <NavLink className='h3' to={item.path}>
                         {item.navName}
                       </NavLink>
