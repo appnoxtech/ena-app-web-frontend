@@ -10,6 +10,7 @@ import Signup from '../../Screens/auth/signup/Signup'
 import Details from '../../pages/product/Details'
 import Navbar from '../navbar/NavBar'
 import DesktopFooter from '../footer/Footer'
+import AddAddress from '../common/addAddress/AddAddress'
 
 function Routing() {
   return (
@@ -26,7 +27,7 @@ function Routing() {
             <Route path='/otp_verification' element={<OtpVar />} />
             <Route path='/otp_verified' element={<OtpVerified />} />
             <Route path='/signup' element={<Signup />} />
-            <Route path='/checkout' element={<Signup />} />
+            <Route path='/addAddress' element={<AddAddress />} />
             <Route path='*' element={<h1>Error 404 ! Page note Found</h1>} />
         </Routes>
         <DesktopFooter class='container-fluid footer mt-5 d-none d-lg-block d-md-block' />
