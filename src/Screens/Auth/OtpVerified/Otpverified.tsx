@@ -6,8 +6,7 @@ import verifyImg from '../../../Assets/Images/114809-success.gif'
 import banner from '../../../Assets/Images/bannerH.png'
 import EnaLogo from '../../../Assets/Images/enaLogoGreen.png'
 import bannerforphone from '../../../Assets/Images/banner.png'
-import Navbar from '../../../Component/navbar/NavBar'
-import DesktopFooter from '../../../Component/footer/Footer'
+
 
 function Passchanged() {
   const heading = 'Password Changed'
