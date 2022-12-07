@@ -2,7 +2,6 @@ import React from 'react'
 import Card from '../../component/Common/Card/Card'
 import Searchbar from '../../component/searchbar/Searchbar'
 import Category from '../../component/categorybar/Category'
-import Filterbar from '../../component/filterbar/Filterbar'
 import Footer from '../../component/footer/Footer'
 import Navbar from '../../component/navbar/NavBar'
 
