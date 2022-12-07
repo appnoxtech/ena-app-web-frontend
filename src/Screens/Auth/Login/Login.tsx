@@ -6,7 +6,7 @@ import '../../../Assets/global/global.css'
 import banner from '../../../Assets/Images/bannerH.png'
 import EnaLogo from '../../../Assets/Images/enaLogoGreen.png'
 import Navbar from '../../../Component/navbar/NavBar'
-import LoginInput from '../../../Component/Common/loginInput'
+import LoginInput from '../../../Component/common/loginInput'
 import DesktopFooter from '../../../Component/footer/Footer'
 
 function Login() {

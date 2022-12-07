@@ -1,5 +1,5 @@
 import React from 'react'
-import RelatedProductCard from '../Common/card/RelatedProductCard'
+import RelatedProductCard from '../common/card/RelatedProductCard'
 const RelatedProduct = () => {
     return (
         <div className="container-fluid py-4">

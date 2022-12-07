@@ -1,9 +1,9 @@
 import React from 'react'
-import Card from '../../Component/Common/card/Card'
+import Card from '../../Component/common/card/Card'
 import Searchbar from '../../Component/searchbar/Searchbar'
 import Category from '../../Component/categorybar/Category'
 import Filterbar from '../../Component/filterbar/Filterbar'
-import Pagination from '../../Component/Common/pagination/Pagination'
+import Pagination from '../../Component/common/pagination/Pagination'
 
 function Home() {
   return (
@@ -22,7 +22,7 @@ function Home() {
                 <Card />
               </div>
             ))}
-            <div className='col-12 d-flex justify-content-end'>
+            <div className='col-12 d-flex justify-content-end mt-3'>
                 <Pagination />
             </div>
           </div>
