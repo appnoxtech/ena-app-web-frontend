@@ -15,19 +15,19 @@ function Routing() {
   return (
     <>
       <BrowserRouter>
-      <Navbar />
+        <Navbar />
         <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/product/details' element={<Details />} />
-            <Route path='/' element={<Home />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/cart_login' element={<Logincart />} />
-            <Route path='/forget_password' element={<ForgetPass />} />
-            <Route path='/otp_verification' element={<OtpVar />} />
-            <Route path='/otp_verified' element={<OtpVerified />} />
-            <Route path='/signup' element={<Signup />} />
-            <Route path='/checkout' element={<Signup />} />
-            <Route path='*' element={<h1>Error 404 ! Page note Found</h1>} />
+          <Route path='/' element={<Home />} />
+          <Route path='/product/details' element={<Details />} />
+          <Route path='/' element={<Home />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/cart_login' element={<Logincart />} />
+          <Route path='/forget_password' element={<ForgetPass />} />
+          <Route path='/otp_verification' element={<OtpVar />} />
+          <Route path='/otp_verified' element={<OtpVerified />} />
+          <Route path='/signup' element={<Signup />} />
+          <Route path='/checkout' element={<Signup />} />
+          <Route path='*' element={<h1>Error 404 ! Page note Found</h1>} />
         </Routes>
         <DesktopFooter class='container-fluid footer mt-5 d-none d-lg-block d-md-block' />
       </BrowserRouter>

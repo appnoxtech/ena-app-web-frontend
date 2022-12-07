@@ -1,5 +1,5 @@
 import React from 'react'
-import Card from '../../Component/common/Card/Card'
+import Card from '../../Component/common/card/Card'
 import Searchbar from '../../Component/searchbar/Searchbar'
 import Category from '../../Component/categorybar/Category'
 import Filterbar from '../../Component/filterbar/Filterbar'
