@@ -7,8 +7,7 @@ import banner from '../../../Assets/Images/bannerH.png'
 import EnaLogo from '../../../Assets/Images/enaLogoGreen.png'
 import bannerforphone from '../../../Assets/Images/banner.png'
 import LoginInput from '../../../Component/common/loginInput'
-import Navbar from '../../../Component/navbar/NavBar'
-import DesktopFooter from '../../../Component/footer/Footer'
+
 
 function Logincart() {
   const heading = 'Sign in to continue'
