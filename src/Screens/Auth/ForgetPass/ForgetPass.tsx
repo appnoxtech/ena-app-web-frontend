@@ -4,9 +4,8 @@ import { IoIosArrowBack } from 'react-icons/all'
 import '../Auth.css'
 import banner from '../../../Assets/Images/bannerH.png'
 import EnaLogo from '../../../Assets/Images/enaLogoGreen.png'
-import Navbar from '../../../Component/navbar/NavBar'
 import LoginInput from '../../../Component/common/loginInput'
-import DesktopFooter from '../../../Component/footer/Footer'
+
 
 function ForgetPass() {
   const heading = 'Forget Password ?'
@@ -16,7 +15,7 @@ function ForgetPass() {
       <div className='container-fluid'>
         <div className='container'>
           <div className='row'>
-          <div className='col-4 text-center d-none d-lg-block'>
+            <div className='col-4 text-center d-none d-lg-block'>
               <img src={banner} className='img-fluid w-75 p-3 pt-0' />
             </div>
             <div className='col-4 text-center d-none d-md-block d-lg-none'>
@@ -37,8 +36,20 @@ function ForgetPass() {
                   Don't worry! it occurs. Please enter the email address linked with your account.
                 </p>
                 <label className='form-label mt-3 h6 d-none d-lg-block d-md-block'>Email</label>
-                <LoginInput type='email' name='email' id='email' placeholder='Enter your email' class="form-control mt-3 d-none d-md-block d-lg-block" />
-                <LoginInput type='email' name='email' id='email' placeholder='Enter your email' class="form-control mt-3 d-md-none d-lg-none d-sm-block" />
+                <LoginInput
+                  type='email'
+                  name='email'
+                  id='email'
+                  placeholder='Enter your email'
+                  class='form-control mt-3 d-none d-md-block d-lg-block'
+                />
+                <LoginInput
+                  type='email'
+                  name='email'
+                  id='email'
+                  placeholder='Enter your email'
+                  class='form-control mt-3 d-md-none d-lg-none d-sm-block'
+                />
                 <button
                   type='button'
                   className='btn w-100 h-100 mt-4 fontWeight-600 button'

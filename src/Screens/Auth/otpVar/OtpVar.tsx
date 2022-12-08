@@ -6,8 +6,6 @@ import '../../../Assets/global/global.css'
 import banner from '../../../Assets/Images/bannerH.png'
 import EnaLogo from '../../../Assets/Images/enaLogoGreen.png'
 import bannerforphone from '../../../Assets/Images/banner.png'
-import Navbar from '../../../Component/navbar/NavBar'
-import DesktopFooter from '../../../Component/footer/Footer'
 import OtpInput from '../../../Component/otpInput/OtpInput'
 
 function OtpVar() {

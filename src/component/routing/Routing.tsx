@@ -17,7 +17,7 @@ function Routing() {
   return (
     <>
       <BrowserRouter>
-      <Navbar />
+        <Navbar />
         <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/product/details' element={<Details />} />
