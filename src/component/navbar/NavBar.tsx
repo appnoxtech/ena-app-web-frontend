@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './Navbar.css'
 import Desktop from '../desknavbar/Desktop'
-import Mobilenav from '../mobilenav/Mobilenav'
+import Mobilenav from '../mobileNav/Mobilenav'
 
 function Navbar() {
  

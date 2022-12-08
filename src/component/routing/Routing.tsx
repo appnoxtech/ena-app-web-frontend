@@ -8,9 +8,10 @@ import OtpVar from '../../Screens/auth/otpVar/OtpVar'
 import OtpVerified from '../../Screens/auth/otpVerified/Otpverified'
 import Signup from '../../Screens/auth/signup/Signup'
 import Details from '../../pages/product/Details'
-import Navbar from '../navbar/Navbar'
+import Navbar from '../navbar/NavBar'
 import DesktopFooter from '../footer/Footer'
-import AddAddress from '../common/addAddress/AddAddress'
+import AddAddressComp from '../common/addAddressComp/AddAddressComp'
+import AddAddress from '../../Screens/checkout/addAddress/AddAddress'
 
 function Routing() {
   return (
@@ -18,17 +19,18 @@ function Routing() {
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/product/details' element={<Details />} />
-          <Route path='/' element={<Home />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/cart_login' element={<Logincart />} />
-          <Route path='/forget_password' element={<ForgetPass />} />
-          <Route path='/otp_verification' element={<OtpVar />} />
-          <Route path='/otp_verified' element={<OtpVerified />} />
-          <Route path='/signup' element={<Signup />} />
-          <Route path='/addAddress' element={<AddAddress />} />
-          <Route path='*' element={<h1>Error 404 ! Page note Found</h1>} />
+            <Route path='/' element={<Home />} />
+            <Route path='/product/details' element={<Details />} />
+            <Route path='/' element={<Home />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/cart_login' element={<Logincart />} />
+            <Route path='/forget_password' element={<ForgetPass />} />
+            <Route path='/otp_verification' element={<OtpVar />} />
+            <Route path='/otp_verified' element={<OtpVerified />} />
+            <Route path='/signup' element={<Signup />} />
+            <Route path='/addAddressComp' element={<AddAddressComp />} />
+            <Route path='/addAddress' element={<AddAddress />} />
+            <Route path='*' element={<h1>Error 404 ! Page note Found</h1>} />
         </Routes>
         <DesktopFooter class='container-fluid footer mt-5 d-none d-lg-block d-md-block' />
       </BrowserRouter>
