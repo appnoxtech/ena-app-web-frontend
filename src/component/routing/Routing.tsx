@@ -12,6 +12,8 @@ import Navbar from '../navbar/NavBar'
 import DesktopFooter from '../footer/Footer'
 import AddAddressComp from '../common/addAddressComp/AddAddressComp'
 import AddAddress from '../../Screens/checkout/addAddress/AddAddress'
+import OrderCard from '../common/orderCard/OrderCard'
+import CheckoutWaddress from '../../Screens/checkout/checkoutWithAddAddress/CheckoutWaddress'
 
 function Routing() {
   return (
@@ -30,6 +32,8 @@ function Routing() {
             <Route path='/signup' element={<Signup />} />
             <Route path='/addAddressComp' element={<AddAddressComp />} />
             <Route path='/addAddress' element={<AddAddress />} />
+            <Route path='/orderCard' element={<OrderCard />} />
+            <Route path='/checkoutWaddress' element={<CheckoutWaddress />} />
             <Route path='*' element={<h1>Error 404 ! Page note Found</h1>} />
         </Routes>
         <DesktopFooter class='container-fluid footer mt-5' />

@@ -10,34 +10,6 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
-
-@media (min-width: 576px) {
-    .form_address{
-        width: 60vw;
-    }
-
-    .form_address_row{
-        padding-top: 5vh;
-        padding-left: 5vw;
-        padding-right: 5vw;
-        padding-bottom: 5vh;
-        background-color: #F8F9F7;
-    }
-}
-
-@media (max-width: 576px) {
-    .form_address{
-        width: 80vw;
-        padding-top: 5vh;
-    }
-
-    .form_address_row{
-        padding-top: 3vh;
-        background-color: #F8F9F7;
-    }
-}
-
-
 select:hover{
     cursor: pointer;
 }

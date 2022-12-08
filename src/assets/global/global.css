@@ -34,7 +34,6 @@
   .font-green{
     color: #51BC4A;
   }
-
   
   
   .font-white{
@@ -48,3 +47,12 @@
     background: #51BC4A;
   }
   
+
+  .back-g-lightwhite{
+    background: #F8F9F7;
+  }
+
+
+  .border_radius1{
+    border-radius: 12px !important;
+  }
