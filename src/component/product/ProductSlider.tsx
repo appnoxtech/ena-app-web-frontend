@@ -1,12 +1,12 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './product.css'
 import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
-import Image1 from '../../Assets/Images/product/one.png';
-import Image2 from '../../Assets/Images/product/two.png';
-import Image3 from '../../Assets/Images/product/three.png';
-import Image4 from '../../Assets/Images/product/four.png';
-import ImageBig from '../../Assets/Images/carrot.jpg';
+import Image1 from '../../assets/images/product/one.png';
+import Image2 from '../../assets/images/product/two.png';
+import Image3 from '../../assets/images/product/three.png';
+import Image4 from '../../assets/images/product/four.png';
+import ImageBig from '../../assets/images/carrot.jpg';
 
 const images = [
   {
@@ -27,12 +27,24 @@ const images = [
   },
 ];
 const ProductSlider = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    if(window.innerWidth < 768){
+      setIsMobile(true)
+    }
+    else(
+      setIsMobile(false)
+    )
+  }, [isMobile])
   return (
     <div className='productSliderMain'>
       <ImageGallery
         items={images}
-        thumbnailPosition={'left'}
+        thumbnailPosition={isMobile ? 'bottom' :  'left'}
         showPlayButton={false}
+        showThumbnails={isMobile ? false : true}
+        showBullets={isMobile ? true : false}
         showFullscreenButton={false}
         showNav={false}
       />

@@ -1,13 +1,15 @@
 import React from 'react'
-import ProductCom from '../../Component/product/ProductCom'
-import RelatedProduct from '../../Component/product/RelatedProduct'
+import ProductCom from '../../component/product/ProductCom'
+import RelatedProduct from '../../component/product/RelatedProduct'
 
 const Details = () => {
   return (
-    <>
-      <ProductCom />
-      <RelatedProduct />
-    </>
+    <div className=' col-12'>
+      <div className='col-12'>
+        <ProductCom />
+        <RelatedProduct />
+      </div>
+    </div>
   )
 }
 
