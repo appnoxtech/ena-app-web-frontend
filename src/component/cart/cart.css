@@ -1,0 +1,149 @@
+.cartModalMain {
+    border-bottom: 0.5px solid #C3CFC5;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.cartModalProductDetail {
+    margin-left: 1rem;
+}
+
+.cartModalProductDetail h5 {
+    font-size: 1rem;
+    color: #313131;
+}
+
+.cartModalProductDetail h6 {
+    color: #313131;
+    font-size: 0.8rem;
+}
+
+.cartModalProductDetail h4 {
+    color: #313131;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.cartModalImg {
+    background: #F8F9F7;
+    border-radius: 3.60889px;
+    padding: 1rem;
+}
+
+.cartModalImg img {
+    width: 100px;
+}
+
+.cartModalSubTotal h5 {
+    font-size: 1rem;
+    color: #000000;
+
+}
+
+.cartModalSubTotal h5 span {
+    color: #313131;
+    font-weight: 600;
+}
+
+.cartModalFooter {
+    justify-content: flex-start !important;
+}
+
+.modalViewCartBtn, .modalViewCartBtn:hover {
+    border: 1px solid #000000;
+    border-radius: 8px;
+    background: none;
+    width: unset !important;
+    color: #000000 !important;
+    font-size: 0.7rem;
+    padding: 0.5rem 1.5rem;
+}
+
+.marginLeft {
+    margin-left: 1rem;
+}
+
+.btn-close:focus {
+    box-shadow: none !important;
+}
+
+.cartModalMain .modal-dialog {
+    margin-right: 0 !important;
+    margin-top: 0 !important;
+}
+
+
+/* shoping cart start */
+
+.shopingCartMain thead {
+    background: #F8F9F7;
+    border-radius: 8px;
+    padding: 2rem;
+}
+
+.shopingCartMain tbody, td, tfoot, th, thead, tr {
+    border: none;
+}
+
+.shopingCartMain thead tr th {
+    min-width: 200px;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    color: #648966;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    text-align: center;
+}
+
+.shopingCartTableBody tr {
+    border-bottom: 0.5px solid #C3CFC5;
+    border-top: none;
+}
+
+.shopingCartTableBody tr td {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    text-align: center;
+}
+
+.shopingCartTableBody tr td h5 {
+    color: #313131;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.cartTableImg {
+    background: #F8F9F7;
+    border-radius: 4.12267px;
+    padding: 1rem;
+}
+
+.cartTableImg img {
+    border-radius: 2.99353px;
+}
+
+.ProductSizeCart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ProductSizeCart input,
+ .ProductSizeCart input:active,
+  .ProductSizeCart input:focus {
+    width: 6rem;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    background: #F8F9F7;
+    border-radius: 8px;
+    padding: 0.5rem;
+}
+.ProductSizeCart input h5{
+    padding-left: 1rem;
+}
+.removeProductCart h5{
+    color: #EB5757 !important;
+}
+/* shoping cart end */

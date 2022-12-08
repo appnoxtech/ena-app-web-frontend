@@ -12,6 +12,7 @@ import Navbar from '../navbar/NavBar'
 import DesktopFooter from '../footer/Footer'
 import AddAddressComp from '../common/addAddressComp/AddAddressComp'
 import AddAddress from '../../Screens/checkout/addAddress/AddAddress'
+import Cart from "../../Component/cart/CartCom"
 
 function Routing() {
   return (
@@ -21,6 +22,7 @@ function Routing() {
         <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/product/details' element={<Details />} />
+            <Route path='/cart' element={<Cart />} />
             <Route path='/' element={<Home />} />
             <Route path='/login' element={<Login />} />
             <Route path='/cart_login' element={<Logincart />} />
