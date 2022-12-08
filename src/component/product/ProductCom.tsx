@@ -1,23 +1,31 @@
-import React from 'react'
-//  import ProductSlider from './ProductSlider'
+import React, { useState } from 'react'
+import ProductSlider from './ProductSlider'
 import Searchbar from '../searchbar/Searchbar'
 import heartIcon from '../../Assets/Images/hearticonred.svg'
 import facebookIcon from '../../Assets/Images/facebook.svg'
 import linkedInIcon from '../../Assets/Images/linkedin.svg'
 import twitterIcon from '../../Assets/Images/twitter.svg'
+import CartModal from '../cart/CartModal'
 
 
 const ProductCom = () => {
+    const [showCartModal, setShowCartModal] = useState(false)
+    const handleShowCartModal = () => {
+        setShowCartModal(true)
+    }
+    const closeCartModal = () => {
+        setShowCartModal(false)
+    }
     return (
         <div className='container-fluid pb-5'>
             <Searchbar />
             <div className='side-Part rounded-4 bg-white'></div>
-            <div className="col-10">
-                <div className="row gx-5 mt-5">
-                    <div className="col-7">
-                        {/* <ProductSlider /> */}
+            <div className="col-10 mx-auto">
+                <div className="row gx-md-5 gy-md-0 mt-3 mt-md-5">
+                    <div className="col-12 col-md-7">
+                        <ProductSlider />
                     </div>
-                    <div className="col-5">
+                    <div className="col-12 col-md-5 mt-3 mt-md-0">
                         <div className="prodcutDetailsData">
                             <div className="d-flex justify-content-between">
                                 <div className="productName">
@@ -48,7 +56,7 @@ const ProductCom = () => {
                                 <button className='btn AddToCartBtnProduct'>Add To  Cart</button>
                             </div>
                             <div className="mt-3">
-                                <button className='btn w-100'>Buy Now</button>
+                                <button className='btn w-100' onClick={handleShowCartModal}>Buy Now</button>
                             </div>
                             <div className="mt-3">
                                 <h6>Postage is calculated at checkout.</h6>
@@ -65,6 +73,10 @@ const ProductCom = () => {
                     </div>
                 </div>
             </div>
+            <CartModal
+            showCartModal ={showCartModal}
+            closeCartModal={closeCartModal}
+            />
         </div>
     )
 }

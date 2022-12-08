@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import './Card.css'
 import { NavLink } from 'react-router-dom'
 
-const Card: FC<any> = ({ cardData,index }) => {
+const Card: FC<any> = ({ cardData, indexData }) => {
   return (
     <div className=''>
       <NavLink to='product/details'>
@@ -12,16 +12,20 @@ const Card: FC<any> = ({ cardData,index }) => {
               <img src={cardData.img} className='img_data ' alt='...' />
             </div>
           </div>
-          <div className='fabDiv'>
-            <div className='rounded-end Off_container mt-1 offContainerGreen'>
+          <div className='fabDiv '>
+            {indexData % 2 == 0 ? (
+
+            <div className='rounded-end Off_container mt-1 '>
               <p className=' p-0 m-0 px-2 py-1'>10% off</p>
             </div>
+            ):''}
 
-            <a href='#' className='text-end px-2 mr-5'>
+            <a href='#' className='ms-auto px-2 mr-5'>
               <i className='fa fa-heart-o heart_fav_icon mt-1' aria-hidden='true'></i>
-              {/* <img src={heartIcon} alt='wish' className='img-fluid' /> */}
+
             </a>
           </div>
+
           <div className='card-body ps-0 pe-0 col-12'>
             <h5 className='card-title'>{cardData.vegName} </h5>
             <p className='card-text w-2 '>
@@ -29,11 +33,11 @@ const Card: FC<any> = ({ cardData,index }) => {
             </p>
             <div className='primary_quantity d-flex align-items-center justify-content-between'>
               <div className='radius_container d-flex  align-items-center justify-content-between border border-success '>
-                <p className=' py-1 font_container '>kg</p>
+                <p className='  font_container '>kg</p>
                 <p className='number_container bg-green '>10</p>
               </div>
-              <div className='outer_button bg-light  '>
-                <a href='#' className='btn add_button'>
+              <div className='outer_button  bg-light  '>
+                <a href='#' className='btn add_button  '>
                   Add
                 </a>
               </div>

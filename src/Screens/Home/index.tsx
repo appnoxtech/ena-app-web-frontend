@@ -20,7 +20,7 @@ const Home: FC<any> = () => {
           <div className='row d-flex align-items-center justify-content-center  mt-5'>
             <Filterbar />
             {data.map((cardData: any, index:any) => (
-              <div className='col-10 col-md-3 my-2' key={1}>
+              <div className='col-10 col-md-3 my-3' key={1}>
                 <Card cardData={cardData} indexData={index} />
               </div>
             ))}

@@ -14,6 +14,8 @@ import AddAddressComp from '../common/addAddressComp/AddAddressComp'
 import AddAddress from '../../Screens/checkout/addAddress/AddAddress'
 import OrderCard from '../common/orderCard/OrderCard'
 import CheckoutWaddress from '../../Screens/checkout/checkoutWithAddAddress/CheckoutWaddress'
+import Cart from "../../Component/cart/CartCom"
+import Order from "../../Component/order/Order"
 
 function Routing() {
   return (
@@ -23,6 +25,7 @@ function Routing() {
         <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/product/details' element={<Details />} />
+            <Route path='/cart' element={<Cart />} />
             <Route path='/' element={<Home />} />
             <Route path='/login' element={<Login />} />
             <Route path='/cart_login' element={<Logincart />} />
@@ -34,6 +37,7 @@ function Routing() {
             <Route path='/addAddress' element={<AddAddress />} />
             <Route path='/orderCard' element={<OrderCard />} />
             <Route path='/checkoutWaddress' element={<CheckoutWaddress />} />
+            <Route path='/order' element={<Order />} />
             <Route path='*' element={<h1>Error 404 ! Page note Found</h1>} />
         </Routes>
         <DesktopFooter class='container-fluid footer mt-5' />
