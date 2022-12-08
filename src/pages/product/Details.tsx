@@ -1,6 +1,6 @@
 import React from 'react'
-import ProductCom from '../../component/product/ProductCom'
-import RelatedProduct from '../../component/product/RelatedProduct'
+import ProductCom from '../../Component/product/ProductCom'
+import RelatedProduct from '../../Component/product/RelatedProduct'
 
 const Details = () => {
     return (

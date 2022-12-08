@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import Searchbar from '../searchbar/Searchbar'
 import Table from 'react-bootstrap/Table';
-import Image1 from '../../assets/images/product/one.png';
+import Image1 from '../../Assets/Images/product/one.png';
 import "./cart.css"
-import infoIcon from "../../assets/images/info.svg"
+import infoIcon from "../../Assets/Images/info.svg"
 
 const CartCom = () => {
     const [size, setSize] = useState('1')

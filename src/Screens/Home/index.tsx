@@ -1,10 +1,10 @@
 import React, { useState, FC } from 'react'
-import Category from "../../component/categorybar/Category"
-import Filterbar from '../../component/filterbar/Filterbar'
-import Card from '../../component/Common/Card/Card'
-import Pagination from '../../component/Common/pagination/Pagination'
-import { EnaAppData } from '../../component/dummyData'
-import Searchbar from '../../component/searchbar/Searchbar'
+import Category from "../../Component/categorybar/Category"
+import Filterbar from '../../Component/filterbar/Filterbar'
+import Card from '../../Component/common/card/Card'
+import Pagination from '../../Component/common/pagination/Pagination'
+import { EnaAppData } from '../../Component/dummyData'
+import Searchbar from '../../Component/searchbar/Searchbar'
 
 const Home: FC<any> = () => {
   const [data, setData] = useState(EnaAppData)

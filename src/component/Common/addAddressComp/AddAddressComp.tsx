@@ -1,7 +1,7 @@
 import React from 'react'
-import LoginInput from '../LoginInput'
+import LoginInput from '../loginInput'
 import './AddAddressComp.css'
-import '../../../assets/global/global.css'
+import '../../../Assets/global/global.css'
 
 function AddAddress() {
   const contactInfoItem = [
