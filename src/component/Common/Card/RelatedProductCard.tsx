@@ -1,7 +1,6 @@
 import React from 'react'
-import Carrot from '../../../assets/images/product/carrot.png'
-import heartIcon from '../../../assets/images/hearticonred.svg'
-
+import heartIcon from '../../../Assets/Images/hearticonred.svg'
+ import Carrot from '../../../Assets/Images/carrot.jpg'
 
 const RelatedProductCard = () => {
     return (
@@ -19,7 +18,7 @@ const RelatedProductCard = () => {
                 </div>
                 <div className='card-body'>
                     <h5 className='card-title'>Carrot </h5>
-                    <p className='card-text w-2 '>kn 35.2/kg <s className='crossTextRelated'>kn 35.2/kg</s></p>
+                    <p className='card-text w-2 '>kn 35.2/kg <s className='crossTextRelated kg_container'>kn 35.2/kg</s></p>
                 </div>
             </div>
         </div>

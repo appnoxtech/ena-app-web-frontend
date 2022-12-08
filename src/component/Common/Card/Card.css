@@ -1,10 +1,16 @@
 .font_container {
-  font-size: 18px;
-  padding-left: 15px;
+  font-size: 16px;
+  padding-left: 12px;
   margin: 0;
   padding-right: 15px;
   color: white;
-  background-color: #12ad2b;
+  background-color: #51BC4A !important ;
+}
+
+
+.add_button:hover{
+  background: #51BC4A !important;
+  color: white !important;
 }
 
 .radius_container {
@@ -16,25 +22,25 @@
 .number_container {
   margin: 0;
   padding-right: 25px;
-  color: #12ad2b;
+  color: #51BC4A;
   font-weight: 600;
   font-size: 17px;
 }
 .btn {
   color: white;
-  background-color: #12ad2b;
+  background-color: #51BC4A;
   width: 100px;
 }
 
 .card-text {
-  font-size: 25px;
+  font-size: 24px;
 
-  font-weight: 650;
+  font-weight: 550;
 }
 
 .Off_container{
-    font-size:13px;
-   background-color:#b100cd;
+    font-size:10px;
+   background-color:#51BC4A;
    padding-right:10px;
    color: white;
 }
@@ -47,4 +53,25 @@
   position: absolute;
    z-index: 999;
   width:100%;
+}
+.kg_container{
+  font-size: 14px;
+}
+
+a:hover{
+  color: #51BC4A !important;
+}
+
+.heart_fav_icon{
+  font-size:19px;
+  color:#C3CFC5;
+}
+
+.carrot_background{
+  background-color: #fbf9f7;
+}
+
+.img_data{
+  height:150px;
+  width: 200px;
 }

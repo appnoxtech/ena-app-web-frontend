@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './OtpInput.css'
 
 function OtpInput(){
     // for otp box 

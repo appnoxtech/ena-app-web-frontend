@@ -4,7 +4,7 @@ function LoginInput(prop:any) {
   return (
       <input
         type={prop.type}
-        className='form-control'
+        className={prop.class}
         id={prop.id}
         placeholder={prop.placeholder}
         name={prop.name}
@@ -12,5 +12,6 @@ function LoginInput(prop:any) {
       />
   )
 }
+
 
 export default LoginInput;

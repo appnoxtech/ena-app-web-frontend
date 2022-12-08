@@ -1,30 +1,31 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 import './Category.css'
 const category = () => {
   return (
     <div className='outer_navli '>
-      <a className='navli_category'>
+      <p className='navli_category fontWeight-700'>
         <li>Categories</li>
-      </a>
+      </p>
       <div>
-        <a className='navli mx-4'>
-          <li className='navli  '>All</li>
-        </a>
-        <a className='navli mx-4'>
-          <li className='navli  '>Vegetables</li>
-        </a>
-        <a className='navli mx-4'>
-          <li className='navli  '>Fruits</li>
-        </a>
-        <a className='navli mx-4'>
-          <li className='navli  '>Dry Fruits</li>
-        </a>
-        <a className='navli mx-4'>
-          <li className='navli  '>Spices</li>
-        </a>
-        <a className='navli mx-4'>
-          <li className='navli  '>Canned</li>
-        </a>
+        <NavLink to='/' className='navlist mx-4'>
+          <li className='navlist  '>All</li>
+        </NavLink>
+        <NavLink to='/' className='navlist mx-4'>
+          <li className='navlist  '>Vegetables</li>
+        </NavLink>
+        <NavLink to='/' className='navlist mx-4'>
+          <li className='navlist  '>Fruits</li>
+        </NavLink>
+        <NavLink to='/' className='navlist mx-4'>
+          <li className='navlist  '>Dry Fruits</li>
+        </NavLink>
+        <NavLink to='/' className='navlist mx-4'>
+          <li className='navlist  '>Spices</li>
+        </NavLink>
+        <NavLink to='/' className='navlist mx-4'>
+          <li className='navlist  '>Canned</li>
+        </NavLink>
       </div>
     </div>
   )

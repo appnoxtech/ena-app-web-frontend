@@ -1,7 +1,7 @@
 import React from 'react'
 import Searchbar from '../searchbar/Searchbar'
 import Table from 'react-bootstrap/Table';
-import Image1 from '../../assets/images/product/1.png';
+import Image1 from '../../Assets/Images/product/one.png';
 import "./cart.css"
 
 const CartCom = () => {
