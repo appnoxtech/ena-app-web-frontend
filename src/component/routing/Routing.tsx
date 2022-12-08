@@ -32,7 +32,7 @@ function Routing() {
             <Route path='/addAddress' element={<AddAddress />} />
             <Route path='*' element={<h1>Error 404 ! Page note Found</h1>} />
         </Routes>
-        <DesktopFooter class='container-fluid footer mt-5 d-none d-lg-block d-md-block' />
+        <DesktopFooter class='container-fluid footer mt-5' />
       </BrowserRouter>
     </>
   )
