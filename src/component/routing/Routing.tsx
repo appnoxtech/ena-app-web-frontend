@@ -8,6 +8,7 @@ import OtpVar from '../../Screens/Auth/otpVar/OtpVar'
 import OtpVerified from '../../Screens/Auth/OtpVerified/Otpverified'
 import Signup from '../../Screens/Auth/Signup/Signup'
 import Details from '../../pages/product/Details'
+import Cart from '../../pages/cart/Cart'
 
 function Routing() {
   return (
@@ -16,6 +17,7 @@ function Routing() {
         <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/product/details' element={<Details />} />
+            <Route path='/cart' element={<Cart />} />
             <Route path='/' element={<Home />} />
             <Route path='/login' element={<Login />} />
             <Route path='/cart_login' element={<Logincart />} />

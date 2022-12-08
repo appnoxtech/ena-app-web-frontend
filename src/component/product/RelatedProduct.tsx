@@ -1,5 +1,4 @@
 import React from 'react'
-import CartModal from '../cart/CartModal'
 import RelatedProductCard from '../Common/Card/RelatedProductCard'
 
 const RelatedProduct = () => {
