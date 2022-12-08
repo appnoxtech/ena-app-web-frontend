@@ -37,7 +37,7 @@ const Card: FC<any> = ({ cardData, indexData }) => {
                 <p className='number_container bg-green '>10</p>
               </div>
               <div className='outer_button  bg-light  '>
-                <a href='#' className='btn add_button  '>
+                <a href='#' className='btn btn1 add_button  '>
                   Add
                 </a>
               </div>
