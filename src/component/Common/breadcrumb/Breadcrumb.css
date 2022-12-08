@@ -1,0 +1,9 @@
+.beadcrumb_font{
+    font-size: larger;
+    font-weight: 100 !important;
+}
+
+.active_breadcrumb{
+    font-weight: 600 !important;
+    font-size: larger;
+}

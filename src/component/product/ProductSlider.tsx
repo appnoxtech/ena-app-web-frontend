@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './product.css'
 import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
@@ -27,12 +27,24 @@ const images = [
   },
 ];
 const ProductSlider = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    if(window.innerWidth < 768){
+      setIsMobile(true)
+    }
+    else(
+      setIsMobile(false)
+    )
+  }, [isMobile])
   return (
     <div className='productSliderMain'>
       <ImageGallery
         items={images}
-        thumbnailPosition={'left'}
+        thumbnailPosition={isMobile ? 'bottom' :  'left'}
         showPlayButton={false}
+        showThumbnails={isMobile ? false : true}
+        showBullets={isMobile ? true : false}
         showFullscreenButton={false}
         showNav={false}
       />
