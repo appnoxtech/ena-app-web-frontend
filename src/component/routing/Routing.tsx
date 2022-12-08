@@ -8,7 +8,7 @@ import OtpVar from '../../Screens/auth/otpVar/OtpVar'
 import OtpVerified from '../../Screens/auth/otpVerified/Otpverified'
 import Signup from '../../Screens/auth/signup/Signup'
 import Details from '../../pages/product/Details'
-import Navbar from '../navbar/Navbar'
+import Navbar from '../navbar/NavBar'
 import DesktopFooter from '../footer/Footer'
 import AddAddress from '../common/addAddress/AddAddress'
 
