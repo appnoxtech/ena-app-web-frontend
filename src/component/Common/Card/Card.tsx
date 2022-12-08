@@ -15,7 +15,7 @@ const Card: FC<any> = ({ cardData, indexData }) => {
           <div className='fabDiv '>
             {indexData % 2 == 0 ? (
 
-            <div className='rounded-end Off_container mt-1 offContainerGreen'>
+            <div className='rounded-end Off_container mt-1 '>
               <p className=' p-0 m-0 px-2 py-1'>10% off</p>
             </div>
             ):''}
@@ -33,11 +33,11 @@ const Card: FC<any> = ({ cardData, indexData }) => {
             </p>
             <div className='primary_quantity d-flex align-items-center justify-content-between'>
               <div className='radius_container d-flex  align-items-center justify-content-between border border-success '>
-                <p className=' py-1 font_container '>kg</p>
+                <p className='  font_container '>kg</p>
                 <p className='number_container bg-green '>10</p>
               </div>
-              <div className='outer_button bg-light  '>
-                <a href='#' className='btn add_button'>
+              <div className='outer_button  bg-light  '>
+                <a href='#' className='btn add_button  '>
                   Add
                 </a>
               </div>

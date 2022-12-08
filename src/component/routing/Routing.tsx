@@ -13,6 +13,7 @@ import DesktopFooter from '../footer/Footer'
 import AddAddressComp from '../common/addAddressComp/AddAddressComp'
 import AddAddress from '../../Screens/checkout/addAddress/AddAddress'
 import Cart from "../../Component/cart/CartCom"
+import Order from "../../Component/order/Order"
 
 function Routing() {
   return (
@@ -32,6 +33,7 @@ function Routing() {
             <Route path='/signup' element={<Signup />} />
             <Route path='/addAddressComp' element={<AddAddressComp />} />
             <Route path='/addAddress' element={<AddAddress />} />
+            <Route path='/order' element={<Order />} />
             <Route path='*' element={<h1>Error 404 ! Page note Found</h1>} />
         </Routes>
         <DesktopFooter class='container-fluid footer mt-5' />

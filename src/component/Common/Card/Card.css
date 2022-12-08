@@ -24,12 +24,14 @@
   padding-right: 25px;
   color: #51BC4A;
   font-weight: 600;
-  font-size: 17px;
+  font-size: 15px;
 }
 .btn {
   color: white;
   background-color: #51BC4A;
   width: 100px;
+  height:32px;
+  font-weight:600
 }
 
 .card-text {
@@ -39,10 +41,10 @@
 }
 
 .Off_container{
-    font-size:10px;
-   background-color:#51BC4A;
+    font-size:14px;
+   background-color:white;
    padding-right:10px;
-   color: white;
+   color: black;
 }
 
 .fabDiv
