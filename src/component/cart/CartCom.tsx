@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Searchbar from '../searchbar/Searchbar'
 import Table from 'react-bootstrap/Table';
-import Image1 from '../../Assets/Images/product/one.png';
+import Image1 from '../../assets/images/product/one.png';
 import "./cart.css"
+import infoIcon from "../../assets/images/info.svg"
 
 const CartCom = () => {
+    const [size, setSize] = useState('1')
     return (
         <div className='container-fluid pb-5'>
             <Searchbar />
@@ -41,7 +43,7 @@ const CartCom = () => {
                                     </td>
                                     <td>
                                         <div className="ProductSizeCart">
-                                            <input type="number" value={"1"} />
+                                            <input type="number" value={size} onChange={(e) => setSize(e.target.value)} />
                                             <h5>(kg)</h5>
                                         </div>
                                     </td>
@@ -59,6 +61,16 @@ const CartCom = () => {
 
                     </tbody>
                 </Table>
+                <div className="subTotalCartVal">
+                    <h5>Subtotal: <span>kn 68723 HRK</span></h5>
+                    <div className="infoText">
+                        <img src={infoIcon} alt="info" className='img-fluid'  />
+                        <p>Taxes and postage are calculated at checkout</p>
+                    </div>
+                </div>
+                <div className="mt-3">
+                    <button className='btn commonBtnGreen w-100'>Checkout</button>
+                </div>
             </div>
         </div>
     )

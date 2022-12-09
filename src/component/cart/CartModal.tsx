@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './cart.css';
 import Modal from 'react-bootstrap/Modal';
-import productImg from '../../Assets/Images/carrot.jpg'
-import deleteIcon from '../../Assets/Images/deleteicon.svg'
+import productImg from '../../assets/images/carrot.jpg'
+import deleteIcon from '../../assets/images/deleteicon.svg'
 
 type cartModalProps = {
     showCartModal : boolean,

@@ -1,19 +1,19 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Login from '../../Screens/auth/login/Login'
-import Logincart from '../../Screens/auth/logincart/Logincart'
-import ForgetPass from '../../Screens/auth/forgetPass/ForgetPass'
-import Home from '../../Screens/home'
-import OtpVar from '../../Screens/auth/otpVar/OtpVar'
-import OtpVerified from '../../Screens/auth/otpVerified/Otpverified'
-import Signup from '../../Screens/auth/signup/Signup'
+import Cart from '../../pages/cart/Cart'
 import Details from '../../pages/product/Details'
-import Navbar from '../navbar/NavBar'
-import DesktopFooter from '../footer/Footer'
-import AddAddressComp from '../common/addAddressComp/AddAddressComp'
+import ForgetPass from '../../Screens/Auth/ForgetPass/ForgetPass'
+import Login from '../../Screens/Auth/Login/Login'
+import Logincart from '../../Screens/Auth/Logincart/Logincart'
+import OtpVar from '../../Screens/Auth/otpVar/OtpVar'
+import Home from '../../Screens/Home'
+import OtpVerified from "../../Screens/Auth/OtpVerified/Otpverified"
+import Signup from "../../Screens/Auth/Signup/Signup"
+import AddAddressComp from "../Common/addAddressComp/AddAddressComp"
 import AddAddress from '../../Screens/checkout/addAddress/AddAddress'
-import Cart from "../../Component/cart/CartCom"
-import Order from "../../Component/order/Order"
+import Order from '../order/Order'
+import DesktopFooter from '../footer/Footer'
+import Navbar from '../navbar/NavBar'
 
 function Routing() {
   return (

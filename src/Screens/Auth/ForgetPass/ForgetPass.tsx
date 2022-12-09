@@ -2,9 +2,9 @@ import React from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { IoIosArrowBack } from 'react-icons/all'
 import '../Auth.css'
-import banner from '../../../Assets/Images/bannerH.png'
-import EnaLogo from '../../../Assets/Images/enaLogoGreen.png'
-import LoginInput from '../../../Component/common/loginInput'
+import banner from '../../../assets/images/bannerH.png'
+import EnaLogo from '../../../assets/images/enaLogoGreen.png'
+import LoginInput from '../../../component/Common/LoginInput'
 
 
 function ForgetPass() {
