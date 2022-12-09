@@ -69,10 +69,12 @@ const Mobilenav = ({}) => {
             <NavLink to='/login'>
               <i className='fa fa-user-o me-4 fs-2 font-green' aria-hidden='true'></i>
             </NavLink>
+            <NavLink to='/checkout'>
             <i
               className='fa fa-shopping-cart me-2 cart_icon fs-2 font-green'
               aria-hidden='true'
             ></i>
+            </NavLink>
             {/* <i className='fa fa-heart-o heart_icon' aria-hidden='true'></i> */}
           </div>
         </div>
