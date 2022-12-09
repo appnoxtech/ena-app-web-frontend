@@ -7,7 +7,7 @@ function AddAddress() {
     <div className='col-12'>
       <div className='row m-0 p-0'>
         <div className='col-12 d-none d-lg-block'>
-          <Breadcrumb />
+          <Breadcrumb pathName='Shopping Cart &nbsp;/&nbsp;Checkout &nbsp;/&nbsp;Add Address'  />
         </div>
         <div className='col-12 my-2 my-md-4'>
         <div className='container-fluid col-12 col-md-8 pt-4 back-g-lightwhite border rounded-3'>
