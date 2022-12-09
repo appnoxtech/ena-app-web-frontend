@@ -1,5 +1,5 @@
 import React from 'react'
-import carrot from '../../../Assets/Images/carrot.jpg'
+import carrot from '../../../Assets/images/carrot.jpg'
 import '../../../Assets/global/global.css'
 import './OrderCard.css'
 

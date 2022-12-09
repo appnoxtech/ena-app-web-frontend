@@ -1,11 +1,11 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import '../Auth.css'
-import '../../../assets/global/global.css'
-import verifyImg from '../../../Assets/Images/114809-success.gif'
-import banner from '../../../Assets/Images/bannerH.png'
-import EnaLogo from '../../../Assets/Images/enaLogoGreen.png'
-import bannerforphone from '../../../Assets/Images/banner.png'
+import '../../../Assets/global/global.css'
+import verifyImg from '../../../Assets/images/114809-success.gif'
+import banner from '../../../Assets/images/bannerH.png'
+import EnaLogo from '../../../Assets/images/enaLogoGreen.png'
+import bannerforphone from '../../../Assets/images/banner.png'
 
 
 function Passchanged() {

@@ -3,9 +3,9 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { IoIosArrowBack } from 'react-icons/all'
 import '../Auth.css'
 import '../../../Assets/global/global.css'
-import banner from "../../../Assets/Images/bannerH.png"
-import EnaLogo from '../../../Assets/Images/enaLogoGreen.png'
-import LoginInput from '../../../component/Common/LoginInput'
+import banner from "../../../Assets/images/bannerH.png"
+import EnaLogo from '../../../Assets/images/enaLogoGreen.png'
+import LoginInput from '../../../Component/common/LoginInput'
 
 
 function Login() {
