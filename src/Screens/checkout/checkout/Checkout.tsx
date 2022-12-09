@@ -1,9 +1,10 @@
 import React from 'react'
-import AddressCard from '../../../component/common/addressCard/AddressCard'
-import Breadcrumb from '../../../component/common/breadcrumb/Breadcrumb'
+// import AddressCard from '../../../component/common/addressCard/AddressCard'
+// import Breadcrumb from '../../../component/common/breadcrumb/Breadcrumb'
 import OrderCard from '../../../component/common/orderCard/OrderCard'
 import '../../../assets/global/global.css'
 import { NavLink } from 'react-router-dom'
+import Breadcrumb from '../../../component/common/breadcrumb/Breadcrumb'
 
 function Checkout() {
   return (
@@ -14,8 +15,8 @@ function Checkout() {
         </div>
         <div className='col-12 d-flex justify-content-center row mx-auto px-md-5'>
         <div className='col-12 col-lg-8'>
-          <AddressCard username='Gorann' address='822 Stewart Street, croatia, 445566' selected='selected'/>
-          <AddressCard username='Vijay Mahesh Singh' address='822 Stewart Street, Indianapolis, 445566' />
+          {/* <AddressCard username='Gorann' address='822 Stewart Street, croatia, 445566' selected='selected'/> */}
+          {/* <AddressCard username='Vijay Mahesh Singh' address='822 Stewart Street, Indianapolis, 445566' /> */}
           <div className='col-12 col-lg-3 mt-2 float-end'>
           <NavLink to='/addAddress'>
                 <button type='button' className='btn py-3 lh-1 border w-100 fontWeight-600 button1  '>

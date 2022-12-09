@@ -1,4 +1,4 @@
-import React, { useState, FC, useEffect } from 'react'
+import React, { useState, FC } from 'react'
 import Category from '../../component/categorybar/Category'
 import Filterbar from '../../component/filterbar/Filterbar'
 import Card from '../../component/common/card/Card'
