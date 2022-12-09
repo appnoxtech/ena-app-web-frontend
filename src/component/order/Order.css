@@ -1,10 +1,10 @@
 
 /*Order Table Heading */
 .orders_Heading thead tr th {
-    width: 100px;
+    width: 90px;
     font-weight: 600;
     font-size: 16px;
-    line-height: 22px;
+    line-height: 20px;
     color: #638a65;
     padding-top: 1rem;
     padding-bottom: 1rem;
@@ -13,10 +13,18 @@
 }
 
 .order_image{
-    height:70x;
-    width:70px;
+    height:73x;
+    width:113px;
 }
 
 .order_Id{
     font-size: 13px;
+}
+.approved_text{
+    color:#51BC4A;
+    font-weight:600;
+}
+.pending_text{
+    color:#B54ABC;
+    font-weight:600;
 }
