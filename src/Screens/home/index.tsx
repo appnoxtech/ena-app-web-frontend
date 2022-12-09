@@ -11,6 +11,7 @@ const Home: FC<any> = () => {
   const filterData = EnaAppData
   const [cardIndex, setCardIndex] = useState<any>()
   const [searchText, setSearchText] = useState('')
+  const [seletedCategory,setSletedCategorey]=useState('All')
 
   const wishListHandler = (index) => {
     console.log(index)
@@ -20,12 +21,11 @@ const Home: FC<any> = () => {
   }
 
   const filterDatabyCategory = (name) => {
-
+    setSletedCategorey(name)
     const temp2 = filterData.filter((item) => {
-      if(name==''){
+      if (name == 'All') {
         return item
-      }
-     else if (item.category == name) {
+      } else if (item.category == name) {
         return item
       }
     })
@@ -37,15 +37,14 @@ const Home: FC<any> = () => {
     // }))
   }
 
-
   console.log(data)
   return (
     <div className='col-12'>
       <Searchbar searchText={searchText} setSearchText={setSearchText} />
       <div className='side-Part rounded-4 bg-white'></div>
       <div className='d-flex flex-column flex-md-row'>
-        <div className='mt-5 col-12 col-md-2'>
-          <Category filterDatabyCategory={filterDatabyCategory} />
+        <div className='mt-5 col-12 col-md-2 '>
+          <Category filterDatabyCategory={filterDatabyCategory} seletedCategory={seletedCategory}/>
         </div>
         <div className=' col-11 mx-auto mx-md-0 col-md-10'>
           <div className='row d-flex  mt-5'>

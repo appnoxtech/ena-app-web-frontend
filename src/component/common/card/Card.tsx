@@ -32,8 +32,8 @@ const Card: FC<any> = ({ cardData, indexData ,wishListHandler }) => {
             </p>
             <div className='primary_quantity d-flex align-items-center justify-content-between'>
               <div className='radius_container d-flex  align-items-center justify-content-between border border-success '>
-                <p className='  font_container '>kg</p>
-                <p className='number_container bg-green '>10</p>
+                <p className=' col-6 font_container '>kg</p>
+                <input className=' col-6 number_container border border-0 border-none m-0 p-0 text-center border border-none border-0'placeholder='10'/>
               </div>
               <div className='outer_button  bg-light  '>
                 <a href='#' className='btn btn1 add_button  '>
