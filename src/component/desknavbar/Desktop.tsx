@@ -42,7 +42,7 @@ const Desktop = () => {
             <i className='fa fa-user-o person-icon' aria-hidden='true'></i>
           </NavLink>
           <i className='fa fa-heart-o heart_icon' aria-hidden='true'></i>
-          <NavLink to='/checkout'>
+          <NavLink to='/checkoutWaddress'>
           <i className='fa fa-shopping-cart cart_icon' aria-hidden='true'></i>
           </NavLink>
         </div>

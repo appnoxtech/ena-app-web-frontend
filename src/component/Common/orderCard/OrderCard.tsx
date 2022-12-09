@@ -2,8 +2,10 @@ import React from 'react'
 import carrot from '../../../assets/images/carrot.jpg'
 import '../../../assets/global/global.css'
 import './OrderCard.css'
+import { useNavigate } from 'react-router-dom'
 
 function OrderCard() {
+    const history = useNavigate();
   return (
     <>
             <div className="col-12 row g-0">
@@ -62,7 +64,7 @@ function OrderCard() {
                     </div>
                     <div className="col-12 mt-3">
                         <div className="col text-end">
-                        <button className="btn w-100 fontWeight-600 order_button1">Place Order</button>
+                        <button className="btn w-100 fontWeight-600 order_button1" onClick={()=> history('/checkout')}>Place Order</button>
                         </div></div>
                 </div>
                 
