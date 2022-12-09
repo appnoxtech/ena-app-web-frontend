@@ -1,0 +1,22 @@
+
+/*Order Table Heading */
+.orders_Heading thead tr th {
+    width: 100px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    color: #638a65;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color:  #F8F9F7;
+    text-align: center;
+}
+
+.order_image{
+    height:70x;
+    width:70px;
+}
+
+.order_Id{
+    font-size: 13px;
+}
