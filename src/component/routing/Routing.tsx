@@ -11,6 +11,8 @@ import OtpVerified from "../../Screens/auth/otpVerified/Otpverified"
 import Signup from "../../Screens/auth/signup/Signup"
 import AddAddressComp from "../common/addAddressComp/AddAddressComp"
 import AddAddress from '../../Screens/checkout/addAddress/AddAddress'
+import OrderCard from '../common/orderCard/OrderCard'
+import CheckoutWaddress from '../../Screens/checkout/checkoutWithAddAddress/CheckoutWaddress'
 import Order from '../order/Order'
 import DesktopFooter from '../footer/Footer'
 import Navbar from '../navbar/NavBar'
@@ -34,8 +36,8 @@ function Routing() {
             <Route path='/otp_verification' element={<OtpVar />} />
             <Route path='/otp_verified' element={<OtpVerified />} />
             <Route path='/signup' element={<Signup />} />
-            <Route path='/addAddressComp' element={<AddAddressComp />} />
             <Route path='/addAddress' element={<AddAddress />} />
+            <Route path='/checkoutWaddress' element={<CheckoutWaddress />} />
             <Route path='/order' element={<Order />} />
 
 

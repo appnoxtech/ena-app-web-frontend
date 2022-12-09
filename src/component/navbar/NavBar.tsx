@@ -7,7 +7,7 @@ function Navbar() {
  
   return (
     <div>
-      <div className='d-none d-md-flex  '>
+      <div className='d-none d-md-flex '>
         <Desktop />
       </div>
 

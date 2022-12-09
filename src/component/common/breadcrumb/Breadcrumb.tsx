@@ -7,13 +7,13 @@ function Breadcrumb() {
       <nav aria-label='breadcrumb'>
         <ol className='breadcrumb d-flex justify-content-center'>
           <li className='breadcrumb-item beadcrumb_font'>
-            <a href='#'>Home</a>
+            <a href='#'>Shopping Cart</a>
           </li>
           <li className='breadcrumb-item beadcrumb_font'>
-            <a href='#'>Library</a>
+            <a href='#'>Checkout</a>
           </li>
           <li className='breadcrumb-item active_breadcrumb'>
-            Data
+            Change Address
           </li>
         </ol>
       </nav>

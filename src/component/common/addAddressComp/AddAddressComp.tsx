@@ -1,9 +1,12 @@
 import React from 'react'
-import LoginInput from '../loginInput'
+import LoginInput from '../loginInput/index'
 import './AddAddressComp.css'
 import '../../../assets/global/global.css'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 function AddAddress() {
+
+  const history = useNavigate();
   const contactInfoItem = [
     {
       lable: 'Name',
@@ -92,12 +95,10 @@ function AddAddress() {
   ]
   return (
     <>
-      <div className='container-fluid form_address'>
-        <div className='row form_address_row rounded-3'>
-          <div className='row col-12 mx-lg-3 px-lg-5 gx-0'>
+          <div className='row col-12 mx-auto px-lg-5 gx-0'>
             <div className='col-12 fontWeight-600 addAddress_heading'>Contact Info</div>
             <hr className='mt-4' />
-            <div className='col-12'>
+            <div className='col-11 col-md-12 mx-auto'>
               {contactInfoItem.map((item) => (
                 <>
                   <label className='form-label mt-3 h6 d-none d-lg-block d-md-block'>
@@ -108,7 +109,7 @@ function AddAddress() {
                     name={item.name}
                     id={item.id}
                     placeholder={item.placeholder}
-                    class='form-control mt-3 d-none d-md-block d-lg-block'
+                    class='form-control  mt-3 d-none d-md-block'
                   />
                   <LoginInput
                     type={item.type}
@@ -122,13 +123,13 @@ function AddAddress() {
             </div>
             <div className='col-12 fontWeight-600 mt-4 addAddress_heading'>Shipping Address</div>
             <hr className='mt-4' />
-            <div className='col-12 row gx-0 d-flex justify-content-between'>
+            <div className='col-11 col-md-12 mx-auto row gx-0 d-flex justify-content-between'>
                 <div className='col-6 gx-0 pe-4'>
               <label className='form-label mt-3 h6 d-none d-lg-block d-md-block'>
                 {shippingAddressSelect[0].lable}
               </label>
               <select className='form-select form-control mt-3' aria-label='Default select example'>
-                <option selected disabled>Country</option>
+                <option selected disabled>Select Country</option>
                 <option value='USA'>USA</option>
                 <option value='INDIA'>India</option>
                 <option value='UK'>UK</option>
@@ -138,12 +139,20 @@ function AddAddress() {
               <label className='form-label mt-3 h6 d-none d-lg-block d-md-block'>
                 {shippingAddressSelect[1].lable}
               </label>
-              <select className='form-select form-control mt-3' aria-label='Default select example'>
-                <option className='option' selected disabled>State</option>
-                <option className='option' value='USA'>USA</option>
-                <option value='INDIA'>India</option>
-                <option value='UK'>UK</option>
-              </select>
+              <LoginInput
+                    type='text'
+                    name="state"
+                    id='state'
+                    placeholder='Enter State'
+                    class='form-control  mt-3 d-none d-md-block'
+                  />
+                  <LoginInput
+                    type='text'
+                    name="state"
+                    id='state'
+                    placeholder='Enter state'
+                    class='form-control mt-3 d-md-none d-lg-none d-sm-block'
+                  />
               </div>
               <div className='col-6 gx-0 pe-4'>
               <>
@@ -197,7 +206,7 @@ function AddAddress() {
                     name={item.name}
                     id={item.id}
                     placeholder={item.placeholder}
-                    class='form-control mt-3 d-none d-md-block d-lg-block'
+                    class='form-control  mt-3 d-none d-md-block'
                   />
                   <LoginInput
                     type={item.type}
@@ -209,17 +218,22 @@ function AddAddress() {
                 </>
               ))}
             </div>
-            <div className="col-12 text-end">
-                <button type='button' className='btn w-25 h-75 mt-4 fontWeight-600 button rounded border-2 cancel_button'>
+            <div className="col-12 row m-0 mt-5 p-0 my-3 d-flex justify-content-center justify-content-md-end">
+              <div className='col-6 col-md-3'>
+                <button type='button' onClick={()=>history(-1)} className='btn py-3 lh-1 border-3 w-100 fontWeight-600 button cancel_button'>
                   Cancel
                 </button>
-                <button type='button' className='btn w-25 h-75 ms-4 mt-4 fontWeight-600 rounded border-2 button'>
-                  Save Address
+              </div>
+              
+              <div className='col-6 col-md-3 p-0 p-sm-auto'>
+                <NavLink to='/addAddress'>
+                <button type='button' className='btn py-3 lh-1 border w-100 fontWeight-600 button1  '>
+                  Add Address
                 </button>
+                </NavLink>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
     </>
   )
 }
