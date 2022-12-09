@@ -14,6 +14,9 @@ import AddAddress from '../../Screens/checkout/addAddress/AddAddress'
 import Order from '../order/Order'
 import DesktopFooter from '../footer/Footer'
 import Navbar from '../navbar/NavBar'
+import Admin from '../../Screens/admin'
+import AdminLogin from '../../Screens/admin/adminLogin/AdminLogin'
+import AdminHome from '../../Screens/admin/adminHome/AdminHome'
 
 function Routing() {
   return (
@@ -34,6 +37,16 @@ function Routing() {
             <Route path='/addAddressComp' element={<AddAddressComp />} />
             <Route path='/addAddress' element={<AddAddress />} />
             <Route path='/order' element={<Order />} />
+
+
+            {/* Admin */}
+            <Route path='/admin' element={<Admin />}/>
+            <Route path='/admin-login' element={<AdminLogin />}/>
+            <Route path='/admin-home' element={<AdminHome />}/>
+  
+            {/* AdminEnd */}
+
+
             <Route path='*' element={<h1>Error 404 ! Page note Found</h1>} />
         </Routes>
         <DesktopFooter class='container-fluid footer mt-5' />
