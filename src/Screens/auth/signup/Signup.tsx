@@ -2,12 +2,11 @@ import React from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { IoIosArrowBack } from 'react-icons/all'
 import '../Auth.css'
-import '../../../Assets/global/global.css'
-import banner from '../../../Assets/images/bannerH.png'
-import EnaLogo from '../../../Assets/images/enaLogoGreen.png'
-import bannerforphone from '../../../Assets/images/banner.png'
-import LoginInput from '../../../Component/common/LoginInput'
-
+import '../../../assets/global/global.css'
+import banner from '../../../assets/images/bannerH.png'
+import EnaLogo from '../../../assets/images/enaLogoGreen.png'
+import bannerforphone from '../../../assets/images/banner.png'
+import LoginInput from '../../../component/common/loginInput'
 
 function Login() {
   const heading = 'Sign up'

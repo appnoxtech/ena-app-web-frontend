@@ -1,6 +1,6 @@
 import React from 'react'
-import heartIcon from '../../../Assets/images/hearticonred.svg'
- import Carrot from '../../../Assets/images/carrot.jpg'
+import heartIcon from '../../../assets/images/hearticonred.svg'
+ import Carrot from '../../../assets/images/carrot.jpg'
 
 const RelatedProductCard = () => {
     return (

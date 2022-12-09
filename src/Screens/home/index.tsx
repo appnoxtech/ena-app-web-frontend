@@ -1,10 +1,10 @@
 import React, { useState, FC } from 'react'
-import Category from "../../Component/categorybar/Category"
-import Filterbar from '../../Component/filterbar/Filterbar'
-import Card from '../../Component/common/Card/Card'
-import Pagination from '../../Component/common/pagination/Pagination'
-import { EnaAppData } from '../../Component/dummyData'
-import Searchbar from '../../Component/searchbar/Searchbar'
+import Category from '../../component/categorybar/Category'
+import Filterbar from '../../component/filterbar/Filterbar'
+import Card from '../../component/common/card/Card'
+import Pagination from '../../component/common/pagination/Pagination'
+import { EnaAppData } from '../../component/dummyData'
+import Searchbar from '../../component/searchbar/Searchbar'
 
 const Home: FC<any> = () => {
   const [data, setData] = useState(EnaAppData)
@@ -19,7 +19,7 @@ const Home: FC<any> = () => {
         <div className=' col-11 mx-auto mx-md-0 col-md-10'>
           <div className='row d-flex align-items-center justify-content-center  mt-5'>
             <Filterbar />
-            {data.map((cardData: any, index:any) => (
+            {data.map((cardData: any, index: any) => (
               <div className='col-10 col-md-3 my-3' key={1}>
                 <Card cardData={cardData} indexData={index} />
               </div>

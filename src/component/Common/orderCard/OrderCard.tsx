@@ -1,6 +1,6 @@
 import React from 'react'
-import carrot from '../../../Assets/images/carrot.jpg'
-import '../../../Assets/global/global.css'
+import carrot from '../../../assets/images/carrot.jpg'
+import '../../../assets/global/global.css'
 import './OrderCard.css'
 
 function OrderCard() {

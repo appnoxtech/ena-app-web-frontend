@@ -1,9 +1,9 @@
 import React from 'react'
-import AddAddressComp from '../../../Component/common/addAddressComp/AddAddressComp'
-import Breadcrumb from '../../../Component/common/breadcrumb/Breadcrumb'
-import OrderCard from '../../../Component/common/orderCard/OrderCard'
+import AddAddressComp from '../../../component/common/addAddressComp/AddAddressComp'
+import Breadcrumb from '../../../component/common/breadcrumb/Breadcrumb'
+import OrderCard from '../../../component/common/orderCard/OrderCard'
 import './CheckoutWaddress.css'
-import '../../../Assets/global/global.css'
+import '../../../assets/global/global.css'
 
 function checkoutWaddress() {
   return (
@@ -13,10 +13,10 @@ function checkoutWaddress() {
           <Breadcrumb />
         </div>
         <div className='col-12 d-flex justify-content-center row mx-auto px-md-5'>
-        <div className='col-12 col-md-8 mx-auto border back-g-lightwhite py-4 border_radius1 px-md-5'>
+        <div className='col-12 col-lg-8 mx-auto border back-g-lightwhite py-4 border_radius1 px-md-5'>
           <AddAddressComp />
         </div>
-          <div className="col-md-4 col-12 mt-5 mt-md-0">
+          <div className="col-lg-4 col-12 mt-5 mt-lg-0">
           <div className="container-fluid px-4 border border_radius1 py-4 back-g-lightwhite">
             <OrderCard />
             </div>

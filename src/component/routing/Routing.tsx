@@ -2,13 +2,13 @@ import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Cart from '../../pages/cart/Cart'
 import Details from '../../pages/product/Details'
-import ForgetPass from '../../Screens/auth/ForgetPass/ForgetPass'
-import Login from '../../Screens/auth/Login/Login'
-import Logincart from '../../Screens/auth/Logincart/Logincart'
+import ForgetPass from '../../Screens/auth/forgetPass/ForgetPass'
+import Login from '../../Screens/auth/login/Login'
+import Logincart from '../../Screens/auth/logincart/Logincart'
 import OtpVar from '../../Screens/auth/otpVar/OtpVar'
-import Home from '../../Screens/Home'
-import OtpVerified from "../../Screens/auth/OtpVerified/Otpverified"
-import Signup from "../../Screens/auth/Signup/Signup"
+import Home from '../../Screens/home'
+import OtpVerified from "../../Screens/auth/otpVerified/Otpverified"
+import Signup from "../../Screens/auth/signup/Signup"
 import AddAddressComp from "../common/addAddressComp/AddAddressComp"
 import AddAddress from '../../Screens/checkout/addAddress/AddAddress'
 import OrderCard from '../common/orderCard/OrderCard'
@@ -33,9 +33,7 @@ function Routing() {
             <Route path='/otp_verification' element={<OtpVar />} />
             <Route path='/otp_verified' element={<OtpVerified />} />
             <Route path='/signup' element={<Signup />} />
-            <Route path='/addAddressComp' element={<AddAddressComp />} />
             <Route path='/addAddress' element={<AddAddress />} />
-            <Route path='/orderCard' element={<OrderCard />} />
             <Route path='/checkoutWaddress' element={<CheckoutWaddress />} />
             <Route path='/order' element={<Order />} />
             <Route path='*' element={<h1>Error 404 ! Page note Found</h1>} />

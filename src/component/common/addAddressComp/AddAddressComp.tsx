@@ -1,7 +1,7 @@
 import React from 'react'
-import LoginInput from '../LoginInput'
+import LoginInput from '../loginInput/index'
 import './AddAddressComp.css'
-import '../../../Assets/global/global.css'
+import '../../../assets/global/global.css'
 import { NavLink, useNavigate } from 'react-router-dom'
 
 function AddAddress() {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import EnaLogo from '../../Assets/images/enaLogoGreen.png'
-import '../../Assets/global/global.css'
+import EnaLogo from '../../assets/images/enaLogoGreen.png'
+import '../../assets/global/global.css'
 import './Mobilenav.css'
 
 const Mobilenav = ({}) => {
