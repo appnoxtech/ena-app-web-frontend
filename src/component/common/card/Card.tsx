@@ -2,10 +2,9 @@ import React, { FC } from 'react'
 import './Card.css'
 import { NavLink } from 'react-router-dom'
 
-const Card: FC<any> = ({ cardData, indexData }) => {
+const Card: FC<any> = ({ cardData, indexData ,wishListHandler }) => {
   return (
     <div className=''>
-      <NavLink to='product/details'>
         <div className='card border-0 col-12  '>
           <div className='col-12 m-0 p-0 carrot_background '>
             <div className='border-0 col-12 text-center '>
@@ -20,10 +19,10 @@ const Card: FC<any> = ({ cardData, indexData }) => {
             </div>
             ):''}
 
-            <a href='#' className='ms-auto px-2 mr-5'>
-              <i className='fa fa-heart-o heart_fav_icon mt-1' aria-hidden='true'></i>
+            <button onClick={()=>wishListHandler(indexData)} className='ms-auto px-2 mr-5 bg-light border border-none border-0'>
+              <i className={cardData.isFav?'fa fa-heart red':'fa fa-heart-o heart_fav_icon mt-1'} aria-hidden='true'></i>
 
-            </a>
+            </button>
           </div>
 
           <div className='card-body ps-0 pe-0 col-12'>
@@ -44,7 +43,6 @@ const Card: FC<any> = ({ cardData, indexData }) => {
             </div>
           </div>
         </div>
-      </NavLink>
     </div>
   )
 }
