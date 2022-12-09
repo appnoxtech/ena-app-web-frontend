@@ -1,8 +1,10 @@
 import React, { FC, useState } from 'react'
 import heartIcon from '../../../assets/images/hearticonred.svg'
 import Carrot from '../../../assets/images/carrot.jpg'
+import './relatedProduct.css'
 
 const RelatedProductCard: FC<any> = ({ noutil }) => {
+  const [isShown, setIsShown] = useState(false)
   const [util, setUtil] = useState(noutil)
   return (
     <div className='card_container border-1'>
@@ -20,7 +22,27 @@ const RelatedProductCard: FC<any> = ({ noutil }) => {
         )}
 
         <div className='card-body'>
-          <h5 className='card-title'>Carrot </h5>
+          <div className='d-flex align-items-center jusity-content-center'>
+            <h5 className='card-title p-0 m-0'>Carrot </h5>
+            {Boolean(!util) && (
+              <>
+                <a
+                  className='btn ms-auto border-0 btn-default fs-3 mb-3 hoverClass'
+                  onMouseEnter={() => setIsShown(true)}
+                  onMouseLeave={() => setIsShown(false)}
+                >
+                  ...
+                </a>
+              </>
+            )}
+          </div>
+          {/* Delete */}
+          {Boolean(isShown) && (
+            <div className='text-end'>
+              <a className='btn btn-light text-danger '>Delete</a>
+            </div>
+          )}
+          {/* DElete */}
           <p className='card-text w-2 '>
             kn 35.2/kg <s className='crossTextRelated kg_container'>kn 35.2/kg</s>
           </p>

@@ -1,0 +1,7 @@
+.activeClass {
+    display: none;
+  }
+  
+  .hoverClass :hover{
+    display: block;
+  }

@@ -25,9 +25,14 @@ const Desktop = () => {
   return (
     <div className='col-12 p-4'>
       <div className='  d-md-flex justify-content-between align-items-center  '>
-        <div>
+        <NavLink to='/'>
+
+        <div className='btn btn-default border-0'>
+         
           <img className='imageProp ' src={Ena} alt='Ena' />
+          
         </div>
+        </NavLink>
         <div className='navOuter '>
           {MenuItem.map((item,index) => (
             <li className='navli  ' key={index}>
