@@ -220,3 +220,27 @@ export const EnaAppData = [
     img: 'https://thumbs.dreamstime.com/b/kiwi-isolated-white-background-clipping-path-101144959.jpg',
   },
 ]
+
+export const wareHouse = [
+  {
+    detail:'Drugs & Pharma',
+    image: 'wareHouse1.png',
+    bgClass:'bgblue'
+  },
+  {
+    detail:'Building & Construction',
+    image: 'wareHouse3.png',
+    bgClass:'bgOrange'
+  },
+  {
+    detail:'Drugs & Pharma',
+    image: 'wareHouse4.png',
+    bgClass:'bgGreen'
+  },
+  {
+    detail:'Drugs & Pharma',
+    image: 'wareHouse5.png',
+    bgClass:'bgPurple'
+  }
+]
+
