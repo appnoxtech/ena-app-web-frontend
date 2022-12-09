@@ -19,6 +19,7 @@ import Navbar from '../navbar/NavBar'
 import Admin from '../../Screens/admin'
 import AdminLogin from '../../Screens/admin/adminLogin/AdminLogin'
 import AdminHome from '../../Screens/admin/adminHome/AdminHome'
+import AdminProductList from '../../Screens/admin/productl-list/productList'
 
 function Routing() {
   return (
@@ -45,6 +46,7 @@ function Routing() {
             <Route path='/admin' element={<Admin />}/>
             <Route path='/admin-login' element={<AdminLogin />}/>
             <Route path='/admin-home' element={<AdminHome />}/>
+            <Route path = '/admin-ProductList' element = {<AdminProductList />} />
   
             {/* AdminEnd */}
 

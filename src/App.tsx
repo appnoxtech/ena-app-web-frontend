@@ -8,7 +8,8 @@ const App = () => {
   return (
     <>
       <div className='main_screen'>
-        {/* <Routing /> */} <Checkout />
+        <Routing /> 
+        {/* <Checkout /> */}
       </div>
     </>
   )
