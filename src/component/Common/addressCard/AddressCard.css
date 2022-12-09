@@ -1,0 +1,12 @@
+.height_address_card{
+    height: fit-content !important;
+}
+
+.addressCard_heading{
+    font-size: medium;
+    font-weight: 600;
+}
+
+.border_color_green:hover{
+    border: 3px solid #51BC4A !important;
+}
