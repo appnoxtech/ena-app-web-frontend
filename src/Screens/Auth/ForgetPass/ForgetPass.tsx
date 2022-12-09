@@ -4,7 +4,7 @@ import { IoIosArrowBack } from 'react-icons/all'
 import '../Auth.css'
 import banner from '../../../Assets/Images/bannerH.png'
 import EnaLogo from '../../../Assets/Images/enaLogoGreen.png'
-import LoginInput from '../../../Component/common/loginInput'
+import LoginInput from '../../../Component/common/LoginInput'
 
 
 function ForgetPass() {

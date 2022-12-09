@@ -1,5 +1,4 @@
 import React from 'react'
-import Navbar from '../../Component/navbar/NavBar'
 import ProductCom from '../../Component/product/ProductCom'
 import RelatedProduct from '../../Component/product/RelatedProduct'
 

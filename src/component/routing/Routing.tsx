@@ -1,21 +1,21 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Cart from '../../pages/cart/Cart'
+import Details from '../../pages/product/Details'
+import ForgetPass from '../../Screens/auth/forgetPass/ForgetPass'
 import Login from '../../Screens/auth/login/Login'
 import Logincart from '../../Screens/auth/logincart/Logincart'
-import ForgetPass from '../../Screens/auth/forgetPass/ForgetPass'
-import Home from '../../Screens/home'
 import OtpVar from '../../Screens/auth/otpVar/OtpVar'
-import OtpVerified from '../../Screens/auth/otpVerified/Otpverified'
-import Signup from '../../Screens/auth/signup/Signup'
-import Details from '../../pages/product/Details'
-import Navbar from '../navbar/NavBar'
-import DesktopFooter from '../footer/Footer'
-import AddAddressComp from '../common/addAddressComp/AddAddressComp'
+import Home from '../../Screens/home'
+import OtpVerified from "../../Screens/auth/otpVerified/Otpverified"
+import Signup from "../../Screens/auth/signup/Signup"
+import AddAddressComp from "../common/addAddressComp/AddAddressComp"
 import AddAddress from '../../Screens/checkout/addAddress/AddAddress'
 import OrderCard from '../common/orderCard/OrderCard'
 import CheckoutWaddress from '../../Screens/checkout/checkoutWithAddAddress/CheckoutWaddress'
-import Cart from "../../Component/cart/CartCom"
-import Order from "../../Component/order/Order"
+import Order from '../order/Order'
+import DesktopFooter from '../footer/Footer'
+import Navbar from '../navbar/NavBar'
 
 function Routing() {
   return (

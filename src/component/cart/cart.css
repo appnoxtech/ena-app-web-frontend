@@ -130,8 +130,8 @@
 }
 
 .ProductSizeCart input,
- .ProductSizeCart input:active,
-  .ProductSizeCart input:focus {
+.ProductSizeCart input:active,
+.ProductSizeCart input:focus {
     width: 6rem;
     border: none;
     box-shadow: none;
@@ -139,11 +139,50 @@
     background: #F8F9F7;
     border-radius: 8px;
     padding: 0.5rem;
+    text-align: center;
 }
-.ProductSizeCart input h5{
+
+.ProductSizeCart h5 {
     padding-left: 1rem;
 }
-.removeProductCart h5{
+
+.removeProductCart h5 {
     color: #EB5757 !important;
 }
+
+.subTotalCartVal {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+}
+
+.subTotalCartVal h5 {
+    color: #000000;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.subTotalCartVal h5 span {
+    font-size: 22px;
+    color: #313131;
+    font-weight: 600;
+}
+
+.commonBtnGreen, .commonBtnGreen:hover {
+    background: #51BC4A;
+    color: #FFFFFF;
+}
+.infoText{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.infoText p{
+    margin-bottom: 0;
+    margin-left: 0.5rem;
+}
+
 /* shoping cart end */
