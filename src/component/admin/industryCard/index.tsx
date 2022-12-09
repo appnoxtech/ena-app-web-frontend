@@ -10,17 +10,18 @@ import './industry.css'
 const IndustryCard:FC<any>=({cardData,key})=>{
   return (
     <>
-        <div className="d-flex align-items-center m-4 justify-content-between border rounded">
-            <div className='col-8 my-5'>
-                <p className='cardP border p-0 m-0'>
+        <div className="d-flex border my-2  ">
+            <div className='col-9 py-4'>
+                <p className='cardP  my-5 p-0 m-0 px-4'>
                 {cardData.detail}
                 </p>
             </div>
-            <div className='col-4 border text-end'>
-                <img src={`/${cardData.image}`} className="img-fluid col-4" alt="image1" />
+            <div className='roundborder border'>
+            <div className={`${cardData.bgClass} d-flex rounded-start align-items-center justify-content-end text-center  `}>
+                <img src={`/${cardData.image}`} className="img-fluid col-5" alt="image1" />
+            </div>
             </div>
         </div>
-    
     </>
   )
 }

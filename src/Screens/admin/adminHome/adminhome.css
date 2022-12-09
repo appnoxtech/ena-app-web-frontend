@@ -5,3 +5,18 @@ border: 1px dashed #648966;
 border-radius: 12px;
 
 }
+
+.pButtonInput{
+    font-family: 'Montserrat';
+font-style: normal;
+font-weight: 500;
+font-size: 18px;
+line-height: 22px;
+/* identical to box height, or 122% */
+
+
+/* System Grey Text */
+
+color: #648966;
+
+}
