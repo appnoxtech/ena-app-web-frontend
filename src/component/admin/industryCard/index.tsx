@@ -3,10 +3,6 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { IoIosArrowBack } from 'react-icons/all'
 import './industry.css'
 
-
-// import '../Auth.css'
-
-
 const IndustryCard:FC<any>=({cardData,key})=>{
   return (
     <>
