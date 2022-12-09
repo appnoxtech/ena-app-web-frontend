@@ -227,7 +227,7 @@ function AddAddress() {
               
               <div className='col-6 col-md-3 p-0 p-sm-auto'>
                 <NavLink to='/addAddress'>
-                <button type='button' className='btn py-3 lh-1 border w-100 fontWeight-600 button  '>
+                <button type='button' className='btn py-3 lh-1 border w-100 fontWeight-600 button1  '>
                   Add Address
                 </button>
                 </NavLink>

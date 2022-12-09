@@ -62,7 +62,7 @@ function OrderCard() {
                     </div>
                     <div className="col-12 mt-3">
                         <div className="col text-end">
-                        <button className="btn w-100 .order_button1">Place Order</button>
+                        <button className="btn w-100 fontWeight-600 order_button1">Place Order</button>
                         </div></div>
                 </div>
                 
