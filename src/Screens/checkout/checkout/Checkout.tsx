@@ -14,7 +14,7 @@ function Checkout() {
         </div>
         <div className='col-12 d-flex justify-content-center row mx-auto px-md-5'>
         <div className='col-12 col-lg-8'>
-          <AddressCard username='Vijay Mahesh Singh' address='822 Stewart Street, Indianapolis, 445566' selected='selected'/>
+          <AddressCard username='Gorann' address='822 Stewart Street, croatia, 445566' selected='selected'/>
           <AddressCard username='Vijay Mahesh Singh' address='822 Stewart Street, Indianapolis, 445566' />
           <div className='col-12 col-lg-3 mt-2 float-end'>
           <NavLink to='/addAddress'>
