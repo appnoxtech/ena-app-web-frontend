@@ -7,7 +7,10 @@
   background-color: #51BC4A !important ;
 }
 
-
+.red{
+  color: red;
+  
+}
 .add_button:hover{
   background: #51BC4A !important;
   color: white !important;

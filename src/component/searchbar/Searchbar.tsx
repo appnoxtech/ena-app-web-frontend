@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState, FC, useEffect } from 'react'
 import './Searchbar.css'
-function Searchbar() {
+
+const Searchbar:FC<any>=({searchText,setSearchText })=> {  
   return (
     <div className='search_background d-flex justify-content-center align-item-center border bg-dark col-12'>
       <div>
@@ -9,6 +10,9 @@ function Searchbar() {
         </h2>
         <div className='d-flex border_outer justify-content-center align-items-center w-75  mx-auto  bg-light'>
           <input
+            // onChange={(val)=>setSearchText(val)}
+            // value={searchText}
+            onChange={e=>setSearchText(e.target.value)}
             type='text'
             placeholder='Search for products or brands.....'
             className='search_bar bg-light border-0'
