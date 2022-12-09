@@ -2,11 +2,11 @@ import React from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { IoIosArrowBack } from 'react-icons/all'
 import '../Auth.css'
-import '../../../Assets/global/global.css'
-import banner from '../../../Assets/Images/bannerH.png'
-import EnaLogo from '../../../Assets/Images/enaLogoGreen.png'
-import bannerforphone from '../../../Assets/Images/banner.png'
-import LoginInput from '../../../Component/common/loginInput'
+import '../../../assets/global/global.css'
+import banner from '../../../assets/images/bannerH.png'
+import EnaLogo from '../../../assets/images/enaLogoGreen.png'
+import bannerforphone from '../../../assets/images/banner.png'
+import LoginInput from '../../../component/Common/LoginInput'
 
 
 function Logincart() {

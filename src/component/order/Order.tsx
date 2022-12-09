@@ -1,6 +1,7 @@
 import React from 'react'
 import Table from 'react-bootstrap/Table';
-import Tomato from '../../Assets/Images/6-tomato-png-image.png'
+import Tomato from '../../assets/images/6-tomato-png-image.png'
+
 import './Order.css'
 const Order = () => {
   return  (
