@@ -11,9 +11,17 @@ import OtpVerified from "../../Screens/auth/otpVerified/Otpverified"
 import Signup from "../../Screens/auth/signup/Signup"
 import AddAddressComp from "../common/addAddressComp/AddAddressComp"
 import AddAddress from '../../Screens/checkout/addAddress/AddAddress'
+import OrderCard from '../common/orderCard/OrderCard'
+import CheckoutWaddress from '../../Screens/checkout/checkoutWithAddAddress/CheckoutWaddress'
 import Order from '../order/Order'
 import DesktopFooter from '../footer/Footer'
 import Navbar from '../navbar/NavBar'
+import Checkout from '../../Screens/checkout/checkout/Checkout'
+import ChangeAddress from '../../Screens/checkout/changeAddress/ChangeAddress'
+import Admin from '../../Screens/admin'
+import AdminLogin from '../../Screens/admin/adminLogin/AdminLogin'
+import AdminHome from '../../Screens/admin/adminHome/AdminHome'
+import AdminProductList from '../../Screens/admin/productl-list/productList'
 
 function Routing() {
   return (
@@ -31,9 +39,22 @@ function Routing() {
             <Route path='/otp_verification' element={<OtpVar />} />
             <Route path='/otp_verified' element={<OtpVerified />} />
             <Route path='/signup' element={<Signup />} />
-            <Route path='/addAddressComp' element={<AddAddressComp />} />
             <Route path='/addAddress' element={<AddAddress />} />
+            <Route path='/changeAddress' element={<ChangeAddress />} />
+            <Route path='/checkoutWaddress' element={<CheckoutWaddress />} />
+            <Route path='/checkout' element={<Checkout />} />
             <Route path='/order' element={<Order />} />
+
+
+            {/* Admin */}
+            <Route path='/admin' element={<Admin />}/>
+            <Route path='/admin-login' element={<AdminLogin />}/>
+            <Route path='/admin-home' element={<AdminHome />}/>
+            <Route path = '/admin-ProductList' element = {<AdminProductList />} />
+  
+            {/* AdminEnd */}
+
+
             <Route path='*' element={<h1>Error 404 ! Page note Found</h1>} />
         </Routes>
         <DesktopFooter class='container-fluid footer mt-5' />

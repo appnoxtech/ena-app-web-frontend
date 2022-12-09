@@ -13,7 +13,7 @@ const RelatedProduct = () => {
                         {
                             Array.from({ length: 8 }).map((data, index) => (
                                 <div className="col-6 col-md-4 col-lg-3" key={index}>
-                                    <RelatedProductCard />
+                                    <RelatedProductCard noutil={false}/>
                                 </div>
                             ))
                         }

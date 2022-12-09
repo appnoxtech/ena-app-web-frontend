@@ -10,11 +10,11 @@ a{
 
 /* css for button  */
 
-.button{
+.button2{
     background: #51BC4A;
 }
 
-.button:hover{
+.button2:hover{
     background: #49c540;
     color: #fff;
 }

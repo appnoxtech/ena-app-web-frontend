@@ -6,7 +6,7 @@ import Pagination from '../../component/common/pagination/Pagination'
 import { EnaAppData } from '../../component/dummyData'
 import Searchbar from '../../component/searchbar/Searchbar'
 
-const Home: FC<any> = () => {
+const Admin: FC<any> = () => {
   const [data, setData] = useState(EnaAppData)
   const filterData = EnaAppData
   const [cardIndex, setCardIndex] = useState<any>()
@@ -75,4 +75,4 @@ const Home: FC<any> = () => {
   )
 }
 
-export default Home
+export default Admin
