@@ -1,19 +1,13 @@
 import React from 'react'
 import './Breadcrumb.css'
 
-function Breadcrumb() {
+function Breadcrumb(prop:any) {
   return (
     <>
       <nav aria-label='breadcrumb'>
         <ol className='breadcrumb d-flex justify-content-center'>
-          <li className='breadcrumb-item beadcrumb_font'>
-            <a href='#'>Shopping Cart</a>
-          </li>
-          <li className='breadcrumb-item beadcrumb_font'>
-            <a href='#'>Checkout</a>
-          </li>
           <li className='breadcrumb-item active_breadcrumb'>
-            Change Address
+              {prop.pathName}
           </li>
         </ol>
       </nav>

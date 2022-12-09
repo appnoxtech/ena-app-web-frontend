@@ -16,6 +16,8 @@ import CheckoutWaddress from '../../Screens/checkout/checkoutWithAddAddress/Chec
 import Order from '../order/Order'
 import DesktopFooter from '../footer/Footer'
 import Navbar from '../navbar/NavBar'
+import Checkout from '../../Screens/checkout/checkout/Checkout'
+import ChangeAddress from '../../Screens/checkout/changeAddress/ChangeAddress'
 
 function Routing() {
   return (
@@ -34,7 +36,9 @@ function Routing() {
             <Route path='/otp_verified' element={<OtpVerified />} />
             <Route path='/signup' element={<Signup />} />
             <Route path='/addAddress' element={<AddAddress />} />
+            <Route path='/changeAddress' element={<ChangeAddress />} />
             <Route path='/checkoutWaddress' element={<CheckoutWaddress />} />
+            <Route path='/checkout' element={<Checkout />} />
             <Route path='/order' element={<Order />} />
             <Route path='*' element={<h1>Error 404 ! Page note Found</h1>} />
         </Routes>
