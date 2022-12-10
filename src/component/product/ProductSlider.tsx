@@ -39,8 +39,8 @@ const ProductSlider:FC<any>= ({productInfo}) => {
     )
   }, [isMobile])
   return (
-    <div className='productSliderMain'>
-      <ImageGallery
+    <div className='productSliderMain  '>
+      {/* <ImageGallery
         items={images}
         thumbnailPosition={isMobile ? 'bottom' :  'left'}
         showPlayButton={false}
@@ -48,7 +48,9 @@ const ProductSlider:FC<any>= ({productInfo}) => {
         showBullets={isMobile ? true : false}
         showFullscreenButton={false}
         showNav={false}
-      />
+      /> */}
+
+      <img src={productInfo.img} className='img-fluid mx-auto'/>
     </div>
   )
 }

@@ -1,6 +1,7 @@
 import React, { FC, useState } from 'react';
 import './cart.css';
 import Modal from 'react-bootstrap/Modal';
+import { useNavigate } from 'react-router-dom';
 
 // type cartModalProps = {
 //     showCartModal : boolean,
@@ -8,6 +9,7 @@ import Modal from 'react-bootstrap/Modal';
 //     productData:any
 // }
 const CartModal:FC<any> = ({showCartModal,closeCartModal,productData}) => {
+    const navigate=useNavigate()
     return (
         <>
             <Modal show={showCartModal} onHide={closeCartModal} className="cartModalMain">
@@ -43,7 +45,7 @@ const CartModal:FC<any> = ({showCartModal,closeCartModal,productData}) => {
                     </div>
                 </Modal.Body>
                 <Modal.Footer  className='cartModalFooter'>
-                    <button  className='btn modalViewCartBtn'>
+                    <button  onClick={()=>navigate('/cart')} className='btn modalViewCartBtn'>
                         View Cart
                     </button>
                     <button className='btn marginLeft modalViewCartBtn'>

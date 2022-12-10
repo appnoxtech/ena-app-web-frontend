@@ -78,13 +78,16 @@
 .shopingCartMain thead {
     background: #F8F9F7;
     border-radius: 8px;
-    padding: 2rem;
+    padding:10px;
+    /* width:; */
 }
 
 .shopingCartMain tbody, td, tfoot, th, thead, tr {
     border: none;
 }
-
+::-webkit-scrollbar {
+    display: none;
+}
 .shopingCartMain thead tr th {
     min-width: 200px;
     font-weight: 600;

@@ -41,7 +41,7 @@ function OtpVar() {
                   <OtpInput />
                 </div>
                 <NavLink to='/otp_verified'>
-                  <button type='button' className='btn w-100 h-100 mt-4 fontWeight-600 button'>
+                  <button type='button' className='py-2 w-100 h-100 mt-4 fontWeight-600 button themecolor btnRadius text-light'>
                     Verify
                   </button>
                 </NavLink>

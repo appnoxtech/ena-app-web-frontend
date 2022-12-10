@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import ProductSlider from './ProductSlider'
 import CartModal from '../cart/CartModal'
 import { FC } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const ProductCom:FC<any>= ({data}) => {
+  const navigate=useNavigate()
   const [showCartModal, setShowCartModal] = useState(false)
   const [productDetail,setProductDetail]=useState(data)
   const handleShowCartModal = () => {
@@ -54,7 +56,7 @@ const ProductCom:FC<any>= ({data}) => {
               </div>
               </div>
               <div className='mt-3'>
-                <button className=' py-3 AddToCartBtnProduct'>Add To Cart</button>
+                <button onClick={()=>navigate('/cart')} className=' py-3 border   col-12 AddToCartBtnProduct'>Add To Cart</button>
               </div>
               <div className='mt-3'>
                 <button className={`${changeColorHandler()} ' border border-0 btnRadius py-3 w-100  text-light fw-bold'`} onClick={handleShowCartModal}>

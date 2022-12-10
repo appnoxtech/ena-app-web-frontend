@@ -18,8 +18,8 @@ const Card: FC<any> = ({ cardData, indexData ,wishListHandler }) => {
           <div className='fabDiv'>
             {indexData % 2 == 0 ? (
 
-            <div className='rounded-end Off_container mt-1 '>
-              <p className=' p-0 m-0 px-2 py-1 '>10% off</p>
+            <div className='rounded-end Off_container mt-1 themecolor '>
+              <p className=' p-0 m-0 px-2 py-1 text-light'>10% off</p>
             </div>
             ):''}
 

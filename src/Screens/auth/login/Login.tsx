@@ -10,6 +10,7 @@ import LoginInput from '../../../component/Common/loginInput'
 function Login() {
   const heading = 'Sign in'
   const history = useNavigate()
+  const navigate=useNavigate()
   return (
     <>
       <div className='container-fluid'>
@@ -73,7 +74,7 @@ function Login() {
                 <NavLink to='/forget_password'>
                   <div className='text-end h6 mt-2 font-green'>Forget Password?</div>
                 </NavLink>
-                <button type='button' className='btn w-100 h-100 mt-4 fontWeight-600 button'>
+                <button onClick={()=>navigate('/')} type='button' className=' btnRadius border border-0 w-100 h-100 mt-4 fontWeight-600 button themecolor text-light py-2'>
                   Login
                 </button>
               </div>

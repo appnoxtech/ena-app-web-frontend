@@ -25,9 +25,11 @@ const Desktop = () => {
   return (
     <div className='col-12 p-4'>
       <div className='  d-md-flex justify-content-between align-items-center  '>
+        <NavLink to={'/'}>
         <div>
           <img className='imageProp ' src={Ena} alt='Ena' />
         </div>
+        </NavLink>
         <div className='navOuter '>
           {MenuItem.map((item,index) => (
             <li className='navli  ' key={index}>
@@ -42,7 +44,7 @@ const Desktop = () => {
             <i className='fa fa-user-o person-icon' aria-hidden='true'></i>
           </NavLink>
           <i className='fa fa-heart-o heart_icon' aria-hidden='true'></i>
-          <NavLink to='/checkoutWaddress'>
+          <NavLink to='/cart'>
           <i className='fa fa-shopping-cart cart_icon' aria-hidden='true'></i>
           </NavLink>
         </div>

@@ -51,7 +51,7 @@ function ForgetPass() {
                 />
                 <button
                   type='button'
-                  className='btn w-100 h-100 mt-4 fontWeight-600 button'
+                  className=' py-2 text-light w-100 h-100 mt-4 fontWeight-600  themecolor btnRadius'
                   onClick={() => history('/otp_verification')}
                 >
                   Send Code

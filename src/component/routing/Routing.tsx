@@ -55,7 +55,9 @@ function Routing() {
             {/* AdminEnd */}
 
 
-            <Route path='*' element={<h1>Error 404 ! Page note Found</h1>} />
+            <Route path='*' element={<div className='col-12  d-flex'>
+              <img src='/4041.png' className='img-fluid col-10 col-md-4  m-auto'/>
+              </div>} />
         </Routes>
         <DesktopFooter class='container-fluid footer mt-5' />
       </BrowserRouter>
