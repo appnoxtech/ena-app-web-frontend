@@ -1,13 +1,14 @@
 import React, { FC, useState } from 'react'
 import heartIcon from '../../../assets/images/hearticonred.svg'
 import Carrot from '../../../assets/images/carrot.jpg'
+import './Card.css'
 
-const RelatedProductCard: FC<any> = ({ noutil }) => {
+const RelatedProductCard: FC<any> = ({ noutil,reletedProduct }) => {
   const [util, setUtil] = useState(noutil)
   return (
-    <div className='card_container border-1'>
-      <div className='card'>
-        <img src={Carrot} className='card-img-top ' alt='...' />
+    <div className='card_container border-1  '>
+      <div className='card '>
+        <img src={reletedProduct.img} className='img_data mx-auto ' alt='...' />
         {Boolean(util) && (
           <div className='fabDiv'>
             <div className='rounded-end Off_container offContainerGreen'>
@@ -20,7 +21,7 @@ const RelatedProductCard: FC<any> = ({ noutil }) => {
         )}
 
         <div className='card-body'>
-          <h5 className='card-title'>Carrot </h5>
+          <h5 className='card-title'>{reletedProduct.vegName} </h5>
           <p className='card-text w-2 '>
             kn 35.2/kg <s className='crossTextRelated kg_container'>kn 35.2/kg</s>
           </p>

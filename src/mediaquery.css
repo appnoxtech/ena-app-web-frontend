@@ -11,6 +11,10 @@
 .textblack{
     color: black;
 }
+
+.voliet{
+    background: #b5255e;
+}
 @media screen and (max-width: 768px) {
   .text {
     font-size: 2rem;

@@ -1,8 +1,12 @@
 import React, { FC } from 'react'
 import './Card.css'
 import { NavLink } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
 const Card: FC<any> = ({ cardData, indexData ,wishListHandler }) => {
+
+  const navigate = useNavigate();
+
   return (
     <div className='overflow-hidden h-100' style={{borderRadius:'10px',border:'0.5px solid #efefef'}}>
         <div className='card border-0 col-12 overflow-hidden '>
@@ -33,10 +37,10 @@ const Card: FC<any> = ({ cardData, indexData ,wishListHandler }) => {
             <div className='primary_quantity d-flex align-items-center justify-content-between'>
               <div className='radius_container d-flex  align-items-center justify-content-between border'>
                 <p className=' col-6 font_container m-0 p-0 py-2 text-center'>kg</p>
-                <input className=' col-6  border border-0 border-none m-0 p-0 text-center border border-none border-0 h-100'placeholder='10'/>
+                <input type={"number"} className=' col-6  border border-0 border-none m-0 p-0 text-center border border-none border-0 h-100'placeholder='10'/>
               </div>
               <div className=' btnRadius col-6 themecolor overflow-hidden mx-1 py-2 '>
-                <button  className='themecolor border border-0 w-100 text-light'>
+                <button onClick={()=>navigate('/product/details',{state:cardData})} className='themecolor border border-0 w-100 text-light'>
                   Add
                 </button>
               </div>
