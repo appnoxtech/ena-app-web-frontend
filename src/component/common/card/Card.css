@@ -15,7 +15,9 @@
   background: #51BC4A !important;
   color: white !important;
 }
-
+input:focus {
+  outline:none;
+}
 .radius_container {
   border-radius: 6px;
   overflow: hidden;

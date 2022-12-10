@@ -30,11 +30,6 @@ const Admin: FC<any> = () => {
       }
     })
     setData(temp2)
-    // setData(data.filter((item)=>{
-    //   if(item.category === name){
-    //     return item
-    //   }
-    // }))
   }
 
   console.log(data)
@@ -46,9 +41,9 @@ const Admin: FC<any> = () => {
         <div className='mt-5 col-12 col-md-2 '>
           <Category filterDatabyCategory={filterDatabyCategory} seletedCategory={seletedCategory}/>
         </div>
-        <div className=' col-11 mx-auto mx-md-0 col-md-10'>
-          <div className='row d-flex  mt-5'>
-            <Filterbar />
+        <div className=' col-12 mx-auto mx-md-0 col-md-10 '>
+          <div className='row d-flex    mt-5 mx-auto m-0 p-0'>
+            {/* <Filterbar /> */}
             {/* search product by name */}
             {data
               .filter((d, i) => {
@@ -61,7 +56,7 @@ const Admin: FC<any> = () => {
                 }
               })
               .map((cardData: any, index) => (
-                <div className='col-10 col-md-3 my-3' key={index}>
+                <div className='col-6 col-md-3 my-3 m-0 px-2 overflow-hidden' key={index}>
                   <Card cardData={cardData} indexData={index} wishListHandler={wishListHandler} />
                 </div>
               ))}

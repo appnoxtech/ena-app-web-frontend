@@ -2,28 +2,28 @@ import React, { useEffect, useState } from 'react'
 import './product.css'
 import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
-import Image1 from '../../assets/images/product/one.png';
-import Image2 from '../../assets/images/product/two.png';
-import Image3 from '../../assets/images/product/three.png';
-import Image4 from '../../assets/images/product/four.png';
-import ImageBig from '../../assets/images/carrot.jpg';
+// import Image1 from '../../assets/images/one.png';
+// import Image2 from '../../assets/images/two.png';
+// import Image3 from '../../assets/images/three.png';
+// import Image4 from '../../assets/images/four.png';
+// import ImageBig from '../../assets/images/carrot.jpg';
 
 const images = [
   {
-    original: ImageBig,
-    thumbnail: Image1,
+    original: 'https://drhealthbenefits.com/wp-content/uploads/2017/06/carrot-leaves.jpg',
+    thumbnail: 'https://drhealthbenefits.com/wp-content/uploads/2017/06/carrot-leaves.jpg',
   },
   {
-    original: Image2,
-    thumbnail: Image2,
+    original: 'https://drhealthbenefits.com/wp-content/uploads/2017/06/carrot-leaves.jpg',
+    thumbnail: 'https://drhealthbenefits.com/wp-content/uploads/2017/06/carrot-leaves.jpg',
   },
   {
-    original: Image3,
-    thumbnail: Image3,
+    original: 'https://drhealthbenefits.com/wp-content/uploads/2017/06/carrot-leaves.jpg',
+    thumbnail: 'https://drhealthbenefits.com/wp-content/uploads/2017/06/carrot-leaves.jpg',
   },
   {
-    original: Image4,
-    thumbnail: Image4,
+    original: 'https://drhealthbenefits.com/wp-content/uploads/2017/06/carrot-leaves.jpg',
+    thumbnail: 'https://drhealthbenefits.com/wp-content/uploads/2017/06/carrot-leaves.jpg',
   },
 ];
 const ProductSlider = () => {

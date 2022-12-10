@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import Searchbar from '../searchbar/Searchbar'
 import Table from 'react-bootstrap/Table';
-import Image1 from '../../assets/images/product/one.png';
+// import Image1 from '../../assets/images/one.png';
 import "./cart.css"
 import infoIcon from "../../assets/images/info.svg"
 
 const CartCom = () => {
     const [size, setSize] = useState('1')
+    let Image1='https://drhealthbenefits.com/wp-content/uploads/2017/06/carrot-leaves.jpg'
     return (
         <div className='container-fluid pb-5'>
             <Searchbar />

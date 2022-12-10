@@ -22,7 +22,7 @@ const ProductCom = () => {
       <div className='col-10 mx-auto'>
         <div className='row gx-md-5 gy-md-0 mt-3 mt-md-5'>
           <div className='col-12 col-md-7'>
-            <ProductSlider />
+            {/* <ProductSlider /> */}
           </div>
           <div className='col-12 col-md-5 mt-3 mt-md-0'>
             <div className='prodcutDetailsData'>
