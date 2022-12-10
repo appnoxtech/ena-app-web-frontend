@@ -1,15 +1,11 @@
 import React, { useState } from 'react'
 import ProductSlider from './ProductSlider'
-import Searchbar from '../searchbar/Searchbar'
-import heartIcon from '../../assets/images/hearticonred.svg'
-import facebookIcon from '../../assets/images/facebook.svg'
-import linkedInIcon from '../../assets/images/linkedin.svg'
-import twitterIcon from '../../assets/images/twitter.svg'
 import CartModal from '../cart/CartModal'
 import { FC } from 'react'
 
 const ProductCom:FC<any>= ({data}) => {
   const [showCartModal, setShowCartModal] = useState(false)
+  const [productDetail,setProductDetail]=useState(data)
   const handleShowCartModal = () => {
     setShowCartModal(true)
   }
@@ -39,7 +35,7 @@ const ProductCom:FC<any>= ({data}) => {
                 </div>
                 <div className='wishListProduct'>
                   <div className='text-end px-2'>
-                    <img src={heartIcon} alt='wish' className='img-fluid' />
+                  <i className={true?'fa fa-heart red':'fa fa-heart-o heart_fav_icon mt-1'} aria-hidden='true'></i>
                   </div>
                 </div>
               </div>
@@ -71,16 +67,16 @@ const ProductCom:FC<any>= ({data}) => {
               <div className='mt-5 d-flex align-content-center'>
                 <h6 className='greentext'>Share :</h6>
                 <div className='socialIconMain'>
-                  <img src={facebookIcon} alt='facebookIcon' className='img-fluid' />
-                  <img src={linkedInIcon} alt='linkedInIcon' className='img-fluid' />
-                  <img src={twitterIcon} alt='twitterIcon' className='img-fluid' />
+                <i className="fa fa-facebook-square h4 mx-2" aria-hidden="true"></i>
+                  <i className="fa fa-linkedin-square h4 mx-2" aria-hidden="true"></i>
+                  <i className="fa fa-twitter-square h4 mx-2" aria-hidden="true"></i>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <CartModal showCartModal={showCartModal} closeCartModal={closeCartModal} />
+      <CartModal showCartModal={showCartModal} closeCartModal={closeCartModal} productData={data} />
     </div>
   )
 }

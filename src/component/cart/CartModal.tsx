@@ -1,17 +1,16 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import './cart.css';
 import Modal from 'react-bootstrap/Modal';
-import productImg from '../../assets/images/carrot.jpg'
-import deleteIcon from '../../assets/images/deleteicon.svg'
 
-type cartModalProps = {
-    showCartModal : boolean,
-    closeCartModal : () => void
-}
-const CartModal = (props : cartModalProps) => {
+// type cartModalProps = {
+//     showCartModal : boolean,
+//     closeCartModal : () => void,
+//     productData:any
+// }
+const CartModal:FC<any> = ({showCartModal,closeCartModal,productData}) => {
     return (
         <>
-            <Modal show={props.showCartModal} onHide={props.closeCartModal} className="cartModalMain">
+            <Modal show={showCartModal} onHide={closeCartModal} className="cartModalMain">
                 <Modal.Header closeButton>
                     <Modal.Title>Shopping Cart</Modal.Title>
                 </Modal.Header>
@@ -22,7 +21,7 @@ const CartModal = (props : cartModalProps) => {
                                 <div className="d-flex justify-content-between">
                                     <div className="d-flex">
                                         <div className="cartModalImg">
-                                            <img src={productImg} alt="img" className='img-fluid' />
+                                            <img src={productData.img} alt="img" className='img-fluid' />
                                         </div>
                                         <div className="cartModalProductDetail">
                                             <h5>Carrot </h5>
@@ -31,7 +30,7 @@ const CartModal = (props : cartModalProps) => {
                                         </div>
                                     </div>
                                     <div className="cartModalDelete">
-                                        <img src={deleteIcon} alt="delete" className='img-fluid' />
+                                        {/* <img src={deleteIcon} alt="delete" className='img-fluid' /> */}
                                     </div>
                                 </div>
                             </div>

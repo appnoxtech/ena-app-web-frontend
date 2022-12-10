@@ -1,6 +1,4 @@
 import React, { FC, useState } from 'react'
-import heartIcon from '../../../assets/images/hearticonred.svg'
-import Carrot from '../../../assets/images/carrot.jpg'
 import './Card.css'
 
 const RelatedProductCard: FC<any> = ({ noutil,reletedProduct }) => {
@@ -15,7 +13,7 @@ const RelatedProductCard: FC<any> = ({ noutil,reletedProduct }) => {
               <p className=' p-0 m-0 px-4 py-2'>10% off</p>
             </div>
             <a href='#' className='text-end px-2'>
-              <img src={heartIcon} alt='wish' className='img-fluid' />
+            <i className={true?'fa fa-heart red':'fa fa-heart-o heart_fav_icon mt-1'} aria-hidden='true'></i>
             </a>
           </div>
         )}
