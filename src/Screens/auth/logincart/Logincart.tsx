@@ -6,7 +6,7 @@ import '../../../assets/global/global.css'
 import banner from '../../../assets/images/bannerH.png'
 import EnaLogo from '../../../assets/images/enaLogoGreen.png'
 import bannerforphone from '../../../assets/images/banner.png'
-import LoginInput from '../../../component/common/loginInput'
+import LoginInput from '../../../component/Common/loginInput'
 
 function Logincart() {
   const heading = 'Sign in to continue'

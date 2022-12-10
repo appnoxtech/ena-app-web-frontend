@@ -5,7 +5,7 @@ import '../Auth.css'
 import '../../../assets/global/global.css'
 import banner from '../../../assets/images/bannerH.png'
 import EnaLogo from '../../../assets/images/enaLogoGreen.png'
-import LoginInput from '../../../component/common/loginInput'
+import LoginInput from '../../../component/Common/loginInput'
 
 function Login() {
   const heading = 'Sign in'
