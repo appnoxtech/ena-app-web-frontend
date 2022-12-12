@@ -115,8 +115,8 @@ function Login() {
                   class='form-control mt-3 d-md-none d-lg-none d-sm-block'
                 />
                 <NavLink to='/login'>
-                  <button type='button' className='btn w-100 h-100 mt-4 fontWeight-600 button'>
-                    Login
+                  <button type='button' className='btn w-100 h-100 mt-4 fontWeight-600 button1'>
+                    Sign up
                   </button>
                 </NavLink>
               </div>

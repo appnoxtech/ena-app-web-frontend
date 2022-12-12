@@ -34,7 +34,7 @@ function Passchanged() {
                   successfully.
                 </p>
                 <NavLink to='/login'>
-                  <button type='button' className='btn w-100 h-100 mt-4 fontWeight-600 button'>
+                  <button type='button' className='btn w-100 h-100 mt-4 fontWeight-600 button1'>
                     Back to Login
                   </button>
                 </NavLink>

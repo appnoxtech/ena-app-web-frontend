@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Searchbar from '../searchbar/Searchbar'
 import Table from 'react-bootstrap/Table'
 // import Image1 from '../../assets/images/one.png';
@@ -6,6 +7,7 @@ import './cart.css'
 import infoIcon from '../../assets/images/info.svg'
 
 const CartCom = () => {
+  const history = useNavigate();
   const [size, setSize] = useState('1')
   let Image1 = 'https://drhealthbenefits.com/wp-content/uploads/2017/06/carrot-leaves.jpg'
   return (
@@ -86,7 +88,7 @@ const CartCom = () => {
           </div>
         </div>
         <div className='mt-3'>
-          <button className=' btnRadius border border-0 themecolor py-3 fw-bold text-light col-12'>
+          <button className=' btnRadius border border-0 themecolor py-3 fw-bold text-light col-12' onClick={()=> history('/checkoutWaddress')}>
             Checkout
           </button>
         </div>
