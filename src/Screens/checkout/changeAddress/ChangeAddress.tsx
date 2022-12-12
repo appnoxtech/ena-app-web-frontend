@@ -11,7 +11,7 @@ function AddAddress() {
         </div>
         <div className='col-12 my-2 my-md-4'>
         <div className='container-fluid col-12 col-md-8 pt-4 back-g-lightwhite border rounded-3'>
-        <div className='row form_address_row '>
+        <div className='row form_address_row p-sm-5 p-0 py-sm-3 py-0 '>
           <AddAddressComp />
           </div>
           </div>
