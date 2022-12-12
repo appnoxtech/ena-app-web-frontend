@@ -4,6 +4,8 @@ import './AddProductComp.css'
 import '../addAddressComp/AddAddressComp.css'
 import '../../../assets/global/global.css'
 import { NavLink, useNavigate } from 'react-router-dom'
+import DropZoneComp from '../dropZoneComp/DropZoneComp'
+
 
 function AddProductComp() {
   const history = useNavigate()
@@ -136,6 +138,14 @@ function AddProductComp() {
             placeholder='Leave a comment here'
             id='floatingTextarea'
           />
+          <div className='col-12 fontWeight-600 addAddress_heading mt-3'>Upload Product Image</div>
+        <hr className='mt-4' />
+
+
+        {/* dropzoneComp import  */}
+
+        <DropZoneComp />
+
         </div>
 
         <div className='col-12 row m-0 mt-5 p-0 my-3 d-flex justify-content-center justify-content-md-end'>
@@ -150,11 +160,9 @@ function AddProductComp() {
           </div>
 
           <div className='col-6 col-md-3 p-0 p-sm-auto'>
-            <NavLink to='/addAddress'>
-              <button type='button' className='btn py-3 lh-1 border w-100 fontWeight-600 button1  '>
+              <button onClick={()=> history('/')} type='button' className='btn py-3 lh-1 border w-100 fontWeight-600 button1  '>
                 Add Address
               </button>
-            </NavLink>
           </div>
         </div>
       </div>
