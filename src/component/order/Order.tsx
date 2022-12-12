@@ -1,9 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Button } from 'react-bootstrap/lib/InputGroup'
 import Table from 'react-bootstrap/Table'
 import Tomato from '../../assets/images/6-tomato-png-image.png'
-
+import CustomButton from '../Button/Button';
+import WarningModal from '../WarningModal/WarningModal';
 import './Order.css'
 const Order = () => {
+  const [showModal, setShowModal] = useState(false);
+  const displayModal = () => {
+    setShowModal(true);
+  }
+  const hideModal = () => {
+    setShowModal(false);
+  }
+  const handleOrderTracking = () => {
+    console.log('function will handle order tracking ..');
+    
+  }
   return (
     <div className='container-fluid pb-5'>
       <div className='side-Part rounded-4 bg-white'></div>
@@ -56,7 +69,24 @@ const Order = () => {
                 </td>
                 <td>
                   <div className=''>
-                    <h5>Remove</h5>
+                    {
+                      index == 0 ? (
+                        <div className='d- flex align-items-center justify-content-between'>
+                        <CustomButton
+                          props={{ styleName: 'dark px-5  p-0', indexData: 'Track', btnType: 'btn-outline', clickHandler: handleOrderTracking}}
+                        />
+
+                        <CustomButton
+                          props={{ styleName: 'danger px-3 p-0 mt-2', indexData: 'Cancel Order', btnType: 'btn-outline', clickHandler:  displayModal}}
+                        />
+                      </div>
+                      ) : (
+                        <CustomButton
+                          props={{ styleName: 'danger px-3 p-0 mt-2', indexData: 'Cancel Order', btnType: 'btn-outline', clickHandler: displayModal}}
+                        />
+                      )
+                    }
+                    
                   </div>
                 </td>
               </tr>
@@ -64,6 +94,14 @@ const Order = () => {
           </tbody>
         </Table>
       </div>
+      {
+        showModal ? 
+        <WarningModal
+          message="Are you sure you want to cancel the order ?"
+          show={showModal}
+
+         /> : null
+      }
     </div>
   )
 }
