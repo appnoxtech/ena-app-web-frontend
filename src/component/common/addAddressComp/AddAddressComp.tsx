@@ -220,7 +220,7 @@ function AddAddress() {
             </div>
             <div className="col-12 row m-0 mt-5 p-0 my-3 d-flex justify-content-center justify-content-md-end">
               <div className='col-6 col-md-3'>
-                <button type='button' onClick={()=>history(-1)} className='btn py-3 lh-1 border-3 w-100 fontWeight-600 button cancel_button'>
+                <button type='button' onClick={()=>history(-1)} className='btn py-3 lh-1 border-3 w-100 fontWeight-600 button2 cancel_button'>
                   Cancel
                 </button>
               </div>

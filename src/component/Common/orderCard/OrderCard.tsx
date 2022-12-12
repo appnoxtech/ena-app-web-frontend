@@ -12,18 +12,18 @@ function OrderCard() {
                 <div className="col-12 fontWeight-600 addAddress_heading">Your Order</div>
                 <hr className='mt-4'/>
                     <div className="col-12 row">
-                        <div className="col gx-0">
-                            <img src={carrot} className='' />
+                        <div className="col-6">
+                            <img src={carrot} className='img-fluid' />
                         </div>
-                        <div className="col">
+                        <div className="col-6">
                             <div className="col-12 fontWeight-600">Carrot</div>
                             <div className="col-12">Size: 1 KG</div>
                             <div className="col-12">kn 35.2</div>
                         </div>
-                        <div className="col gx-0">
-                            <img src={carrot} className='' />
+                        <div className="col-6">
+                            <img src={carrot} className='img-fluid' />
                         </div>
-                        <div className="col">
+                        <div className="col-6">
                             <div className="col-12 fontWeight-600">Carrot</div>
                             <div className="col-12">Size: 1 KG</div>
                             <div className="col-12">kn 35.2</div>
