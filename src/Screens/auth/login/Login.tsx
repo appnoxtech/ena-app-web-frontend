@@ -1,4 +1,5 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
+import axios from 'axios'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { IoIosArrowBack } from 'react-icons/all'
 import '../Auth.css'
@@ -8,14 +9,32 @@ import EnaLogo from '../../../assets/images/enaLogoGreen.png'
 import LoginInput from '../../../component/Common/loginInput'
 import ButtonComp from '../../../component/Common/buttonComp/ButtonComp'
 
+import {API_URL} from '../../../GlobalVariable'
+
 function Login() {
   const heading = 'Sign in'
   const navigate = useNavigate()
 
+// ---------- Api part ----------
+
+  const [userData, setuserData] = useState([]);
+  useEffect(() => {
+    // POST request using axios inside useEffect React hook
+    const Induction = { "userName": input.email,
+    "password": input.password };
+    axios.post(`${API_URL}/access/sign-in`, Induction)
+        .then(response => setuserData(response.data));
+
+}, []);
+
+console.log(userData)
+
+
+// ---------- Api part End ---------- 
 
   const [input,setinput]=useState({
-    email : '',
-    password: '',
+    email : 'akalax@gmail.com',
+    password: '123456789',
   });
   console.log(input)
 
