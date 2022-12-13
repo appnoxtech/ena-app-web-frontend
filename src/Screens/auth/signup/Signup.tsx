@@ -21,11 +21,11 @@ function Login() {
       <div className='container-fluid'>
         <div className='container'>
           <div className='row'>
-            <div className='col-4 text-center d-none d-lg-block'>
+          <div className='col-4 text-center d-none d-lg-block'>
               <img src={banner} className='img-fluid w-75 p-3 pt-0' />
             </div>
             <div className='col-4 text-center d-none d-md-block d-lg-none'>
-              <img src={bannerforphone} className='img-fluid w-100 p-3 pt-' />
+              <img src={banner} className='img-fluid w-100 p-3 pt-0' />
             </div>
             <div className='col-12 text-center d-lg-none d-sm-block d-md-none'>
               <img src={EnaLogo} className='img-fluid w-50 p-3 mt-5 pt-5' />
@@ -52,22 +52,9 @@ function Login() {
                   name='username'
                   id='username'
                   placeholder='Enter your Username'
-                  class='form-control mt-3 d-md-none d-lg-none d-sm-block'
+                  class='form-control mt-3'
                 />
-                <LoginInput
-                  type='text'
-                  name='username'
-                  id='username'
-                  placeholder='Enter your Username'
-                  class='form-control mt-3 d-none d-md-block d-lg-block'
-                />
-                <LoginInput
-                  type='password'
-                  name='password'
-                  id='password'
-                  placeholder='Enter your password'
-                  class='form-control mt-3 d-md-none d-lg-none d-sm-block'
-                />
+                
                 <label className='form-label lable mt-3 h6 d-none d-lg-block d-md-block'>
                   Email
                 </label>
@@ -76,14 +63,7 @@ function Login() {
                   name='email'
                   id='email'
                   placeholder='Enter your email'
-                  class='form-control mt-3 d-none d-md-block d-lg-block'
-                />
-                <LoginInput
-                  type='email'
-                  name='email'
-                  id='email'
-                  placeholder='Enter your email'
-                  class='form-control mt-3 d-md-none d-lg-none d-sm-block'
+                  class='form-control mt-3'
                 />
                 <label className='form-label lable mt-3 h6 d-none d-lg-block d-md-block'>
                   Password
@@ -93,14 +73,7 @@ function Login() {
                   name='password'
                   id='password'
                   placeholder='Enter your password'
-                  class='form-control mt-3 d-none d-md-block d-lg-block'
-                />
-                <LoginInput
-                  type='password'
-                  name='password'
-                  id='password'
-                  placeholder='Enter your password'
-                  class='form-control mt-3 d-md-none d-lg-none d-sm-block'
+                  class='form-control mt-3'
                 />
                 <label className='form-label mt-3 h6 d-none d-lg-block d-md-block lable'>
                   Confirm Password
@@ -110,14 +83,7 @@ function Login() {
                   name='password'
                   id='password'
                   placeholder='Confirm your password'
-                  class='form-control mt-3 d-none d-md-block d-lg-block'
-                />
-                <LoginInput
-                  type='password'
-                  name='password'
-                  id='password'
-                  placeholder='Confirm your password'
-                  class='form-control mt-3 d-md-none d-lg-none d-sm-block'
+                  class='form-control mt-3'
                 />
 
                 <ButtonComp

@@ -49,15 +49,9 @@ function Login() {
                   name='email'
                   id='email'
                   placeholder='Enter your email'
-                  class='form-control mt-3 d-none d-md-block d-lg-block'
+                  class='form-control mt-3'
                 />
-                <LoginInput
-                  type='email'
-                  name='email'
-                  id='email'
-                  placeholder='Enter your email'
-                  class='form-control mt-3 d-md-none d-lg-none d-sm-block'
-                />
+                
                 <label className='form-label mt-3 h6 h3 d-none d-lg-block d-md-block'>
                   Password
                 </label>
@@ -66,14 +60,7 @@ function Login() {
                   name='password'
                   id='password'
                   placeholder='Enter your password'
-                  class='form-control mt-3 d-none d-md-block d-lg-block'
-                />
-                <LoginInput
-                  type='password'
-                  name='password'
-                  id='password'
-                  placeholder='Enter your password'
-                  class='form-control mt-3 d-md-none d-lg-none d-sm-block'
+                  class='form-control mt-3'
                 />
                 <NavLink to='/forget_password'>
                   <div className='text-end h6 mt-2 font-green'>Forget Password?</div>
