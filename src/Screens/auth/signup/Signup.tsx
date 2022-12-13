@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { IoIosArrowBack } from 'react-icons/all'
 import '../Auth.css'
@@ -12,6 +12,15 @@ import ButtonComp from '../../../component/Common/buttonComp/ButtonComp'
 function Login() {
   const heading = 'Sign up'
   const navigate = useNavigate()
+
+  const [input,setinput]=useState({
+    username:'',
+    email : '',
+    password: '',
+    confirm_password: ''
+  });
+  console.log(input)
+
 
   const navigationHandler = () => {
     navigate('/login')
@@ -53,6 +62,8 @@ function Login() {
                   id='username'
                   placeholder='Enter your Username'
                   class='form-control mt-3'
+                  Input={input}
+                  setInput={setinput}
                 />
                 
                 <label className='form-label lable mt-3 h6 d-none d-lg-block d-md-block'>
@@ -64,6 +75,8 @@ function Login() {
                   id='email'
                   placeholder='Enter your email'
                   class='form-control mt-3'
+                  Input={input}
+                  setInput={setinput}
                 />
                 <label className='form-label lable mt-3 h6 d-none d-lg-block d-md-block'>
                   Password
@@ -74,16 +87,20 @@ function Login() {
                   id='password'
                   placeholder='Enter your password'
                   class='form-control mt-3'
+                  Input={input}
+                  setInput={setinput}
                 />
                 <label className='form-label mt-3 h6 d-none d-lg-block d-md-block lable'>
                   Confirm Password
                 </label>
                 <LoginInput
                   type='password'
-                  name='password'
-                  id='password'
+                  name='confirm_password'
+                  id='confirm_password'
                   placeholder='Confirm your password'
                   class='form-control mt-3'
+                  Input={input}
+                  setInput={setinput}
                 />
 
                 <ButtonComp

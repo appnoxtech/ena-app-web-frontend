@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import LoginInput from '../loginInput/index'
 import './AddProductComp.css'
 import '../addAddressComp/AddAddressComp.css'
@@ -9,12 +9,26 @@ import ButtonComp from '../buttonComp/ButtonComp'
 
 function AddProductComp() {
   const navigate = useNavigate()
+  const [input,setinput]=useState({
+    productname : '',
+    price: '',
+    unit: 'none',
+    MinimumOrder:'',
+    product_desc:'',
+  });
+  console.log(input)
+
+  const handleOnChange = event => {
+    const { name, value } = event.target;
+    setinput({ ...input, [name]: value });
+  };
+
   const ProductInfo = [
     {
       lable: 'Name',
       type: 'text',
-      id: 'username',
-      name: 'username',
+      id: 'productname',
+      name: 'productname',
       placeholder: 'Enter your name',
     },
     {
@@ -26,9 +40,9 @@ function AddProductComp() {
     },
     {
       lable: 'Unit',
-      type: 'select',
-      id: 'select',
-      name: 'select',
+      type: 'text',
+      id: 'unit',
+      name: 'unit',
       placeholder: 'Enter unit',
     },
     {
@@ -71,14 +85,9 @@ function AddProductComp() {
               name={ProductInfo[0].name}
               id={ProductInfo[0].id}
               placeholder={ProductInfo[0].placeholder}
-              class='form-control  mt-3 d-none d-md-block'
-            />
-            <LoginInput
-              type={ProductInfo[0].type}
-              name={ProductInfo[0].name}
-              id={ProductInfo[0].id}
-              placeholder={ProductInfo[0].placeholder}
-              class='form-control mt-3 d-md-none d-lg-none d-sm-block'
+              class='form-control  mt-3'
+              Input={input}
+              setInput={setinput}
             />
           </>
           <div className='mx-auto row gx-0 d-flex justify-content-between'>
@@ -91,14 +100,9 @@ function AddProductComp() {
                 name={ProductInfo[1].name}
                 id={ProductInfo[1].id}
                 placeholder={ProductInfo[1].placeholder}
-                class='form-control  mt-3 d-none d-md-block'
-              />
-              <LoginInput
-                type={ProductInfo[1].type}
-                name={ProductInfo[1].name}
-                id={ProductInfo[1].id}
-                placeholder={ProductInfo[1].placeholder}
-                class='form-control mt-3 d-md-none d-lg-none d-sm-block'
+                class='form-control  mt-3'
+                Input={input}
+                setInput={setinput}
               />
             </div>
 
@@ -124,28 +128,21 @@ function AddProductComp() {
             name={ProductInfo[3].name}
             id={ProductInfo[3].id}
             placeholder={ProductInfo[3].placeholder}
-            class='form-control  mt-3 d-none d-md-block'
+            class='form-control  mt-3'
+            Input={input}
+            setInput={setinput}
           />
-          <LoginInput
-            type={ProductInfo[3].type}
-            name={ProductInfo[3].name}
-            id={ProductInfo[3].id}
-            placeholder={ProductInfo[3].placeholder}
-            class='form-control mt-3 d-md-none d-lg-none d-sm-block'
-          />
+          
           <label className='form-label mt-3 h6 d-none d-lg-block d-md-block'>
             {ProductInfo[4].lable}
           </label>
           <textarea
-            className='form-control mt-3 d-none d-md-block'
+            className='form-control mt-3'
             placeholder={ProductInfo[4].placeholder}
             id='floatingTextarea'
             style={{ height: '25vh' }}
-          />
-          <textarea
-            className='form-control mt-3 d-md-none d-lg-none d-sm-block'
-            placeholder='Leave a comment here'
-            id='floatingTextarea'
+            name={ProductInfo[4].name}
+            onChange={(e)=> handleOnChange(e)}
           />
           <div className='col-12 fontWeight-600 addAddress_heading mt-3'>Upload Product Image</div>
           <hr className='mt-4' />

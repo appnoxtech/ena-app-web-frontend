@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import LoginInput from '../loginInput/index'
 import './AddAddressComp.css'
 import '../../../assets/global/global.css'
@@ -7,6 +7,20 @@ import ButtonComp from '../buttonComp/ButtonComp'
 
 function AddAddress() {
   const navigate = useNavigate()
+  const [input,setinput]=useState({
+    username : '',
+    phone: '',
+    state:'',
+    city:'',
+    pincode:'',
+    addressLine1:'',
+    addressLine2:'',
+  });
+  
+  console.log(input)
+
+  // console.log(Object.keys(input), 'keyofAllBoect ')
+  
   const contactInfoItem = [
     {
       lable: 'Name',
@@ -80,15 +94,15 @@ function AddAddress() {
     {
       lable: 'Locality / Area / Street',
       type: 'text',
-      id: 'address',
-      name: 'address',
+      id: 'addressLine1',
+      name: 'addressLine1',
       placeholder: 'Enter locality / area / street',
     },
     {
       lable: 'Flat No. / Building Name',
       type: 'text',
-      id: 'address',
-      name: 'address',
+      id: 'addressLine2',
+      name: 'addressLine2',
       placeholder: 'Enter flat no. / building name',
     },
   ]
@@ -118,14 +132,9 @@ function AddAddress() {
                 name={item.name}
                 id={item.id}
                 placeholder={item.placeholder}
-                class='form-control  mt-3 d-none d-md-block'
-              />
-              <LoginInput
-                type={item.type}
-                name={item.name}
-                id={item.id}
-                placeholder={item.placeholder}
-                class='form-control mt-3 d-md-none d-lg-none d-sm-block'
+                class='form-control  mt-3'
+                Input={input}
+                setInput={setinput}
               />
             </>
           ))}
@@ -156,6 +165,8 @@ function AddAddress() {
               id='state'
               placeholder='Enter State'
               class='form-control  mt-3'
+              Input={input}
+              setInput={setinput}
             />
           </div>
           <div className='col-6 gx-0 pe-4'>
@@ -169,6 +180,8 @@ function AddAddress() {
                 id={shippingAddress1[0].id}
                 placeholder={shippingAddress1[0].placeholder}
                 class='form-control mt-3'
+                Input={input}
+                setInput={setinput}
               />
             </>
           </div>
@@ -183,23 +196,37 @@ function AddAddress() {
                 id={shippingAddress1[1].id}
                 placeholder={shippingAddress1[1].placeholder}
                 class='form-control mt-3'
+                Input={input}
+                setInput={setinput}
               />
             </>
           </div>
-          {shippingAddress.map((item) => (
             <>
               <label className='form-label mt-3 h6 d-none d-lg-block d-md-block'>
-                {item.lable}
+                {shippingAddress[0].lable}
               </label>
               <LoginInput
-                type={item.type}
-                name={item.name}
-                id={item.id}
-                placeholder={item.placeholder}
+                type={shippingAddress[0].type}
+                name={shippingAddress[0].name}
+                id={shippingAddress[0].id}
+                placeholder={shippingAddress[0].placeholder}
                 class='form-control  mt-3'
+                Input={input}
+                setInput={setinput}
+              />
+              <label className='form-label mt-3 h6 d-none d-lg-block d-md-block'>
+                {shippingAddress[1].lable}
+              </label>
+              <LoginInput
+                type={shippingAddress[1].type}
+                name={shippingAddress[1].name}
+                id={shippingAddress[1].id}
+                placeholder={shippingAddress[1].placeholder}
+                class='form-control  mt-3'
+                Input={input}
+                setInput={setinput}
               />
             </>
-          ))}
         </div>
         <div className='col-12 row m-0 mt-5 p-0 my-3 d-flex justify-content-center justify-content-md-end'>
           <div className='col-6 col-md-3'>

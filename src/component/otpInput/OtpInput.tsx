@@ -6,6 +6,8 @@ function OtpInput(){
 
   const [otp, setOtp] = useState(new Array(4).fill(""));
 
+  console.log(otp)
+
   const handleChange = (element:any, index:any) => {
       if (isNaN(element.value)) return false;
 

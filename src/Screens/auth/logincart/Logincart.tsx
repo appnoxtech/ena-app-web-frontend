@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { IoIosArrowBack } from 'react-icons/all'
 import '../Auth.css'
@@ -12,6 +12,11 @@ import ButtonComp from '../../../component/Common/buttonComp/ButtonComp'
 function Logincart() {
   const heading = 'Sign in to continue'
   const navigate = useNavigate()
+
+  const [input,setinput]=useState({
+    email : '',
+    password: '',
+  });
 
   const navigationHandler = () => {
     navigate('/checkout')
@@ -53,6 +58,8 @@ function Logincart() {
                   id='email'
                   placeholder='Enter your email'
                   class='form-control mt-3'
+                  Input={input}
+                  setInput={setinput}
                 />
                 <label className='form-label lable mt-3 h6 d-none d-lg-block d-md-block'>
                   Password
@@ -63,6 +70,8 @@ function Logincart() {
                   id='password'
                   placeholder='Enter your password'
                   class='form-control mt-3'
+                  Input={input}
+                  setInput={setinput}
                 />
                 <NavLink to='/forget_password'>
                   <div className='text-end h6 mt-2 font-green'>Forget Password?</div>

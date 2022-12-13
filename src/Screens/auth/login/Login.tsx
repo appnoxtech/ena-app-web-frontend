@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { IoIosArrowBack } from 'react-icons/all'
 import '../Auth.css'
@@ -11,6 +11,13 @@ import ButtonComp from '../../../component/Common/buttonComp/ButtonComp'
 function Login() {
   const heading = 'Sign in'
   const navigate = useNavigate()
+
+
+  const [input,setinput]=useState({
+    email : '',
+    password: '',
+  });
+  console.log(input)
 
   const navigationHandler = () => {
     navigate('/')
@@ -50,6 +57,8 @@ function Login() {
                   id='email'
                   placeholder='Enter your email'
                   class='form-control mt-3'
+                  Input={input}
+                  setInput={setinput}
                 />
                 
                 <label className='form-label mt-3 h6 h3 d-none d-lg-block d-md-block'>
@@ -61,6 +70,8 @@ function Login() {
                   id='password'
                   placeholder='Enter your password'
                   class='form-control mt-3'
+                  Input={input}
+                  setInput={setinput}
                 />
                 <NavLink to='/forget_password'>
                   <div className='text-end h6 mt-2 font-green'>Forget Password?</div>
