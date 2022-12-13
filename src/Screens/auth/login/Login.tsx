@@ -2,7 +2,6 @@ import React,{useState} from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { IoIosArrowBack } from 'react-icons/all'
 import '../Auth.css'
-import './Login.css'
 import '../../../assets/global/global.css'
 import banner from '../../../assets/images/bannerH.png'
 import EnaLogo from '../../../assets/images/enaLogoGreen.png'
@@ -19,22 +18,6 @@ function Login() {
     password: '',
   });
   console.log(input)
-
-  const[eye,seteye]=useState(true);
-  const[password,setpassword]=useState("password");
-  const[type,settype]=useState(false);
-  const Eye=()=>{
-    if(password=="password"){
-        setpassword("text");
-        seteye(false);
-        settype(true);
-    }
-    else{
-        setpassword("password");
-        seteye(true);
-        settype(false);
-    }
-}
 
   const navigationHandler = () => {
     navigate('/')
@@ -82,7 +65,7 @@ function Login() {
                   Password
                 </label>
                 <LoginInput
-                  type={password}
+                  type='password'
                   name='password'
                   id='password'
                   placeholder='Enter your password'
@@ -90,7 +73,6 @@ function Login() {
                   Input={input}
                   setInput={setinput}
                 />
-                  <i onClick={Eye} className={`fa ${eye ? "fa-eye-slash" : "fa-eye" }` } id='eye_icon' />
                 <NavLink to='/forget_password'>
                   <div className='text-end h6 mt-2 font-green'>Forget Password?</div>
                 </NavLink>
