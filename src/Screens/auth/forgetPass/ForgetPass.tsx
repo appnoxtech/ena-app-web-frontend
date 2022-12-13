@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { IoIosArrowBack } from 'react-icons/all'
 import '../Auth.css'
@@ -11,10 +11,13 @@ function ForgetPass() {
   const heading = 'Forget Password ?'
   const navigate = useNavigate()
 
-  const [input,setinput]=useState({
-    email : '',
-  });
-  console.log(input)
+  // ------ state for inputs --------  
+
+  const [input, setinput] = useState({
+    email: '',
+  })
+
+  // -------- navigate handler -------- 
 
   const navigationHandler = () => {
     navigate('/otp_verification')

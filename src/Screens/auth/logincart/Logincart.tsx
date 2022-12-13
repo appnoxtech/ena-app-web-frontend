@@ -1,11 +1,10 @@
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { IoIosArrowBack } from 'react-icons/all'
 import '../Auth.css'
 import '../../../assets/global/global.css'
 import banner from '../../../assets/images/bannerH.png'
 import EnaLogo from '../../../assets/images/enaLogoGreen.png'
-import bannerforphone from '../../../assets/images/banner.png'
 import LoginInput from '../../../component/Common/loginInput'
 import ButtonComp from '../../../component/Common/buttonComp/ButtonComp'
 
@@ -13,20 +12,28 @@ function Logincart() {
   const heading = 'Sign in to continue'
   const navigate = useNavigate()
 
-  const [input,setinput]=useState({
-    email : '',
+  // -------- state for inputs -------
+
+  const [input, setinput] = useState({
+    email: '',
     password: '',
-  });
+  })
+
+  // -------- state for inputs end -------
+
+  // --------- navigate handler --------
 
   const navigationHandler = () => {
     navigate('/checkout')
   }
+
+  // --------- navigate handler End --------
   return (
     <>
       <div className='container-fluid'>
         <div className='container'>
           <div className='row'>
-          <div className='col-4 text-center d-none d-lg-block'>
+            <div className='col-4 text-center d-none d-lg-block'>
               <img src={banner} className='img-fluid w-75 p-3 pt-0' />
             </div>
             <div className='col-4 text-center d-none d-md-block d-lg-none'>

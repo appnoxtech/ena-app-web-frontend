@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { IoIosArrowBack } from 'react-icons/all'
@@ -9,38 +9,40 @@ import EnaLogo from '../../../assets/images/enaLogoGreen.png'
 import LoginInput from '../../../component/Common/loginInput'
 import ButtonComp from '../../../component/Common/buttonComp/ButtonComp'
 
-import {API_URL} from '../../../GlobalVariable'
+import { API_URL } from '../../../GlobalVariable'
 
 function Login() {
   const heading = 'Sign in'
   const navigate = useNavigate()
 
-// ---------- Api part ----------
+  // ---------- Api part ----------
 
-  const [userData, setuserData] = useState([]);
+  const [userData, setuserData] = useState([])
   useEffect(() => {
     // POST request using axios inside useEffect React hook
-    const Induction = { "userName": input.email,
-    "password": input.password };
-    axios.post(`${API_URL}/access/sign-in`, Induction)
-        .then(response => setuserData(response.data));
+    const Induction = { userName: input.email, password: input.password }
+    axios
+      .post(`${API_URL}/access/sign-in`, Induction)
+      .then((response) => setuserData(response.data))
+  }, [])
 
-}, []);
+  // ---------- Api part End ----------
 
-console.log(userData)
+  // ------ state for inputs -------- 
 
-
-// ---------- Api part End ---------- 
-
-  const [input,setinput]=useState({
-    email : 'akalax@gmail.com',
+  const [input, setinput] = useState({
+    email: 'akalax@gmail.com',
     password: '123456789',
-  });
-  console.log(input)
+  })
+
+  // -------- navigate handler ------ 
 
   const navigationHandler = () => {
     navigate('/')
   }
+
+  // -------- navigate handler ------ 
+
   return (
     <>
       <div className='container-fluid'>
@@ -79,7 +81,7 @@ console.log(userData)
                   Input={input}
                   setInput={setinput}
                 />
-                
+
                 <label className='form-label mt-3 h6 h3 d-none d-lg-block d-md-block'>
                   Password
                 </label>

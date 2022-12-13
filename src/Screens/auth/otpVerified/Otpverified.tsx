@@ -5,7 +5,6 @@ import '../../../assets/global/global.css'
 import verifyImg from '../../../assets/images/114809-success.gif'
 import banner from '../../../assets/images/bannerH.png'
 import EnaLogo from '../../../assets/images/enaLogoGreen.png'
-import bannerforphone from '../../../assets/images/banner.png'
 import ButtonComp from '../../../component/Common/buttonComp/ButtonComp'
 
 function Passchanged() {
@@ -20,7 +19,7 @@ function Passchanged() {
       <div className='container-fluid'>
         <div className='container'>
           <div className='row'>
-          <div className='col-4 text-center d-none d-lg-block'>
+            <div className='col-4 text-center d-none d-lg-block'>
               <img src={banner} className='img-fluid w-75 p-3 pt-0' />
             </div>
             <div className='col-4 text-center d-none d-md-block d-lg-none'>

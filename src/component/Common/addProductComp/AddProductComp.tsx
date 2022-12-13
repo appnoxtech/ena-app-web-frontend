@@ -16,7 +16,7 @@ function AddProductComp() {
     MinimumOrder:'',
     product_desc:'',
   });
-  console.log(input)
+
 
   const handleOnChange = event => {
     const { name, value } = event.target;

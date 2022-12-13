@@ -5,13 +5,14 @@ import '../Auth.css'
 import '../../../assets/global/global.css'
 import banner from '../../../assets/images/bannerH.png'
 import EnaLogo from '../../../assets/images/enaLogoGreen.png'
-import bannerforphone from '../../../assets/images/banner.png'
 import OtpInput from '../../../component/otpInput/OtpInput'
 import ButtonComp from '../../../component/Common/buttonComp/ButtonComp'
 
 function OtpVar() {
   const heading = 'OTP Verification'
   const navigate = useNavigate()
+
+  // ----- navigate handler -----
 
   const navigationHandler = () => {
     navigate('/otp_verified')
@@ -22,7 +23,7 @@ function OtpVar() {
       <div className='container-fluid'>
         <div className='container'>
           <div className='row'>
-          <div className='col-4 text-center d-none d-lg-block'>
+            <div className='col-4 text-center d-none d-lg-block'>
               <img src={banner} className='img-fluid w-75 p-3 pt-0' />
             </div>
             <div className='col-4 text-center d-none d-md-block d-lg-none'>
