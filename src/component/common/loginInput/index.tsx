@@ -8,6 +8,7 @@ function LoginInput(prop:any) {
         id={prop.id}
         placeholder={prop.placeholder}
         name={prop.name}
+        value={prop.value}
         required
       />
   )
