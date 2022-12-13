@@ -5,10 +5,10 @@ import '../addAddressComp/AddAddressComp.css'
 import '../../../assets/global/global.css'
 import { NavLink, useNavigate } from 'react-router-dom'
 import DropZoneComp from '../dropZoneComp/DropZoneComp'
-
+import ButtonComp from '../buttonComp/ButtonComp'
 
 function AddProductComp() {
-  const history = useNavigate()
+  const navigate = useNavigate()
   const ProductInfo = [
     {
       lable: 'Name',
@@ -46,6 +46,15 @@ function AddProductComp() {
       placeholder: 'Enter product description here...',
     },
   ]
+
+  //#region all function here
+  const navigationHandler = () => {
+    navigate('/')
+  }
+
+  const navigationBack = () => {
+    navigate(-1)
+  }
 
   return (
     <>
@@ -131,7 +140,7 @@ function AddProductComp() {
             className='form-control mt-3 d-none d-md-block'
             placeholder={ProductInfo[4].placeholder}
             id='floatingTextarea'
-            style={{height: "25vh"}}
+            style={{ height: '25vh' }}
           />
           <textarea
             className='form-control mt-3 d-md-none d-lg-none d-sm-block'
@@ -139,30 +148,30 @@ function AddProductComp() {
             id='floatingTextarea'
           />
           <div className='col-12 fontWeight-600 addAddress_heading mt-3'>Upload Product Image</div>
-        <hr className='mt-4' />
+          <hr className='mt-4' />
 
+          {/* dropzoneComp import  */}
 
-        {/* dropzoneComp import  */}
-
-        <DropZoneComp />
-
+          <DropZoneComp />
         </div>
 
         <div className='col-12 row m-0 mt-5 p-0 my-3 d-flex justify-content-center justify-content-md-end'>
           <div className='col-6 col-md-3'>
-            <button
+            <ButtonComp
+              navigationHandler={navigationBack}
               type='button'
-              onClick={() => history(-1)}
-              className='btn py-3 lh-1 border-3 w-100 fontWeight-600 button2 cancel_button'
-            >
-              Cancel
-            </button>
+              class='btn py-3 lh-1 border-3 w-100 fontWeight-600 button2 cancel_button'
+              btvalue='Cancel'
+            />
           </div>
 
           <div className='col-6 col-md-3 p-0 p-sm-auto'>
-              <button onClick={()=> history('/')} type='button' className='btn py-3 lh-1 border w-100 fontWeight-600 button1  '>
-                Add Address
-              </button>
+            <ButtonComp
+              navigationHandler={navigationHandler}
+              type='button'
+              class='btn py-3 lh-1 border w-100 fontWeight-600 button1'
+              btvalue='Add Product'
+            />
           </div>
         </div>
       </div>

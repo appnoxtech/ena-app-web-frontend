@@ -1,15 +1,20 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import '../Auth.css'
 import '../../../assets/global/global.css'
 import verifyImg from '../../../assets/images/114809-success.gif'
 import banner from '../../../assets/images/bannerH.png'
 import EnaLogo from '../../../assets/images/enaLogoGreen.png'
 import bannerforphone from '../../../assets/images/banner.png'
-
+import ButtonComp from '../../../component/Common/buttonComp/ButtonComp'
 
 function Passchanged() {
   const heading = 'Password Changed'
+  const navigate = useNavigate()
+
+  const navigationHandler = () => {
+    navigate('/login')
+  }
   return (
     <>
       <div className='container-fluid'>
@@ -33,11 +38,12 @@ function Passchanged() {
                   <br />
                   successfully.
                 </p>
-                <NavLink to='/login'>
-                  <button type='button' className='btn w-100 h-100 mt-4 fontWeight-600 button1'>
-                    Back to Login
-                  </button>
-                </NavLink>
+                <ButtonComp
+                  navigationHandler={navigationHandler}
+                  type='button'
+                  class='btn w-100 h-100 mt-4 fontWeight-600 button1'
+                  btvalue='Back to Login'
+                />
               </div>
             </div>
           </div>

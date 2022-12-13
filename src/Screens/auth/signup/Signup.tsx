@@ -7,10 +7,15 @@ import banner from '../../../assets/images/bannerH.png'
 import EnaLogo from '../../../assets/images/enaLogoGreen.png'
 import bannerforphone from '../../../assets/images/banner.png'
 import LoginInput from '../../../component/Common/loginInput'
+import ButtonComp from '../../../component/Common/buttonComp/ButtonComp'
 
 function Login() {
   const heading = 'Sign up'
-  const history = useNavigate()
+  const navigate = useNavigate()
+
+  const navigationHandler = () => {
+    navigate('/login')
+  }
   return (
     <>
       <div className='container-fluid'>
@@ -29,7 +34,7 @@ function Login() {
               <IoIosArrowBack
                 className='border mt-3 rounded-3 backicon d-none d-md-block d-lg-block'
                 size={30}
-                onClick={() => history(-1)}
+                onClick={() => navigate(-1)}
               />
               <div className='col-10 mx-auto mt-3 pt-0'>
                 <p className='mt-1 h3 fontWeight-700'>{heading}</p>
@@ -114,11 +119,13 @@ function Login() {
                   placeholder='Confirm your password'
                   class='form-control mt-3 d-md-none d-lg-none d-sm-block'
                 />
-                <NavLink to='/login'>
-                  <button type='button' className='btn w-100 h-100 mt-4 fontWeight-600 button1'>
-                    Sign up
-                  </button>
-                </NavLink>
+
+                <ButtonComp
+                  navigationHandler={navigationHandler}
+                  type='button'
+                  class='btn w-100 h-100 mt-4 fontWeight-600 button1'
+                  btvalue='Sign up'
+                />
               </div>
             </div>
           </div>

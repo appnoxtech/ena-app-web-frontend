@@ -5,10 +5,15 @@ import '../Auth.css'
 import banner from '../../../assets/images/bannerH.png'
 import EnaLogo from '../../../assets/images/enaLogoGreen.png'
 import LoginInput from '../../../component/Common/loginInput'
+import ButtonComp from '../../../component/Common/buttonComp/ButtonComp'
 
 function ForgetPass() {
   const heading = 'Forget Password ?'
-  const history = useNavigate()
+  const navigate = useNavigate()
+
+  const navigationHandler = () => {
+    navigate('/otp_verification')
+  }
   return (
     <>
       <div className='container-fluid'>
@@ -27,7 +32,7 @@ function ForgetPass() {
               <IoIosArrowBack
                 className='border mt-3 rounded-3 backicon d-none d-md-block d-lg-block'
                 size={30}
-                onClick={() => history(-1)}
+                onClick={() => navigate(-1)}
               />
               <div className='col-10 mx-auto mt-0 pt-0 mt-3'>
                 <p className='mt-1 h3 fontWeight-700'>{heading}</p>
@@ -49,13 +54,13 @@ function ForgetPass() {
                   placeholder='Enter your email'
                   class='form-control mt-3 d-md-none d-lg-none d-sm-block'
                 />
-                <button
+
+                <ButtonComp
+                  navigationHandler={navigationHandler}
                   type='button'
-                  className=' py-2 text-light w-100 h-100 mt-4 fontWeight-600  themecolor btnRadius'
-                  onClick={() => history('/otp_verification')}
-                >
-                  Send Code
-                </button>
+                  class='py-2 text-light w-100 h-100 mt-4 fontWeight-600  themecolor btnRadius'
+                  btvalue='Send Code'
+                />
               </div>
             </div>
           </div>

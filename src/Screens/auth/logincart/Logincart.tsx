@@ -7,10 +7,15 @@ import banner from '../../../assets/images/bannerH.png'
 import EnaLogo from '../../../assets/images/enaLogoGreen.png'
 import bannerforphone from '../../../assets/images/banner.png'
 import LoginInput from '../../../component/Common/loginInput'
+import ButtonComp from '../../../component/Common/buttonComp/ButtonComp'
 
 function Logincart() {
   const heading = 'Sign in to continue'
-  const history = useNavigate()
+  const navigate = useNavigate()
+
+  const navigationHandler = () => {
+    navigate('/checkout')
+  }
   return (
     <>
       <div className='container-fluid'>
@@ -29,7 +34,7 @@ function Logincart() {
               <IoIosArrowBack
                 className='border mt-3 rounded-3 backicon d-none d-md-block d-lg-block'
                 size={30}
-                onClick={() => history(-1)}
+                onClick={() => navigate(-1)}
               />
               <div className='col-10 mx-auto mt-3 pt-0'>
                 <p className='mt-1 h3 fontWeight-700'>{heading}</p>
@@ -76,9 +81,12 @@ function Logincart() {
                 <NavLink to='/forget_password'>
                   <div className='text-end h6 mt-2 font-green'>Forget Password?</div>
                 </NavLink>
-                <button type='button' className='btn w-100 h-100 mt-4 fontWeight-600 button'>
-                  Login
-                </button>
+                <ButtonComp
+                  navigationHandler={navigationHandler}
+                  type='button'
+                  class=' btnRadius border border-0 w-100 h-100 mt-4 fontWeight-600 button themecolor text-light py-2'
+                  btvalue='Login'
+                />
               </div>
             </div>
           </div>

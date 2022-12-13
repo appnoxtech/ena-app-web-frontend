@@ -7,10 +7,15 @@ import banner from '../../../assets/images/bannerH.png'
 import EnaLogo from '../../../assets/images/enaLogoGreen.png'
 import bannerforphone from '../../../assets/images/banner.png'
 import OtpInput from '../../../component/otpInput/OtpInput'
+import ButtonComp from '../../../component/Common/buttonComp/ButtonComp'
 
 function OtpVar() {
   const heading = 'OTP Verification'
-  const history = useNavigate()
+  const navigate = useNavigate()
+
+  const navigationHandler = () => {
+    navigate('/otp_verified')
+  }
 
   return (
     <>
@@ -30,7 +35,7 @@ function OtpVar() {
               <IoIosArrowBack
                 className='border mt-3 rounded-3 backicon d-none d-md-block d-lg-block'
                 size={30}
-                onClick={() => history(-1)}
+                onClick={() => navigate(-1)}
               />
               <div className='col-10 mx-auto mt-3 pt-0'>
                 <p className='mt-1 h3 fontWeight-700'>{heading}</p>
@@ -40,11 +45,13 @@ function OtpVar() {
                 <div className='text-center'>
                   <OtpInput />
                 </div>
-                <NavLink to='/otp_verified'>
-                  <button type='button' className='py-2 w-100 h-100 mt-4 fontWeight-600 button themecolor btnRadius text-light'>
-                    Verify
-                  </button>
-                </NavLink>
+
+                <ButtonComp
+                  navigationHandler={navigationHandler}
+                  type='button'
+                  class='py-2 w-100 h-100 mt-4 fontWeight-600 button themecolor btnRadius text-light'
+                  btvalue='Verify'
+                />
               </div>
             </div>
           </div>

@@ -3,10 +3,11 @@ import LoginInput from '../loginInput/index'
 import './AddAddressComp.css'
 import '../../../assets/global/global.css'
 import { NavLink, useNavigate } from 'react-router-dom'
+import ButtonComp from '../buttonComp/ButtonComp'
 
 function AddAddress() {
 
-  const history = useNavigate();
+  const navigate = useNavigate();
   const contactInfoItem = [
     {
       lable: 'Name',
@@ -93,6 +94,18 @@ function AddAddress() {
       placeholder: 'Enter flat no. / building name',
     },
   ]
+
+
+   //#region all function here
+   const navigationHandler = () => {
+    navigate('/addAddress')
+  }
+
+  const navigationBack = () => {
+    navigate(-1)
+  }
+
+
   return (
     <>
           <div className='row col-12 mx-auto px-lg-5 gx-0'>
@@ -220,17 +233,26 @@ function AddAddress() {
             </div>
             <div className="col-12 row m-0 mt-5 p-0 my-3 d-flex justify-content-center justify-content-md-end">
               <div className='col-6 col-md-3'>
-                <button type='button' onClick={()=>history(-1)} className='btn py-3 lh-1 border-3 w-100 fontWeight-600 button2 cancel_button'>
+              <ButtonComp
+              navigationHandler={navigationBack}
+              type='button'
+              class='btn py-3 lh-1 border-3 w-100 fontWeight-600 button2 cancel_button'
+              btvalue='Cancel'
+            />
+                {/* <button type='button' onClick={()=>history(-1)} className='btn py-3 lh-1 border-3 w-100 fontWeight-600 button2 cancel_button'>
                   Cancel
-                </button>
+                </button> */}
               </div>
               
               <div className='col-6 col-md-3 p-0 p-sm-auto'>
-                <NavLink to='/addAddress'>
-                <button type='button' className='btn py-3 lh-1 border w-100 fontWeight-600 button1  '>
-                  Add Address
-                </button>
-                </NavLink>
+
+
+              <ButtonComp
+              navigationHandler={navigationHandler}
+              type='button'
+              class='btn py-3 lh-1 border w-100 fontWeight-600 button1 '
+              btvalue='Add Address'
+            />
               </div>
             </div>
           </div>
