@@ -25,7 +25,7 @@ export const useForgetPassHook = () => {
     // started Loader
     dispatch(updateLoaderState(true))
 
-    // Call Login Service
+    // Call Forgetpass Service
     forgetpasswordServices(data)
       .then((res) => {
         console.log('response', res.data)
