@@ -6,22 +6,25 @@ import banner from '../../../assets/images/bannerH.png'
 import EnaLogo from '../../../assets/images/enaLogoGreen.png'
 import LoginInput from '../../../component/Common/loginInput'
 import ButtonComp from '../../../component/Common/buttonComp/ButtonComp'
+import { useForgetPassHook } from '../../../hooks/authHooks/ForgetPassHook'
 
 function ForgetPass() {
   const heading = 'Forget Password ?'
   const navigate = useNavigate()
+  const handleForgetPass = useForgetPassHook()
 
-  // ------ state for inputs --------  
-
-  const [input, setinput] = useState({
+  // ------ state for inputs --------
+  const initialState = {
     email: '',
-  })
+  }
+  const [input, setinput] = useState(initialState)
 
-  // -------- navigate handler -------- 
+  // -------- navigate handler --------
 
   const navigationHandler = () => {
-    navigate('/otp_verification')
+    handleForgetPass(input)
   }
+
   return (
     <>
       <div className='container-fluid'>

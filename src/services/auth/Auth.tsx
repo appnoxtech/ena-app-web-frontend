@@ -1,11 +1,44 @@
-import axios from "axios";
-import { API_URL } from "../../GlobalVariable";
+import axios from 'axios'
+import { API_URL } from '../../GlobalVariable'
 
 export const LoginServices = async (data) => {
-    const url = `${API_URL}/api/access/sign-in`
-    return axios.post(url, data, {
-        headers: {
-            'Content-Type': 'application/json',
-        }
-    })
+  const url = `${API_URL}/access/sign-in`
+  console.log(data, 'is colliect')
+  return axios.post(url, data, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+}
+
+export const SignupServices = async (data) => {
+  const url = `${API_URL}/access/sign-up`
+  console.log(data, 'is colliect')
+  return axios.post(url, data, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+}
+
+export const forgetpasswordServices = async (data) => {
+  console.log(data)
+  const url = `${API_URL}/access/reset-password`
+  console.log(data, 'is colliect')
+  return axios.post(url, data, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+}
+
+export const changepasswordServices = async (data) => {
+  console.log(data)
+  const url = `${API_URL}/access/reset-password`
+  console.log(data, url, 'is colliect')
+  return axios.post(url, data, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
 }

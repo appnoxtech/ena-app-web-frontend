@@ -8,24 +8,34 @@ import EnaLogo from '../../../assets/images/enaLogoGreen.png'
 import LoginInput from '../../../component/Common/loginInput'
 import ButtonComp from '../../../component/Common/buttonComp/ButtonComp'
 
-function Login() {
+import { useSignupHook } from '../../../hooks/authHooks/SignupHook'
+
+function Signup() {
   const heading = 'Sign up'
   const navigate = useNavigate()
-
-  // ------- state for inputs ----- 
-
-  const [input, setinput] = useState({
-    username: '',
+  const handelSignup = useSignupHook()
+  const initialState = {
+    firstname: '',
+    lastname: '',
     email: '',
     password: '',
-    confirm_password: '',
-  })
+  }
 
-// -------- navigate handler ------ 
+  // ------- state for inputs -----
+
+  const [input, setinput] = useState(initialState)
+
+  // -------- navigate handler ------
 
   const navigationHandler = () => {
-    navigate('/login')
+    // checkValidation();
+    handelSignup(input)
   }
+
+  // -------- validation goes here ---------
+
+  // --------- validation Ends here ---------
+
   return (
     <>
       <div className='container-fluid'>
@@ -55,13 +65,25 @@ function Login() {
                   </NavLink>
                 </p>
                 <label className='form-label lable mt-3 h6 d-none d-lg-block d-md-block'>
-                  Username
+                  First Name
                 </label>
                 <LoginInput
                   type='text'
-                  name='username'
-                  id='username'
-                  placeholder='Enter your Username'
+                  name='firstname'
+                  id='firstname'
+                  placeholder='Enter your firstname'
+                  class='form-control mt-3'
+                  Input={input}
+                  setInput={setinput}
+                />
+                <label className='form-label lable mt-3 h6 d-none d-lg-block d-md-block'>
+                  Last Name
+                </label>
+                <LoginInput
+                  type='text'
+                  name='lastname'
+                  id='lastname'
+                  placeholder='Enter your lastname'
                   class='form-control mt-3'
                   Input={input}
                   setInput={setinput}
@@ -119,4 +141,4 @@ function Login() {
   )
 }
 
-export default Login
+export default Signup

@@ -9,39 +9,55 @@ import EnaLogo from '../../../assets/images/enaLogoGreen.png'
 import LoginInput from '../../../component/Common/loginInput'
 import ButtonComp from '../../../component/Common/buttonComp/ButtonComp'
 
-import { API_URL } from '../../../GlobalVariable'
+import { useLoginHook } from '../../../hooks/authHooks/LoginHook'
 
 function Login() {
   const heading = 'Sign in'
   const navigate = useNavigate()
+  const handleLogin = useLoginHook()
+  const initialState = {
+    email: '',
+    password: '',
+  }
+  const localErrorState = { emailError: '', passwordError: '' }
+  const [input, setinput] = useState(initialState)
 
-  // ---------- Api part ----------
+  // --------- validation goes here -----
 
-  const [userData, setuserData] = useState([])
-  useEffect(() => {
-    // POST request using axios inside useEffect React hook
-    const Induction = { userName: input.email, password: input.password }
-    axios
-      .post(`${API_URL}/access/sign-in`, Induction)
-      .then((response) => setuserData(response.data))
-  }, [])
+  const [localError, setlocalError] = useState(localErrorState)
 
-  // ---------- Api part End ----------
-
-  // ------ state for inputs -------- 
-
-  const [input, setinput] = useState({
-    email: 'akalax@gmail.com',
-    password: '123456789',
-  })
-
-  // -------- navigate handler ------ 
-
-  const navigationHandler = () => {
-    navigate('/')
+  const checkValidation = () => {
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input.email)) {
+      setlocalError({ ...localErrorState, emailError: '' })
+      if (input.password.length < 8) {
+        setlocalError({
+          ...localErrorState,
+          passwordError: 'Password must be atleast 8 characters',
+        })
+      } else {
+        setlocalError({ ...localErrorState, passwordError: '' })
+      }
+    } else {
+      setlocalError({
+        ...localErrorState,
+        emailError: 'You have entered an invalid email address!',
+      })
+    }
   }
 
-  // -------- navigate handler ------ 
+  // -------- validation Ends -----------
+
+  const navigationHandler = () => {
+    checkValidation()
+
+    if (localError.emailError == '' && localError.passwordError == '') {
+      handleLogin(input)
+    } else {
+      alert('You entered wrong inputs.')
+    }
+  }
+
+  // -------- navigate handler ------
 
   return (
     <>
@@ -81,6 +97,9 @@ function Login() {
                   Input={input}
                   setInput={setinput}
                 />
+                {localError.emailError == '' ? null : (
+                  <p className='text-danger'>{localError.emailError}</p>
+                )}
 
                 <label className='form-label mt-3 h6 h3 d-none d-lg-block d-md-block'>
                   Password
@@ -94,6 +113,11 @@ function Login() {
                   Input={input}
                   setInput={setinput}
                 />
+
+                {localError.passwordError == '' ? null : (
+                  <p className='text-danger mt-1'>{localError.passwordError}</p>
+                )}
+
                 <NavLink to='/forget_password'>
                   <div className='text-end h6 mt-2 font-green'>Forget Password?</div>
                 </NavLink>
