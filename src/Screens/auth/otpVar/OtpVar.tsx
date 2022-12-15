@@ -1,5 +1,5 @@
-import React from 'react'
-import { NavLink, useNavigate } from 'react-router-dom'
+import React, { useState } from 'react'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { IoIosArrowBack } from 'react-icons/all'
 import '../Auth.css'
 import '../../../assets/global/global.css'
@@ -9,13 +9,24 @@ import OtpInput from '../../../component/otpInput/OtpInput'
 import ButtonComp from '../../../component/Common/buttonComp/ButtonComp'
 
 function OtpVar() {
+  const { state } = useLocation()
+
+  const [input, setinput] = useState([])
+
+  const result = input.join('')
+  const x = parseInt(result)
+
   const heading = 'OTP Verification'
   const navigate = useNavigate()
 
   // ----- navigate handler -----
 
   const navigationHandler = () => {
-    navigate('/otp_verified')
+    if (x === state.x) {
+      navigate('/resetPassword', { state: state })
+    } else {
+      alert('Wrong OTP')
+    }
   }
 
   return (
@@ -44,7 +55,7 @@ function OtpVar() {
                   Enter the verification code we just sent on your email <br /> address.
                 </p>
                 <div className='text-center'>
-                  <OtpInput />
+                  <OtpInput setInput={setinput} Input={input} />
                 </div>
 
                 <ButtonComp

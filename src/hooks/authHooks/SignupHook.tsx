@@ -22,7 +22,7 @@ export const useSignupHook = () => {
     SignupServices(data)
       .then((res) => {
         console.log('response', res.data)
-        if (res.data.msg == 'Created SuccessFully') {
+        if (res.status == 201) {
           alert('Account Created Successfully, Please login to continue')
           navigate('/login')
         } else {
@@ -30,8 +30,9 @@ export const useSignupHook = () => {
         }
       })
       .catch((err) => {
-        alert('There are some technical erroers.')
-        console.log(err)
+        if (err.response.data.msg == 'Email Duplicacy') {
+          alert('Email You entered already have an account, please login to continue.')
+        } else alert('Server problem')
       })
   }
   return handelSignup

@@ -17,7 +17,6 @@ export const useLoginHook = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const handelLogin = (userData: any) => {
-    console.log('userData', userData)
     const password = userData.password
     const userName = userData.email
     const data = { userName, password }
@@ -28,20 +27,28 @@ export const useLoginHook = () => {
     // Call Login Service
     LoginServices(data)
       .then((res) => {
-        console.log('response', res.data)
-        if (res.data.token) {
-          const token = res.data.token
-          storeToken(token)
-          navigate('/')
-          // stop Loader
-          dispatch(updateLoaderState(false))
+        if (res.status == 200) {
+          if (res.data.token) {
+            const token = res.data.token
+            storeToken(token)
+            navigate('/')
+            // stop Loader
+            dispatch(updateLoaderState(false))
+          } else {
+            // stop Loader
+            dispatch(updateLoaderState(false))
+          }
         } else {
-          // stop Loader
-          dispatch(updateLoaderState(false))
+          alert('You entered wrong input')
         }
       })
       .catch((err) => {
-        console.log(err)
+        if (err.response.data.msg == 'Invalid Credential') {
+          alert('Invalid Password')
+        }
+        if (err.response.data.msg == 'Invalid User') {
+          alert('Invalid Email')
+        }
       })
   }
   return handelLogin

@@ -19,17 +19,57 @@ function Signup() {
     lastname: '',
     email: '',
     password: '',
+    confirm_password:''
   }
+  const localErrorState = { firstnameError:'',lastnameError:'', emailError: '', passwordError: ''}
+
+  const [localError, setlocalError] = useState(localErrorState)
 
   // ------- state for inputs -----
 
   const [input, setinput] = useState(initialState)
+  
+
+  const {firstname,lastname,email,password} = input
+  const user = {firstname,lastname,email,password}
+
+  
+  const checkValidation=()=>{
+    if(input.firstname!=''){
+      setlocalError({ ...localErrorState, firstnameError: '' })
+      if(input.lastname!=''){
+        setlocalError({ ...localErrorState, lastnameError: '' })
+        if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input.email)){
+          setlocalError({ ...localErrorState, emailError: '' })
+          if(input.password == input.confirm_password){
+            setlocalError({ ...localErrorState, passwordError: '' })
+            return true
+          }else{
+            setlocalError({ ...localErrorState, passwordError: 'Password not matched' })
+            return false
+          }
+        }else{
+          setlocalError({ ...localErrorState, emailError: 'Wrong Email' })
+          return false
+        }
+      }else{
+        setlocalError({ ...localErrorState, lastnameError: 'Required field' })
+        return false
+      }
+    }else{
+      setlocalError({ ...localErrorState, firstnameError: 'Required field' })
+      return false
+    }
+  }
+
 
   // -------- navigate handler ------
 
   const navigationHandler = () => {
-    // checkValidation();
-    handelSignup(input)
+    if(checkValidation()){
+      handelSignup(user)
+    }
+   
   }
 
   // -------- validation goes here ---------
@@ -76,6 +116,9 @@ function Signup() {
                   Input={input}
                   setInput={setinput}
                 />
+                 {localError.firstnameError == '' ? null : (
+                  <p className='text-danger'>{localError.firstnameError}</p>
+                )}
                 <label className='form-label lable mt-3 h6 d-none d-lg-block d-md-block'>
                   Last Name
                 </label>
@@ -88,6 +131,9 @@ function Signup() {
                   Input={input}
                   setInput={setinput}
                 />
+                 {localError.lastnameError == '' ? null : (
+                  <p className='text-danger'>{localError.lastnameError}</p>
+                )}
 
                 <label className='form-label lable mt-3 h6 d-none d-lg-block d-md-block'>
                   Email
@@ -101,6 +147,9 @@ function Signup() {
                   Input={input}
                   setInput={setinput}
                 />
+                 {localError.emailError == '' ? null : (
+                  <p className='text-danger'>{localError.emailError}</p>
+                )}
                 <label className='form-label lable mt-3 h6 d-none d-lg-block d-md-block'>
                   Password
                 </label>
@@ -125,6 +174,9 @@ function Signup() {
                   Input={input}
                   setInput={setinput}
                 />
+                 {localError.passwordError == '' ? null : (
+                  <p className='text-danger'>{localError.passwordError}</p>
+                )}
 
                 <ButtonComp
                   navigationHandler={navigationHandler}

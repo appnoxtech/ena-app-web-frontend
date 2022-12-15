@@ -15,12 +15,12 @@ function Login() {
   const heading = 'Sign in'
   const navigate = useNavigate()
   const handleLogin = useLoginHook()
-  const initialState = {
+
+  const localErrorState = { emailError: '', passwordError: '' }
+  const [input, setinput] = useState({
     email: '',
     password: '',
-  }
-  const localErrorState = { emailError: '', passwordError: '' }
-  const [input, setinput] = useState(initialState)
+  })
 
   // --------- validation goes here -----
 
@@ -29,31 +29,31 @@ function Login() {
   const checkValidation = () => {
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input.email)) {
       setlocalError({ ...localErrorState, emailError: '' })
-      if (input.password.length < 8) {
+      if (input.password.length >= 8) {
         setlocalError({
           ...localErrorState,
-          passwordError: 'Password must be atleast 8 characters',
+          passwordError: '',
         })
+        console.log('inpass')
+        return true
       } else {
-        setlocalError({ ...localErrorState, passwordError: '' })
+        setlocalError({
+          ...localErrorState,
+          passwordError: 'please enter 8 digits',
+        })
+        return false
       }
     } else {
-      setlocalError({
-        ...localErrorState,
-        emailError: 'You have entered an invalid email address!',
-      })
+      setlocalError({ ...localErrorState, emailError: 'Email is not valid' })
+      return false
     }
   }
 
   // -------- validation Ends -----------
 
   const navigationHandler = () => {
-    checkValidation()
-
-    if (localError.emailError == '' && localError.passwordError == '') {
+    if (checkValidation()) {
       handleLogin(input)
-    } else {
-      alert('You entered wrong inputs.')
     }
   }
 

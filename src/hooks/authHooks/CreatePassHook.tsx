@@ -1,29 +1,32 @@
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { updateLoaderState } from '../../redux/reducer/loader/LoaderAction'
-import { forgetpasswordServices } from '../../services/auth/Auth'
+import { changepasswordServices } from '../../services/auth/Auth'
 
-export const useForgetPassHook = () => {
+export const useCreatePassHook = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const handleForgetPass = (userData: any) => {
+  const handleCreatePass = (userData: any) => {
     console.log('userData', userData)
     const email = userData.email
-    const type = 'GENERATE'
-    const data = { email, type }
+    const password = userData.password
+    const confirmPassword = userData.confirmPassword
+    const type = 'VERIFY'
+    const otp = userData.otp
+    const data = { email, password, confirmPassword, type, otp }
 
     // started Loader
     dispatch(updateLoaderState(true))
 
     // Call Forgetpass Service
-    forgetpasswordServices(data)
+    changepasswordServices(data)
       .then((res) => {
         console.log('response', res.data)
-        navigate('/otp_verification', { state: { x: res.data.OTP, y: email } })
+        navigate('/otp_verified')
       })
       .catch((err) => {
         console.log(err)
       })
   }
-  return handleForgetPass
+  return handleCreatePass
 }

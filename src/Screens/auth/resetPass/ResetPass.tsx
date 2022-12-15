@@ -1,46 +1,50 @@
 import React, { useState } from 'react'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { IoIosArrowBack } from 'react-icons/all'
 import '../Auth.css'
 import banner from '../../../assets/images/bannerH.png'
 import EnaLogo from '../../../assets/images/enaLogoGreen.png'
 import LoginInput from '../../../component/Common/loginInput'
 import ButtonComp from '../../../component/Common/buttonComp/ButtonComp'
-import { useForgetPassHook } from '../../../hooks/authHooks/ForgetPassHook'
 
-function ForgetPass() {
-  const heading = 'Forget Password ?'
+import { useCreatePassHook } from '../../../hooks/authHooks/CreatePassHook'
+
+function ResetPass() {
+  const { state } = useLocation()
+  const heading = 'Create new password'
   const navigate = useNavigate()
-  const handleForgetPass = useForgetPassHook()
+  const handleCreatePass = useCreatePassHook()
 
   // ------ state for inputs --------
   const initialState = {
-    email: '',
+    email: `${state.y}`,
+    password: '',
+    confirmPassword: '',
+    otp: `${state.x}`,
   }
-  const initialError = {
-    email: '',
-  }
+  const localErrorState = { passwordError: '' }
 
   const [input, setinput] = useState(initialState)
 
-  const [localError, setlocalError] = useState(initialError)
+  console.log(input)
+
+  const [localError, setlocalError] = useState(localErrorState)
 
   const checkValidation = () => {
-    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input.email)) {
-      setlocalError({ email: '' })
+    if (input.password == input.confirmPassword) {
+      setlocalError({ ...localErrorState, passwordError: '' })
+      return true
     } else {
-      setlocalError({ email: 'You have entered an invalid email address!' })
+      setlocalError({ ...localErrorState, passwordError: 'Password not matched' })
+      return false
     }
   }
 
   // -------- navigate handler --------
 
   const navigationHandler = () => {
-    checkValidation()
-    if (localError.email == '') {
-      handleForgetPass(input)
-    } else {
-      alert('wrong inputs !')
+    if (checkValidation()) {
+      handleCreatePass(input)
     }
   }
 
@@ -59,32 +63,39 @@ function ForgetPass() {
               <img src={EnaLogo} className='img-fluid w-50 p-3 mt-5 pt-5' />
             </div>
             <div className='col-lg-8 col-md-8 col-sm-12'>
-              <IoIosArrowBack
-                className='border mt-3 rounded-3 backicon d-none d-md-block d-lg-block'
-                size={30}
-                onClick={() => navigate(-1)}
-              />
               <div className='col-10 mx-auto mt-0 pt-0 mt-3'>
                 <p className='mt-1 h3 fontWeight-700'>{heading}</p>
-                <p className='h6'>
-                  Don't worry! it occurs. Please enter the email address linked with your account.
-                </p>
-                <label className='form-label mt-3 h6 d-none d-lg-block d-md-block'>Email</label>
+                <p className='h6'>Your new password must be unique from those previously used.</p>
+                <label className='form-label mt-3 h6 d-none d-lg-block d-md-block'>Password</label>
                 <LoginInput
-                  type='email'
-                  name='email'
-                  id='email'
-                  placeholder='Enter your email'
+                  type='password'
+                  name='password'
+                  id='password'
+                  placeholder='Enter new password'
                   class='form-control mt-3'
                   Input={input}
                   setInput={setinput}
                 />
-                {localError.email == '' ? null : <p className='text-danger'>{localError.email}</p>}
+                <label className='form-label mt-3 h6 d-none d-lg-block d-md-block'>
+                  Confirm Password
+                </label>
+                <LoginInput
+                  type='password'
+                  name='confirmPassword'
+                  id='confirmPassword'
+                  placeholder='Confirm new password'
+                  class='form-control mt-3'
+                  Input={input}
+                  setInput={setinput}
+                />
+                {localError.passwordError == '' ? null : (
+                  <p className='text-danger mt-1'>{localError.passwordError}</p>
+                )}
                 <ButtonComp
                   navigationHandler={navigationHandler}
                   type='button'
                   class='py-2 text-light w-100 h-100 mt-4 fontWeight-600  themecolor btnRadius'
-                  btvalue='Send Code'
+                  btvalue='Reset Password'
                 />
               </div>
             </div>
@@ -95,4 +106,4 @@ function ForgetPass() {
   )
 }
 
-export default ForgetPass
+export default ResetPass

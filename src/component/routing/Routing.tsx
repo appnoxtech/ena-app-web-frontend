@@ -23,6 +23,7 @@ import AdminLogin from '../../Screens/admin/adminLogin/AdminLogin'
 import AdminHome from '../../Screens/admin/adminHome/AdminHome'
 import AdminProductList from '../../Screens/admin/productl-list/productList'
 import AddProduct from '../../Screens/addProduct/AddProduct'
+import ResetPass from '../../Screens/auth/resetPass/ResetPass'
 
 function Routing() {
   return (
@@ -39,6 +40,7 @@ function Routing() {
             <Route path='/forget_password' element={<ForgetPass />} />
             <Route path='/otp_verification' element={<OtpVar />} />
             <Route path='/otp_verified' element={<OtpVerified />} />
+            <Route path='resetPassword' element={<ResetPass />} />
             <Route path='/signup' element={<Signup />} />
             <Route path='/addAddress' element={<AddAddress />} />
             <Route path='/changeAddress' element={<ChangeAddress />} />
