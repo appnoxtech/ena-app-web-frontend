@@ -31,20 +31,17 @@ function ResetPass() {
   const [localError, setlocalError] = useState(localErrorState)
 
   const checkValidation = () => {
-    if (input.password == input.confirmPassword) {
-      setlocalError({ ...localErrorState, passwordError: '' })
-      return true
-    } else {
-      setlocalError({ ...localErrorState, passwordError: 'Password not matched' })
-      return false
-    }
+   
   }
 
   // -------- navigate handler --------
 
   const navigationHandler = () => {
-    if (checkValidation()) {
+    if (input.password == input.confirmPassword && input.password.length>=8) {
+      setlocalError({ ...localErrorState, passwordError: '' })
       handleCreatePass(input)
+    } else {
+      setlocalError({ ...localErrorState, passwordError: 'Password not matched' })
     }
   }
 
