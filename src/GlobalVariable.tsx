@@ -1,3 +1,3 @@
-let hostname = "http://172.16.2.27";
+let hostname = 'http://43.205.208.110'
 
-export const API_URL = `${hostname}:5000/api`;
+export const API_URL = `${hostname}:5000/api`

@@ -19,7 +19,7 @@ export const useForgetPassHook = () => {
     forgetpasswordServices(data)
       .then((res) => {
         console.log('response', res.data)
-        navigate('/otp_verification', { state: { x: res.data.OTP, y: email } })
+        navigate('/resetpass/otpvar', { state: { email: email, otp: res.data.otp } })
       })
       .catch((err) => {
         console.log(err)

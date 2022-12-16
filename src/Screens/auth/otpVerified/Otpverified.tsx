@@ -1,18 +1,25 @@
 import React from 'react'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import '../Auth.css'
 import '../../../assets/global/global.css'
 import verifyImg from '../../../assets/images/114809-success.gif'
 import banner from '../../../assets/images/bannerH.png'
 import EnaLogo from '../../../assets/images/enaLogoGreen.png'
 import ButtonComp from '../../../component/Common/buttonComp/ButtonComp'
+import { useLoginHook } from '../../../hooks/authHooks/LoginHook'
 
 function Passchanged() {
+  const { state } = useLocation()
   const heading = 'Password Changed'
+  const handelLogin = useLoginHook()
   const navigate = useNavigate()
+  const input = {
+    email: state.email,
+    password: state.password,
+  }
 
   const navigationHandler = () => {
-    navigate('/login')
+    handelLogin(input)
   }
   return (
     <>

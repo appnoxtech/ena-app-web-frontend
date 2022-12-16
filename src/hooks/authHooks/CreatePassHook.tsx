@@ -11,9 +11,7 @@ export const useCreatePassHook = () => {
     const email = userData.email
     const password = userData.password
     const confirmPassword = userData.confirmPassword
-    const type = 'VERIFY'
-    const otp = userData.otp
-    const data = { email, password, confirmPassword, type, otp }
+    const data = { email, password, confirmPassword }
 
     // started Loader
     dispatch(updateLoaderState(true))
@@ -22,7 +20,8 @@ export const useCreatePassHook = () => {
     changepasswordServices(data)
       .then((res) => {
         console.log('response', res.data)
-        navigate('/otp_verified')
+        console.log(email)
+        navigate('/otp_verified', { state: { email: email, password: password } })
       })
       .catch((err) => {
         console.log(err)

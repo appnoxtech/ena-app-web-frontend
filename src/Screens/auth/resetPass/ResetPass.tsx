@@ -17,27 +17,22 @@ function ResetPass() {
 
   // ------ state for inputs --------
   const initialState = {
-    email: `${state.y}`,
+    email: `${state.email}`,
     password: '',
     confirmPassword: '',
-    otp: `${state.x}`,
   }
   const localErrorState = { passwordError: '' }
 
   const [input, setinput] = useState(initialState)
 
-  console.log(input)
-
   const [localError, setlocalError] = useState(localErrorState)
 
-  const checkValidation = () => {
-   
-  }
+  const checkValidation = () => {}
 
   // -------- navigate handler --------
 
   const navigationHandler = () => {
-    if (input.password == input.confirmPassword && input.password.length>=8) {
+    if (input.password == input.confirmPassword && input.password.length >= 8) {
       setlocalError({ ...localErrorState, passwordError: '' })
       handleCreatePass(input)
     } else {

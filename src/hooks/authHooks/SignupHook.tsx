@@ -12,8 +12,7 @@ export const useSignupHook = () => {
     const lastName = userData.lastname
     const email = userData.email
     const password = userData.password
-    const userType = 'CUSTOMER'
-    const data = { firstName, lastName, email, password, userType }
+    const data = { firstName, lastName, email, password }
 
     // started Loader
     dispatch(updateLoaderState(true))
@@ -23,8 +22,8 @@ export const useSignupHook = () => {
       .then((res) => {
         console.log('response', res.data)
         if (res.status == 201) {
-          alert('Account Created Successfully, Please login to continue')
-          navigate('/login')
+          alert('Account Created Successfully, Please verify your account')
+          navigate('/otp_verification', { state: { email: email, password: password } })
         } else {
           alert('Sorry account not created !')
         }

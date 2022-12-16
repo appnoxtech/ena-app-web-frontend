@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { updateLoaderState } from '../../redux/reducer/loader/LoaderAction'
-import { LoginServices } from '../../services/auth/Auth'
+import { LoginServices, forgetpasswordServices } from '../../services/auth/Auth'
 
 // async fn. to store user Token
 const storeToken = async (token) => {
@@ -28,26 +28,29 @@ export const useLoginHook = () => {
     LoginServices(data)
       .then((res) => {
         if (res.status == 200) {
-          if (res.data.token) {
+          if (res.data.emailVerified == true) {
             const token = res.data.token
             storeToken(token)
             navigate('/')
             // stop Loader
             dispatch(updateLoaderState(false))
+          } else if (res.data.emailVerified == false) {
+            alert('Your account is not verified please click ok to verify.')
+            navigate('/otp_verification', { state: { email: userName, password: password } })
           } else {
             // stop Loader
             dispatch(updateLoaderState(false))
           }
-        } else {
-          alert('You entered wrong input')
         }
       })
       .catch((err) => {
+        //change when api upgrade
+        console.log(err)
         if (err.response.data.msg == 'Invalid Credential') {
           alert('Invalid Password')
         }
         if (err.response.data.msg == 'Invalid User') {
-          alert('Invalid Email')
+          alert('This email is not have an account.')
         }
       })
   }
