@@ -7,7 +7,6 @@ export const useSignupHook = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const handelSignup = (userData: any) => {
-    console.log('userData', userData)
     const firstName = userData.firstname
     const lastName = userData.lastname
     const email = userData.email
@@ -20,7 +19,6 @@ export const useSignupHook = () => {
     // Call Signnup Service
     SignupServices(data)
       .then((res) => {
-        console.log('response', res.data)
         if (res.status == 201) {
           alert('Account Created Successfully, Please verify your account')
           navigate('/otp_verification', { state: { email: email, password: password } })
@@ -31,6 +29,7 @@ export const useSignupHook = () => {
       .catch((err) => {
         if (err.response.data.msg == 'Email Duplicacy') {
           alert('Email You entered already have an account, please login to continue.')
+          navigate('/login')
         } else alert('Server problem')
       })
   }

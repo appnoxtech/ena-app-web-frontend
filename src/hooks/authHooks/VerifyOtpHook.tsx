@@ -9,7 +9,6 @@ const storeToken = async (token) => {
     await localStorage.setItem('CUSTOMER_Token', token)
   } catch (e) {
     // saving error
-    console.log(e)
   }
 }
 
@@ -31,7 +30,6 @@ export const useVerifyOtpHook = () => {
     // Call Login Service
     VerifyOtpServices(data)
       .then((res) => {
-        console.log('hii you are here')
         if (res.data.status == true) {
           alert('Your account is verifed successfully.')
           handleLogin(data2)
@@ -41,8 +39,6 @@ export const useVerifyOtpHook = () => {
       })
       .catch((err) => {
         //change when api upgrade
-
-        console.log('hiii in error')
         if (err.response.data.msg == 'OTP Is Invalid') {
           alert('Wrong otp')
         } else {

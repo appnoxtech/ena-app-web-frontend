@@ -9,7 +9,6 @@ const storeToken = async (token) => {
     await localStorage.setItem('CUSTOMER_Token', token)
   } catch (e) {
     // saving error
-    console.log(e)
   }
 }
 
@@ -29,7 +28,6 @@ export const useVerifyOtpForgetHook = () => {
     // Call Login Service
     VerifyOtpServices(data)
       .then((res) => {
-        console.log('hii you are here')
         if (res.data.status == true) {
           navigate('/resetPassword', { state: { email: email } })
         } else {
@@ -39,7 +37,6 @@ export const useVerifyOtpForgetHook = () => {
       .catch((err) => {
         //change when api upgrade
 
-        console.log('hiii in error')
         if (err.response.data.msg == 'OTP Is Invalid') {
           alert('Wrong otp')
         } else {

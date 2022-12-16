@@ -7,7 +7,6 @@ export const useForgetPassHook = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const handleForgetPass = (userData: any) => {
-    console.log('userData', userData)
     const email = userData.email
     const type = 'GENERATE'
     const data = { email, type }
@@ -18,11 +17,9 @@ export const useForgetPassHook = () => {
     // Call Forgetpass Service
     forgetpasswordServices(data)
       .then((res) => {
-        console.log('response', res.data)
         navigate('/resetpass/otpvar', { state: { email: email, otp: res.data.otp } })
       })
       .catch((err) => {
-        console.log(err)
       })
   }
   return handleForgetPass

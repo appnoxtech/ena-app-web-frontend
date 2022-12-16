@@ -34,7 +34,6 @@ function Login() {
           ...localErrorState,
           passwordError: '',
         })
-        console.log('inpass')
         return true
       } else {
         setlocalError({

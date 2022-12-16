@@ -9,7 +9,6 @@ const storeToken = async (token) => {
     await localStorage.setItem('CUSTOMER_Token', token)
   } catch (e) {
     // saving error
-    console.log(e)
   }
 }
 
@@ -45,7 +44,6 @@ export const useLoginHook = () => {
       })
       .catch((err) => {
         //change when api upgrade
-        console.log(err)
         if (err.response.data.msg == 'Invalid Credential') {
           alert('Invalid Password')
         }
