@@ -1,16 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { IoIosArrowBack } from 'react-icons/all'
 import '../Auth.css'
 import '../../../assets/global/global.css'
 import banner from '../../../assets/images/bannerH.png'
 import EnaLogo from '../../../assets/images/enaLogoGreen.png'
-import bannerforphone from '../../../assets/images/banner.png'
 import LoginInput from '../../../component/Common/loginInput'
+import ButtonComp from '../../../component/Common/buttonComp/ButtonComp'
 
 function Logincart() {
   const heading = 'Sign in to continue'
-  const history = useNavigate()
+  const navigate = useNavigate()
+
+  // -------- state for inputs -------
+
+  const [input, setinput] = useState({
+    email: '',
+    password: '',
+  })
+
+  // -------- state for inputs end -------
+
+  // --------- navigate handler --------
+
+  const navigationHandler = () => {
+    navigate('/checkout')
+  }
+
+  // --------- navigate handler End --------
   return (
     <>
       <div className='container-fluid'>
@@ -20,7 +37,7 @@ function Logincart() {
               <img src={banner} className='img-fluid w-75 p-3 pt-0' />
             </div>
             <div className='col-4 text-center d-none d-md-block d-lg-none'>
-              <img src={bannerforphone} className='img-fluid w-100 p-3 pt-' />
+              <img src={banner} className='img-fluid w-100 p-3 pt-0' />
             </div>
             <div className='col-12 text-center d-lg-none d-sm-block d-md-none'>
               <img src={EnaLogo} className='img-fluid w-50 p-3 mt-5 pt-5' />
@@ -29,7 +46,7 @@ function Logincart() {
               <IoIosArrowBack
                 className='border mt-3 rounded-3 backicon d-none d-md-block d-lg-block'
                 size={30}
-                onClick={() => history(-1)}
+                onClick={() => navigate(-1)}
               />
               <div className='col-10 mx-auto mt-3 pt-0'>
                 <p className='mt-1 h3 fontWeight-700'>{heading}</p>
@@ -47,14 +64,9 @@ function Logincart() {
                   name='email'
                   id='email'
                   placeholder='Enter your email'
-                  class='form-control mt-3 d-none d-md-block d-lg-block'
-                />
-                <LoginInput
-                  type='email'
-                  name='email'
-                  id='email'
-                  placeholder='Enter your email'
-                  class='form-control mt-3 d-md-none d-lg-none d-sm-block'
+                  class='form-control mt-3'
+                  Input={input}
+                  setInput={setinput}
                 />
                 <label className='form-label lable mt-3 h6 d-none d-lg-block d-md-block'>
                   Password
@@ -64,21 +76,19 @@ function Logincart() {
                   name='password'
                   id='password'
                   placeholder='Enter your password'
-                  class='form-control mt-3 d-none d-md-block d-lg-block'
-                />
-                <LoginInput
-                  type='password'
-                  name='password'
-                  id='password'
-                  placeholder='Enter your password'
-                  class='form-control mt-3 d-md-none d-lg-none d-sm-block'
+                  class='form-control mt-3'
+                  Input={input}
+                  setInput={setinput}
                 />
                 <NavLink to='/forget_password'>
                   <div className='text-end h6 mt-2 font-green'>Forget Password?</div>
                 </NavLink>
-                <button type='button' className='btn w-100 h-100 mt-4 fontWeight-600 button'>
-                  Login
-                </button>
+                <ButtonComp
+                  navigationHandler={navigationHandler}
+                  type='button'
+                  class=' btnRadius border border-0 w-100 h-100 mt-4 fontWeight-600 button themecolor text-light py-2'
+                  btvalue='Login'
+                />
               </div>
             </div>
           </div>

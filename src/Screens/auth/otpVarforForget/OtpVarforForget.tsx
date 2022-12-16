@@ -7,11 +7,12 @@ import banner from '../../../assets/images/bannerH.png'
 import EnaLogo from '../../../assets/images/enaLogoGreen.png'
 import OtpInput from '../../../component/otpInput/OtpInput'
 import ButtonComp from '../../../component/Common/buttonComp/ButtonComp'
-import { useVerifyOtpHook } from '../../../hooks/authHooks/VerifyOtpHook'
+import { useVerifyOtpForgetHook } from '../../../hooks/authHooks/VerifyOtpForgetpass'
+import Timer from '../../../component/Common/timer/Timer'
 
-function OtpVar() {
+function OtpVarForForget() {
   const { state } = useLocation()
-  const handleotp = useVerifyOtpHook()
+  const handleotp = useVerifyOtpForgetHook()
 
   const [input, setinput] = useState([])
 
@@ -61,6 +62,7 @@ function OtpVar() {
                 <div className='text-center'>
                   <OtpInput setInput={setinput} Input={input} />
                 </div>
+                {/* <Timer /> */}
 
                 <ButtonComp
                   navigationHandler={navigationHandler}
@@ -77,4 +79,4 @@ function OtpVar() {
   )
 }
 
-export default OtpVar
+export default OtpVarForForget

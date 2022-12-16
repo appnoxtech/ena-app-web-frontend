@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, FC } from 'react';
 import './OtpInput.css'
 
-function OtpInput(){
+const OtpInput:FC<any>=({...prop})=>{
     // for otp box 
 
   const [otp, setOtp] = useState(new Array(4).fill(""));
+  prop.setInput(otp);
 
   const handleChange = (element:any, index:any) => {
       if (isNaN(element.value)) return false;

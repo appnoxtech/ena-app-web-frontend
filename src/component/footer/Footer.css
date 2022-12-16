@@ -20,3 +20,9 @@ ul li{
 .icon_link{
     color: #FFFFFF !important;
 }
+
+.sub_button{
+    background: #51BC4A !important;
+    color: #FFFFFF !important;
+    font-weight: 600 !important;
+}

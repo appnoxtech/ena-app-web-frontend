@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { FC } from 'react';
 
-function LoginInput(prop:any) {
+const LoginInput:FC<any>=({...prop})=>{
+  const handleOnChange = event => {
+    const { name, value } = event.target;
+    prop.setInput({ ...prop.Input, [name]: value });
+  };
   return (
       <input
         type={prop.type}
@@ -8,7 +12,7 @@ function LoginInput(prop:any) {
         id={prop.id}
         placeholder={prop.placeholder}
         name={prop.name}
-        required
+        onChange={(e)=> handleOnChange(e)}
       />
   )
 }
