@@ -1,8 +1,8 @@
 import React, { useState, FC } from 'react'
 import Category from '../../component/categorybar/Category'
 import Filterbar from '../../component/filterbar/Filterbar'
-import Card from '../../component/Common/card/Card'
-import Pagination from '../../component/Common/pagination/Pagination'
+import Card from '../../component/common-components/card/Card'
+import Pagination from '../../component/common-components/pagination/Pagination'
 import { EnaAppData } from '../../component/dummyData'
 import Searchbar from '../../component/searchbar/Searchbar'
 

@@ -6,9 +6,9 @@ import '../../../assets/global/global.css'
 import banner from '../../../assets/images/bannerH.png'
 import EnaLogo from '../../../assets/images/enaLogoGreen.png'
 import OtpInput from '../../../component/otpInput/OtpInput'
-import ButtonComp from '../../../component/Common/buttonComp/ButtonComp'
+import ButtonComp from '../../../component/common-components/buttonComp/ButtonComp'
 import { useVerifyOtpForgetHook } from '../../../hooks/authHooks/VerifyOtpForgetpass'
-import Timer from '../../../component/Common/timer/Timer'
+import Timer from '../../../component/common-components/timer/Timer'
 
 function OtpVarForForget() {
   const { state } = useLocation()

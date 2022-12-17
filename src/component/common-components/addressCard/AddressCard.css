@@ -1,0 +1,37 @@
+.height_address_card{
+    height: fit-content !important;
+}
+
+.addressCard_heading{
+    font-size: medium;
+    font-weight: 600;
+}
+
+.selected{
+    border: 2px solid #51BC4A !important;
+}
+
+.change_addressbtn{
+    color: #4A51BC;
+}
+
+.make_default{
+    color: #B54ABC;
+}
+.form_radio{
+    color: #B54ABC !important;
+}
+
+.address{
+    color: #648966 !important;
+}
+
+.form-check .form-check-input {
+    float: right !important;
+    margin-left: 0.5em !important;
+}
+
+.form-check-input:checked {
+    background-color: #B54ABC !important;
+    border-color: #B54ABC !important;
+}
