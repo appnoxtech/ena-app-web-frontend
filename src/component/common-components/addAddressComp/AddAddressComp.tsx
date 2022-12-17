@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import LoginInput from '../../common/loginInput/index'
+import LoginInput from '../loginInput/index'
 import './AddAddressComp.css'
 import '../../../assets/global/global.css'
 import { NavLink, useNavigate } from 'react-router-dom'
-import ButtonComp from '../../common/buttonComp/ButtonComp'
+import ButtonComp from '../buttonComp/ButtonComp'
 
 function AddAddress() {
   const navigate = useNavigate()

@@ -1,6 +1,6 @@
 import React from 'react'
-import AddAddressComp from '../../../component/common/addAddressComp/AddAddressComp'
-import Breadcrumb from '../../../component/common/breadcrumb/Breadcrumb'
+import AddAddressComp from '../../../component/common-components/addAddressComp/AddAddressComp'
+import Breadcrumb from '../../../component/common-components/breadcrumb/Breadcrumb'
 
 function AddAddress() {
   return (

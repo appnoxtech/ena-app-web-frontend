@@ -1,7 +1,7 @@
 import React from 'react'
-import AddAddressComp from '../../../component/common/addAddressComp/AddAddressComp'
-import Breadcrumb from '../../../component/common/breadcrumb/Breadcrumb'
-import OrderCard from '../../../component/common/orderCard/OrderCard'
+import AddAddressComp from '../../../component/common-components/addAddressComp/AddAddressComp'
+import Breadcrumb from '../../../component/common-components/breadcrumb/Breadcrumb'
+import OrderCard from '../../../component/common-components/orderCard/OrderCard'
 import './CheckoutWaddress.css'
 import '../../../assets/global/global.css'
 

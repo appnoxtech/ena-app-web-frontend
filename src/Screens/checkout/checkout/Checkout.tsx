@@ -1,7 +1,7 @@
 import React from 'react'
-import AddressCard from '../../../component/common/addressCard/AddressCard'
-import Breadcrumb from '../../../component/common/breadcrumb/Breadcrumb'
-import OrderCard from '../../../component/common/orderCard/OrderCard'
+import AddressCard from '../../../component/common-components/addressCard/AddressCard'
+import Breadcrumb from '../../../component/common-components/breadcrumb/Breadcrumb'
+import OrderCard from '../../../component/common-components/orderCard/OrderCard'
 import '../../../assets/global/global.css'
 import { NavLink } from 'react-router-dom'
 

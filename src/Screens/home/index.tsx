@@ -1,7 +1,8 @@
 import React, { useState, FC } from 'react'
 import Category from '../../component/categorybar/Category'
-import Card from '../../component/common/card/Card'
-import Pagination from '../../component/common/pagination/Pagination'
+import Filterbar from '../../component/filterbar/Filterbar'
+import Card from '../../component/common-components/card/Card'
+import Pagination from '../../component/common-components/pagination/Pagination'
 import { EnaAppData } from '../../component/dummyData'
 import Searchbar from '../../component/searchbar/Searchbar'
 
@@ -10,7 +11,7 @@ const Admin: FC<any> = () => {
   const filterData = EnaAppData
   const [cardIndex, setCardIndex] = useState<any>()
   const [searchText, setSearchText] = useState('')
-  const [seletedCategory,setSletedCategorey]=useState('All')
+  const [seletedCategory, setSletedCategorey] = useState('All')
 
   const wishListHandler = (index) => {
     console.log(index)
@@ -38,7 +39,7 @@ const Admin: FC<any> = () => {
       <div className='side-Part rounded-4 bg-white'></div>
       <div className='d-flex flex-column flex-md-row'>
         <div className='mt-5 col-12 col-md-2 '>
-          <Category filterDatabyCategory={filterDatabyCategory} seletedCategory={seletedCategory}/>
+          <Category filterDatabyCategory={filterDatabyCategory} seletedCategory={seletedCategory} />
         </div>
         <div className=' col-12 mx-auto mx-md-0 col-md-10 '>
           <div className='row d-flex    mt-5 mx-auto m-0 p-0'>

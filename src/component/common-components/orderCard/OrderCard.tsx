@@ -3,7 +3,7 @@ import carrot from '../../../assets/images/carrot.jpg'
 import '../../../assets/global/global.css'
 import './OrderCard.css'
 import { useNavigate } from 'react-router-dom'
-import ButtonComp from '../../common/buttonComp/ButtonComp'
+import ButtonComp from '../buttonComp/ButtonComp'
 
 function OrderCard() {
   const navigate = useNavigate()

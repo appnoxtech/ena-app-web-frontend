@@ -5,8 +5,8 @@ import '../Auth.css'
 import '../../../assets/global/global.css'
 import banner from '../../../assets/images/bannerH.png'
 import EnaLogo from '../../../assets/images/enaLogoGreen.png'
-import LoginInput from '../../../component/common/loginInput'
-import ButtonComp from '../../../component/common/buttonComp/ButtonComp'
+import LoginInput from '../../../component/common-components/loginInput'
+import ButtonComp from '../../../component/common-components/buttonComp/ButtonComp'
 
 function Logincart() {
   const heading = 'Sign in to continue'
