@@ -30,3 +30,8 @@
 .cart_icon{
     font-size: 25px;
 }
+
+.nav__link:hover{
+  color:#51BC4A;
+
+}

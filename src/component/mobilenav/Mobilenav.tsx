@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import EnaLogo from '../../assets/images/enaLogoGreen.png'
 import '../../assets/global/global.css'
 import './Mobilenav.css'
+import { Button, OverlayTrigger, Popover, PopoverBody } from 'react-bootstrap'
 
 const Mobilenav = ({}) => {
+  const navigate = useNavigate()
   const MenuItem = [
     {
       navName: 'Home',
@@ -23,6 +25,13 @@ const Mobilenav = ({}) => {
       path: '/contact',
     },
   ]
+
+  // function for logout
+
+  const Logout = () => {
+    localStorage.removeItem('CUSTOMER_Token')
+    navigate('#')
+  }
 
   return (
     <>
@@ -66,9 +75,28 @@ const Mobilenav = ({}) => {
             </div>
           </div>
           <div className='d-flex flex-row  mx-2 '>
-            <NavLink to='/login'>
-              <i className='fa fa-user-o me-4 fs-2 font-green' aria-hidden='true'></i>
-            </NavLink>
+          <OverlayTrigger
+            trigger='focus'
+            key='bottom'
+            placement='bottom'
+            overlay={
+              <Popover id='popover-positioned-bottom'>
+                <PopoverBody>
+                  {localStorage.getItem('CUSTOMER_Token') ? (
+                    <NavLink to='#' onClick={() => Logout()}>
+                      Logout
+                    </NavLink>
+                  ) : (
+                    <NavLink to='/login'>Log in</NavLink>
+                  )}
+                </PopoverBody>
+              </Popover>
+            }
+          >
+            <Button className='nav__link' variant=''>
+            <i className='fa fa-user-o me-4 fs-2 font-green' aria-hidden='true'></i>
+            </Button>
+          </OverlayTrigger>
             <NavLink to='/checkout'>
             <i
               className='fa fa-shopping-cart me-2 cart_icon fs-2 font-green'
