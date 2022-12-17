@@ -1,3 +1,3 @@
-let hostname = 'http://43.205.208.110'
+let hostname = process.env.REACT_APP_BACKEND_URL
 
-export const API_URL = `${hostname}:5000/api`
+export const API_URL = `${hostname}/api`
