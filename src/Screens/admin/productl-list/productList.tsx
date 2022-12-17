@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react'
 
 import IndustryCard from '../../../component/admin/industryCard'
-import RelatedProductCard from '../../../component/Common/card/RelatedProductCard'
+import RelatedProductCard from '../../../component/common/card/RelatedProductCard'
 import { wareHouse } from '../../../component/dummyData'
 import './productList.css'
 // import '../Auth.css'

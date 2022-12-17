@@ -5,7 +5,7 @@ import { IoIosArrowBack } from 'react-icons/all'
 import '../../../assets/global/global.css'
 import banner from '../../../assets/images/bannerH.png'
 import EnaLogo from '../../../assets/images/enaLogoGreen.png'
-import LoginInput from '../../../component/Common/loginInput'
+import LoginInput from '../../../component/common/loginInput'
 
 function AdminLogin() {
   const heading = 'Sign in'

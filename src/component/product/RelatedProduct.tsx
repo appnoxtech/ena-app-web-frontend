@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import { FC } from 'react'
-import RelatedProductCard from '../Common/card/RelatedProductCard'
+import RelatedProductCard from '../common/card/RelatedProductCard'
 import { EnaAppData } from '../dummyData'
 
 const RelatedProduct: FC<any> = ({ data }) => {

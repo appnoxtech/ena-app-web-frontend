@@ -1,6 +1,6 @@
 import React, { useState, FC } from 'react'
-import AddProductComp from '../../component/Common/addProductComp/AddProductComp'
-import Breadcrumb from '../../component/Common/breadcrumb/Breadcrumb'
+import AddProductComp from '../../component/common/addProductComp/AddProductComp'
+import Breadcrumb from '../../component/common/breadcrumb/Breadcrumb'
 
 const AddProduct: FC<any> = () => {
     return (

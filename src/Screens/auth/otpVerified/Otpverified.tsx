@@ -5,7 +5,7 @@ import '../../../assets/global/global.css'
 import verifyImg from '../../../assets/images/114809-success.gif'
 import banner from '../../../assets/images/bannerH.png'
 import EnaLogo from '../../../assets/images/enaLogoGreen.png'
-import ButtonComp from '../../../component/Common/buttonComp/ButtonComp'
+import ButtonComp from '../../../component/common/buttonComp/ButtonComp'
 import { useLoginHook } from '../../../hooks/authHooks/LoginHook'
 
 function Passchanged() {

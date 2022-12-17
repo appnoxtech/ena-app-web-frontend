@@ -6,7 +6,7 @@ import '../../../assets/global/global.css'
 import banner from '../../../assets/images/bannerH.png'
 import EnaLogo from '../../../assets/images/enaLogoGreen.png'
 import OtpInput from '../../../component/otpInput/OtpInput'
-import ButtonComp from '../../../component/Common/buttonComp/ButtonComp'
+import ButtonComp from '../../../component/common/buttonComp/ButtonComp'
 import { useVerifyOtpHook } from '../../../hooks/authHooks/VerifyOtpHook'
 
 function OtpVar() {
