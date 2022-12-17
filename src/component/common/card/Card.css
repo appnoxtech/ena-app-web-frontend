@@ -1,0 +1,84 @@
+.font_container {
+  font-size: 16px;
+  padding-left: 12px;
+  margin: 0;
+  padding-right: 15px;
+  color: white;
+  background-color: #51BC4A !important ;
+}
+
+.red{
+  color: red;
+  
+}
+.add_button:hover{
+  background: #51BC4A !important;
+  color: white !important;
+}
+input:focus {
+  outline:none;
+}
+.radius_container {
+  border-radius: 6px;
+  overflow: hidden;
+  width: 118px;
+}
+
+.number_container {
+  margin: 0;
+  padding-right: 25px;
+  color: #51BC4A;
+  font-weight: 600;
+  font-size: 15px;
+}
+.btn1 {
+  color: white;
+  background-color: #51BC4A;
+  width: 100px;
+  height:32px;
+  font-weight:600
+}
+
+.card-text {
+  font-size: 24px;
+
+  font-weight: 550;
+}
+
+.Off_container{
+    font-size:14px;
+   background-color:white;
+   padding-right:10px;
+   color: black;
+}
+
+.fabDiv
+{
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+  position: absolute;
+   z-index: 999;
+  width:100%;
+}
+.kg_container{
+  font-size: 14px;
+}
+
+a:hover{
+  color: #51BC4A !important;
+}
+
+.heart_fav_icon{
+  font-size:19px;
+  color:#C3CFC5;
+}
+
+.carrot_background{
+  background-color: #fbf9f7;
+}
+
+.img_data{
+  height:150px;
+  width: 200px;
+}

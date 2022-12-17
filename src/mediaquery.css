@@ -1,0 +1,45 @@
+.themecolor{
+    background-color: #51BC4A;
+}
+.btnRadius{
+    border-radius:6px;
+    border-color: #51BC4A;
+}
+.iconcolor{
+    color: #51BC4A;
+}
+.textblack{
+    color: black;
+}
+
+.voliet{
+    background: #b5255e;
+}
+@media screen and (max-width: 768px) {
+  .text {
+    font-size: 2rem;
+    line-height: 1.5;
+  }
+  .productSliderMain .image-gallery-slide {
+    padding: 1rem;
+  }
+  .crossTextRelated {
+    font-size: 0.7rem;
+  }
+  .card-title {
+    font-size: 1rem;
+  }
+  .card-text {
+    font-size: 0.8rem;
+  }
+  .Off_container {
+    padding-right: 0;
+  }
+  .card-img-top {
+    margin-top: 2.5rem;
+  }
+  .img_data {
+    height: 100px;
+    width: 100px;
+  }
+}
