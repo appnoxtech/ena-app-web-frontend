@@ -1,11 +1,17 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Navigate, NavLink, useNavigate } from 'react-router-dom'
 import './Desktop.css'
 import Ena from '../../assets/images/enaLogoGreen.png'
 import { Button, OverlayTrigger, Popover, PopoverHeader } from 'react-bootstrap'
+import {useSelector} from 'react-redux';
+import { GetCartDetailsService } from '../../services/cart/cartService'
 
 const Desktop = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const isLogin = useSelector((state: any) => state.user.isLogin);
+  //const count = useSelector((state:any) => state.cart.count);
+  const [count, setCount] = useState(0);
+
   const MenuItem = [
     {
       navName: '',
@@ -31,7 +37,20 @@ const Desktop = () => {
     localStorage.removeItem('CUSTOMER_Token')
     navigate('#')
   }
+  console.log('isLogin', isLogin);
 
+  const getCart = async () => {
+    const res = await GetCartDetailsService();
+    const data = res.data[0].productList;
+    if (data) {
+      setCount(data.length);
+    }
+  }
+
+  useEffect(() => {
+    getCart();
+  }, []);
+  
   return (
     <div className='col-12 p-4'>
       <div className='  d-md-flex justify-content-between align-items-center  '>
@@ -57,7 +76,7 @@ const Desktop = () => {
             overlay={
               <Popover id='popover-positioned-bottom'>
                 <Popover.Body>
-                  {localStorage.getItem('CUSTOMER_Token') ? (
+                  {isLogin ? (
                     <NavLink to='#' onClick={() => Logout()}>
                       Logout
                     </NavLink>
@@ -74,7 +93,10 @@ const Desktop = () => {
           </OverlayTrigger>
           <i className='fa fa-heart-o heart_icon' aria-hidden='true'></i>
           <NavLink to='/cart'>
-            <i className='fa fa-shopping-cart cart_icon' aria-hidden='true'></i>
+            <div className="cart-container">
+               <p className='cart-count'>{count}</p>
+               <i className='fa fa-shopping-cart cart_icon' aria-hidden='true'></i>
+            </div>
           </NavLink>
         </div>
       </div>

@@ -20,7 +20,7 @@ const category: FC<any> = ({ filterDatabyCategory }) => {
   }, [isMobile])
   return (
     <div className='outer_navli col-12 '>
-      <div className={' col-6 col-md-8 ms-auto mx-md-auto py-2 bgWhite'}>
+      <div className={'col-6 col-md-8 col-sm-12 ms-auto mx-md-auto py-2 bgWhite'}>
         <p
           onClick={() => {dropDowntoggleHandler()}}
           className='fontWeight-700 bgWhite m-0 p-0 linone text-center bgWhite d-flex justify-content-center align-item-center'

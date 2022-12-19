@@ -189,3 +189,7 @@
 }
 
 /* shoping cart end */
+
+.removeProductCart:hover {
+   cursor: pointer;
+}

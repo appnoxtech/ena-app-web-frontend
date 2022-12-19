@@ -5,9 +5,12 @@ import Tomato from '../../assets/images/6-tomato-png-image.png'
 import CustomButton from '../Button/Button';
 import WarningModal from '../WarningModal/WarningModal';
 import './Order.css'
+import { GetCartDetailsService } from '../../services/cart/cartService';
 const Order = () => {
   const [showModal, setShowModal] = useState(false);
   const displayModal = () => {
+    console.log('display fn.called');
+    
     setShowModal(true);
   }
   const hideModal = () => {
@@ -15,7 +18,6 @@ const Order = () => {
   }
   const handleOrderTracking = () => {
     console.log('function will handle order tracking ..');
-    
   }
   return (
     <div className='container-fluid pb-5'>
@@ -94,14 +96,12 @@ const Order = () => {
           </tbody>
         </Table>
       </div>
-      {
-        showModal ? 
-        <WarningModal
+      <WarningModal
           message="Are you sure you want to cancel the order ?"
           show={showModal}
-
-         /> : null
-      }
+          closeModal={hideModal}
+          showReason={true}
+         />
     </div>
   )
 }
