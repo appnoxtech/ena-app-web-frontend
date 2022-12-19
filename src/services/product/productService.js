@@ -4,7 +4,6 @@ import { API_URL } from "../../GlobalVariable";
 export const AddProductService = async (data) => {
     const url = `${API_URL}/product/add-product`;
     const token = localStorage.getItem('@user_Token');
-    console.log('token', token);
     return axios.post(url, data, {
         headers: {
             'Content-Type': 'application/json',

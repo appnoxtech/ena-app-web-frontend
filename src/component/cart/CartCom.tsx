@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Table from 'react-bootstrap/Table';
 import Searchbar from '../searchbar/Searchbar'
-import Table from 'react-bootstrap/Table'
+
 // import Image1 from '../../assets/images/one.png';
 import './cart.css'
 import infoIcon from '../../assets/images/info.svg'
@@ -11,11 +12,10 @@ import emptyCartData from '../../assets/animations/emptyCart.json';
 import { updateUserCart } from '../../redux/reducer/cart/CartReducer'
 
 const CartCom = () => {
+  const Message = 'Taxes and postage are calculated at checkout';
   const history = useNavigate();
   const [size, setSize] = useState('1')
   const [cartData, setCartData] = useState([]);
-  let Image1 = 'https://drhealthbenefits.com/wp-content/uploads/2017/06/carrot-leaves.jpg';
-
   const getCart = async () => {
     const res = await GetCartDetailsService();
     const data = res.data[0].productList;
@@ -147,7 +147,7 @@ const CartCom = () => {
                 </h5>
                 <div className='infoText'>
                   <img src={infoIcon} alt='info' className='img-fluid' />
-                  <p>Taxes and postage are calculated at checkout</p>
+                  <p>{Message}</p>
                 </div>
               </div>
               <div className='mt-3'>

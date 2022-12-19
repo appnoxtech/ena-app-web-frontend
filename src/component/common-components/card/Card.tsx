@@ -4,7 +4,6 @@ import { NavLink } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { decreaseCartCount, increaseCartCount } from '../../../redux/reducer/cart/CartReducer';
-import { Alert } from 'react-bootstrap';
 import { AddToCartService, UpdateCartService } from '../../../services/cart/cartService';
 
 const Card: FC<any> = ({ cardData, indexData, wishListHandler }) => {
@@ -44,7 +43,7 @@ const Card: FC<any> = ({ cardData, indexData, wishListHandler }) => {
       <div className='card border-0 col-12 overflow-hidden'>
         <div className='col-12 m-0 p-0 carrot_background px-2 px-md-0'>
           <div className='border-0 col-12 text-center text'>
-            <img src={cardData.image} style={{objectFit: 'cover'}} className='img_data' alt='...' />
+            <img src={cardData.image} className='img_data' alt='...' />
           </div>
         </div>
         <div className='fabDiv'>

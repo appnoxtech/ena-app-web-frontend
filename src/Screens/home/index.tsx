@@ -49,16 +49,14 @@ const Admin: FC<any> = () => {
     setData(temp2)
   }
 
-  console.log(data);
 
   const getProductList = async() => {
     try {
       const res = await GetProductListService();
       const data = res.data.result;
-      console.log('data', data);
       setProductList(data);
     } catch (error) {
-      console.log('error', error);
+      return;
     }
   }
 

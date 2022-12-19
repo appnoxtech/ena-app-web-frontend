@@ -37,8 +37,6 @@ export const useLoginHook = () => {
             } = res.data;
             const user = {firstName,lastName, isLogin: true};
             dispatch(updateUserData(user));
-            console.log('data inside user', user);
-            
             navigate('/')
             // stop Loader
             dispatch(updateLoaderState(false))
