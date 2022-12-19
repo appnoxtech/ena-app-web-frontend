@@ -123,7 +123,7 @@ function Login() {
                 <ButtonComp
                   navigationHandler={navigationHandler}
                   type='button'
-                  class=' btnRadius border border-0 w-100 h-100 mt-4 fontWeight-600 button themecolor text-light py-2'
+                  class=' btnRadius border border-0 w-100 h-100 mt-4 fontWeight-600 button themecolor text-light py-2 '
                   btvalue='Login'
                 />
               </div>

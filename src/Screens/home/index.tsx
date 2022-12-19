@@ -1,14 +1,31 @@
-import React, { useState, FC } from 'react'
+import React, { useState, FC, useEffect } from 'react'
 import Category from '../../component/categorybar/Category'
 import Filterbar from '../../component/filterbar/Filterbar'
 import Card from '../../component/common-components/card/Card'
 import Pagination from '../../component/common-components/pagination/Pagination'
 import { EnaAppData } from '../../component/dummyData'
 import Searchbar from '../../component/searchbar/Searchbar'
+import { GetProductListService } from '../../services/product/productService'
+
+interface product {
+  id: number,
+  vegName: string,
+  engVegName: string,
+  price: number,
+  orderQuantity: number,
+  unit: number,
+  image: string,
+};
+
+interface Response {
+   result: Array<product>
+};
+
 
 const Admin: FC<any> = () => {
   const [data, setData] = useState(EnaAppData)
   const filterData = EnaAppData
+  const [productList, setProductList] :any = useState([]); 
   const [cardIndex, setCardIndex] = useState<any>()
   const [searchText, setSearchText] = useState('')
   const [seletedCategory,setSletedCategorey]=useState('All')
@@ -32,7 +49,23 @@ const Admin: FC<any> = () => {
     setData(temp2)
   }
 
-  console.log(data)
+  console.log(data);
+
+  const getProductList = async() => {
+    try {
+      const res = await GetProductListService();
+      const data = res.data.result;
+      console.log('data', data);
+      setProductList(data);
+    } catch (error) {
+      console.log('error', error);
+    }
+  }
+
+  useEffect(() => {
+    getProductList()
+  },[]);
+
   return (
     <div className='col-12'>
       <Searchbar searchText={searchText} setSearchText={setSearchText} />
@@ -45,7 +78,7 @@ const Admin: FC<any> = () => {
           <div className='row d-flex    mt-5 mx-auto m-0 p-0'>
             {/* <Filterbar /> */}
             {/* search product by name */}
-            {data
+            {productList
               .filter((d, i) => {
                 if (searchText == '') {
                   return d

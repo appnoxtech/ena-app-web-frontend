@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import AddAddressComp from '../../../component/common-components/addAddressComp/AddAddressComp'
 import Breadcrumb from '../../../component/common-components/breadcrumb/Breadcrumb'
 import OrderCard from '../../../component/common-components/orderCard/OrderCard'
 import './CheckoutWaddress.css'
 import '../../../assets/global/global.css'
+import { GetCartDetailsService } from '../../../services/cart/cartService'
 
 function checkoutWaddress() {
+
   return (
     <div className='container-fluid mx-0'>
       <div className='row d-flex justify-content-between m-0 p-0'>
@@ -18,7 +20,7 @@ function checkoutWaddress() {
         </div>
           <div className="col-lg-4 col-12 mt-5 mt-lg-0">
           <div className="container-fluid px-4 border border_radius1 py-4 back-g-lightwhite">
-            <OrderCard />
+            <OrderCard  />
             </div>
           </div>
         </div>

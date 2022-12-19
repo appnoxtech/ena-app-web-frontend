@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import '../Auth.css'
 import '../../../assets/global/global.css'
@@ -19,8 +19,13 @@ function Passchanged() {
   }
 
   const navigationHandler = () => {
-    handelLogin(input)
+    handelLogin(input);
   }
+  useEffect(() => {
+     setTimeout(() => {
+      navigate("/");
+     }, 1500);
+  }, []);
   return (
     <>
       <div className='container-fluid'>
@@ -48,7 +53,7 @@ function Passchanged() {
                   navigationHandler={navigationHandler}
                   type='button'
                   class='btn w-100 h-100 mt-4 fontWeight-600 button1'
-                  btvalue='Back to Login'
+                  btvalue='Continue'
                 />
               </div>
             </div>

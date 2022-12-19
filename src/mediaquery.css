@@ -12,6 +12,10 @@
     color: black;
 }
 
+.danger {
+  background-color: #EB5757;
+}
+
 .voliet{
     background: #b5255e;
 }

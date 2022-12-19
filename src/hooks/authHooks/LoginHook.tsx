@@ -2,11 +2,12 @@ import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { updateLoaderState } from '../../redux/reducer/loader/LoaderAction'
 import { LoginServices, forgetpasswordServices } from '../../services/auth/Auth'
+import { updateUserData } from '../../redux/reducer/UserDetails/userAction'
 
 // async fn. to store user Token
-const storeToken = async (token) => {
+const storeToken = async (token: string) => {
   try {
-    await localStorage.setItem('CUSTOMER_Token', token)
+    localStorage.setItem('@user_Token', token);
   } catch (e) {
     // saving error
   }
@@ -29,7 +30,15 @@ export const useLoginHook = () => {
         if (res.status == 200) {
           if (res.data.emailVerified == true) {
             const token = res.data.token
-            storeToken(token)
+            storeToken(token);
+            const {
+              firstName,
+              lastName,
+            } = res.data;
+            const user = {firstName,lastName, isLogin: true};
+            dispatch(updateUserData(user));
+            console.log('data inside user', user);
+            
             navigate('/')
             // stop Loader
             dispatch(updateLoaderState(false))

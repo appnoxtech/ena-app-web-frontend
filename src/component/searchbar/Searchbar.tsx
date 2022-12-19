@@ -1,7 +1,10 @@
 import React, { useState, FC, useEffect } from 'react'
 import './Searchbar.css'
+import {useSelector} from 'react-redux';
 
-const Searchbar:FC<any>=({searchText,setSearchText })=> {  
+
+const Searchbar:FC<any>=({searchText,setSearchText })=> {
+  const isLogin = useSelector((state: any) => state.user.isLogin);
   return (
     <>
     <div className='search_background d-flex justify-content-center align-item-center border bg-dark col-12 d-none d-md-block'>
