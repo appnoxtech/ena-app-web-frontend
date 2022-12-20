@@ -19,7 +19,7 @@ function Passchanged() {
   }
 
   const navigationHandler = () => {
-    handelLogin(input);
+    handelLogin(input, '/');
   }
   useEffect(() => {
      setTimeout(() => {

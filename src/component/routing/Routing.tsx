@@ -25,6 +25,7 @@ import AdminProductList from '../../Screens/admin/productl-list/productList'
 import AddProduct from '../../Screens/addProduct/AddProduct'
 import ResetPass from '../../Screens/auth/resetPass/ResetPass'
 import OtpVarForForget from '../../Screens/auth/otpVarforForget/OtpVarforForget'
+import OrderSuccess from '../../Screens/checkout/OrderSuccess/OrderSuccess'
 
 function Routing() {
   return (
@@ -47,6 +48,8 @@ function Routing() {
           <Route path='/addAddress' element={<AddAddress />} />
           <Route path='/changeAddress' element={<ChangeAddress />} />
           <Route path='/checkout' element={<Checkout />} />
+          <Route path='/orderSuccess' element={<OrderSuccess />} />
+          error.message
           <Route path='/checkoutWaddress' element={<CheckoutWaddress />} />
 
           <Route path='/order' element={<Order />} />

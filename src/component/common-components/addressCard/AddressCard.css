@@ -12,6 +12,7 @@
 }
 
 .change_addressbtn{
+    cursor: pointer;
     color: #4A51BC;
 }
 

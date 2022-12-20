@@ -5,31 +5,48 @@ import './OrderCard.css'
 import { useNavigate } from 'react-router-dom'
 import ButtonComp from '../buttonComp/ButtonComp'
 import { GetCartDetailsService } from '../../../services/cart/cartService'
+import { useGetCartList } from '../../../hooks/carts/getCartList'
+import { AddToCartService } from '../../../services/cart/cartService'
+import { CreateOrderService } from '../../../services/order/OrderService'
 
-function OrderCard() {
+function OrderCard({setIsLoading}) {
   const navigate = useNavigate()
-  const [cartData, setCartData] = useState([]);
-  const navigationHandler = () => {
-    navigate('/checkout')
-  }
-
-
-
-  const getCart = async () => {
-    const res = await GetCartDetailsService();
-    const data = res.data[0].productList;
-    if (data) {
-      setCartData(data);
+  const cartData = useGetCartList();
+  const navigationHandler = async() => {
+    try {
+      setIsLoading(true);
+      cartData.forEach(async(item: any) => {
+        const data = {
+          productId: item.productId,
+          quantity: item.quantity,
+          price: item.price,
+        }
+        await AddToCartService(data);
+      });
+      const res = await GetCartDetailsService();
+      const cartId = res.data[0].cartId;
+      const addressId = localStorage.getItem('addressId');
+      await createOrder({cartId, addressId});
+      setIsLoading(false);
+    } catch (error) {
+       alert(error.message)
+       setIsLoading(false);
     }
   }
 
-  useEffect(() => {
-    getCart();
-  }, []);
+  const createOrder = async (data:any) => {
+     try {
+      const res = await CreateOrderService(data);
+      navigate('/orderSuccess');
+     } catch (error) {
+      alert(error.message)
+     }
+  }
+
 
   const calculateSubTotoal = () => {
     const total = cartData.reduce((total, item ) => {
-      return total + item.price
+      return total + (item.price * item.quantity);
     }, 0);
     return total;
   }
@@ -42,16 +59,16 @@ function OrderCard() {
           {
             cartData.map(item => {
               return (
-                <>
+                <div className='mb-2 d-flex justify-content-between'>
                   <div className='col-6'>
                     <img src={item.image} className='img-fluid' />
                   </div>
-                  <div className='col-6'>
+                  <div className='col-6 ps-2'>
                     <div className='col-12 fontWeight-600'>{item.engVegName}</div>
                     <div className='col-12'>Quantity: {item.quantity} KG</div>
                     <div className='col-12'>kn {item.price}</div>
                   </div>
-                </>
+                </div>
               )
             })
           }

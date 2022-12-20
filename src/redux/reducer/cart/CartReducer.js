@@ -6,7 +6,7 @@ export const CartReducer = (state= initialState, action) => {
     switch (action.type) {
         case 'UPDATE_CART': {
             return {
-                ...action.data,
+                count: action.count,
             }
         }
         case 'INCREASE_CART_COUNT': {
@@ -27,10 +27,10 @@ export const CartReducer = (state= initialState, action) => {
     }
 };
 
-export const updateUserCart = (data) => {
+export const updateUserCart = (count) => {
     return {
         type: 'UPDATE_CART',
-        data,
+        count,
     }
 }
 

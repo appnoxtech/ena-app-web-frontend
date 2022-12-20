@@ -56,13 +56,17 @@ const Admin: FC<any> = () => {
       const data = res.data.result;
       setProductList(data);
     } catch (error) {
-      return;
+      console.log(error.msg);
+      return ;
     }
   }
 
   useEffect(() => {
     getProductList()
   },[]);
+
+  console.log('productList', productList);
+  
 
   return (
     <div className='col-12'>
@@ -86,9 +90,9 @@ const Admin: FC<any> = () => {
                   return d
                 }
               })
-              .map((cardData: any, index) => (
-                <div className='col-6 col-md-3 my-3 m-0 px-2 overflow-hidden' key={index}>
-                  <Card cardData={cardData} indexData={index} wishListHandler={wishListHandler} />
+              .map((cardData: any) => (
+                <div className='col-6 col-md-3 my-3 m-0 px-2 overflow-hidden' key={cardData.productId}>
+                  <Card cardData={cardData} wishListHandler={wishListHandler} />
                 </div>
               ))}
             <div className='col-12 d-flex justify-content-end mt-3'>

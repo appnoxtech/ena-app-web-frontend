@@ -1,42 +1,74 @@
 import React, { FC, useEffect, useState } from 'react'
-import './Card.css'
 import { NavLink } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import './Card.css';
 import { decreaseCartCount, increaseCartCount } from '../../../redux/reducer/cart/CartReducer';
-import { AddToCartService, UpdateCartService } from '../../../services/cart/cartService';
+import { useAddItemToCartHooks } from '../../../hooks/carts/addintoCart';
+import { useRemoveItemFromCart } from '../../../hooks/carts/removeFromCart';
+import { useGetCartList } from '../../../hooks/carts/getCartList';
+import { useUpdateCartItem } from '../../../hooks/carts/updateCartItem';
 
 const Card: FC<any> = ({ cardData, indexData, wishListHandler }) => {
   const [itemCount, setItemCount] = useState(0);
-  const navigate = useNavigate();
+  const handleAddItemToCart = useAddItemToCartHooks();
+  const updateCartItem = useUpdateCartItem();
+  const cartData = useGetCartList();
+  const handleRemoveItemFromCart = useRemoveItemFromCart();
   const dispatch = useDispatch()
-  const handleAddtoCart = async() => {
+  const handleAddtoCart = async () => {
     // navigate('/product/details',{state:cardData})
-    dispatch(increaseCartCount());
     const data = {
+      ...cardData,
       productId: cardData._id,
       quantity: 1,
       price: cardData.price,
     }
-    const res = await AddToCartService(data);
+    await handleAddItemToCart(data);
+    dispatch(increaseCartCount());
     setItemCount(1);
   }
 
-  const handleRemoveFromCart = async() => {
-    dispatch(decreaseCartCount());
+  const handleRemoveFromCart = async () => {
+    //dispatch(decreaseCartCount());
     const data = {
       productId: cardData._id,
       removeProduct: 1
     };
-    const res = await UpdateCartService(data);
+    await handleRemoveItemFromCart(data);
+    dispatch(decreaseCartCount());
     setItemCount(0);
   }
 
-  const handleItemCountChange = (value: any) => {
-      if(typeof value !== 'number') {
-        alert('Invalid Quantity')
+  const handleItemCountChange = async (value: any) => {
+    const count = parseInt(value, 10);
+    if (typeof count !== 'number' || isNaN(count)) {
+      alert('Invalid Quantity')
+    } else if (count < 0) {
+      alert('Only Positive Quantity');
+    } else {
+      const data = {
+        ...cardData,
+        productId: cardData._id,
+        quantity: count,
+        price: cardData.price,
       }
+      await updateCartItem(data);
+      setItemCount(count);
+    }
   }
+
+  console.log('cartData', cardData);
+  useEffect(() => {
+    if (cartData.length > 0) {
+      const item = cartData.find((item: any) => item.productId === cardData._id);
+      console.log('item found', item);
+
+      if (item) {
+        setItemCount(item.quantity);
+      }
+    }
+  }, [])
 
   return (
     <div className='overflow-hidden h-100' style={{ borderRadius: '10px', border: '0.5px solid #efefef' }}>
@@ -66,22 +98,22 @@ const Card: FC<any> = ({ cardData, indexData, wishListHandler }) => {
             kn 35.2/kg <s className='crossTextRelated kg_container'>kn 35.2/kg</s>
           </p>
           <div className='primary_quantity d-flex align-items-center justify-content-between'>
-            <div className='radius_container d-flex  align-items-center justify-content-between border'>
+            {itemCount ? <div className='radius_container d-flex  align-items-center justify-content-between border'>
               <p className=' col-6 font_container m-0 p-0 py-2 text-center'>kg</p>
               <input
                 type={"number"}
                 className=' col-6  border border-0 border-none m-0 p-0 text-center border border-none border-0 h-100'
                 value={itemCount}
-                onChange={(e) => handleItemCountChange}
+                onChange={(e) => handleItemCountChange(e.target.value)}
               />
-            </div>
+            </div> : null}
             {
               itemCount ? <div className=' btnRadius col-6 danger overflow-hidden mx-1 py-2'>
-                <button onClick={handleRemoveFromCart} className='danger border border-0 w-100 text-light'>
+                <button onClick={() => handleRemoveFromCart()} className='danger border border-0 w-100 text-light'>
                   Remove
                 </button>
               </div> : <div className=' btnRadius col-6 themecolor overflow-hidden mx-1 py-2'>
-                <button onClick={handleAddtoCart} className='themecolor border border-0 w-100 text-light'>
+                <button onClick={() => handleAddtoCart()} className='themecolor border border-0 w-100 text-light'>
                   Add to cart
                 </button>
               </div>

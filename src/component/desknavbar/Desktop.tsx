@@ -5,12 +5,23 @@ import Ena from '../../assets/images/enaLogoGreen.png'
 import { Button, OverlayTrigger, Popover, PopoverHeader } from 'react-bootstrap'
 import {useSelector} from 'react-redux';
 import { GetCartDetailsService } from '../../services/cart/cartService'
+import { useGetCartList } from '../../hooks/carts/getCartList'
+import { useIsLoginHook } from '../../hooks/user/IsLoginHooks'
+import { useDispatch } from 'react-redux';
+import { updateUserCart } from '../../redux/reducer/cart/CartReducer'
 
 const Desktop = () => {
   const navigate = useNavigate();
-  const isLogin = useSelector((state: any) => state.user.isLogin);
-  //const count = useSelector((state:any) => state.cart.count);
-  const [count, setCount] = useState(0);
+  const cartData = useGetCartList(); 
+  const dispatch = useDispatch();
+  const isLogin = useIsLoginHook();
+  const countGlobal = useSelector((state:any) => state.cart.count);
+  const [count, setCount] = useState(cartData.length);
+
+  useEffect(() => {
+    dispatch(updateUserCart(cartData.length));
+    setCount(countGlobal);
+  },[countGlobal]);
 
   const MenuItem = [
     {
@@ -38,18 +49,6 @@ const Desktop = () => {
     navigate('#')
   }
   console.log('isLogin', isLogin);
-
-  const getCart = async () => {
-    const res = await GetCartDetailsService();
-    const data = res.data[0].productList;
-    if (data) {
-      setCount(data.length);
-    }
-  }
-
-  useEffect(() => {
-    getCart();
-  }, []);
   
   return (
     <div className='col-12 p-4'>
@@ -91,7 +90,7 @@ const Desktop = () => {
               <i className='fa fa-user-o person-icon' aria-hidden='true'></i>
             </Button>
           </OverlayTrigger>
-          <i className='fa fa-heart-o heart_icon' aria-hidden='true'></i>
+          {/* <i className='fa fa-heart-o heart_icon' aria-hidden='true'></i> */}
           <NavLink to='/cart'>
             <div className="cart-container">
                <p className='cart-count'>{count}</p>
