@@ -2,8 +2,8 @@
 
 // console.log('hostname', hostname);
 
-const hostname = 'http://172.16.2.159:5000'
-//const hostname = 'https://backend.appnox.website'
+//const hostname = 'http://172.16.2.159:5000'
+const hostname = 'https://backend.appnox.website'
 
 
 export const API_URL = `${hostname}/api`
