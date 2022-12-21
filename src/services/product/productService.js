@@ -28,6 +28,7 @@ export const GetProductListService = async(id) => {
     if(id){
         return axios.get(url,  {
             headers: {
+                'Access-Control-Allow-Origin': '*',
                 'Content-Type': 'application/json',
                 'categoryId': id
             }
