@@ -13,6 +13,7 @@ export default function OrderSuccess() {
   const navigationHandler = () => {
     navigation('/order');
     localStorage.removeItem('cartData');
+    localStorage.removeItem('cartData');
     dispatch(resetCartCount());
   }
   

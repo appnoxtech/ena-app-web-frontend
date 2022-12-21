@@ -9,12 +9,12 @@ import { useGetCartList } from '../../../hooks/carts/getCartList'
 import { AddToCartService } from '../../../services/cart/cartService'
 import { CreateOrderService } from '../../../services/order/OrderService'
 
-function OrderCard({setIsLoading}) {
+function OrderCard({...prop}) {
   const navigate = useNavigate()
   const cartData = useGetCartList();
   const navigationHandler = async() => {
     try {
-      setIsLoading(true);
+      prop.setIsLoading(true);
       cartData.forEach(async(item: any) => {
         const data = {
           productId: item.productId,
@@ -27,10 +27,10 @@ function OrderCard({setIsLoading}) {
       const cartId = res.data[0].cartId;
       const addressId = localStorage.getItem('addressId');
       await createOrder({cartId, addressId});
-      setIsLoading(false);
+      prop.setIsLoading(false);
     } catch (error) {
        alert(error.message)
-       setIsLoading(false);
+       prop.setIsLoading(false);
     }
   }
 

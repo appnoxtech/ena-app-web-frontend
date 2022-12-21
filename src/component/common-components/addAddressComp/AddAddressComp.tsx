@@ -6,7 +6,7 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import ButtonComp from '../buttonComp/ButtonComp'
 import { AddAddressService } from '../../../services/address/AddressService'
 
-function AddAddress({setAddress}) {
+function AddAddress({...prop}) {
   const navigate = useNavigate()
   const [isInputDisable, setIsInputDisable] = useState(false);
   const [input,setinput]=useState({
@@ -131,7 +131,7 @@ function AddAddress({setAddress}) {
       localStorage.setItem('address', JSON.stringify({...data, _id: res.data.addressId}));
       console.log('local Address', data);
       
-      setAddress((oldData:any) => [...oldData, {...data}]);
+      prop.setAddress((oldData:any) => [...oldData, {...data}]);
       setIsInputDisable(true)
     } catch (error) {
        alert(error.message);

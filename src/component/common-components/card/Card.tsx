@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheckSquare, faTrash } from '@fortawesome/fontawesome-free-solid';
 import './Card.css';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
@@ -12,6 +11,8 @@ import { useAddItemToCartHooks } from '../../../hooks/carts/addintoCart';
 import { useRemoveItemFromCart } from '../../../hooks/carts/removeFromCart';
 import { useGetCartList } from '../../../hooks/carts/getCartList';
 import { useUpdateCartItem } from '../../../hooks/carts/updateCartItem';
+import { FaPlus } from 'react-icons/fa';
+import { FaMinus } from 'react-icons/fa';
 
 const CardComponent: FC<any> = ({ cardData, indexData, wishListHandler }) => {
   const [itemCount, setItemCount] = useState(10);
@@ -156,7 +157,8 @@ const CardComponent: FC<any> = ({ cardData, indexData, wishListHandler }) => {
       <div className="rounded-2 w-100 d-flex justify-content-between align-items-center">
         <div className="rounded-2 d-flex justify-content-center align-items-center me-3">
           <div className="width-20 add_quantity_container" onClick={increaseItemCount}>
-            <FontAwesomeIcon className='' color='white' icon="fa-plus" />
+            
+            <FaPlus color='white' />
           </div>
           <div className="border border-secondary border-start-0 border-end-0 quantitiy-container h-100 width-40">
           <input
@@ -172,7 +174,7 @@ const CardComponent: FC<any> = ({ cardData, indexData, wishListHandler }) => {
             </p>
           </div>
           <div className="width-20  minus_quantity_container" onClick={decreseItemCount}>
-            <FontAwesomeIcon className='' color='white' icon="fa-minus" />
+            <FaMinus color='white' />
           </div>
         </div>
         {
