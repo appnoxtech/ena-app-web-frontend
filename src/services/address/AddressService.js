@@ -6,6 +6,7 @@ export const AddAddressService = async(data) => {
     const token = localStorage.getItem('@user_Token');
     return axios.post(url, data, {
         headers: {
+            'Access-Control-Allow-Origin': '*',
             'Content-Type': 'application/json',
             "x-auth-token": token,
         }
@@ -17,6 +18,7 @@ export const getAddressList = async() => {
     const token = localStorage.getItem('@user_Token');
     return axios.get(url, {
         headers: {
+            'Access-Control-Allow-Origin': '*',
             'Content-Type': 'application/json',
             "x-auth-token": token,
         }

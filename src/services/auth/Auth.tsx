@@ -6,6 +6,7 @@ export const LoginServices = async (data) => {
   console.log(data, 'is colliect')
   return axios.post(url, data, {
     headers: {
+      'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json',
     },
   })
@@ -16,6 +17,7 @@ export const VerifyOtpServices = async (data) => {
   console.log(data, 'is colliect')
   return axios.post(url, data, {
     headers: {
+      'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json',
     },
   })
@@ -26,6 +28,7 @@ export const SignupServices = async (data) => {
   console.log(data, 'is colliect')
   return axios.post(url, data, {
     headers: {
+      'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json',
     },
   })
@@ -37,6 +40,7 @@ export const forgetpasswordServices = async (data) => {
   console.log(data, 'is colliect')
   return axios.post(url, data, {
     headers: {
+      'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json',
     },
   })
@@ -48,6 +52,7 @@ export const changepasswordServices = async (data) => {
   console.log(data, url, 'is colliect')
   return axios.post(url, data, {
     headers: {
+      'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json',
     },
   })
@@ -59,6 +64,7 @@ export const generateOtpServices = async (data) => {
   console.log(data, url, 'is colliect')
   return axios.post(url, data, {
     headers: {
+      'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json',
     },
   })
