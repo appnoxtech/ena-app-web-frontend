@@ -1,28 +1,20 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import React, { Component, useState }  from 'react';
+import LoginInput from '../loginInput';
 import { NavLink, useNavigate } from 'react-router-dom'
-import { IoIosArrowBack } from 'react-icons/all'
-import '../Auth.css'
-import '../../../assets/global/global.css'
-import banner from '../../../assets/images/bannerH.png'
-import EnaLogo from '../../../assets/images/enaLogoGreen.png'
-import LoginInput from '../../../component/common-components/loginInput'
-import ButtonComp from '../../../component/common-components/buttonComp/ButtonComp'
+import { useLoginHook } from '../../../hooks/authHooks/LoginHook';
+import ButtonComp from '../buttonComp/ButtonComp';
 
-import { useLoginHook } from '../../../hooks/authHooks/LoginHook'
-
-function Login() {
-  const heading = 'Sign in'
-  const navigate = useNavigate()
-  const handleLogin = useLoginHook()
-
-  const localErrorState = { emailError: '', passwordError: '' }
-  const [input, setinput] = useState({
-    email: '',
-    password: '',
-  })
-
-  // --------- validation goes here -----
+export default function LoginModal(props) {
+    const localErrorState = { emailError: '', passwordError: '' }
+    const handleLogin = useLoginHook()
+    const [input, setinput] = useState({
+      email: '',
+      password: '',
+    })
+    const heading = 'Sign in';
+      // --------- validation goes here -----
 
   const [localError, setlocalError] = useState(localErrorState)
 
@@ -52,33 +44,25 @@ function Login() {
 
   const navigationHandler = () => {
     if (checkValidation()) {
-      handleLogin(input, '/')
+      handleLogin(input, '/checkoutWaddress')
     }
   }
 
   // -------- navigate handler ------
-
   return (
-    <>
-      <div className='container-fluid'>
-        <div className='container'>
-          <div className='row'>
-            <div className='col-4 text-center d-none d-lg-block'>
-              <img src={banner} className='img-fluid w-75 p-3 pt-0' />
-            </div>
-            <div className='col-4 text-center d-none d-md-block d-lg-none'>
-              <img src={banner} className='img-fluid w-100 p-3 pt-0' />
-            </div>
-            <div className='col-12 text-center d-lg-none d-sm-block d-md-none'>
-              <img src={EnaLogo} className='img-fluid w-50 p-3 mt-5 pt-5' />
-            </div>
-            <div className='col-lg-8 col-md-8 col-sm-12'>
-              <IoIosArrowBack
-                className='border mt-3 rounded-3 backicon d-none d-md-block d-lg-block'
-                size={30}
-                onClick={() => navigate(-1)}
-              />
-              <div className='col-10 mx-auto pt-0 mt-3'>
+    <Modal
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          Login
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body className='mb-3'>
+      <div className='col-10 mx-auto pt-0 mt-3'>
                 <p className='mt-1 h3 fontWeight-700'>{heading}</p>
                 <p className='h6'>
                   Don't have a account ?
@@ -127,12 +111,7 @@ function Login() {
                   btvalue='Login'
                 />
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  )
+      </Modal.Body>
+    </Modal>
+  );
 }
-
-export default Login

@@ -23,11 +23,23 @@ export const UpdateProductService = async(data) => {
     });
 }
 
-export const GetProductListService = async() => {
+export const GetProductListService = async(id) => {
     const url = `${API_URL}/product/get-all-product`;
-    return axios.get(url, {
-        headers: {
-            'Content-Type': 'application/json',
-        }
-    })
+    if(id){
+        return axios.get(url,  {
+            headers: {
+                'Content-Type': 'application/json',
+                'categoryId': id
+            }
+        });
+    }else{
+        return axios.get(url);
+    }
+    
+}
+
+export const getAllCategory = async () => {
+    const url = `${API_URL}/product/get-all-category`;
+    return axios.get(url);
+    
 }

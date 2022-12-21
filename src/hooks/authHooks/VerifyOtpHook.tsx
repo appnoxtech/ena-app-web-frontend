@@ -32,7 +32,7 @@ export const useVerifyOtpHook = () => {
       .then((res) => {
         if (res.data.status == true) {
           alert('Your account is verifed successfully.')
-          handleLogin(data2)
+          handleLogin(data2, '/')
         } else {
           alert('server error')
         }

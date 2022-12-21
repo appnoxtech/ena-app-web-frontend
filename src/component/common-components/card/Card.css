@@ -86,3 +86,133 @@ a:hover{
 .card {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
+
+.card-image{
+  height: 60%;
+  object-fit: cover;
+}
+
+.card-image-hover{
+  transform: scale(1.1);
+  transition-duration: 0.5s;
+  height: 60%;
+  object-fit: cover;
+}
+
+.product-card{
+  width: 18rem;
+  height:100%;
+  background-color: white;
+  overflow: hidden;
+}
+
+@media only screen and (max-width: 576px) {
+  .product-card{
+    width: 13rem;
+    height:100%;
+    background-color: white;
+  }
+}
+
+.unit-container{
+  width: 2rem;
+  height:100%;
+  text-align: center;
+  background-color: white;
+}
+
+.width-20{
+  width: 20%;
+}
+
+.width-40{
+  width: 40%;
+}
+
+.full-height{
+  height: 100%;
+  background-color: #0d6efd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.full-height:hover{
+  background-color: #2b7ffd;
+}
+
+.unit-inp{
+  padding-top: 11px;
+}
+
+.cart-btn{
+  width: 30%;
+  padding: 12px;
+  background-color: #51BC4A;
+  border-color: #51BC4A;
+}
+
+.cart-btn:hover{
+  background-color: #2eab25;
+  border-color: #2eab25;
+}
+
+.cart-btn-remove {
+  width: 30%;
+  padding: 12px;
+  background-color: #EB5757;
+  border-color: #EB5757;
+}
+
+.cart-btn-remove:hover{
+  background-color: #d73a3a;
+  border-color: #d73a3a;
+}
+
+.trash-icon{
+  font-size: 24px;
+}
+
+
+
+.id-container{
+  padding-top: 18.5px;
+  padding-bottom: 18.5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.add_quantity_container{
+  background-color: rgba(46, 204, 113, .7);
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  padding-top: 18.5px;
+  padding-bottom: 18.5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.minus_quantity_container{
+  background-color: rgba(11, 127, 171, .7);
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  padding-top: 18.5px;
+  padding-bottom: 18.5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.minus_quantity_container:hover{
+  background-color: rgba(11, 127, 171, 1);
+}
+
+.add_quantity_container:hover{
+  background-color: rgba(46, 204, 113, 1);
+}

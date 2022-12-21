@@ -1,5 +1,6 @@
 import React, { FC, useState, useEffect } from 'react'
 import './Category.css'
+import { getAllCategory } from '../../services/product/productService'
 
 const category: FC<any> = ({ filterDatabyCategory }) => {
   //#region  all state define here
@@ -17,9 +18,19 @@ const category: FC<any> = ({ filterDatabyCategory }) => {
     if (window.innerWidth < 768) {
       setIsMobile(true)
     } else setIsMobile(false)
-  }, [isMobile])
+  }, [isMobile]);
+
+  const getProductCategory = async () => {
+    try {
+      const res = await getAllCategory();
+
+    } catch (error) {
+      
+    }
+  }
+
   return (
-    <div className='outer_navli col-12 '>
+    <div className='outer_navli col-12'>
       <div className={'col-6 col-md-8 col-sm-12 ms-auto mx-md-auto py-2 bgWhite'}>
         <p
           onClick={() => {dropDowntoggleHandler()}}
@@ -41,7 +52,7 @@ const category: FC<any> = ({ filterDatabyCategory }) => {
               onClick={() => {filterDatabyCategory('All');dropDowntoggleHandler()}}
               className={'navlist py-2 py-md-3 border border-0 border-none bgWhite'}
             >
-              <li className='navlist  '>All</li>
+              <li className='navlist'>All</li>
             </button>
             <button
               onClick={() => {filterDatabyCategory('Vegetable');dropDowntoggleHandler()}}

@@ -4,14 +4,17 @@ import './AddAddressComp.css'
 import '../../../assets/global/global.css'
 import { NavLink, useNavigate } from 'react-router-dom'
 import ButtonComp from '../buttonComp/ButtonComp'
+import { AddAddressService } from '../../../services/address/AddressService'
 
-function AddAddress() {
+function AddAddress({setAddress}) {
   const navigate = useNavigate()
+  const [isInputDisable, setIsInputDisable] = useState(false);
   const [input,setinput]=useState({
     username : '',
     phone: '',
     state:'',
     city:'',
+    country: '',
     pincode:'',
     addressLine1:'',
     addressLine2:'',
@@ -41,6 +44,7 @@ function AddAddress() {
   const shippingAddressSelect = [
     {
       lable: 'Country',
+      name: 'country',
       country: [
         {
           name: 'USA',
@@ -108,12 +112,42 @@ function AddAddress() {
   ]
 
   //#region all function here
-  const navigationHandler = () => {
-    navigate('/addAddress')
+  const navigationHandler = async() => {
+    const data = {
+      name: input.username,
+      phoneNumber: input.phone,
+      addressInfo: {
+        pincode: input.pincode,
+        country: input.country,
+        state: input.state,
+        city: input.city,
+        street: input.addressLine1,
+        buildingName: input.addressLine2,
+      }
+    }
+    try {
+      const res = await AddAddressService(data);
+      console.log('Address Response', res.data.addressId);
+      localStorage.setItem('address', JSON.stringify({...data, _id: res.data.addressId}));
+      console.log('local Address', data);
+      
+      setAddress((oldData:any) => [...oldData, {...data}]);
+      setIsInputDisable(true)
+    } catch (error) {
+       alert(error.message);
+    }
   }
 
   const navigationBack = () => {
     navigate(-1)
+  }
+
+  const onChangeHandler = (e:any) => {
+     const {name, value} = e.target;
+     console.log('name', name);
+     console.log('value', value);
+     
+     setinput({...input, [name]: value});
   }
 
   return (
@@ -131,6 +165,7 @@ function AddAddress() {
                 type={item.type}
                 name={item.name}
                 id={item.id}
+                isInputDisable={setIsInputDisable}
                 placeholder={item.placeholder}
                 class='form-control  mt-3'
                 Input={input}
@@ -146,7 +181,12 @@ function AddAddress() {
             <label className='form-label mt-3 h6 d-none d-lg-block d-md-block'>
               {shippingAddressSelect[0].lable}
             </label>
-            <select className='form-select form-control mt-3' aria-label='Default select example'>
+            <select 
+              className='form-select form-control mt-3' 
+              aria-label='Default select example'
+              name='country'
+              onChange={(e) => onChangeHandler(e)}
+            >
               <option selected disabled>
                 Select Country
               </option>

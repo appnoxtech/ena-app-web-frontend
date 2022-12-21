@@ -16,7 +16,7 @@ const storeToken = async (token: string) => {
 export const useLoginHook = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const handelLogin = (userData: any) => {
+  const handelLogin = (userData: any, source:any) => {
     const password = userData.password
     const userName = userData.email
     const data = { userName, password }
@@ -37,7 +37,8 @@ export const useLoginHook = () => {
             } = res.data;
             const user = {firstName,lastName, isLogin: true};
             dispatch(updateUserData(user));
-            navigate('/')
+            localStorage.setItem('user', JSON.stringify(user));
+            navigate(source)
             // stop Loader
             dispatch(updateLoaderState(false))
           } else if (res.data.emailVerified == false) {
@@ -51,6 +52,10 @@ export const useLoginHook = () => {
       })
       .catch((err) => {
         //change when api upgrade
+        console.log('error', err.message);
+        if(err.message){
+          alert(err.message)
+        }
         if (err.response.data.msg == 'Invalid Credential') {
           alert('Invalid Password')
         }

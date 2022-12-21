@@ -1,24 +1,58 @@
-import React, { useState } from 'react'
-import { Button } from 'react-bootstrap/lib/InputGroup'
+import React, { useEffect, useState } from 'react'
 import Table from 'react-bootstrap/Table'
-import Tomato from '../../assets/images/6-tomato-png-image.png'
 import CustomButton from '../Button/Button';
 import WarningModal from '../WarningModal/WarningModal';
 import './Order.css'
 import { GetCartDetailsService } from '../../services/cart/cartService';
+import { GetOrderLiveStatus } from '../../services/order/OrderService';
+import { FaBoxOpen } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+import { getJSDocDeprecatedTag } from 'typescript';
+import OrderCancelModal from '../common-components/modals/OrderCancelModal';
+
 const Order = () => {
-  const [showModal, setShowModal] = useState(false);
-  const displayModal = () => {
+  const [modalShow, setModalShow] = useState(false);
+  const [orderList, setOrderList] = useState([]);
+  const navigate = useNavigate();
+
+  const displayModal = (e:any) => {
     console.log('display fn.called');
-    
-    setShowModal(true);
+    setModalShow(true);
+    e.stopPropagation();
   }
   const hideModal = () => {
-    setShowModal(false);
+    setModalShow(false);
   }
   const handleOrderTracking = () => {
     console.log('function will handle order tracking ..');
   }
+
+  const getOrderList = async() => {
+    try {
+      const res = await GetOrderLiveStatus();
+      const list = res.data.result;
+      if(list.length > 0) {
+        setOrderList(list);
+      }
+    } catch (error) {
+       alert(error.message);
+    }
+  };
+
+  useEffect(() => {
+    getOrderList();
+  }, []);
+
+  const handleOrderRowClick = (productList:any) => {
+    localStorage.setItem('orderDetail', JSON.stringify(productList));
+    navigate('/orderDetails');
+  }
+
+  const getDate = (data:any) => {
+    var date = new Date(data);
+    return date.toLocaleDateString();
+  }
+
   return (
     <div className='container-fluid pb-5'>
       <div className='side-Part rounded-4 bg-white'></div>
@@ -26,82 +60,82 @@ const Order = () => {
         <Table responsive className='orders_Heading rounded'>
           <thead>
             <tr>
-              <th></th>
-              <th>Product</th>
-              <th>Price</th>
-              <th>Size</th>
+              <th>Orders</th>
+              <th>Placed At</th>
+              {/* <th>Price</th> */}
+              <th>Quantity</th>
               <th>Subtotal</th>
               <th>Status</th>
               <th>Action</th>
             </tr>
           </thead>
-          <tbody className='shopingCartTableBody'>
-            {Array.from({ length: 2 }).map((data, index) => (
-              <tr key={index}>
-                <td>
+          <tbody className='shopingCartTableBody text-center'>
+            {orderList.map((data, index) => (
+              <tr key={index} className='orderRow' onClick={() => handleOrderRowClick(data.productList)}>
+              <td>
+                <div className=''>
+                <FaBoxOpen size={60} />
+                </div>
+              </td>
+              <td>
+                <h5>{getDate(data.createdAt)}</h5>
+              </td>
+              <td>
+                <h6>{data.productList.length}</h6>
+              </td>
+              <td>
+                <div className=''>
+                  <h5>{data.netAmount}</h5>
+                </div>
+              </td>
+              <td>
+                {/* {index  == 0 ? (
                   <div className=''>
-                    <img src={Tomato} alt='img' className='img-fluid order_image' />
+                    <h5>Approved</h5>
                   </div>
-                </td>
-                <td>
-                  <h5>Carrot</h5>
-                  <p className='order_Id'>Order id:1234</p>
-                </td>
-                <td>
-                  <h6>kn 35.2/kg</h6>
-                </td>
-                <td>
+                ) : (
                   <div className=''>
-                    <h5>10 kg</h5>
+                    <h5>Pending</h5>
                   </div>
-                </td>
-                <td>
-                  <h5>kn 35560</h5>
-                </td>
-                <td>
-                  {index  == 0 ? (
-                    <div className=''>
-                      <h5>Approved</h5>
-                    </div>
-                  ) : (
-                    <div className=''>
-                      <h5>Pending</h5>
-                    </div>
-                  )}
-                </td>
-                <td>
-                  <div className=''>
-                    {
-                      index == 0 ? (
-                        <div className='d- flex align-items-center justify-content-between'>
-                        <CustomButton
-                          props={{ styleName: 'dark px-5  p-0', indexData: 'Track', btnType: 'btn-outline', clickHandler: handleOrderTracking}}
-                        />
+                )} */}
+                <div className=''>
+                    <h5>{data.status === 'CREATED' ? 'Pending' : data.status}</h5>
+                  </div>
+              </td>
+              <td>
+                <div className=''>
+                  {/* {
+                    index == 0 ? (
+                      <div className='d- flex align-items-center justify-content-between'>
+                      <CustomButton
+                        props={{ styleName: 'dark px-5  p-0', indexData: 'Track', btnType: 'btn-outline', clickHandler: handleOrderTracking}}
+                      />
 
-                        <CustomButton
-                          props={{ styleName: 'danger px-3 p-0 mt-2', indexData: 'Cancel Order', btnType: 'btn-outline', clickHandler:  displayModal}}
-                        />
-                      </div>
-                      ) : (
-                        <CustomButton
-                          props={{ styleName: 'danger px-3 p-0 mt-2', indexData: 'Cancel Order', btnType: 'btn-outline', clickHandler: displayModal}}
-                        />
-                      )
-                    }
-                    
-                  </div>
-                </td>
+                      <CustomButton
+                        props={{ styleName: 'danger px-3 p-0 mt-2', indexData: 'Cancel Order', btnType: 'btn-outline', clickHandler:  displayModal}}
+                      />
+                    </div>
+                    ) : (
+                      <CustomButton
+                        props={{ styleName: 'danger px-3 p-0 mt-2', indexData: 'Cancel Order', btnType: 'btn-outline', clickHandler: displayModal}}
+                      />
+                    )
+                  } */}
+                   <CustomButton
+                        props={{ styleName: 'danger px-3 p-0 mt-2', indexData: 'Cancel Order', btnType: 'btn-outline', clickHandler: displayModal}}
+                    />
+                  
+                </div>
+              </td>
               </tr>
             ))}
           </tbody>
         </Table>
       </div>
-      <WarningModal
-          message="Are you sure you want to cancel the order ?"
-          show={showModal}
-          closeModal={hideModal}
-          showReason={true}
-         />
+      <OrderCancelModal
+         show={modalShow}
+         onHide={() => setModalShow(false)}
+       />
     </div>
   )
 }
