@@ -1,23 +1,27 @@
 import React, { useEffect, useState } from 'react'
-import { Button } from 'react-bootstrap/lib/InputGroup'
 import Table from 'react-bootstrap/Table'
-import Tomato from '../../assets/images/6-tomato-png-image.png'
 import CustomButton from '../Button/Button';
 import WarningModal from '../WarningModal/WarningModal';
 import './Order.css'
 import { GetCartDetailsService } from '../../services/cart/cartService';
 import { GetOrderLiveStatus } from '../../services/order/OrderService';
+import { FaBoxOpen } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+import { getJSDocDeprecatedTag } from 'typescript';
+import OrderCancelModal from '../common-components/modals/OrderCancelModal';
 
 const Order = () => {
-  const [showModal, setShowModal] = useState(false);
+  const [modalShow, setModalShow] = useState(false);
   const [orderList, setOrderList] = useState([]);
-  const displayModal = () => {
+  const navigate = useNavigate();
+
+  const displayModal = (e:any) => {
     console.log('display fn.called');
-    
-    setShowModal(true);
+    setModalShow(true);
+    e.stopPropagation();
   }
   const hideModal = () => {
-    setShowModal(false);
+    setModalShow(false);
   }
   const handleOrderTracking = () => {
     console.log('function will handle order tracking ..');
@@ -27,11 +31,8 @@ const Order = () => {
     try {
       const res = await GetOrderLiveStatus();
       const list = res.data.result;
-
       if(list.length > 0) {
-        list.map((item:any) => {
-          setOrderList([...orderList, ...item.productList]);
-        })
+        setOrderList(list);
       }
     } catch (error) {
        alert(error.message);
@@ -42,6 +43,16 @@ const Order = () => {
     getOrderList();
   }, []);
 
+  const handleOrderRowClick = (productList:any) => {
+    localStorage.setItem('orderDetail', JSON.stringify(productList));
+    navigate('/orderDetails');
+  }
+
+  const getDate = (data:any) => {
+    var date = new Date(data);
+    return date.toLocaleDateString();
+  }
+
   return (
     <div className='container-fluid pb-5'>
       <div className='side-Part rounded-4 bg-white'></div>
@@ -49,37 +60,33 @@ const Order = () => {
         <Table responsive className='orders_Heading rounded'>
           <thead>
             <tr>
-              <th></th>
-              <th>Product</th>
-              <th>Price</th>
-              <th>Size</th>
+              <th>Orders</th>
+              <th>Placed At</th>
+              {/* <th>Price</th> */}
+              <th>Quantity</th>
               <th>Subtotal</th>
               <th>Status</th>
               <th>Action</th>
             </tr>
           </thead>
-          <tbody className='shopingCartTableBody'>
+          <tbody className='shopingCartTableBody text-center'>
             {orderList.map((data, index) => (
-              <tr key={index}>
+              <tr key={index} className='orderRow' onClick={() => handleOrderRowClick(data.productList)}>
               <td>
                 <div className=''>
-                  <img src={data.image} alt='img' className='img-fluid order_image' />
+                <FaBoxOpen size={60} />
                 </div>
               </td>
               <td>
-                <h5>Carrot</h5>
-                <p className='order_Id'>Order id:1234</p>
+                <h5>{getDate(data.createdAt)}</h5>
               </td>
               <td>
-                <h6>kn {data.price}/kg</h6>
+                <h6>{data.productList.length}</h6>
               </td>
               <td>
                 <div className=''>
-                  <h5>{data.quantity} kg</h5>
+                  <h5>{data.netAmount}</h5>
                 </div>
-              </td>
-              <td>
-                <h5>kn {(data.quantity*data.price).toFixed(2)}</h5>
               </td>
               <td>
                 {/* {index  == 0 ? (
@@ -92,7 +99,7 @@ const Order = () => {
                   </div>
                 )} */}
                 <div className=''>
-                    <h5>Pending</h5>
+                    <h5>{data.status === 'CREATED' ? 'Pending' : data.status}</h5>
                   </div>
               </td>
               <td>
@@ -120,17 +127,15 @@ const Order = () => {
                   
                 </div>
               </td>
-            </tr>
+              </tr>
             ))}
           </tbody>
         </Table>
       </div>
-      <WarningModal
-          message="Are you sure you want to cancel the order ?"
-          show={showModal}
-          closeModal={hideModal}
-          showReason={true}
-         />
+      <OrderCancelModal
+         show={modalShow}
+         onHide={() => setModalShow(false)}
+       />
     </div>
   )
 }

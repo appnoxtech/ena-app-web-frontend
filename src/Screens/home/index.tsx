@@ -1,7 +1,7 @@
 import React, { useState, FC, useEffect } from 'react'
 import Category from '../../component/categorybar/Category'
 import Filterbar from '../../component/filterbar/Filterbar'
-import Card from '../../component/common-components/card/Card'
+import CardComponent from '../../component/common-components/card/Card'
 import Pagination from '../../component/common-components/pagination/Pagination'
 import { EnaAppData } from '../../component/dummyData'
 import Searchbar from '../../component/searchbar/Searchbar'
@@ -29,6 +29,7 @@ const Admin: FC<any> = () => {
   const [cardIndex, setCardIndex] = useState<any>()
   const [searchText, setSearchText] = useState('')
   const [seletedCategory,setSletedCategorey]=useState('All')
+  const [currCat, setCurrCat] = useState('63a01973291ae32acdb68d06');
 
   const wishListHandler = (index) => {
     console.log(index)
@@ -52,7 +53,13 @@ const Admin: FC<any> = () => {
 
   const getProductList = async() => {
     try {
-      const res = await GetProductListService();
+      let res:any;
+      if(currCat){
+        res = await GetProductListService(currCat);
+      }else {
+        res = await GetProductListService('');
+      }
+      
       const data = res.data.result;
       setProductList(data);
     } catch (error) {
@@ -73,10 +80,10 @@ const Admin: FC<any> = () => {
       <Searchbar searchText={searchText} setSearchText={setSearchText} />
       <div className='side-Part rounded-4 bg-white'></div>
       <div className='d-flex flex-column flex-md-row'>
-        <div className='mt-5 col-12 col-md-2 '>
+        <div className='mt-5 pt-3 col-12 col-md-2 '>
           <Category filterDatabyCategory={filterDatabyCategory} seletedCategory={seletedCategory}/>
         </div>
-        <div className=' col-12 mx-auto mx-md-0 col-md-10 '>
+        <div className='col-12 mx-auto mx-md-0 col-md-10 '>
           <div className='row d-flex    mt-5 mx-auto m-0 p-0'>
             {/* <Filterbar /> */}
             {/* search product by name */}
@@ -92,7 +99,7 @@ const Admin: FC<any> = () => {
               })
               .map((cardData: any) => (
                 <div className='col-6 col-md-3 my-3 m-0 px-2 overflow-hidden' key={cardData.productId}>
-                  <Card cardData={cardData} wishListHandler={wishListHandler} />
+                  <CardComponent cardData={cardData} wishListHandler={wishListHandler} />
                 </div>
               ))}
             <div className='col-12 d-flex justify-content-end mt-3'>

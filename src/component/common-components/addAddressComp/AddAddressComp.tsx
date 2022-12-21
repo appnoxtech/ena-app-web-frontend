@@ -126,14 +126,15 @@ function AddAddress({setAddress}) {
       }
     }
     try {
-      //const res = await AddAddressService(data);
-
-      localStorage.setItem('address', JSON.stringify(data));
-      console.log('input', data);
-      setAddress(data);
+      const res = await AddAddressService(data);
+      console.log('Address Response', res.data.addressId);
+      localStorage.setItem('address', JSON.stringify({...data, _id: res.data.addressId}));
+      console.log('local Address', data);
+      
+      setAddress((oldData:any) => [...oldData, {...data}]);
       setIsInputDisable(true)
     } catch (error) {
-      
+       alert(error.message);
     }
   }
 

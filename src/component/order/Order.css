@@ -13,7 +13,7 @@
 }
 
 .order_image{
-    height:70x;
+    height:70px;
     width:70px;
 }
 
@@ -25,4 +25,35 @@
 .shopingCartTableBody td {
     text-align: center;
     vertical-align: middle;
+}
+
+.orderRow{
+    cursor: pointer;
+    -webkit-transition: background-color 1s ease-out;
+    -moz-transition: background-color 1s ease-out;
+    -o-transition: background-color 1s ease-out;
+    transition: background-color 1s ease-out;
+}
+
+.orderRow:hover{
+    background-color: #baf8be;
+}
+
+.bg-secondary{
+    background-color: #F8F9F7;
+}
+
+.dot{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #B54ABC;
+}
+
+.progressContainer{
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -o-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        transform: rotate(90deg);
 }

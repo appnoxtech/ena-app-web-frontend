@@ -4,12 +4,16 @@ import SuccessAnimation from '../../../assets/animations/Success.json';
 import ButtonComp from '../../../component/common-components/buttonComp/ButtonComp';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { resetCartCount } from '../../../redux/reducer/cart/CartReducer';
 
 export default function OrderSuccess() {
   const navigation = useNavigate();
+  const dispatch = useDispatch();
   const navigationHandler = () => {
     navigation('/order');
     localStorage.removeItem('cartData');
+    dispatch(resetCartCount());
   }
   
   useEffect(() => {

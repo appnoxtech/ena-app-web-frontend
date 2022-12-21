@@ -45,8 +45,8 @@ const Desktop = () => {
   // function for logout
 
   const Logout = () => {
-    localStorage.removeItem('CUSTOMER_Token')
-    navigate('#')
+    localStorage.removeItem('@user_Token');
+    localStorage.removeItem('user');
   }
   console.log('isLogin', isLogin);
   
