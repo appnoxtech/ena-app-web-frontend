@@ -58,9 +58,10 @@ function checkoutWaddress() {
         <div className='col-12 col-lg-8 mx-auto border back-g-lightwhite py-4 border_radius1 px-md-5'>
           {
             address.length > 0 ? 
-            address.map(item => {
-              return <AddressCard address={item} setAddress={setAddress} />
-            })
+            <AddressCard address={address[address.length - 1]} setAddress={setAddress} />
+            // address.map(item => {
+            //   return <AddressCard address={item} setAddress={setAddress} />
+            // })
             :
             <AddAddressComp setAddress={setAddress} />
           }

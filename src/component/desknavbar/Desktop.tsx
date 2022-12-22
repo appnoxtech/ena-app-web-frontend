@@ -47,6 +47,7 @@ const Desktop = () => {
   const Logout = () => {
     localStorage.removeItem('@user_Token');
     localStorage.removeItem('user');
+    localStorage.clear();
   }
   console.log('isLogin', isLogin);
   
@@ -76,7 +77,7 @@ const Desktop = () => {
               <Popover id='popover-positioned-bottom'>
                 <Popover.Body>
                   {isLogin ? (
-                    <NavLink to='#' onClick={() => Logout()}>
+                    <NavLink to='/' onClick={() => Logout()}>
                       Logout
                     </NavLink>
                   ) : (

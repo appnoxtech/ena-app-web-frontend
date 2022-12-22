@@ -19,12 +19,12 @@ function AddressCard(prop:any) {
         </div>
         <div className='col-12 d-flex justify-content-between'>
           <p>Phone : {prop.address.phoneNumber}</p>
-          <div className='form-check'>
-            <label className='form-check-label make_default' htmlFor='flexRadioDefault2'>
+          <div className='form-check '>
+            <label className='mt-2 form-check-label make_default' htmlFor='flexRadioDefault2'>
               Default
             </label>
             <input
-              className='form-check-input form_radio'
+              className='form-check-input form_radio p-3'
               type='radio'
               name='flexRadioDefault'
               id='flexRadioDefault2'

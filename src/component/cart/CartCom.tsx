@@ -15,12 +15,14 @@ import { useIsLoginHook } from '../../hooks/user/IsLoginHooks';
 import LoginModal from '../common-components/modals/loginModal';
 import { useDispatch } from 'react-redux';
 import { decreaseCartCount } from '../../redux/reducer/cart/CartReducer';
+import { useUpdateBidAmount } from '../../hooks/carts/updateBidAmount';
 
 const CartCom = () => {
   const Message = 'Taxes and postage are calculated at checkout';
   const [modalShow, setModalShow] = React.useState(false);
   const history = useNavigate();
   const isLogin = useIsLoginHook();
+  const updateBidAmount = useUpdateBidAmount();
   const dispatch = useDispatch()
   const updateCartItem = useUpdateCartItem();
   const cartData = useGetCartList();
@@ -32,32 +34,39 @@ const CartCom = () => {
     animationData: emptyCartData,
   };
 
-  const handleRemoveCart = async (item:any) => {
-     const data = {
-       productId: item.productId,
-       removeProduct: 1
-     }
-     const newList = await handleRemoveItemFromCart(data);
-     setCartList(newList);
-     dispatch(decreaseCartCount());
+  const handleRemoveCart = async (item: any) => {
+    const data = {
+      productId: item.productId,
+      removeProduct: 1
+    }
+    const newList = await handleRemoveItemFromCart(data);
+    setCartList(newList);
+    dispatch(decreaseCartCount());
   }
 
   const calculateSubTotal = () => {
-    const total = cartData.reduce((total, item ) => {
+    const total = cartData.reduce((total, item) => {
       return total + (item.price * item.quantity)
     }, 0);
     return total;
   }
 
+  const calculateBidSubTotal = () => {
+    const total = cartData.reduce((total, item) => {
+      return total + (item.bidAmount * item.quantity)
+    }, 0);
+    return total;
+  }
+
   console.log('cartData', cartData);
-  
-  const handleItemCountChange = async(value: any, cardData:any) => {
+
+  const handleItemCountChange = async (value: any, cardData: any) => {
     const count = parseInt(value, 10);
-    if(typeof count !== 'number' || isNaN(count)) {
+    if (typeof count !== 'number' || isNaN(count)) {
       alert('Invalid Quantity')
-    }else if(count < 0) {
+    } else if (count < 0) {
       alert('Only Positive Quantity');
-    }else {
+    } else {
       const data = {
         ...cardData,
         productId: cardData._id,
@@ -71,11 +80,29 @@ const CartCom = () => {
 
   const handleCheckOut = () => {
     console.log('isLogin', isLogin);
-    
-    if(isLogin) {
+
+    if (isLogin) {
       history('/checkoutWaddress');
-    }else{
+    } else {
       setModalShow(true);
+    }
+  }
+
+  const handleBidAmountChange = async (value: any, cardData: any) => {
+    const count = parseInt(value, 10);
+    if (typeof count !== 'number' || isNaN(count)) {
+      alert('Invalid Quantity')
+    } else if (count < 0) {
+      alert('Only Positive Quantity');
+    } else {
+      const data = {
+        ...cardData,
+        productId: cardData._id,
+        bidAmount: count,
+        price: cardData.price,
+      }
+      const newList = await updateBidAmount(data);
+      setCartList(newList);
     }
   }
   return (
@@ -95,14 +122,16 @@ const CartCom = () => {
                     <th></th>
                     <th>Product</th>
                     <th>Price</th>
+                    <th>Bid Price</th>
                     <th>Quantity</th>
+                    <th>Bid Subtotal</th>
                     <th>Subtotal</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody className='shopingCartTableBody'>
                   {
-                    cartList.map((item:any) => {
+                    cartList.map((item: any) => {
                       return (
                         <>
                           <tr key={item.productId}>
@@ -119,17 +148,26 @@ const CartCom = () => {
                             </td>
                             <td>
                               <div className='ProductSizeCart'>
-                                <input type='number' value={item.quantity} onChange={(e) => handleItemCountChange(e.target.value, item)} />
+                                <input className='border border-1' type='number' placeholder='BidAmount' value={item.bidAmount} onChange={(e) => handleBidAmountChange(e.target.value, item)} />
+                                <h5>(Kn)</h5>
+                              </div>
+                            </td>
+                            <td>
+                              <div className='ProductSizeCart'>
+                                <input type='number' className='border border-1' value={item.quantity} onChange={(e) => handleItemCountChange(e.target.value, item)} />
                                 <h5>(kg)</h5>
                               </div>
+                            </td>
+                            <td>
+                              <h5>kn {item.bidAmount * item.quantity}</h5>
                             </td>
                             <td>
                               <h5>kn {item.price * item.quantity}</h5>
                             </td>
                             <td>
-                            <button type="button" className="btn btn-outline-danger" onClick={() => handleRemoveCart(item)}>
-                               Remove
-                            </button>
+                              <button type="button" className="btn btn-outline-danger" onClick={() => handleRemoveCart(item)}>
+                                Remove
+                              </button>
                               {/* <div className='removeProductCart' >
                                 <h5></h5>
                               </div> */}
@@ -170,6 +208,9 @@ const CartCom = () => {
               <div className='subTotalCartVal'>
                 <h5>
                   Subtotal: <span>kn {calculateSubTotal()} HRK</span>
+                </h5>
+                <h5>
+                  BidSubtotal: <span>kn {calculateBidSubTotal()} HRK</span>
                 </h5>
                 <div className='infoText'>
                   <img src={infoIcon} alt='info' className='img-fluid' />

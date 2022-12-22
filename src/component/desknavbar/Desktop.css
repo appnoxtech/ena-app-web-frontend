@@ -42,7 +42,7 @@
 
 .cart-count {
   position: absolute;
-  top: 1.8rem;
+  top: -15px !important;
   right: 1.8rem;
   color: #51BC4A
 
