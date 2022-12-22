@@ -127,11 +127,9 @@ function AddAddress({...prop}) {
     }
     try {
       const res = await AddAddressService(data);
-      console.log('Address Response', res.data.addressId);
-      localStorage.setItem('address', JSON.stringify({...data, _id: res.data.addressId}));
-      console.log('local Address', data);
-      
-      prop.setAddress((oldData:any) => [...oldData, {...data}]);
+      // localStorage.setItem('address', JSON.stringify({...data, _id: res.data.addressId}));
+      // prop.setAddress((oldData:any) => [...oldData, {...data, _id: res.data.addressId}]);
+      window.location. reload();
       setIsInputDisable(true)
     } catch (error) {
        alert(error.message);

@@ -62,7 +62,6 @@ const CardComponent: FC<any> = ({ cardData, indexData, wishListHandler }) => {
       quantity: value,
       price: cardData.price,
     }
-    await updateCartItem(data);
     setItemCount(value);
   }
 
@@ -183,6 +182,7 @@ const CardComponent: FC<any> = ({ cardData, indexData, wishListHandler }) => {
            addonAfter={'Kg'} 
            width={25} 
            height={30} 
+           disabled={isItemAddedToCart}
            size="large"
            value={itemCount}
            min={1} 
