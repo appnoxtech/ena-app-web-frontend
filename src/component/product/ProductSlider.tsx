@@ -13,20 +13,20 @@ const ProductSlider:FC<any>= ({productInfo}) => {
   const [isMobile, setIsMobile] = useState(false);
   const images = [
     {
-      original:productInfo.img,
-      thumbnail:productInfo.img,
+      original:productInfo.image,
+      thumbnail:productInfo.image,
     },
     {
-      original:productInfo.img,
-      thumbnail:productInfo.img,
+      original:productInfo.image,
+      thumbnail:productInfo.image,
     },
     {
-      original:productInfo.img,
-      thumbnail:productInfo.img,
+      original:productInfo.image,
+      thumbnail:productInfo.image,
     },
     {
-      original:productInfo.img,
-      thumbnail:productInfo.img,
+      original:productInfo.image,
+      thumbnail:productInfo.image,
     },
   ];
 
@@ -50,7 +50,7 @@ const ProductSlider:FC<any>= ({productInfo}) => {
         showNav={false}
       /> */}
 
-      <img src={productInfo.img} className='img-fluid mx-auto'/>
+      <img src={productInfo.image} className='img-fluid mx-auto'/>
     </div>
   )
 }

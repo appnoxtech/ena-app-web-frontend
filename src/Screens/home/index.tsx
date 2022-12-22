@@ -1,11 +1,11 @@
-import React, { useState, FC, useEffect } from 'react'
-import Category from '../../component/categorybar/Category'
-import Filterbar from '../../component/filterbar/Filterbar'
-import CardComponent from '../../component/common-components/card/Card'
-import Pagination from '../../component/common-components/pagination/Pagination'
-import { EnaAppData } from '../../component/dummyData'
-import Searchbar from '../../component/searchbar/Searchbar'
-import { GetProductListService } from '../../services/product/productService'
+import React, { useState, FC, useEffect } from 'react';
+import Category from '../../component/categorybar/Category';
+import Filterbar from '../../component/filterbar/Filterbar';
+import CardComponent from '../../component/common-components/card/Card';
+import Pagination from '../../component/common-components/pagination/Pagination';
+import { EnaAppData } from '../../component/dummyData';
+import Searchbar from '../../component/searchbar/Searchbar';
+import { GetProductListService } from '../../services/product/productService';
 
 interface product {
   id: number,
@@ -29,7 +29,7 @@ const Admin: FC<any> = () => {
   const [cardIndex, setCardIndex] = useState<any>()
   const [searchText, setSearchText] = useState('')
   const [seletedCategory,setSletedCategorey]=useState('All')
-  const [currCat, setCurrCat] = useState('63a01973291ae32acdb68d06');
+  const [currCat, setCurrCat] = useState('');
 
   const wishListHandler = (index) => {
     console.log(index)
@@ -84,7 +84,7 @@ const Admin: FC<any> = () => {
           <Category filterDatabyCategory={filterDatabyCategory} seletedCategory={seletedCategory}/>
         </div>
         <div className='col-12 mx-auto mx-md-0 col-md-10 '>
-          <div className='row d-flex    mt-5 mx-auto m-0 p-0'>
+          <div className='row d-flex mt-5 mx-auto m-0 p-0 pe-2'>
             {/* <Filterbar /> */}
             {/* search product by name */}
             {productList
@@ -98,7 +98,7 @@ const Admin: FC<any> = () => {
                 }
               })
               .map((cardData: any) => (
-                <div className='col-6 col-md-3 my-3 m-0 px-2 overflow-hidden' key={cardData.productId}>
+                <div className='shadow-lg col-6 col-md-3 m-0 my-3 bg-light' key={cardData.productId}>
                   <CardComponent cardData={cardData} wishListHandler={wishListHandler} />
                 </div>
               ))}

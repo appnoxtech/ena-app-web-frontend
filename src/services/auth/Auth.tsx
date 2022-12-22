@@ -3,69 +3,30 @@ import { API_URL } from '../../GlobalVariable'
 
 export const LoginServices = async (data) => {
   const url = `${API_URL}/access/sign-in`
-  console.log(data, 'is colliect')
-  return axios.post(url, data, {
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Content-Type': 'application/json',
-    },
-  })
+  return axios.post(url, data)
 }
 
 export const VerifyOtpServices = async (data) => {
   const url = `${API_URL}/access/verify-otp`
-  console.log(data, 'is colliect')
-  return axios.post(url, data, {
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Content-Type': 'application/json',
-    },
-  })
+  return axios.post(url, data);
 }
 
 export const SignupServices = async (data) => {
   const url = `${API_URL}/access/sign-up`
-  console.log(data, 'is colliect')
-  return axios.post(url, data, {
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Content-Type': 'application/json',
-    },
-  })
+  return axios.post(url, data);
 }
 
 export const forgetpasswordServices = async (data) => {
-  console.log(data)
   const url = `${API_URL}/access/verify-otp`
-  console.log(data, 'is colliect')
-  return axios.post(url, data, {
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Content-Type': 'application/json',
-    },
-  })
+  return axios.post(url, data);
 }
 
 export const changepasswordServices = async (data) => {
-  console.log(data)
   const url = `${API_URL}/access/reset-password`
-  console.log(data, url, 'is colliect')
-  return axios.post(url, data, {
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Content-Type': 'application/json',
-    },
-  })
+  return axios.post(url, data);
 }
 
 export const generateOtpServices = async (data) => {
-  console.log(data)
   const url = `${API_URL}/access/verify-otp`
-  console.log(data, url, 'is colliect')
-  return axios.post(url, data, {
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Content-Type': 'application/json',
-    },
-  })
+  return axios.post(url, data);
 }

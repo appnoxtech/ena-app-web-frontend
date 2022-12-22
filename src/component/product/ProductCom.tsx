@@ -35,11 +35,11 @@ const ProductCom:FC<any>= ({data}) => {
                     kn 35.2/kg <s className='CrossText'>kn 35.2/kg</s>
                   </p>
                 </div>
-                <div className='wishListProduct'>
+                {/* <div className='wishListProduct'>
                   <div className='text-end px-2'>
                   <i className={true?'fa fa-heart red':'fa fa-heart-o heart_fav_icon mt-1'} aria-hidden='true'></i>
                   </div>
-                </div>
+                </div> */}
               </div>
               <div className={` ${changeColorHandler()}  ' rounded-end mt-3 offerPercent col-3 btnRadius ' `}>
                 <p className=' p-0 m-0 px-4 py-2 text-light  fw-bold'>10% off</p>
