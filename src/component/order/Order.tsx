@@ -121,6 +121,7 @@ const Order = () => {
                       />
                     )
                   } */}
+                  
                    <CustomButton
                         props={{ styleName: 'danger px-3 p-0 mt-2', indexData: 'Cancel Order', btnType: 'btn-outline', clickHandler: displayModal}}
                     />

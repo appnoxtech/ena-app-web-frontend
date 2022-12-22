@@ -1,12 +1,21 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import EnaLogo from '../../assets/images/enaLogoGreen.png'
 import '../../assets/global/global.css'
 import './Mobilenav.css'
 import { Button, OverlayTrigger, Popover, PopoverBody } from 'react-bootstrap'
+import { useIsLoginHook } from '../../hooks/user/IsLoginHooks'
+import { useGetCartList } from '../../hooks/carts/getCartList'
+import { useDispatch, useSelector } from 'react-redux'
+import { updateUserCart } from '../../redux/reducer/cart/CartReducer'
 
 const Mobilenav = ({}) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const isLogin = useIsLoginHook();
+  const cartData = useGetCartList(); 
+  const dispatch = useDispatch();
+  const countGlobal = useSelector((state:any) => state.cart.count);
+  const [count, setCount] = useState(cartData.length);
   const MenuItem = [
     {
       navName: 'Home',
@@ -29,9 +38,14 @@ const Mobilenav = ({}) => {
   // function for logout
 
   const Logout = () => {
-    localStorage.removeItem('CUSTOMER_Token')
-    navigate('#')
+    localStorage.removeItem('@user_Token');
+    localStorage.removeItem('user');
+    localStorage.clear();
   }
+  useEffect(() => {
+    dispatch(updateUserCart(cartData.length));
+    setCount(countGlobal);
+  },[countGlobal]);
 
   return (
     <>
@@ -74,7 +88,7 @@ const Mobilenav = ({}) => {
               </div>
             </div>
           </div>
-          <div className='d-flex flex-row  mx-2 '>
+          <div className='d-flex flex-row  mx-2 justify-content-center align-item-center '>
           <OverlayTrigger
             trigger='focus'
             key='bottom'
@@ -82,8 +96,8 @@ const Mobilenav = ({}) => {
             overlay={
               <Popover id='popover-positioned-bottom'>
                 <PopoverBody>
-                  {localStorage.getItem('CUSTOMER_Token') ? (
-                    <NavLink to='#' onClick={() => Logout()}>
+                  {isLogin ? (
+                    <NavLink to='/' onClick={() => Logout()}>
                       Logout
                     </NavLink>
                   ) : (
@@ -97,11 +111,11 @@ const Mobilenav = ({}) => {
             <i className='fa fa-user-o me-4 fs-2 font-green' aria-hidden='true'></i>
             </Button>
           </OverlayTrigger>
-            <NavLink to='/checkout'>
-            <i
-              className='fa fa-shopping-cart me-2 cart_icon fs-2 font-green'
-              aria-hidden='true'
-            ></i>
+            <NavLink to='/cart'>
+            <div className="cart-container">
+               <p className='cart-count'>{count}</p>
+               <i className='mt-2 fa fa-shopping-cart font-green cart_icon' aria-hidden='true'></i>
+            </div>
             </NavLink>
             {/* <i className='fa fa-heart-o heart_icon' aria-hidden='true'></i> */}
           </div>

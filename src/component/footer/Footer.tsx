@@ -65,11 +65,11 @@ function DesktopFooter(prop:any) {
         </div>
       </div>
       <div className='row pb-3'>
-        <div className='col-12 col-md-6 pb-0'>
+        {/* <div className='col-12 col-md-6 pb-0'>
           <ul>
             <li>&#169;2022, Ena Fruit d.o.o. Omaogucuje Shopify</li>{' '}
           </ul>
-        </div>
+        </div> */}
         <div className='col-12 col-md-6 text-end'>
           <NavLink to=''><FaFacebook size={30} className='m-3 icon_link' /></NavLink>
           <NavLink to=''><FaInstagram size={30} className='me-3 icon_link' /></NavLink>

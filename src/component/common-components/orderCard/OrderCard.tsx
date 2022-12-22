@@ -20,6 +20,7 @@ function OrderCard({...prop}) {
           productId: item.productId,
           quantity: item.quantity,
           price: item.price,
+          bidAmount: item.bidAmount
         }
         await AddToCartService(data);
       });

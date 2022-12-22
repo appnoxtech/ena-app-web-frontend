@@ -18,3 +18,13 @@ a {
     border-style: none;
     border:none;
   }
+
+  .cart-container{
+    position: relative;
+  }
+
+  .cart-count{
+    position: absolute;
+    top: -6px;
+    right: 5px;
+  }
