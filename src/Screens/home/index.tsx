@@ -5,7 +5,7 @@ import CardComponent from '../../component/common-components/card/Card';
 import Pagination from '../../component/common-components/pagination/Pagination';
 import { EnaAppData } from '../../component/dummyData';
 import Searchbar from '../../component/searchbar/Searchbar';
-import { GetProductListService } from '../../services/product/productService';
+import { GetAllCategory, GetProductListService } from '../../services/product/productService';
 
 interface product {
   id: number,
@@ -28,7 +28,7 @@ const Admin: FC<any> = () => {
   const [productList, setProductList] :any = useState([]); 
   const [cardIndex, setCardIndex] = useState<any>()
   const [searchText, setSearchText] = useState('')
-  const [seletedCategory,setSletedCategorey]=useState('All')
+  //const [seletedCategory,setSletedCategorey]=useState()
   const [currCat, setCurrCat] = useState('');
 
   const wishListHandler = (index) => {
@@ -38,17 +38,17 @@ const Admin: FC<any> = () => {
     setData(temp)
   }
 
-  const filterDatabyCategory = (name) => {
-    setSletedCategorey(name)
-    const temp2 = filterData.filter((item) => {
-      if (name == 'All') {
-        return item
-      } else if (item.category == name) {
-        return item
-      }
-    })
-    setData(temp2)
-  }
+  // const filterDatabyCategory = (name) => {
+  //   setSletedCategorey(name)
+  //   const temp2 = filterData.filter((item) => {
+  //     if (name == 'All') {
+  //       return item
+  //     } else if (item.category == name) {
+  //       return item
+  //     }
+  //   })
+  //   setData(temp2)
+  // }
 
 
   const getProductList = async() => {
@@ -68,11 +68,13 @@ const Admin: FC<any> = () => {
     }
   }
 
-  useEffect(() => {
-    getProductList()
-  },[]);
 
-  console.log('productList', productList);
+
+  useEffect(() => {
+    console.log('current category', currCat);
+    
+    getProductList();
+  },[currCat]);
   
 
   return (
@@ -81,7 +83,11 @@ const Admin: FC<any> = () => {
       <div className='side-Part rounded-4 bg-white'></div>
       <div className='d-flex flex-column flex-md-row'>
         <div className='mt-5 pt-3 col-12 col-md-2 '>
-          <Category filterDatabyCategory={filterDatabyCategory} seletedCategory={seletedCategory}/>
+          <Category 
+            filterDatabyCategory={setCurrCat} 
+            seletedCategory={setCurrCat}
+            currCat={currCat}
+          />
         </div>
         <div className='col-12 mx-auto mx-md-0 col-md-10 '>
           <div className='row d-flex mt-5 mx-auto m-0 p-0 pe-2'>

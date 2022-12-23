@@ -55,11 +55,9 @@ const CardComponent: FC<any> = ({ cardData, indexData, wishListHandler }) => {
   }
 
   const handleItemCountChange = async(value: any) => {
-    console.log('value', value);
     setItemCount(value);
   }
 
-  console.log('cartData', cardData);
   useEffect(() => {
     if (cartData.length > 0) {
       const item = cartData.find((item: any) => item.productId === cardData._id);
