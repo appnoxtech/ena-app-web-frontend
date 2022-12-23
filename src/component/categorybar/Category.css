@@ -13,6 +13,10 @@
     font-size:15px
 }
 
+.navlist:hover{
+    color: #51BC4A;
+}
+
 .navli_category{
     font-size:20px;
     text-decoration: none;

@@ -16,6 +16,7 @@ import LoginModal from '../common-components/modals/loginModal';
 import { useDispatch } from 'react-redux';
 import { decreaseCartCount } from '../../redux/reducer/cart/CartReducer';
 import { useUpdateBidAmount } from '../../hooks/carts/updateBidAmount';
+import ProductCard from '../ProductCard/ProductCard';
 
 const CartCom = () => {
   const Message = 'Taxes and postage are calculated at checkout';
@@ -60,24 +61,45 @@ const CartCom = () => {
 
   console.log('cartData', cartData);
 
-  const handleItemCountChange = async (value: any, cardData: any) => {
-    const count = parseInt(value, 10);
+  const handleBidAmountChange = (CardItem: any, bidAmount: any) => {
+    const count = parseInt(bidAmount, 10);
     if (typeof count !== 'number' || isNaN(count)) {
       alert('Invalid Quantity')
     } else if (count < 0) {
       alert('Only Positive Quantity');
     } else {
       const data = {
-        ...cardData,
-        productId: cardData._id,
-        quantity: count,
-        price: cardData.price,
+        ...CardItem,
+        productId: CardItem._id,
+        bidAmount: bidAmount,
+        price: CardItem.price,
       }
-      const newList = await updateCartItem(data);
+      const newList = updateBidAmount(data);
       setCartList(newList);
     }
   }
 
+  const handleItemCountChange = (CardItem: any, ItemQuantity: any) => {
+    console.log('itemQuantity', ItemQuantity);
+
+    const count = parseInt(ItemQuantity, 10);
+    if (typeof count !== 'number' || isNaN(count)) {
+      alert('Invalid Quantity')
+    } else if (count < 0) {
+      alert('Only Positive Quantity');
+    } else {
+      const data = {
+        ...CardItem,
+        productId: CardItem._id,
+        quantity: ItemQuantity,
+        price: CardItem.price,
+      }
+      console.log('cart update data', data);
+
+      const newList = updateCartItem(data);
+      setCartList(newList);
+    }
+  }
   const handleCheckOut = () => {
     console.log('isLogin', isLogin);
 
@@ -88,142 +110,54 @@ const CartCom = () => {
     }
   }
 
-  const handleBidAmountChange = async (value: any, cardData: any) => {
-    const count = parseInt(value, 10);
-    if (typeof count !== 'number' || isNaN(count)) {
-      alert('Invalid Quantity')
-    } else if (count < 0) {
-      alert('Only Positive Quantity');
-    } else {
-      const data = {
-        ...cardData,
-        productId: cardData._id,
-        bidAmount: count,
-        price: cardData.price,
-      }
-      const newList = await updateBidAmount(data);
-      setCartList(newList);
-    }
-  }
   return (
     <div className='container-fluid pb-5'>
       {/* <Searchbar /> */}
       <div className='side-Part rounded-4 bg-white'></div>
       <div className='col-11 mx-auto'>
-        <div className='text-center mb-4 mt-5'>
-          <h2>Shopping Cart</h2>
+        <div className='text-center mb-4 mt-3'>
+          <h2 style={{ color: '#51BC4A' }}>Shopping Cart</h2>
         </div>
-        <div style={{ overflowX: 'scroll' }} className='col-12'>
-          {
-            cartList.length > 0 ?
-              <Table className='shopingCartMain  w-100'>
-                <thead>
-                  <tr>
-                    <th></th>
-                    <th>Product</th>
-                    <th>Price</th>
-                    <th>Bid Price</th>
-                    <th>Quantity</th>
-                    <th>Bid Subtotal</th>
-                    <th>Subtotal</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody className='shopingCartTableBody'>
-                  {
-                    cartList.map((item: any) => {
-                      return (
-                        <>
-                          <tr key={item.productId}>
-                            <td>
-                              <div className=''>
-                                <img src={item.image} alt='img' className='img-fluid col-4 col-md-3' />
-                              </div>
-                            </td>
-                            <td>
-                              <h5>{item.engVegName}</h5>
-                            </td>
-                            <td>
-                              <h5>{`kn ${item.price}`}</h5>
-                            </td>
-                            <td>
-                              <div className='ProductSizeCart'>
-                                <input className='border border-1' type='number' placeholder='BidAmount' value={item.bidAmount} onChange={(e) => handleBidAmountChange(e.target.value, item)} />
-                                <h5>(Kn)</h5>
-                              </div>
-                            </td>
-                            <td>
-                              <div className='ProductSizeCart'>
-                                <input type='number' className='border border-1' value={item.quantity} onChange={(e) => handleItemCountChange(e.target.value, item)} />
-                                <h5>(kg)</h5>
-                              </div>
-                            </td>
-                            <td>
-                              <h5>kn {item.bidAmount * item.quantity}</h5>
-                            </td>
-                            <td>
-                              <h5>kn {item.price * item.quantity}</h5>
-                            </td>
-                            <td>
-                              <button type="button" className="btn btn-outline-danger" onClick={() => handleRemoveCart(item)}>
-                                Remove
-                              </button>
-                              {/* <div className='removeProductCart' >
-                                <h5></h5>
-                              </div> */}
-                            </td>
-                          </tr>
-
-                        </>
-                      )
-                    })
-                  }
-                </tbody>
-              </Table>
-              : <div>
-                <Lottie
-                  options={defaultOptions}
-                  height={400}
-                  width={400}
-                />
-              </div>
-          }
-
-        </div>
-
-        {/* <div className='col-12 border bg-danger  d-flex' style={{width:'100%'}}>
-                  <div className='col-12 col-md-4 bg-dark' style={{width:''}}>
-                        <h1>sachin</h1>
-                  </div>
-                  <div className='col-12 col-md-4 bg-dark' style={{width:''}} >
-
-                  </div>
-                  <div className='col-12 col-md-4 bg-dark' style={{width:''}}>
-
-                  </div>
-                </div> */}
         {
-          cartData.length > 0 ?
-            <>
-              <div className='subTotalCartVal'>
-                <h5>
-                  Subtotal: <span>kn {calculateSubTotal()} HRK</span>
-                </h5>
-                <h5>
-                  BidSubtotal: <span>kn {calculateBidSubTotal()} HRK</span>
-                </h5>
-                <div className='infoText'>
-                  <img src={infoIcon} alt='info' className='img-fluid' />
-                  <p>{Message}</p>
-                </div>
+          cartList.length > 0 ?
+            <div className="col-12 d-md-flex">
+              <div className='col-12 col-md-8 px-2 px-md-4 pt-5' style={{ height: '65vh', overflow: 'scroll' }}>
+                {
+                  cartList.map(item => <ProductCard handleRemoveCart={handleRemoveCart} handleBidAmountChange={handleBidAmountChange} handleItemCountChange={handleItemCountChange} item={item} />)
+                }
               </div>
-              <div className='mt-3'>
-                <button className=' btnRadius border border-0 themecolor py-3 fw-bold text-light col-12' onClick={() => handleCheckOut()}>
-                  Checkout
-                </button>
+              <div className="mt-3 col-12 col-md-4 px-3">
+                {
+                  cartData.length > 0 ?
+                    <div>
+                      <div className='subTotalCartVal'>
+                        <h5>
+                          Subtotal: <span>kn {calculateSubTotal().toFixed(2)} HRK</span>
+                        </h5>
+                        <h5>
+                          BidSubtotal: <span>kn {calculateBidSubTotal().toFixed(2)} HRK</span>
+                        </h5>
+                        <div className='infoText'>
+                          <img src={infoIcon} alt='info' className='img-fluid' />
+                          <p>{Message}</p>
+                        </div>
+                      </div>
+                      <div className='mt-3'>
+                        <button className=' btnRadius border border-0 themecolor py-3 fw-bold text-light col-12' onClick={() => handleCheckOut()}>
+                          Checkout
+                        </button>
+                      </div>
+                    </div>
+                    : null
+                }
               </div>
-            </>
-            : null
+            </div> : <div>
+              <Lottie
+                options={defaultOptions}
+                height={400}
+                width={400}
+              />
+            </div>
         }
       </div>
       <LoginModal

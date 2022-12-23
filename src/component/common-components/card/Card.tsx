@@ -18,7 +18,7 @@ import { useRemoveItemFromCart } from '../../../hooks/carts/removeFromCart';
 import { useGetCartList } from '../../../hooks/carts/getCartList';
 import { useUpdateCartItem } from '../../../hooks/carts/updateCartItem';
 
-const CardComponent: FC<any> = ({ cardData, indexData, wishListHandler }) => {
+const CardComponent: FC<any> = ({ cardData, indexData, wishListHandler, currCat }) => {
   const [itemCount, setItemCount] = useState(10);
   const [cardClassName, setCardClassName] = useState('product-card');
   const [isItemAddedToCart, setIsItemAddedToCart] = useState(false);
@@ -55,20 +55,25 @@ const CardComponent: FC<any> = ({ cardData, indexData, wishListHandler }) => {
   }
 
   const handleItemCountChange = async(value: any) => {
-    console.log('value', value);
     setItemCount(value);
   }
 
-  console.log('cartData', cardData);
   useEffect(() => {
-    if (cartData.length > 0) {
-      const item = cartData.find((item: any) => item.productId === cardData._id);
+    const list = localStorage.getItem('cartData');
+
+    if (list) {
+      const cartList = JSON.parse(list);
+      console.log('cartList ==>**', cartList);
+      
+      const item = cartList.find((item: any) => item.productId === cardData._id);
       if (item) {
         setItemCount(item.quantity);
         setIsItemAddedToCart(true)
+      }else{
+        setIsItemAddedToCart(false)
       }
     }
-  }, []);
+  }, [cardData]);
   
   const handleCountChange = (count:any) => {
      setItemCount(count);
@@ -110,7 +115,8 @@ const CardComponent: FC<any> = ({ cardData, indexData, wishListHandler }) => {
       <div 
         className="rounded-2 col-md-12 col-12 d-flex justify-content-md-end justify-content-between align-items-center">
         <div className="col-8 col-md-7">
-        <InputNumber 
+        <InputNumber
+           type={'number'}
            addonAfter={'Kg'} 
            width={25} 
            height={30} 

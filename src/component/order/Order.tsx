@@ -74,7 +74,13 @@ const Order = () => {
               <tr key={index} className='orderRow' onClick={() => handleOrderRowClick(data.productList)}>
               <td>
                 <div className=''>
-                <FaBoxOpen size={60} />
+                  <img 
+                    src='https://static.vecteezy.com/system/resources/previews/003/705/785/original/basket-with-fruits-isolated-with-icon-illustration-free-vector.jpg'
+                    alt='fruit'
+                    width={80}
+                    height={80}
+                   />
+                {/* <FaBoxOpen size={60} /> */}
                 </div>
               </td>
               <td>

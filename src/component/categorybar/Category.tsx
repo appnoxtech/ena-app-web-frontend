@@ -1,12 +1,12 @@
 import React, { FC, useState, useEffect } from 'react'
 import './Category.css'
-import { getAllCategory } from '../../services/product/productService'
+import { GetAllCategory } from '../../services/product/productService'
 
-const category: FC<any> = ({ filterDatabyCategory }) => {
+const category: FC<any> = ({ filterDatabyCategory, currCat }) => {
   //#region  all state define here
   const [showdropdown, setShowDropdown] = useState(window.innerWidth < 768 ? false : true)
   const [isMobile, setIsMobile] = useState(false)
-
+  const [categoryList, setCategoryList] = useState([]);
   //#region  defilne all function here
 
   const dropDowntoggleHandler=()=>{
@@ -20,13 +20,35 @@ const category: FC<any> = ({ filterDatabyCategory }) => {
     } else setIsMobile(false)
   }, [isMobile]);
 
-  const getProductCategory = async () => {
+  const getCategoryList = async() => {
     try {
-      const res = await getAllCategory();
-
+      const res = await GetAllCategory();
+      const catList = res.data.data;
+      console.log('catList', catList);
+      setCategoryList(catList);
     } catch (error) {
-      
+      alert(error.message);
     }
+  }
+
+  useEffect(() => {
+    getCategoryList();
+  }, []);
+
+  const highlightName = (id: any) => {
+      if(id && id === currCat){
+        return {
+          color: '#51BC4A'
+        }
+      } else if (!id && !currCat){
+        return {
+          color: '#51BC4A'
+        }
+      } else {
+         return {
+          color: 'black'
+         }
+      }
   }
 
   return (
@@ -49,18 +71,35 @@ const category: FC<any> = ({ filterDatabyCategory }) => {
         {showdropdown && (
           <div className='text-start d-flex flex-column'>
             <button
-              onClick={() => {filterDatabyCategory('All');dropDowntoggleHandler()}}
-              className={'navlist py-2 py-md-3 border border-0 border-none bgWhite'}
-            >
-              <li className='navlist'>All</li>
-            </button>
-            <button
-              onClick={() => {filterDatabyCategory('Vegetable');dropDowntoggleHandler()}}
+              onClick={() => {
+                filterDatabyCategory('');
+                dropDowntoggleHandler()
+              }}
               className='navlist py-2 py-md-3 border border-0 border-none bgWhite'
             >
-              <li className='navlist  '>Vegetables</li>
+              <li className='navlist' style={highlightName('')}>All</li>
             </button>
-            <button
+            {
+              categoryList.map(item => {
+                return (
+                  <button
+                    onClick={() => {
+                      filterDatabyCategory(item._id);
+                      dropDowntoggleHandler();
+                    }
+                  }
+                    className={'navlist py-2 py-md-3 border border-0 border-none bgWhite'}
+                  >
+                    <li className='navlist' style={highlightName(item._id)}>
+                      {item.categoryName.toUpperCase()}
+                    </li>
+                  </button>
+                )
+              })
+            }
+
+
+            {/* <button
               onClick={() => {filterDatabyCategory('Fruit');dropDowntoggleHandler()}}
               className='navlist py-2 py-md-3 border border-0 border-none bgWhite'
             >
@@ -83,7 +122,7 @@ const category: FC<any> = ({ filterDatabyCategory }) => {
               className='navlist py-2 py-md-3 border border-0 border-none bgWhite'
             >
               <li className='navlist  '>Canned</li>
-            </button>
+            </button> */}
           </div>
         )}
       </div>

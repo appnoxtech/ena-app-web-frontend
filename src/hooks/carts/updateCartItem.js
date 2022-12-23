@@ -8,18 +8,23 @@ export const useUpdateCartItem = () => {
     const isLogin = useIsLoginHook();
     const cartData = useGetCartList();
 
-    const handleUpdateCartItem = async(data) => {
+    const handleUpdateCartItem = (data) => {
          const quantity = data.quantity;
+         console.log('quantity', quantity);
+
          if(quantity > 0){
             const item = cartData.find(item => item.productId === data.productId);
             const updateItem = {
                 ...item,
                 quantity: data.quantity
             }
-            const tempList = cartData.filter(item => item.productId !== data.productId);
-            const updateCartData = [...tempList, updateItem];
-            localStorage.setItem('cartData', JSON.stringify(updateCartData));
-            return updateCartData;
+            const index = cartData.findIndex(item => item.productId === data.productId);
+            console.log('index', index);
+            //const updateCartData = [...tempList, updateItem];
+            cartData[index] = updateItem
+            console.log('after putting item at index', cartData);
+            localStorage.setItem('cartData', JSON.stringify(cartData));
+            return cartData;
          }else if(quantity === 0){
             const cartData = {
                 productId: data.productId,

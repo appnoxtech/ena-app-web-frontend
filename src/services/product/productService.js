@@ -23,20 +23,16 @@ export const UpdateProductService = async(data) => {
 
 export const GetProductListService = async(id) => {
     const url = `${API_URL}/product/get-all-product`;
-    if(id){
-        return axios.get(url,  {
-            headers: {
-                'categoryId': id
-            }
-        });
-    }else{
-        return axios.get(url);
-    }
-    
+    return axios.post(url);
 }
 
-export const getAllCategory = async () => {
+export const GetProductListWithDataService = async(data) => {
+    const url = `${API_URL}/product/get-all-product`;
+    console.log('data', data);
+    return axios.post(url,data);
+}
+
+export const GetAllCategory = async () => {
     const url = `${API_URL}/product/get-all-category`;
     return axios.get(url);
-    
 }

@@ -50,10 +50,11 @@ const Desktop = () => {
     localStorage.clear();
   }
   console.log('isLogin', isLogin);
+
   
   return (
-    <div className='col-12 p-4'>
-      <div className='  d-md-flex justify-content-between align-items-center  '>
+    <div className='col-12 p-4' style={{position: 'fixed', top: '0px', left: '0px', backgroundColor: 'white', zIndex: 500}}>
+      <div className='d-md-flex justify-content-between align-items-center  '>
         <NavLink to={'/'}>
           <div>
             <img className='imageProp ' src={Ena} alt='Ena' />
