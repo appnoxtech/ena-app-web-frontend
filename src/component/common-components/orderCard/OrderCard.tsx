@@ -13,6 +13,10 @@ function OrderCard({...prop}) {
   const navigate = useNavigate()
   const cartData = useGetCartList();
   const navigationHandler = async() => {
+    const addressId = localStorage.getItem('addressId');
+    if(!addressId){
+      return alert('Select Address');
+    }
     try {
       prop.setIsLoading(true);
       cartData.forEach(async(item: any) => {

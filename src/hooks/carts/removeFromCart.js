@@ -5,12 +5,11 @@ import { useGetCartList } from "./getCartList";
 import { useUpdateCartItem } from "./updateCartItem";
 
 export const useRemoveItemFromCart = () => {
-    const isLogin = false;
-    const cartData = useGetCartList();
     //const handleUpdateCartItem = useUpdateCartItem();
     const handleAddItemToCart = useAddItemToCartHooks();
 
     const handleRemoveItemfromCart = async(data) => {
+        const cartData = JSON.parse(localStorage.getItem('cartData'));
         const isRemove = data.removeProduct;
         console.log('isRemove', isRemove);
         if(isRemove === 1){

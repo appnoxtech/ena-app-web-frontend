@@ -85,7 +85,8 @@ const category: FC<any> = ({ filterDatabyCategory, currCat }) => {
                   <button
                     onClick={() => {
                       filterDatabyCategory(item._id);
-                      dropDowntoggleHandler()}
+                      dropDowntoggleHandler();
+                    }
                   }
                     className={'navlist py-2 py-md-3 border border-0 border-none bgWhite'}
                   >

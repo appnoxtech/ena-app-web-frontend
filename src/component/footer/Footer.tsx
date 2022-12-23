@@ -8,13 +8,13 @@ function DesktopFooter(prop:any) {
   return (
     <div className={prop.class}> 
       <div className='row py-5'>
-        <div className='col-lg-8 row'>
+        <div className='col-lg-8 d-flex justify-content-center align-item-center'>
           <div className='col'>
             <ul>
               <img className='' src={Ena} alt='Ena' width={90} height={46} />
             </ul>
           </div>
-          <div className='col'>
+          {/* <div className='col'>
             <ul className='p-0'>
               <li className='footer_heading'>Menu</li>
               <li>Naslovna</li>
@@ -24,23 +24,23 @@ function DesktopFooter(prop:any) {
               <li>Kategorije</li>
               <li>Veleprodaja</li>
             </ul>
-          </div>
-          <div className='col'>
+          </div> */}
+          {/* <div className='col'>
             <ul>
               <li className='footer_heading'>Company</li>
               <li>About Us</li>
               <li>Contact</li>
             </ul>
-          </div>
-          <div className='col'>
+          </div> */}
+          {/* <div className='col'>
             <ul className='p-0'>
               <li className='footer_heading'>Legal</li>
               <li>Privacy Statement</li>
               <li>Payment Methods</li>
             </ul>
-          </div>
+          </div> */}
         </div>
-        <div className='col-lg-4'>
+        {/* <div className='col-lg-4'>
           <ul>
             <li className='footer_heading'>Join Our Newsletter</li>
             <li>
@@ -62,19 +62,19 @@ function DesktopFooter(prop:any) {
               </div>
             </li>
           </ul>
-        </div>
+        </div> */}
       </div>
-      <div className='row pb-3'>
-        {/* <div className='col-12 col-md-6 pb-0'>
+      {/* <div className='row pb-3'>
+        <div className='col-12 col-md-6 pb-0'>
           <ul>
             <li>&#169;2022, Ena Fruit d.o.o. Omaogucuje Shopify</li>{' '}
           </ul>
-        </div> */}
+        </div>
         <div className='col-12 col-md-6 text-end'>
           <NavLink to=''><FaFacebook size={30} className='m-3 icon_link' /></NavLink>
           <NavLink to=''><FaInstagram size={30} className='me-3 icon_link' /></NavLink>
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }

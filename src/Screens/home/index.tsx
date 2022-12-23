@@ -5,7 +5,7 @@ import CardComponent from '../../component/common-components/card/Card';
 import Pagination from '../../component/common-components/pagination/Pagination';
 import { EnaAppData } from '../../component/dummyData';
 import Searchbar from '../../component/searchbar/Searchbar';
-import { GetAllCategory, GetProductListService } from '../../services/product/productService';
+import { GetAllCategory, GetProductListService, GetProductListWithDataService } from '../../services/product/productService';
 
 interface product {
   id: number,
@@ -26,8 +26,10 @@ const Admin: FC<any> = () => {
   const [data, setData] = useState(EnaAppData)
   const filterData = EnaAppData
   const [productList, setProductList] :any = useState([]); 
-  const [cardIndex, setCardIndex] = useState<any>()
-  const [searchText, setSearchText] = useState('')
+  const [cardIndex, setCardIndex] = useState<any>();
+  const [searchText, setSearchText] = useState('');
+  const [currPage, setCurrPage] = useState(1);
+  const [totalPageNum, setTotalPageNum] = useState(0);
   //const [seletedCategory,setSletedCategorey]=useState()
   const [currCat, setCurrCat] = useState('');
 
@@ -55,26 +57,43 @@ const Admin: FC<any> = () => {
     try {
       let res:any;
       if(currCat){
-        res = await GetProductListService(currCat);
+        const data = {categoryId: currCat}
+        res = await GetProductListWithDataService(data);
+        setCurrPage(1);
       }else {
-        res = await GetProductListService('');
+        res = await GetProductListService();
       }
       
       const data = res.data.result;
       setProductList(data);
+      setTotalPageNum(res.data.pageCount);
     } catch (error) {
       console.log(error.msg);
       return ;
     }
   }
 
+  const handlePagination = async() => {
+    try {
+      const data = {pageNo: currPage}
+      const res = await GetProductListWithDataService(data);
+      const list = res.data.result;
+      setProductList(list);
+      // setTotalPageNum(res.data.pageCount);
+    } catch (error) {
+      alert(error.message);
+    }
+  }
+
 
 
   useEffect(() => {
-    console.log('current category', currCat);
-    
     getProductList();
   },[currCat]);
+
+  useEffect(() => {
+    handlePagination();
+  },[currPage]);
   
 
   return (
@@ -105,11 +124,11 @@ const Admin: FC<any> = () => {
               })
               .map((cardData: any) => (
                 <div className='shadow-lg col-6 col-md-3 m-0 my-3 bg-light' key={cardData.productId}>
-                  <CardComponent cardData={cardData} wishListHandler={wishListHandler} />
+                  <CardComponent currCat={currCat} cardData={cardData} wishListHandler={wishListHandler} />
                 </div>
               ))}
             <div className='col-12 d-flex justify-content-end mt-3'>
-              <Pagination />
+              <Pagination pageCount={totalPageNum} currPage={currPage} setCurrPage={setCurrPage}  />
             </div>
           </div>
         </div>

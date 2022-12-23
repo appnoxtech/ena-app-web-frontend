@@ -33,6 +33,7 @@ function Routing() {
     <>
       <BrowserRouter>
         <Navbar />
+        <div style={{marginTop:"140px"}}></div>
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/product/details' element={<Details />} />

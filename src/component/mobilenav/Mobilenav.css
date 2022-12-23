@@ -25,6 +25,14 @@ a {
 
   .cart-count{
     position: absolute;
-    top: -6px;
+    top: -5.3px !important;
     right: 5px;
+  }
+
+  @media screen and (min-width: 768px) {
+    .cart-count{
+      position: absolute;
+      top: -15px !important;
+      right: 5px;
+    }
   }
