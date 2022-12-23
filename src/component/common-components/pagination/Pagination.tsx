@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/all'
 import './Pagination.css'
 
-function Pagination({ currPage, setCurrPage, pageCount}) {
+const Pagination: FC<any> = ({ currPage, setCurrPage, pageCount}) =>{
   console.log('pageCount', pageCount);
   
   return (
