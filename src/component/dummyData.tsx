@@ -243,24 +243,27 @@ export const EnaAppData = [
 
 export const wareHouse = [
   {
-    detail:'Drugs & Pharma',
+    detail:'Products',
     image: 'wareHouse1.png',
-    bgClass:'bgblue'
+    bgClass:'bgblue',
+    routes: '/all-category',
   },
   {
-    detail:'Building & Construction',
+    detail:'Riders',
     image: 'wareHouse3.png',
-    bgClass:'bgOrange'
+    bgClass:'bgOrange',
+    routes: '/all-riders',
   },
   {
-    detail:'Drugs & Pharma',
+    detail:'Orders',
     image: 'wareHouse4.png',
-    bgClass:'bgGreen'
+    bgClass:'bgGreen',
+    routes: '/all-order',
   },
-  {
-    detail:'Drugs & Pharma',
-    image: 'wareHouse5.png',
-    bgClass:'bgPurple'
-  }
+  // {
+  //   detail:'Drugs & Pharma',
+  //   image: 'wareHouse5.png',
+  //   bgClass:'bgPurple'
+  // }
 ]
 

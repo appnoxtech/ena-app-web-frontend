@@ -34,11 +34,19 @@ export const useLoginHook = () => {
             const {
               firstName,
               lastName,
+              userType,
             } = res.data;
-            const user = {firstName,lastName, isLogin: true};
+            const user = {firstName,lastName,userType, isLogin: true};
             dispatch(updateUserData(user));
             localStorage.setItem('user', JSON.stringify(user));
-            navigate(source)
+            dispatch(updateUserData(user));
+            navigate(source);
+            // if(userType === 'customer'){
+              
+            // } else {
+            //   navigate('/admin');
+            // }
+            
             // stop Loader
             dispatch(updateLoaderState(false))
           } else if (res.data.emailVerified == false) {

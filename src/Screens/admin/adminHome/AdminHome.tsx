@@ -15,7 +15,7 @@ const AdminHome:FC<any> =() => {
         <div className="container row">
           
         {cardsData.map((v :any,i :any)=>(
-          <div className="col-12 col-lg-6 ">
+          <div className="col-12 col-lg-6 p-3">
           <IndustryCard cardData={v} key={i}/>
           </div>
         ))}

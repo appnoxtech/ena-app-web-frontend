@@ -10,7 +10,7 @@ import Lottie from 'react-lottie';
 import LoadingAnimation from '../../../assets/animations/Loading.json';
 import { getAddressList } from '../../../services/address/AddressService'
 
-function checkoutWaddress() {
+function CheckoutWaddress() {
   const [address, setAddress] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const defaultOptions = {
@@ -86,4 +86,4 @@ function checkoutWaddress() {
   )
 }
 
-export default checkoutWaddress
+export default CheckoutWaddress

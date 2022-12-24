@@ -63,8 +63,6 @@ const CardComponent: FC<any> = ({ cardData, indexData, wishListHandler, currCat 
 
     if (list) {
       const cartList = JSON.parse(list);
-      console.log('cartList ==>**', cartList);
-      
       const item = cartList.find((item: any) => item.productId === cardData._id);
       if (item) {
         setItemCount(item.quantity);

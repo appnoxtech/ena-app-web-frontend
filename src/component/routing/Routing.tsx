@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Cart from '../../pages/cart/Cart'
 import Details from '../../pages/product/Details'
@@ -27,53 +27,21 @@ import ResetPass from '../../Screens/auth/resetPass/ResetPass'
 import OtpVarForForget from '../../Screens/auth/otpVarforForget/OtpVarforForget'
 import OrderSuccess from '../../Screens/checkout/OrderSuccess/OrderSuccess'
 import OrderDetails from '../order/OrderDetails'
+import { useGetUserType } from '../../hooks/user/getUserType'
+import UserRoutes from '../../Routes/userRoutes'
+import AdminRoutes from '../../Routes/AdminRoutes'
 
 function Routing() {
+  const userType = useGetUserType();
+
   return (
     <>
       <BrowserRouter>
         <Navbar />
         <div style={{marginTop:"140px"}}></div>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/product/details' element={<Details />} />
-          <Route path='/cart' element={<Cart />} />
-          <Route path='/' element={<Home />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/cart_login' element={<Logincart />} />
-          <Route path='/forget_password' element={<ForgetPass />} />
-          <Route path='/otp_verification' element={<OtpVar />} />
-          <Route path='/resetpass/otpvar' element={<OtpVarForForget />} />
-          <Route path='/otp_verified' element={<OtpVerified />} />
-          <Route path='/resetPassword' element={<ResetPass />} />
-          <Route path='/signup' element={<Signup />} />
-          <Route path='/addAddress' element={<AddAddress />} />
-          <Route path='/changeAddress' element={<ChangeAddress />} />
-          <Route path='/checkout' element={<Checkout />} />
-          <Route path='/orderSuccess' element={<OrderSuccess />} />
-          <Route path='/checkoutWaddress' element={<CheckoutWaddress />} />
-
-          <Route path='/order' element={<Order />} />
-          <Route path='/orderDetails' element={<OrderDetails />} />
-
-          {/* Admin */}
-          <Route path='/admin' element={<Admin />} />
-          <Route path='/admin-login' element={<AdminLogin />} />
-          <Route path='/admin-home' element={<AdminHome />} />
-          <Route path='/admin-ProductList' element={<AdminProductList />} />
-          <Route path='/admin-AddProduct' element={<AddProduct />} />
-
-          {/* AdminEnd */}
-
-          <Route
-            path='*'
-            element={
-              <div className='col-12  d-flex'>
-                <img src='/4041.png' className='img-fluid col-10 col-md-4  m-auto' />
-              </div>
-            }
-          />
-        </Routes>
+          {
+            userType === 'customer' ? <UserRoutes /> : userType === 'admin' ? <AdminRoutes /> : null
+          }
         <DesktopFooter class='container-fluid footer mt-5' />
       </BrowserRouter>
     </>
