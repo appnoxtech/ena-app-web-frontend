@@ -8,6 +8,7 @@ import { GetProductListService, GetProductListWithDataService } from '../../../s
 import Pagination from '../../../component/common-components/pagination/Pagination'
 import ProductCard from '../productCard/ProductCard';
 import SelectCategory from '../../../component/common-components/SelectCategory/SelectCategory';
+import AddProductForm from '../../../forms/Products/Add/AddProduct';
 // import '../Auth.css'
 const { Meta } = Card;
 
@@ -17,6 +18,7 @@ const AdminProductList: FC<any> = () => {
   const [categoryData, setCategoryItem] = useState({});
   const [totalPageNum, setTotalPageNum] = useState(0);
   const [currPage, setCurrPage] = useState(1);
+  const [modalShow, setModalShow] = useState(false);
 
   const getProductList = async(id:any) => {
      try {
@@ -64,13 +66,13 @@ const AdminProductList: FC<any> = () => {
             </p>
           </div>
           <div className='me-4'>
-            <a className='btn btn-success text-light btnGreen'>Add Product</a>
+            <a onClick={() => setModalShow(true)} className='btn btn-success text-light btnGreen'>Add Product</a>
           </div>
         </div>
         <div className='container-fluid border-top my-4'></div>
         <div className="container row">
           {productList.map((product:any,i :any)=>(
-            <div className="col-12 col-lg-3 col-md-4 mb-3" style={{overFlow: 'hidden'}}>
+            <div className="col-12 col-lg-4 col-md-6 col-xl-3 mb-3 d-flex justify-content-center align-item-center">
                <ProductCard product={product} />
             </div>
           ))}
@@ -79,6 +81,10 @@ const AdminProductList: FC<any> = () => {
             <Pagination pageCount={totalPageNum} currPage={currPage} setCurrPage={setCurrPage}  />
         </div>
       </div>
+      <AddProductForm
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      />
     </>
   )
 }

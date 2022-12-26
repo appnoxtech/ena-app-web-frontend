@@ -2,15 +2,19 @@ import { Breadcrumb, Button } from 'antd'
 import React, { useEffect, useState } from 'react'
 import CategoryCard from '../categoryCard/CategoryCard';
 import { GetAllCategory } from '../../../services/product/productService';
+import { useDispatch } from 'react-redux';
+import { updateProductCategory } from '../../../redux/reducer/categorie/categorieReducer';
 
 function CategoryList() {
     const [categoryList, setCategoryList] = useState([]);
-    
+    const dispatch = useDispatch();
+
     const getCategoryList = async() => {
         try {
             const res = await GetAllCategory();
             const catList = res.data.data;
             setCategoryList(catList);
+            dispatch(updateProductCategory(catList));
         } catch (error) {
             alert(error.message);
         }
