@@ -2,3 +2,8 @@
     color: #fff !important;
     background: #51BC4A !important;
 }
+
+.fixedHeight{
+    height: 35vh !important;
+    overflow: auto;
+}

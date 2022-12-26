@@ -2,8 +2,21 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import React from 'react';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
+import ButtonComp from '../buttonComp/ButtonComp';
+import { CancelOrder } from '../../../services/order/OrderService';
 
 function OrderCancelModal(props) {
+  const handelCancelOrder = async() => {
+     try {
+      const data = {orderId: props.id}
+      const res = await CancelOrder(data);
+      await props.refreshList();
+      props.onHide();
+     } catch (error) {
+       alert(error.message)
+     }
+  }
+  console.log('id', props.id);
   return (
     <Modal
       {...props}
@@ -23,11 +36,14 @@ function OrderCancelModal(props) {
              <div className='mt-3' style={{width: '80%'}}>
                 <textarea placeholder='Tell us the reason of cancellation' className="form-control w-100" aria-label="With textarea"></textarea>
             </div>
+            <ButtonComp
+              navigationHandler={handelCancelOrder}
+              type='button'
+              class=' btnRadius border border-0 w-100 h-100 mt-4 fontWeight-600 button danger text-light py-2 '
+              btvalue='Submit'
+            />
          </div>
       </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
-      </Modal.Footer>
     </Modal>
   );
 }

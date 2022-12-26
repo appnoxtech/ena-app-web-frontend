@@ -22,6 +22,7 @@
 }
 
 
+
 .shopingCartTableBody td {
     text-align: center;
     vertical-align: middle;
@@ -57,3 +58,9 @@
         -ms-transform: rotate(90deg);
         transform: rotate(90deg);
 }
+
+.fixedHeightTable{
+    height: 63vh !important;
+    overflow: auto;
+}
+

@@ -7,9 +7,9 @@ import { NavLink } from 'react-router-dom'
 function DesktopFooter(prop:any) {
   return (
     <div className={prop.class}> 
-      <div className='row py-5'>
-        <div className='col-lg-8 d-flex justify-content-center align-item-center'>
-          <div className='col'>
+      <div className='row py-2'>
+        <div className='col-lg-12 d-flex justify-content-end align-item-center'>
+          <div className='col d-flex justify-content-center'>
             <ul>
               <img className='' src={Ena} alt='Ena' width={90} height={46} />
             </ul>

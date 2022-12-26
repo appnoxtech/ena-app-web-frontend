@@ -1,0 +1,16 @@
+.height{
+   margin-top: 140px; 
+}
+
+.bottom{
+   margin-bottom: 100px;
+}
+
+@media screen and (max-width: 576px) {
+   .height{
+        margin-top: 0px; 
+     }
+   .bottom{
+      margin-bottom: 150px;
+   }
+}

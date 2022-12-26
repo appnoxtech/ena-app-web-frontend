@@ -60,7 +60,7 @@ function OrderCard({...prop}) {
       <div className='col-12 row g-0'>
         <div className='col-12 fontWeight-600 addAddress_heading'>Your Order</div>
         <hr className='mt-4' />
-        <div className='col-12 row'>
+        <div className='col-12 row fixedHeight' >
           {
             cartData.map(item => {
               return (
@@ -82,7 +82,7 @@ function OrderCard({...prop}) {
         <div className='col-12 m-0 p-0'>
           <div className='col-12 row gx-0'>
             <div className='col fontWeight-500'>Subtotal</div>
-            <div className='col text-end'>{`Kn ${calculateSubTotoal()}`}</div>
+            <div className='col text-end'>{`Kn ${calculateSubTotoal().toFixed(2)}`}</div>
           </div>
           {/* <div className='col-12 row gx-0'>
             <div className='col fontWeight-500'>
@@ -101,7 +101,7 @@ function OrderCard({...prop}) {
         <div className='col-12 m-0 p-0'>
           <div className='col-12 row gx-0'>
             <div className='col h5 fontWeight-700'>Total</div>
-            <div className='col h5 text-end'>Kn {calculateSubTotoal()}</div>
+            <div className='col h5 text-end'>Kn {calculateSubTotoal().toFixed(2)}</div>
           </div>
           <div className='col-12 mt-3'>
             <div className='col text-end'>

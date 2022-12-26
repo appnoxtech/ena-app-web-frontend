@@ -9,7 +9,7 @@ const Searchbar:FC<any>=({searchText,setSearchText })=> {
     <>
     <div className='search_background d-flex justify-content-center align-item-center border bg-dark col-12 d-none d-md-block'>
       <div>
-        <h2 className='text d-flex justify-content-center align-item-center w-75 mx-auto text-center py-1'>
+        <h2 className='text d-flex justify-content-center align-item-center w-75 w-md-100 mx-auto text-center'>
           Get the best deal for your business
         </h2>
         <div className='d-flex border_outer justify-content-center align-items-center w-75  mx-auto  bg-light'>
@@ -18,7 +18,7 @@ const Searchbar:FC<any>=({searchText,setSearchText })=> {
             // value={searchText}
             onChange={e=>setSearchText(e.target.value)}
             type='text'
-            placeholder='Search for products or brands.....'
+            placeholder='Search Fruits & Vegetables...'
             className='search_bar bg-light border-0'
           />
           <i className='fa fa-search search-icon mt-3 mb-3 ' aria-hidden='true'></i>
@@ -32,7 +32,7 @@ const Searchbar:FC<any>=({searchText,setSearchText })=> {
     // value={searchText}
     onChange={(e) => setSearchText(e.target.value)}
     type='text'
-    placeholder='Search for products or brands.....'
+    placeholder='Search For Fruits & Vegetables...'
     className='search_bar  border-0 mx-auto'
   />
   <i className='fa fa-search search-icon mt-3 mb-3 ' aria-hidden='true'></i>

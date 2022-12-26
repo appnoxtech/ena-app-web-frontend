@@ -56,17 +56,16 @@ const OrderDetails = () => {
     return (
         <div className='container-fluid pb-5'>
             <div className='side-Part rounded-4 bg-white'></div>
-            <div className='col-10 mx-auto'>
-                <Table responsive className='orders_Heading rounded'>
-                    <thead>
+            <div className='fixedHeightTable col-10 mx-auto'>
+                <Table stickyHeader={true} responsive className='orders_Heading rounded'>
+                    <thead className="header">
                         <tr>
-                            <th></th>
+                            <th>Image</th>
                             <th>Product</th>
                             <th>Price</th>
                             <th>Quantity</th>
                             <th>Subtotal</th>
-                            <th>Status</th>
-                            <th>Action</th>
+                            <th>Bid Price</th>
                         </tr>
                     </thead>
                     <tbody className='shopingCartTableBody'>
@@ -79,7 +78,6 @@ const OrderDetails = () => {
                                 </td>
                                 <td>
                                     <h5>{data.engVegName}</h5>
-                                    <p className='order_Id'>Order id:1234</p>
                                 </td>
                                 <td>
                                     <h6>kn {data.price}/kg</h6>
@@ -93,42 +91,8 @@ const OrderDetails = () => {
                                     <h5>kn {(data.quantity * data.price).toFixed(2)}</h5>
                                 </td>
                                 <td>
-                                    {/* {index  == 0 ? (
-                  <div className=''>
-                    <h5>Approved</h5>
-                  </div>
-                ) : (
-                  <div className=''>
-                    <h5>Pending</h5>
-                  </div>
-                )} */}
                                     <div className=''>
-                                        <h5>Pending</h5>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div className=''>
-                                        {/* {
-                    index == 0 ? (
-                      <div className='d- flex align-items-center justify-content-between'>
-                      <CustomButton
-                        props={{ styleName: 'dark px-5  p-0', indexData: 'Track', btnType: 'btn-outline', clickHandler: handleOrderTracking}}
-                      />
-
-                      <CustomButton
-                        props={{ styleName: 'danger px-3 p-0 mt-2', indexData: 'Cancel Order', btnType: 'btn-outline', clickHandler:  displayModal}}
-                      />
-                    </div>
-                    ) : (
-                      <CustomButton
-                        props={{ styleName: 'danger px-3 p-0 mt-2', indexData: 'Cancel Order', btnType: 'btn-outline', clickHandler: displayModal}}
-                      />
-                    )
-                  } */}
-                                        <CustomButton
-                                            props={{ styleName: 'danger px-3 p-0 mt-2', indexData: 'Cancel Order', btnType: 'btn-outline', clickHandler: displayModal }}
-                                        />
-
+                                        <h5>kn {data.bidAmount ? data.bidAmount : data.price}</h5>
                                     </div>
                                 </td>
                             </tr>
