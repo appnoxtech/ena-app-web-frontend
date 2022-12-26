@@ -6,6 +6,7 @@ import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { resetCartCount } from '../../../redux/reducer/cart/CartReducer';
+import './OrderSuccess.css';
 
 export default function OrderSuccess() {
   const navigation = useNavigate();
@@ -16,12 +17,6 @@ export default function OrderSuccess() {
     localStorage.removeItem('cartData');
     dispatch(resetCartCount());
   }
-  
-  useEffect(() => {
-    setTimeout(() => {
-        navigationHandler();
-    }, 1500);
-  }, []);
 
   const defaultOptions = {
     loop: true,

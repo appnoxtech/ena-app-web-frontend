@@ -111,17 +111,17 @@ const CartCom = () => {
   }
 
   return (
-    <div className='container-fluid pb-5'>
+    <div className='container-fluid'>
       {/* <Searchbar /> */}
       <div className='side-Part rounded-4 bg-white'></div>
       <div className='col-11 mx-auto'>
-        <div className='text-center mb-4 mt-3'>
+        <div className='text-center mb-4 mt-1'>
           <h2 style={{ color: '#51BC4A' }}>Shopping Cart</h2>
         </div>
         {
           cartList.length > 0 ?
             <div className="col-12 d-md-flex">
-              <div className='col-12 col-md-8 px-2 px-md-4 pt-5' style={{ height: '65vh', overflow: 'scroll' }}>
+              <div className='col-12 col-md-8 px-2 px-md-4 pt-3' style={{ height: '65vh', overflow: 'scroll' }}>
                 {
                   cartList.map(item => <ProductCard handleRemoveCart={handleRemoveCart} handleBidAmountChange={handleBidAmountChange} handleItemCountChange={handleItemCountChange} item={item} />)
                 }
@@ -151,7 +151,7 @@ const CartCom = () => {
                     : null
                 }
               </div>
-            </div> : <div>
+            </div> : <div style={{height: '70vh'}}>
               <Lottie
                 options={defaultOptions}
                 height={400}

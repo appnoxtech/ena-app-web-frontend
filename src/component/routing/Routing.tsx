@@ -27,13 +27,14 @@ import ResetPass from '../../Screens/auth/resetPass/ResetPass'
 import OtpVarForForget from '../../Screens/auth/otpVarforForget/OtpVarforForget'
 import OrderSuccess from '../../Screens/checkout/OrderSuccess/OrderSuccess'
 import OrderDetails from '../order/OrderDetails'
+import './Routing.css';
 
 function Routing() {
   return (
     <>
       <BrowserRouter>
         <Navbar />
-        <div style={{marginTop:"140px"}}></div>
+        <div className='height'></div>
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/product/details' element={<Details />} />
@@ -74,6 +75,7 @@ function Routing() {
             }
           />
         </Routes>
+        <div className='bottom'></div>
         <DesktopFooter class='container-fluid footer mt-5' />
       </BrowserRouter>
     </>

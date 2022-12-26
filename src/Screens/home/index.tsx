@@ -63,7 +63,6 @@ const Admin: FC<any> = () => {
       }else {
         res = await GetProductListService();
       }
-      
       const data = res.data.result;
       setProductList(data);
       setTotalPageNum(res.data.pageCount);
@@ -75,11 +74,30 @@ const Admin: FC<any> = () => {
 
   const handlePagination = async() => {
     try {
-      const data = {pageNo: currPage}
+      let data:any;
+      if(currCat){
+        data = {categoryId: currCat, pageNo: currPage}
+      }else if(searchText) {
+        data = {subStr: searchText, pageNo: currPage}
+      }else {
+        data = {pageNo: currPage}
+      }
       const res = await GetProductListWithDataService(data);
       const list = res.data.result;
       setProductList(list);
       // setTotalPageNum(res.data.pageCount);
+    } catch (error) {
+      alert(error.message);
+    }
+  }
+
+  const handleSearch = async() => {
+    try {
+      const data = {'subStr': searchText};
+      const res = await GetProductListWithDataService(data);
+      const list = res.data.result;
+      setProductList(list);
+      setTotalPageNum(res.data.pageCount);
     } catch (error) {
       alert(error.message);
     }
@@ -94,14 +112,18 @@ const Admin: FC<any> = () => {
   useEffect(() => {
     handlePagination();
   },[currPage]);
+
+  useEffect(() => {
+    handleSearch();
+  }, [searchText]);
   
 
   return (
     <div className='col-12'>
-      <Searchbar searchText={searchText} setSearchText={setSearchText} />
+      <Searchbar searchText={searchText} setSearchText={setSearchText}  />
       <div className='side-Part rounded-4 bg-white'></div>
       <div className='d-flex flex-column flex-md-row'>
-        <div className='mt-5 pt-3 col-12 col-md-2 '>
+        <div className='mt-2 pt-3 col-12 col-md-2 mt-3'>
           <Category 
             filterDatabyCategory={setCurrCat} 
             seletedCategory={setCurrCat}
@@ -109,21 +131,11 @@ const Admin: FC<any> = () => {
           />
         </div>
         <div className='col-12 mx-auto mx-md-0 col-md-10 '>
-          <div className='row d-flex mt-5 mx-auto m-0 p-0 pe-2'>
+          <div className='row d-flex mt-2 mx-auto m-0 p-0 pe-2'>
             {/* <Filterbar /> */}
             {/* search product by name */}
-            {productList
-              .filter((d, i) => {
-                if (searchText == '') {
-                  return d
-                } else if (
-                  d.engVegName.toLocaleLowerCase().startsWith(searchText.toLocaleLowerCase())
-                ) {
-                  return d
-                }
-              })
-              .map((cardData: any) => (
-                <div className='shadow-lg col-6 col-md-3 m-0 my-3 bg-light' key={cardData.productId}>
+            {productList.map((cardData: any) => (
+                <div className='col-12 col-lg-4 col-md-4 col-xl-3 m-0 my-3 d-flex justify-content-center align-item-center p-3' key={cardData.productId}>
                   <CardComponent currCat={currCat} cardData={cardData} wishListHandler={wishListHandler} />
                 </div>
               ))}

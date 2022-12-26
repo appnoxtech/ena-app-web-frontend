@@ -30,7 +30,7 @@ const Desktop = () => {
     },
     {
       navName: '',
-      path: '/shop',
+      path: '/order',
     },
     {
       navName: '',
@@ -53,7 +53,7 @@ const Desktop = () => {
 
   
   return (
-    <div className='col-12 p-4' style={{position: 'fixed', top: '0px', left: '0px', backgroundColor: 'white', zIndex: 500}}>
+    <div className='col-12 px-4 pt-3' style={{position: 'fixed', top: '0px', left: '0px', backgroundColor: 'white', zIndex: 500}}>
       <div className='d-md-flex justify-content-between align-items-center  '>
         <NavLink to={'/'}>
           <div>
@@ -62,7 +62,7 @@ const Desktop = () => {
         </NavLink>
         <div className='navOuter '>
           {MenuItem.map((item, index) => (
-            <li className='navli  ' key={index}>
+            <li className='navli' key={index}>
               <NavLink to={item.path} className='navli mx-4'>
                 {item.navName}
               </NavLink>

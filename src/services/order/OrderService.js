@@ -20,3 +20,13 @@ export const GetOrderLiveStatus = async() => {
         }
     });
 }
+
+export const CancelOrder = async(data) => {
+    const url = `${API_URL}/order/cancel-order`;
+    const token = localStorage.getItem('@user_Token');
+    return axios.post(url, data, {
+        headers: {
+            "x-auth-token": token,
+        }
+    });
+}
