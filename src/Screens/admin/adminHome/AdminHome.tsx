@@ -21,11 +21,10 @@ const AdminHome:FC<any> =() => {
         ))}
           
         </div>
-        <div className="my-5"></div>
-        {/* <div className="col-lg-6 col-12  my-5 roundedDash d-flex flex-column align-items-center justify-content-center p-5">
+        <div className="col-lg-6 col-12  my-5 roundedDash d-flex flex-column align-items-center justify-content-center p-5">
               <span className='btn btn-default'><i className='fa fa-thin fa-plus text-success fs-1 lh-sm' aria-hidden='true'></i></span>
             <p className='pButtonInput my-2'>Add new Warehouse</p>
-        </div> */}
+        </div>
       </div>
     </>
   )
