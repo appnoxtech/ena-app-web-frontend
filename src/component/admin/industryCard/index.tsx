@@ -4,9 +4,10 @@ import { IoIosArrowBack } from 'react-icons/all'
 import './industry.css'
 
 const IndustryCard:FC<any>=({cardData,key})=>{
+  const navigate = useNavigate();
   return (
     <>
-        <div className="d-flex border my-2  ">
+        <div onClick={() => navigate(cardData.routes)} role="button" className="d-flex border my-2 rounded-2 onHoverEffect">
             <div className='col-9 py-4'>
                 <p className='cardP  my-5 p-0 m-0 px-4'>
                 {cardData.detail}

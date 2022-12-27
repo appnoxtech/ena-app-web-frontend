@@ -9,6 +9,7 @@ import { useGetCartList } from '../../hooks/carts/getCartList'
 import { useIsLoginHook } from '../../hooks/user/IsLoginHooks'
 import { useDispatch } from 'react-redux';
 import { updateUserCart } from '../../redux/reducer/cart/CartReducer'
+import { resetUserData } from '../../redux/reducer/UserDetails/userAction'
 
 const Desktop = () => {
   const navigate = useNavigate();
@@ -48,6 +49,7 @@ const Desktop = () => {
     localStorage.removeItem('@user_Token');
     localStorage.removeItem('user');
     localStorage.clear();
+    dispatch(resetUserData());
   }
   console.log('isLogin', isLogin);
 
