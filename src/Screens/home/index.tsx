@@ -6,6 +6,7 @@ import Pagination from '../../component/common-components/pagination/Pagination'
 import { EnaAppData } from '../../component/dummyData';
 import Searchbar from '../../component/searchbar/Searchbar';
 import { GetAllCategory, GetProductListService, GetProductListWithDataService } from '../../services/product/productService';
+import SmallSearchBar from '../../component/searchbar/SmallSearchBar';
 
 interface product {
   id: number,
@@ -18,14 +19,14 @@ interface product {
 };
 
 interface Response {
-   result: Array<product>
+  result: Array<product>
 };
 
 
 const Admin: FC<any> = () => {
   const [data, setData] = useState(EnaAppData)
   const filterData = EnaAppData
-  const [productList, setProductList] :any = useState([]); 
+  const [productList, setProductList]: any = useState([]);
   const [cardIndex, setCardIndex] = useState<any>();
   const [searchText, setSearchText] = useState('');
   const [currPage, setCurrPage] = useState(1);
@@ -53,14 +54,14 @@ const Admin: FC<any> = () => {
   // }
 
 
-  const getProductList = async() => {
+  const getProductList = async () => {
     try {
-      let res:any;
-      if(currCat){
-        const data = {categoryId: currCat}
+      let res: any;
+      if (currCat) {
+        const data = { categoryId: currCat }
         res = await GetProductListWithDataService(data);
         setCurrPage(1);
-      }else {
+      } else {
         res = await GetProductListService();
       }
       const data = res.data.result;
@@ -68,19 +69,19 @@ const Admin: FC<any> = () => {
       setTotalPageNum(res.data.pageCount);
     } catch (error) {
       console.log(error.msg);
-      return ;
+      return;
     }
   }
 
-  const handlePagination = async() => {
+  const handlePagination = async () => {
     try {
-      let data:any;
-      if(currCat){
-        data = {categoryId: currCat, pageNo: currPage}
-      }else if(searchText) {
-        data = {subStr: searchText, pageNo: currPage}
-      }else {
-        data = {pageNo: currPage}
+      let data: any;
+      if (currCat) {
+        data = { categoryId: currCat, pageNo: currPage }
+      } else if (searchText) {
+        data = { subStr: searchText, pageNo: currPage }
+      } else {
+        data = { pageNo: currPage }
       }
       const res = await GetProductListWithDataService(data);
       const list = res.data.result;
@@ -91,9 +92,9 @@ const Admin: FC<any> = () => {
     }
   }
 
-  const handleSearch = async() => {
+  const handleSearch = async () => {
     try {
-      const data = {'subStr': searchText};
+      const data = { 'subStr': searchText };
       const res = await GetProductListWithDataService(data);
       const list = res.data.result;
       setProductList(list);
@@ -107,25 +108,36 @@ const Admin: FC<any> = () => {
 
   useEffect(() => {
     getProductList();
-  },[currCat]);
+  }, [currCat]);
 
   useEffect(() => {
     handlePagination();
-  },[currPage]);
+  }, [currPage]);
 
   useEffect(() => {
     handleSearch();
   }, [searchText]);
-  
+
 
   return (
     <div className='col-12'>
-      <Searchbar searchText={searchText} setSearchText={setSearchText}  />
+      {/* <div className='d-flex border_outer justify-content-center align-items-center w-75  mx-auto  bg-light'>
+        <input
+          // onChange={(val)=>setSearchText(val)}
+          // value={searchText}
+          onChange={e => setSearchText(e.target.value)}
+          type='text'
+          placeholder='Search Fruits & Vegetables...'
+          className='search_bar bg-light border-0'
+        />
+        <i className='fa fa-search search-icon mt-3 mb-3 ' aria-hidden='true'></i>
+      </div> */}
       <div className='side-Part rounded-4 bg-white'></div>
       <div className='d-flex flex-column flex-md-row'>
-        <div className='mt-2 pt-3 col-12 col-md-2 mt-3'>
-          <Category 
-            filterDatabyCategory={setCurrCat} 
+        <div className='mt-2 pt-2 col-12 col-xl-2 mt-3'>
+          <SmallSearchBar setSearchText={setSearchText} searchText={searchText}  />
+          <Category
+            filterDatabyCategory={setCurrCat}
             seletedCategory={setCurrCat}
             currCat={currCat}
           />
@@ -135,12 +147,12 @@ const Admin: FC<any> = () => {
             {/* <Filterbar /> */}
             {/* search product by name */}
             {productList.map((cardData: any) => (
-                <div className='col-12 col-lg-4 col-md-4 col-xl-3 m-0 my-3 d-flex justify-content-center align-item-center p-3' key={cardData.productId}>
-                  <CardComponent currCat={currCat} cardData={cardData} wishListHandler={wishListHandler} />
-                </div>
-              ))}
+              <div className='col-12 col-lg-4 col-md-4 col-xl-3 m-0 mb-1 d-flex justify-content-center align-item-center p-3' key={cardData.productId}>
+                <CardComponent currCat={currCat} cardData={cardData} wishListHandler={wishListHandler} />
+              </div>
+            ))}
             <div className='col-12 d-flex justify-content-end mt-3'>
-              <Pagination pageCount={totalPageNum} currPage={currPage} setCurrPage={setCurrPage}  />
+              <Pagination pageCount={totalPageNum} currPage={currPage} setCurrPage={setCurrPage} />
             </div>
           </div>
         </div>

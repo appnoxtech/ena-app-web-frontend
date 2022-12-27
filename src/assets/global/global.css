@@ -56,3 +56,13 @@
   .border_radius1{
     border-radius: 12px !important;
   }
+
+  .mt-90{
+    margin-top: 90px;
+  }
+
+  @media screen and (max-width: 576px) {
+    .mt-90{
+      margin-top: 0px;
+    }
+  }

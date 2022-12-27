@@ -9,6 +9,7 @@ import { FaBoxOpen } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { getJSDocDeprecatedTag } from 'typescript';
 import OrderCancelModal from '../common-components/modals/OrderCancelModal';
+import '../../assets/global/global.css';
 
 const Order = () => {
   const [modalShow, setModalShow] = useState(false);
@@ -55,9 +56,9 @@ const Order = () => {
   }
 
   return (
-    <div className='container-fluid pb-5'>
+    <div className='container-fluid pb-5 mt-90'>
       <div className='side-Part rounded-4 bg-white'></div>
-      <div className='col-10 mx-auto fixedHeightTable'>
+      <div className='col-10 mx-auto fixedHeightTable mt-5 mt-md-0'>
         <Table responsive className='orders_Heading rounded' hover bordered>
           <thead>
             <tr>

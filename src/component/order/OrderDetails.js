@@ -9,7 +9,7 @@ import './Order.css'
 import { GetCartDetailsService } from '../../services/cart/cartService';
 import { GetOrderLiveStatus } from '../../services/order/OrderService';
 import OrderTracking from './OrderTracking';
-
+import '../../assets/global/global.css';
 
 const OrderDetails = () => {
     const [showModal, setShowModal] = useState(false);
@@ -54,10 +54,10 @@ const OrderDetails = () => {
     }, []);
 
     return (
-        <div className='container-fluid pb-5'>
+        <div className='container-fluid pb-5 mt-90'>
             <div className='side-Part rounded-4 bg-white'></div>
             <div className='fixedHeightTable col-10 mx-auto'>
-                <Table stickyHeader={true} responsive className='orders_Heading rounded'>
+                <Table stickyHeader={true} responsive className='orders_Heading rounded mt-5 mt-md-0'>
                     <thead className="header">
                         <tr>
                             <th>Image</th>

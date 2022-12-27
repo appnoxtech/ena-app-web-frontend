@@ -52,8 +52,8 @@ const category: FC<any> = ({ filterDatabyCategory, currCat }) => {
   }
 
   return (
-    <div className='outer_navli col-12'>
-      <div className={'col-12 col-md-8 col-sm-12 ms-auto mx-md-auto py-2 bgWhite'}>
+    <div className='outer_navli ps-2 col-12 d-flex justify-content-center align-item-center'>
+      <div className={'col-12 col-md-8 col-xl-11 col-sm-12 ms-auto mx-md-auto py-2 bgWhite'}>
         <p
           onClick={() => {dropDowntoggleHandler()}}
           className='fontWeight-700 bgWhite m-0 p-0 linone text-center bgWhite d-flex justify-content-center align-item-center'

@@ -14,9 +14,8 @@ const Pagination: FC<any> = ({ currPage, setCurrPage, pageCount }) => {
             ? null 
             : 
             <li onClick={() => {
-              console.log('test log');
               setCurrPage(oldVal => --oldVal)
-            }} role="button" className="page-item px-2  disabled">
+            }} role="button" className="page-item px-sm-1 px-2  disabled">
               <a  className="page-link "><FaArrowLeft /></a>
             </li>
           }
@@ -24,7 +23,7 @@ const Pagination: FC<any> = ({ currPage, setCurrPage, pageCount }) => {
             Array.from({ length: pageCount }, (_, index) => {
               const num = ++index;
               return (
-                <li role="button" className="page-item px-2" >
+                <li role="button" className="page-item px-sm-1 px-2" >
                   <a
                     className="page-link"
                     id={currPage === num ? 'active' : ''}
@@ -38,7 +37,7 @@ const Pagination: FC<any> = ({ currPage, setCurrPage, pageCount }) => {
           }
           {
             pageCount === currPage ? null
-              : <li className="page-item px-2">
+              : <li className="page-item px-sm-1 px-2">
                 <a role="button" onClick={() => setCurrPage(oldVal => ++oldVal)} className="page-link" ><FaArrowRight /></a>
               </li>
           }

@@ -104,7 +104,7 @@ const CardComponent: FC<any> = ({ cardData, indexData, wishListHandler, currCat 
       hoverable
       style={{ width: '100%' }}
       cover={
-        <img alt="example" height={240} width={240} style={{ objectFit: 'contain', objectPosition: 'center' }} src={cardData.image} />
+        <img alt="example" height={200} width={240} style={{ objectFit: 'contain', objectPosition: 'center' }} src={cardData.image} />
       }
     >
       <Meta className='ms-1' title={cardData.engVegName} />
@@ -149,8 +149,6 @@ const CardComponent: FC<any> = ({ cardData, indexData, wishListHandler, currCat 
               />
           }
         </div>
-
-
       </div>
     </Card>
   )
