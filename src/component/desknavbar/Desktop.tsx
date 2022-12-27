@@ -90,15 +90,15 @@ const Desktop = () => {
               </Popover>
             }
           >
-            <Button className='nav__link' variant=''>
-              <i style={{fontSize: 32}} className='fa fa-user-o person-icon' aria-hidden='true'></i>
+            <Button className='nav__link me-3' variant=''>
+              <i style={{fontSize: 46}} className='fa fa-user-o person-icon' aria-hidden='true'></i>
             </Button>
           </OverlayTrigger>
           {/* <i className='fa fa-heart-o heart_icon' aria-hidden='true'></i> */}
           <NavLink to='/cart'>
             <div className="cart-container">
                <p className='cart-count'>{count}</p>
-               <i className='fa fa-shopping-cart cart_icon' style={{fontSize: 32}} aria-hidden='true'></i>
+               <i className='fa fa-shopping-cart cart_icon' style={{fontSize: 46}} aria-hidden='true'></i>
             </div>
           </NavLink>
         </div>

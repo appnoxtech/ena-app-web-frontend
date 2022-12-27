@@ -64,6 +64,7 @@ const SelectCategory = ({changeCategorie}) => {
                 slot: categoryList.length,
                 selectable: true,
                 defaultSelectedKeys: [`${currCat}`],
+                onClick: ({ item, key, keyPath, domEvent }) => changeCategorie(key)
             }}
         >
             <Typography.Link>
