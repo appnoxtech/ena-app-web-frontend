@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { PlusOutlined } from '@ant-design/icons';
 import Form from 'react-bootstrap/Form';
@@ -7,39 +7,48 @@ import LoginInput from '../../../component/common-components/loginInput';
 import ButtonComp from '../../../component/common-components/buttonComp/ButtonComp';
 import Dropzone from "react-dropzone";
 import { BiImageAdd } from 'react-icons/bi';
-import { AddProductService } from '../../../services/product/productService';
+import { AddProductService, UpdateProductService } from '../../../services/product/productService';
 import { UploadImageService } from '../../../services/imageUpload/uploadImage';
+import './AddProduct.css';
+
 const initialState = {
     vegName: '',
     engVegName: '',
     image: '',
-    quantity: '',
-    categorieId: '',
+    categoryId: '',
+    totalQuantity: '',
     price: '',
     priceWithTax: '',
-    unit: '',
     orderQuantity: '',
-    totalQuantity: '',
     description: '',
 }
 const errorInitialState = {
     vegName: '',
     engVegName: '',
     image: '',
-    quantity: '',
-    categorieId: '',
+    categoryId: '',
     price: '',
     priceWithTax: '',
-    unit: '',
     orderQuantity: '',
     totalQuantity: '',
     description: '',
 }
 
 export default function AddProductForm(props) {
+
     const [localError, setLocalError] = useState(errorInitialState);
     const [product, setProduct] = useState(initialState);
     const CategoreList = useSelector(state => state.categorie.categorieList);
+    const [isUpdate, setIsUpdate] = useState(false);
+    const productInfo = () => {
+        if(Object.keys(props.product).length > 0){
+            setProduct(props.product)
+            setIsUpdate(true);
+        }else{
+            setProduct(initialState);
+            setIsUpdate(false);
+        }
+    }
 
     const validation = () => {
         const error = {};
@@ -57,16 +66,38 @@ export default function AddProductForm(props) {
 
     console.log('CategoreList', CategoreList);
 
-    const handleAddProduct = async() => {
+    const handleAddProduct = async () => {
         const error = validation();
         const isErrorLength = Object.keys(error).filter(id => error[id] !== '').length;
         console.log('isErrorLength', isErrorLength);
 
         if (isErrorLength === 0) {
-            console.log('Product', product);
             try {
-                const res = await AddProductService(product);
-                alert('Product Added Successfully !');
+                if(isUpdate){
+                    const data = {
+                        ...product,
+                        price: parseInt(product.price, 10),
+                        priceWithTax: parseInt(product.priceWithTax, 10),
+                        orderQuantity: parseInt(product.orderQuantity, 10),
+                        totalQuantity: parseInt(product.totalQuantity, 10),
+                        unit: 'KG',
+                    }
+                    const res = await UpdateProductService(data);
+                    await props.getProductList();
+                    alert('Product Updated Successfully !');
+                }else{
+                    const data = {
+                        ...product,
+                        price: parseInt(product.price, 10),
+                        priceWithTax: parseInt(product.priceWithTax, 10),
+                        orderQuantity: parseInt(product.orderQuantity, 10),
+                        totalQuantity: parseInt(product.totalQuantity, 10),
+                        unit: 'KG',
+                    }
+                    const res = await AddProductService(data);
+                    await props.getProductList();
+                    alert('Product Added Successfully !');
+                }
                 props.onHide();
             } catch (error) {
                 console.log('Error');
@@ -82,17 +113,31 @@ export default function AddProductForm(props) {
         })
     }
 
-    const uploadImage = async(data) => {
+
+    useEffect(() => {
+        productInfo();
+        return () => {
+            setLocalError(errorInitialState);
+        }
+    }, [props.product])
+
+    const uploadImage = async (data) => {
         var bodyFormData = new FormData();
         bodyFormData.append('file', data);
         try {
-            const res = UploadImageService(bodyFormData);
-            console.log('response', res);
+            const res = await UploadImageService(bodyFormData);
+            const urlPath = res.data.result.baseUrl + res.data.result.imagePath;
+            console.log('urlPath', urlPath);
+            if (urlPath) {
+                setProduct({
+                    ...product,
+                    image: urlPath
+                })
+            }
         } catch (error) {
             alert(error.message);
         }
-    }
-
+    };
 
     return (
         <Modal
@@ -106,10 +151,10 @@ export default function AddProductForm(props) {
                     Add Product
                 </Modal.Title>
             </Modal.Header>
-            <Modal.Body style={{overFlow: 'auto'}}>
+            <Modal.Body style={{ overFlow: 'auto' }}>
                 <div className='col-10 mx-auto pt-0 mt-3'>
                     <div
-                        className="d-flex flex-1 me-3 justify-content-center align-item-center h-100"
+                        className="d-flex me-3 justify-content-center align-item-center"
                         style={!product.image ? {
                             borderWidth: 2,
                             borderRadius: 2,
@@ -119,12 +164,12 @@ export default function AddProductForm(props) {
                             color: '#bdbdbd',
                             outline: 'none',
                             transition: 'border .24s ease-in-out'
-                        } : { overflow: 'hidden',marginBottom: 10, flexDirection: 'column', height: '100%' }}
+                        } : { overflow: 'hidden', marginBottom: 10, flexDirection: 'column', height: '30%' }}
                     >
                         {
                             product.image ? (
                                 <>
-                                    <img src={product.image} alt='shared media' style={{ width: '100%', height: '90%', marginBottom: '10' }} />
+                                    <img className='dynamicImage' src={product.image} alt='shared media' style={{ marginBottom: '10' }} />
                                     <ButtonComp
                                         navigationHandler={removeImage}
                                         type='button'
@@ -134,9 +179,9 @@ export default function AddProductForm(props) {
                                 </>
                             ) : (
                                 <Dropzone
-                                    onDrop={acceptedFiles => {
+                                    onDrop={async (acceptedFiles) => {
                                         console.log('acceptedFiles', acceptedFiles[0].path);
-                                        uploadImage(acceptedFiles[0]);
+                                        await uploadImage(acceptedFiles[0]);
                                         // setProduct({
                                         //     ...product,
                                         //     image: URL.createObjectURL(acceptedFiles[0])
@@ -193,21 +238,40 @@ export default function AddProductForm(props) {
                     <label className='form-label mt-4 h6 h3 d-none d-lg-block d-md-block'>
                         Select Category
                     </label>
-                    <Form.Select aria-label="Select Categorie" className='mt-4 mt-xl-2' 
-                    onChange={(e) => 
-                        setProduct(oldValue => {
-                            return {
-                                ...oldValue,
-                                categorieId: e.target.value
-                            }
-                        })
-                    }>
+                    <Form.Select aria-label="Select Categorie" className='mt-4 mt-xl-2'
+                        onChange={(e) =>
+                            setProduct(oldValue => {
+                                return {
+                                    ...oldValue,
+                                    categoryId: e.target.value
+                                }
+                            })
+                        }>
+                        <option>Select Category</option>
                         {
                             CategoreList.map(item => <option value={item._id}>{item.categoryName}</option>)
                         }
                     </Form.Select>
-                    {localError.categorieId == '' ? null : (
-                        <p className='text-danger mt-1'>{localError.categorieId}</p>
+                    {localError.categoryId == '' ? null : (
+                        <p className='text-danger mt-1'>{localError.categoryId}</p>
+                    )}
+
+                    <label className='form-label mt-4 h6 h3 d-none d-lg-block d-md-block'>
+                        Description
+                    </label>
+
+                    <Form.Control 
+                        onChange={(e) => setProduct(oldValue => {
+                            return {
+                                ...oldValue,
+                                description: e.target.value,
+                            }
+                        })} 
+                        as="textarea"
+                        aria-label="With textarea"
+                     />
+                    {localError.description == '' ? null : (
+                        <p className='text-danger mt-1'>{localError.description}</p>
                     )}
 
                     <label className='form-label mt-4 h6 h3 d-none d-lg-block d-md-block'>
@@ -266,16 +330,16 @@ export default function AddProductForm(props) {
                     </label>
                     <LoginInput
                         type='number'
-                        name='quantity'
-                        id='quantity'
+                        name='totalQuantity'
+                        id='totalQuantity'
                         placeholder='Enter Product Quantity'
                         class='form-control mt-4 mt-xl-2'
                         Input={product}
                         setInput={setProduct}
                     />
 
-                    {localError.quantity == '' ? null : (
-                        <p className='text-danger mt-1'>{localError.quantity}</p>
+                    {localError.totalQuantity == '' ? null : (
+                        <p className='text-danger mt-1'>{localError.totalQuantity}</p>
                     )}
 
                     <ButtonComp

@@ -260,6 +260,12 @@ export const wareHouse = [
     bgClass:'bgGreen',
     routes: '/all-order',
   },
+  {
+    detail:'Users',
+    image: 'wareHouse4.png',
+    bgClass:'bgOrange',
+    routes: '/all-order',
+  },
   // {
   //   detail:'Drugs & Pharma',
   //   image: 'wareHouse5.png',

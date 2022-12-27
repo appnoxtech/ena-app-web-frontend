@@ -30,10 +30,16 @@ import OrderDetails from '../order/OrderDetails'
 import { useGetUserType } from '../../hooks/user/getUserType'
 import UserRoutes from '../../Routes/userRoutes'
 import AdminRoutes from '../../Routes/AdminRoutes'
+import { useSelector } from 'react-redux'
 
 function Routing() {
-  const userType = useGetUserType();
-
+  const UserType = useSelector((state: any) => state.user.userType);
+  const [userType, setUserType] = useState(UserType);
+  useEffect(() => {
+    setUserType(UserType);
+  }, [UserType]);
+  console.log('userType', UserType);
+  
   return (
     <>
       <BrowserRouter>

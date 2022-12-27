@@ -19,6 +19,9 @@ const AdminProductList: FC<any> = () => {
   const [totalPageNum, setTotalPageNum] = useState(0);
   const [currPage, setCurrPage] = useState(1);
   const [modalShow, setModalShow] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState({});
+  const [isEdit, setIsEdit] = useState(false);
+  const [currId, setCurrId] = useState('');
 
   const getProductList = async(id:any) => {
      try {
@@ -32,9 +35,21 @@ const AdminProductList: FC<any> = () => {
      }
   }
 
+//   const refreshProductList = async() => {
+//     try {
+//      const data = {categoryId: currId, pageNo};
+//      const res = await GetProductListWithDataService(data);
+//      const list = res.data.result;
+//      setProductList(list);
+//      setTotalPageNum(res.data.pageCount);
+//     } catch (error) {
+//        alert(error.message);
+//     }
+//  }
+
   const handlePagination = async() => {
     try {
-      const data = {pageNo: currPage}
+      const data = {categoryId: currId, pageNo: currPage}
       const res = await GetProductListWithDataService(data);
       const list = res.data.result;
       setProductList(list);
@@ -47,33 +62,52 @@ const AdminProductList: FC<any> = () => {
   useEffect(() => {
     const SelectedCategory = JSON.parse(localStorage.getItem('category'));
     setCategoryItem(SelectedCategory);
+    setCurrId(SelectedCategory._id);
     getProductList(SelectedCategory._id);
   },[]);
 
   useEffect(() => {
-    handlePagination();
+    if(currId){
+      handlePagination();
+    }
+   
   },[currPage]);
+
+  const handleCardEditClick = (data:any) => {
+    console.log('bsvhbfjdhb', data);
+    setIsEdit(true);
+    setSelectedProduct(data);
+    setModalShow(true);
+  }
 
   return (
     <>
       <div className='container-fluid d-flex flex-column align-items-center justify-content-center'>
         {/* HeadPartList */}
         <div className='col-12 d-flex align-items-center flex-column flex-lg-row justify-content-between'>
-          <SelectCategory />
+          <SelectCategory changeCategorie={getProductList} />
           <div className='my-4 my-lg-0'>
             <p className='p-0 m-0 headP '>
               Industrial Supplies <span className='text-dark fw-bold'>/Products</span>
             </p>
           </div>
           <div className='me-4'>
-            <a onClick={() => setModalShow(true)} className='btn btn-success text-light btnGreen'>Add Product</a>
+            <a onClick={() => {
+               setSelectedProduct({});
+               setModalShow(true)
+            }} className='btn btn-success text-light btnGreen'>Add Product</a>
           </div>
         </div>
         <div className='container-fluid border-top my-4'></div>
         <div className="container row">
           {productList.map((product:any,i :any)=>(
             <div className="col-12 col-lg-4 col-md-6 col-xl-3 mb-3 d-flex justify-content-center align-item-center">
-               <ProductCard product={product} />
+               <ProductCard 
+                product={product} 
+                handleCardEditClick={handleCardEditClick} 
+                getProductList={handlePagination} 
+                changeCategorie={getProductList}
+               />
             </div>
           ))}
         </div>
@@ -84,6 +118,8 @@ const AdminProductList: FC<any> = () => {
       <AddProductForm
         show={modalShow}
         onHide={() => setModalShow(false)}
+        product={selectedProduct}
+        getProductList={handlePagination}
       />
     </>
   )

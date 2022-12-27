@@ -3,7 +3,7 @@ import { DownOutlined } from '@ant-design/icons';
 import { Dropdown, Space, Typography } from 'antd';
 import { GetAllCategory } from '../../../services/product/productService';
 
-const SelectCategory = () => {
+const SelectCategory = ({changeCategorie}) => {
     const [categoryList, setCategoryList] = useState([{}]);
     const [currCat, setCurrCat] = useState('');
     const items = [
