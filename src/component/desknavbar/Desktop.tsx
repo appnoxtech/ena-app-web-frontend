@@ -50,6 +50,7 @@ const Desktop = () => {
     localStorage.removeItem('user');
     localStorage.clear();
     dispatch(resetUserData());
+    navigate('/login');
   }
   console.log('isLogin', isLogin);
 

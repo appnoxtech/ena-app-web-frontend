@@ -43,7 +43,7 @@
 .cart-count {
   font-size: large;
   position: absolute;
-  top: -15px !important;
-  right: 1.9rem;
+  top: -20px !important;
+  right: 8px !important;
   color: #51BC4A
 }

@@ -31,6 +31,7 @@ import { useGetUserType } from '../../hooks/user/getUserType'
 import UserRoutes from '../../Routes/userRoutes'
 import AdminRoutes from '../../Routes/AdminRoutes'
 import { useSelector } from 'react-redux'
+import './Routing.css';
 
 function Routing() {
   const UserType = useSelector((state: any) => state.user.userType);
@@ -44,7 +45,7 @@ function Routing() {
     <>
       <BrowserRouter>
         <Navbar />
-        <div style={{marginTop:"140px"}}></div>
+        <div className='height'></div>
           {
             userType === 'customer' ? <UserRoutes /> : userType === 'admin' ? <AdminRoutes /> : null
           }
