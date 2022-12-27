@@ -6,7 +6,7 @@ const RelatedProductCard: FC<any> = ({ noutil,reletedProduct }) => {
   return (
     <div className='card_container border-1  '>
       <div className='card '>
-        <img src={reletedProduct.img} className='img_data mx-auto ' alt='...' />
+        <img src={reletedProduct.image} className='img_data mx-auto ' alt='...' />
         {Boolean(util) && (
           <div className='fabDiv'>
             <div className='rounded-end Off_container offContainerGreen'>

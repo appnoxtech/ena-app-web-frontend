@@ -8,6 +8,7 @@ const LoginInput:FC<any>=({...prop})=>{
   return (
       <input
         type={prop.type}
+        value={prop.Input[prop.id]}
         className={prop.class}
         id={prop.id}
         placeholder={prop.placeholder}

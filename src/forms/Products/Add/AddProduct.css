@@ -1,0 +1,15 @@
+.dynamicImage{
+    width: 630px;
+    height: 381px;
+    object-fit: contain;
+    object-position: center;
+}
+
+@media screen and (max-width: 576px) {
+    .dynamicImage{
+        width: 80%;
+        height: 200px;
+        object-fit: contain;
+        object-position: center;
+    }
+}

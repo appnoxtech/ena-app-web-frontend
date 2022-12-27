@@ -36,3 +36,13 @@ export const GetAllCategory = async () => {
     const url = `${API_URL}/product/get-all-category`;
     return axios.get(url);
 }
+
+export const DeleteProductServive = async (data) => {
+    const url = `${API_URL}/product/delete-product`;
+    const token = localStorage.getItem('@user_Token');
+    return axios.post(url, data,{
+        headers: {
+            "x-auth-token": token,
+        }
+    });
+}
