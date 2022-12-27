@@ -7,7 +7,8 @@ import { EnaAppData } from '../../component/dummyData';
 import Searchbar from '../../component/searchbar/Searchbar';
 import { GetAllCategory, GetProductListService, GetProductListWithDataService } from '../../services/product/productService';
 import SmallSearchBar from '../../component/searchbar/SmallSearchBar';
-
+import Lottie from 'react-lottie';
+import NothingFound from '../../assets/animations/nothing-found.json';
 interface product {
   id: number,
   vegName: string,
@@ -33,7 +34,11 @@ const Admin: FC<any> = () => {
   const [totalPageNum, setTotalPageNum] = useState(0);
   //const [seletedCategory,setSletedCategorey]=useState()
   const [currCat, setCurrCat] = useState('');
-
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: NothingFound,
+  };
   const wishListHandler = (index) => {
     console.log(index)
     let temp = [...data]
@@ -135,27 +140,39 @@ const Admin: FC<any> = () => {
       <div className='side-Part rounded-4 bg-white'></div>
       <div className='d-flex flex-column flex-md-row'>
         <div className='mt-2 pt-2 col-12 col-xl-2 mt-3'>
-          <SmallSearchBar setSearchText={setSearchText} searchText={searchText}  />
+          <SmallSearchBar setSearchText={setSearchText} searchText={searchText} />
           <Category
             filterDatabyCategory={setCurrCat}
             seletedCategory={setCurrCat}
             currCat={currCat}
           />
         </div>
-        <div className='col-12 mx-auto mx-md-0 col-md-10 '>
-          <div className='row d-flex mt-2 mx-auto m-0 p-0 pe-2'>
-            {/* <Filterbar /> */}
-            {/* search product by name */}
-            {productList.map((cardData: any) => (
-              <div className='col-12 col-lg-4 col-md-4 col-xl-3 m-0 mb-1 d-flex justify-content-center align-item-center p-3' key={cardData.productId}>
-                <CardComponent currCat={currCat} cardData={cardData} wishListHandler={wishListHandler} />
+        {
+          productList.length > 0 ?
+           <div className='col-12 mx-auto mx-md-0 col-md-10 '>
+              <div className='row d-flex mt-2 mx-auto m-0 p-0 pe-2'>
+                {/* <Filterbar /> */}
+                {/* search product by name */}
+                {productList.map((cardData: any) => (
+                  <div className='col-12 col-lg-4 col-md-4 col-xl-3 m-0 mb-1 d-flex justify-content-center align-item-center p-3' key={cardData.productId}>
+                    <CardComponent currCat={currCat} cardData={cardData} wishListHandler={wishListHandler} />
+                  </div>
+                ))}
+                <div className='col-12 d-flex justify-content-end mt-3'>
+                  <Pagination pageCount={totalPageNum} currPage={currPage} setCurrPage={setCurrPage} />
+                </div>
               </div>
-            ))}
-            <div className='col-12 d-flex justify-content-end mt-3'>
-              <Pagination pageCount={totalPageNum} currPage={currPage} setCurrPage={setCurrPage} />
-            </div>
+           </div> 
+          : 
+          <div className='col-12 d-flex justify-content-center align-item-center' style={{ height: '72vh' }}>
+            <Lottie
+              options={defaultOptions}
+              height={400}
+              width={400}
+            />
           </div>
-        </div>
+        }
+
       </div>
     </div>
   )
