@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { Navigate, NavLink, useNavigate } from 'react-router-dom'
-import './Desktop.css'
 import Ena from '../../assets/images/enaLogoGreen.png'
 import { Button, OverlayTrigger, Popover, PopoverHeader } from 'react-bootstrap'
 import {useSelector} from 'react-redux';
@@ -10,6 +9,7 @@ import { useIsLoginHook } from '../../hooks/user/IsLoginHooks'
 import { useDispatch } from 'react-redux';
 import { updateUserCart } from '../../redux/reducer/cart/CartReducer'
 import { resetUserData } from '../../redux/reducer/UserDetails/userAction'
+import './Desktop.css'
 
 const Desktop = () => {
   const navigate = useNavigate();

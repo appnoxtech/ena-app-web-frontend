@@ -40,7 +40,7 @@
   position: relative;
 }
 
-.cart-count-desk {
+.cart-count-desk{
   font-size: large;
   position: absolute;
   top: -15px !important;
