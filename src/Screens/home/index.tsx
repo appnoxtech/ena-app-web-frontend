@@ -138,8 +138,8 @@ const Admin: FC<any> = () => {
         <i className='fa fa-search search-icon mt-3 mb-3 ' aria-hidden='true'></i>
       </div> */}
       <div className='side-Part rounded-4 bg-white'></div>
-      <div className='d-flex flex-column flex-md-row'>
-        <div className='mt-2 pt-2 col-12 col-xl-2 mt-3'>
+      <div className='d-flex flex-column flex-lg-row'>
+        <div className='mt-2 pt-2 col-md-12 col-md-2 col-xl-2 mt-3'>
           <SmallSearchBar setSearchText={setSearchText} searchText={searchText} />
           <Category
             filterDatabyCategory={setCurrCat}
@@ -149,7 +149,7 @@ const Admin: FC<any> = () => {
         </div>
         {
           productList.length > 0 ?
-           <div className='col-12 mx-auto mx-md-0 col-md-10 '>
+           <div className='col-12 mx-auto mx-md-0 col-md-12 '>
               <div className='row d-flex mt-2 mx-auto m-0 p-0 pe-2'>
                 {/* <Filterbar /> */}
                 {/* search product by name */}

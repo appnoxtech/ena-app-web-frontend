@@ -44,12 +44,14 @@ function Routing() {
   return (
     <>
       <BrowserRouter>
-        <Navbar />
+       <div className="col-12 containe">
+       <Navbar />
         <div className='height'></div>
           {
             userType === 'customer' ? <UserRoutes /> : userType === 'admin' ? <AdminRoutes /> : null
           }
-        <DesktopFooter class='container-fluid footer mt-5' />
+        <DesktopFooter class='container-fluid footer mt-5 mt-auto' />
+       </div>
       </BrowserRouter>
     </>
   )

@@ -12,7 +12,6 @@ const App = () => {
     <>
       <div className='main_screen'>
         <Routing /> 
-        {/* <Checkout /> */}
       </div>
     </>
   )
