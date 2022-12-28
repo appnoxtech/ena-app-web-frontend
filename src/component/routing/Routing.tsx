@@ -32,6 +32,7 @@ import UserRoutes from '../../Routes/userRoutes'
 import AdminRoutes from '../../Routes/AdminRoutes'
 import { useSelector } from 'react-redux'
 import './Routing.css';
+import AgentsRoutes from '../../Routes/AgentsRoutes'
 
 function Routing() {
   const UserType = useSelector((state: any) => state.user.userType);
@@ -48,7 +49,13 @@ function Routing() {
        <Navbar />
         <div className='height'></div>
           {
-            userType === 'customer' ? <UserRoutes /> : userType === 'admin' ? <AdminRoutes /> : null
+            userType === 'customer' ? 
+              <UserRoutes /> 
+              : userType === 'admin' ? 
+              <AdminRoutes /> 
+              : userType === 'driver' ?
+              <AgentsRoutes />
+              :null
           }
         <DesktopFooter class='container-fluid footer mt-5 mt-auto' />
        </div>

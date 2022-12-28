@@ -3,7 +3,7 @@ import { Navigate, NavLink, useNavigate } from 'react-router-dom'
 import './Desktop.css'
 import Ena from '../../assets/images/enaLogoGreen.png'
 import { Button, OverlayTrigger, Popover, PopoverHeader } from 'react-bootstrap'
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 import { GetCartDetailsService } from '../../services/cart/cartService'
 import { useGetCartList } from '../../hooks/carts/getCartList'
 import { useIsLoginHook } from '../../hooks/user/IsLoginHooks'
@@ -13,16 +13,17 @@ import { resetUserData } from '../../redux/reducer/UserDetails/userAction'
 
 const Desktop = () => {
   const navigate = useNavigate();
-  const cartData = useGetCartList(); 
+  const UserType = useSelector((state: any) => state.user.userType);
+  const cartData = useGetCartList();
   const dispatch = useDispatch();
   const isLogin = useIsLoginHook();
-  const countGlobal = useSelector((state:any) => state.cart.count);
+  const countGlobal = useSelector((state: any) => state.cart.count);
   const [count, setCount] = useState(cartData.length);
 
   useEffect(() => {
     dispatch(updateUserCart(cartData.length));
     setCount(countGlobal);
-  },[countGlobal]);
+  }, [countGlobal]);
 
   const MenuItem = [
     {
@@ -54,9 +55,9 @@ const Desktop = () => {
   }
   console.log('isLogin', isLogin);
 
-  
+
   return (
-    <div className='col-12 px-4 pt-3' style={{position: 'fixed', top: '0px', left: '0px', backgroundColor: 'white', zIndex: 500}}>
+    <div className='col-12 px-4 pt-3' style={{ position: 'fixed', top: '0px', left: '0px', backgroundColor: 'white', zIndex: 500 }}>
       <div className='d-md-flex justify-content-between align-items-center  '>
         <NavLink to={'/'}>
           <div>
@@ -91,17 +92,22 @@ const Desktop = () => {
               </Popover>
             }
           >
-            <Button className='nav__link me-3' variant=''>
-              <i style={{fontSize: 46}} className='fa fa-user-o person-icon' aria-hidden='true'></i>
+            <Button className='nav__link' variant=''>
+              <i style={{ fontSize: 46 }} className='fa fa-user-o person-icon' aria-hidden='true'></i>
             </Button>
           </OverlayTrigger>
           {/* <i className='fa fa-heart-o heart_icon' aria-hidden='true'></i> */}
-          <NavLink to='/cart'>
-            <div className="cart-container">
-               <p className='cart-count-desk'>{count}</p>
-               <i className='fa fa-shopping-cart cart_icon' style={{fontSize: 46}} aria-hidden='true'></i>
-            </div>
-          </NavLink>
+          {
+            UserType === 'customer' ?
+              <NavLink to='/cart'>
+                <div className="cart-container ms-3">
+                  <p className='cart-count-desk'>{count}</p>
+                  <i className='fa fa-shopping-cart cart_icon' style={{ fontSize: 46 }} aria-hidden='true'></i>
+                </div>
+              </NavLink>
+              : null
+          }
+
         </div>
       </div>
     </div>
