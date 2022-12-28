@@ -216,3 +216,7 @@ a:hover{
 .add_quantity_container:hover{
   background-color: rgba(46, 204, 113, 1);
 }
+
+.ant-card-body{
+  padding-bottom: 10px !important;
+}

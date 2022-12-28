@@ -154,7 +154,7 @@ const Admin: FC<any> = () => {
                 {/* <Filterbar /> */}
                 {/* search product by name */}
                 {productList.map((cardData: any) => (
-                  <div className='col-12 col-lg-4 col-md-4 col-xl-3 m-0 d-flex justify-content-center align-item-center p-3' key={cardData.productId}>
+                  <div className='col-12 col-lg-4 col-md-4 col-xl-3 m-0 d-flex justify-content-center align-item-center p-3 pb-0' key={cardData.productId}>
                     <CardComponent currCat={currCat} cardData={cardData} wishListHandler={wishListHandler} />
                   </div>
                 ))}
