@@ -6,6 +6,7 @@ import AdminHome from "../Screens/admin/adminHome/AdminHome";
 import AdminProductList from "../Screens/admin/productl-list/productList";
 import AddProduct from "../Screens/addProduct/AddProduct";
 import CategoryList from "../Screens/admin/categoryList/CategoryList";
+import RiderList from "../Screens/admin/riders/RiderList";
 
 const AdminRoutes = () => {
     return (
@@ -16,6 +17,7 @@ const AdminRoutes = () => {
             <Route path="/all-category" element={<CategoryList />} />
             <Route path='/admin-ProductList' element={<AdminProductList />} />
             <Route path='/admin-AddProduct' element={<AddProduct />} />
+            <Route path='/all-riders' element={<RiderList />} />
             <Route
                 path='*'
                 element={
