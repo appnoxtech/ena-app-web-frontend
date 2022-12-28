@@ -98,7 +98,15 @@ const Desktop = () => {
           {/* <i className='fa fa-heart-o heart_icon' aria-hidden='true'></i> */}
           <NavLink to='/cart'>
             <div className="cart-container">
-               <p className='cart-count-desk'>{count}</p>
+               <p 
+               style={{
+                  fontSize: 'large',
+                  position: 'absolute',
+                  bottom: '15px',
+                  left: '17px',
+                  color: '#51BC4A'
+               }}
+              >{count}</p>
                <i className='fa fa-shopping-cart cart_icon' style={{fontSize: 46}} aria-hidden='true'></i>
             </div>
           </NavLink>
