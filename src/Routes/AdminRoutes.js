@@ -7,10 +7,13 @@ import AdminProductList from "../Screens/admin/productl-list/productList";
 import AddProduct from "../Screens/addProduct/AddProduct";
 import CategoryList from "../Screens/admin/categoryList/CategoryList";
 import RiderList from "../Screens/admin/riders/RiderList";
+import OrderList from "../Screens/admin/orders/OrderList";
+import OrderDetails from "../Screens/admin/orders/OrderDetails";
 
 const AdminRoutes = () => {
     return (
-        <Routes>
+        <div className="mt-1 mt-lg-4">
+            <Routes>
             {/* <Route path='/admin' element={<Admin />} /> */}
             <Route path='/' element={<AdminHome />} />
             <Route path='/admin-login' element={<AdminLogin />} />
@@ -18,6 +21,8 @@ const AdminRoutes = () => {
             <Route path='/admin-ProductList' element={<AdminProductList />} />
             <Route path='/admin-AddProduct' element={<AddProduct />} />
             <Route path='/all-riders' element={<RiderList />} />
+            <Route path='/all-orders' element={<OrderList />} />
+            <Route path='/orderDetails' element={<OrderDetails />} />
             <Route
                 path='*'
                 element={
@@ -27,6 +32,7 @@ const AdminRoutes = () => {
                 }
             />
         </Routes>
+        </div>
     )
 }
 

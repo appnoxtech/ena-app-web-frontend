@@ -26,7 +26,7 @@ function CategoryList() {
 
 
     return (
-        <div>
+        <div className='mt-1 mt-lg-4'>
             <div className="container-fluid d-flex flex-column align-items-center justify-content-center">
                 <div className='col-12 d-flex align-items-center flex-column flex-lg-row justify-content-between'>
                     <div></div>

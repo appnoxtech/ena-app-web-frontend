@@ -1,0 +1,11 @@
+.fixedTable{
+    height: 40vh !important;
+    overflow: auto;
+}
+
+@media screen and (max-width: 991px) {
+    .fixedTable{
+        height: 45vh !important;
+        overflow: auto;
+    }
+}

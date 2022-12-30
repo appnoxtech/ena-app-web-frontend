@@ -258,7 +258,7 @@ export const wareHouse = [
     detail:'Orders',
     image: 'wareHouse4.png',
     bgClass:'bgGreen',
-    routes: '/all-order',
+    routes: '/all-orders',
   },
   {
     detail:'Users',

@@ -9,12 +9,13 @@ import { useGetCartList } from '../../hooks/carts/getCartList'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateUserCart } from '../../redux/reducer/cart/CartReducer'
 
-const Mobilenav = ({}) => {
+const Mobilenav = ({ }) => {
   const navigate = useNavigate();
   const isLogin = useIsLoginHook();
-  const cartData = useGetCartList(); 
+  const cartData = useGetCartList();
+  const UserType = useSelector((state: any) => state.user.userType);
   const dispatch = useDispatch();
-  const countGlobal = useSelector((state:any) => state.cart.count);
+  const countGlobal = useSelector((state: any) => state.cart.count);
   const [count, setCount] = useState(cartData.length);
   const MenuItem = [
     {
@@ -45,7 +46,7 @@ const Mobilenav = ({}) => {
   useEffect(() => {
     dispatch(updateUserCart(cartData.length));
     setCount(countGlobal);
-  },[countGlobal]);
+  }, [countGlobal]);
 
   return (
     <>
@@ -89,34 +90,38 @@ const Mobilenav = ({}) => {
             </div>
           </div>
           <div className='d-flex flex-row  mx-2 justify-content-center align-item-center '>
-          <OverlayTrigger
-            trigger='focus'
-            key='bottom'
-            placement='bottom'
-            overlay={
-              <Popover id='popover-positioned-bottom'>
-                <PopoverBody>
-                  {isLogin ? (
-                    <NavLink to='/' onClick={() => Logout()}>
-                      Logout
-                    </NavLink>
-                  ) : (
-                    <NavLink to='/login'>Log in</NavLink>
-                  )}
-                </PopoverBody>
-              </Popover>
+            <OverlayTrigger
+              trigger='focus'
+              key='bottom'
+              placement='bottom'
+              overlay={
+                <Popover id='popover-positioned-bottom'>
+                  <PopoverBody>
+                    {isLogin ? (
+                      <NavLink to='/' onClick={() => Logout()}>
+                        Logout
+                      </NavLink>
+                    ) : (
+                      <NavLink to='/login'>Log in</NavLink>
+                    )}
+                  </PopoverBody>
+                </Popover>
+              }
+            >
+              <Button className='nav__link' variant=''>
+                <i className='fa fa-user-o fs-2 font-green' aria-hidden='true'></i>
+              </Button>
+            </OverlayTrigger>
+            {
+              UserType === 'customer' ?
+                <NavLink to='/cart'>
+                  <div className="ms-4 cart-container">
+                    <p className='cart-count'>{count}</p>
+                    <i className='mt-2 fa fa-shopping-cart font-green cart_icon' aria-hidden='true'></i>
+                  </div>
+                </NavLink> : null
             }
-          >
-            <Button className='nav__link' variant=''>
-            <i className='fa fa-user-o me-4 fs-2 font-green' aria-hidden='true'></i>
-            </Button>
-          </OverlayTrigger>
-            <NavLink to='/cart'>
-            <div className="cart-container">
-               <p className='cart-count'>{count}</p>
-               <i className='mt-2 fa fa-shopping-cart font-green cart_icon' aria-hidden='true'></i>
-            </div>
-            </NavLink>
+
             {/* <i className='fa fa-heart-o heart_icon' aria-hidden='true'></i> */}
           </div>
         </div>

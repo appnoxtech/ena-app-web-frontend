@@ -30,3 +30,24 @@ export const CancelOrder = async(data) => {
         }
     });
 }
+
+export const AssignOrderService = async(data) => {
+    const url = `${API_URL}/order/assign-order`;
+    const token = localStorage.getItem('@user_Token');
+    return axios.post(url, data, {
+        headers: {
+            "x-auth-token": token,
+        }
+    });
+}
+
+export const GetOrderById = async(id) => {
+    const url = `${API_URL}/order/get-order-details/${id}`;
+    const token = localStorage.getItem('@user_Token');
+    return axios.get(url, {
+        headers: {
+            "x-auth-token": token,
+        }
+    });
+}
+

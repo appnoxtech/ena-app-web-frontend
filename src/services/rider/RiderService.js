@@ -51,3 +51,23 @@ export const DeleteRiderServive = async (data) => {
         }
     });
 }
+
+export const GetAssignedOrderList = async() => {
+    const url = `${API_URL}/agent/delete-agent`;
+    const token = localStorage.getItem('@user_Token');
+    return axios.get(url, {
+        headers: {
+            "x-auth-token": token,
+        }
+    })
+}
+
+export const GetRiderDetailsById = async (id) => {
+    const url = `${API_URL}/utils/get-profile/${id}`;
+    const token = localStorage.getItem('@user_Token');
+    return axios.get(url, {
+        headers: {
+            "x-auth-token": token,
+        }
+    });
+}

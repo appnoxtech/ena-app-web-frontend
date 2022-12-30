@@ -66,3 +66,18 @@
       margin-top: 0px;
     }
   }
+
+  .text-dots{
+    display: block;
+    color: #333333;
+    opacity: .4;
+    max-width: 98%;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+  }
+
+  .image-fit{
+    object-fit: cover;
+    object-position: center;
+  }
