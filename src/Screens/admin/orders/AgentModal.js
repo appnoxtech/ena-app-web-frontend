@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { Image } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
@@ -12,8 +12,8 @@ function AgentModal(props) {
 
     const AssignOrder = async(rider) => {
        try {
-        const data = {agentId: rider._id, orderId}
-        const res = await AssignOrderService(data);
+        const param = {agentId: rider._id, orderId}
+        const res = await AssignOrderService(param);
         await props.updateOrderDetails()
         props.onHide();
         alert('Agent Assigned');

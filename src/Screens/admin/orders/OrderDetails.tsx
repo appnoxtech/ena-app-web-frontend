@@ -10,6 +10,10 @@ import AgentModal from './AgentModal';
 import { Button } from 'react-bootstrap';
 import { GetRiderDetailsById, GetRiderListService } from '../../../services/rider/RiderService';
 import { GetOrderById } from '../../../services/order/OrderService';
+import io from 'socket.io-client';
+import { hostname } from '../../../GlobalVariable';
+
+const socket = io(hostname);
 
 type PropTypes = {
     order: orderType
@@ -21,6 +25,7 @@ const getDate = (data: number) => {
 }
 
 const OrderDetails: FC<any> = (props) => {
+    const [isConnected, setIsConnected] = useState(socket.connected);
     const [agentModal, setAgentModal] = useState(false);
     const [riderList, setRiderList] = useState([]);
     const [addressModal, setAddressModal] = useState(false);
@@ -80,6 +85,40 @@ const OrderDetails: FC<any> = (props) => {
     useEffect(() => {
         updateOrderDetails();
         getRiderList();
+    }, []);
+
+    //socket listen to change in order status
+    useEffect(() => {
+        socket.on('connect', () => {
+            console.log('Hi connection is runned');
+            setIsConnected(true);
+          });
+      
+          socket.on('disconnect', () => {
+            setIsConnected(false);
+          });
+
+          socket.on('ORDER_UPDATED', (data) => {
+            try {
+              console.log('DATA', { data });
+              // Subscribe to delivery associate
+              if (Order._id) {
+                socket.emit("SUBSCRIBE_TO_ORDER", {
+                  orderId: Order._id,
+                });
+              }
+            } catch (error) {
+              console.error(error);
+            }
+          });
+
+          return () => {
+            console.log('does is change');
+            
+            socket.off('connect');
+            socket.off('disconnect');
+            socket.off('ORDER_UPDATED');
+          };
     }, []);
 
 

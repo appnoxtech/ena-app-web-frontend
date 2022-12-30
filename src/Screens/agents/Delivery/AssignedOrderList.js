@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import Lottie from 'react-lottie';
+import io from 'socket.io-client';
 import { GetOrderLiveStatus } from '../../../services/order/OrderService';
 import OrderCard from '../../admin/orders/OrderCard';
 import NoOrderFound from '../../../assets/animations/noOrderFound.json';
+import { hostname } from '../../../GlobalVariable';
+
+const socket = io(hostname);
 
 function AssignedOrderList() {
     const [orderList, setOrderList] = useState([]);
+    const [isConnected, setIsConnected] = useState(socket.connected);
     const defaultOptions = {
         loop: true,
         autoplay: true,
@@ -25,7 +30,32 @@ function AssignedOrderList() {
 
     useEffect(() => {
         getOrderList();
-    }, []);
+        socket.on('connect', () => {
+          console.log('Hi connection is runned');
+          setIsConnected(true);
+        });
+    
+        socket.on('disconnect', () => {
+          setIsConnected(false);
+        });
+    
+        socket.on('ORDER_UPDATED', (data) => {
+            try {
+              console.log({...data});
+              if(data){
+                setOrderList(data);
+               }
+            } catch (error) {
+              console.error(error);
+            }
+          });
+    
+        return () => {
+          socket.off('connect');
+          socket.off('disconnect');
+          socket.off('ORDER_CREATED');
+        };
+      }, []);
 
     return (
         <div className='mt-1 mt-md-4'>
