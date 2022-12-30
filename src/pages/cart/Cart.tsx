@@ -7,7 +7,7 @@ const Cart = () => {
   },[]);
   
   return (
-    <div className='col-12 mt-1 mt-lg-4'>
+    <div className='col-12 mt-1 mt-lg-2'>
       <CartCom />
     </div>
   )

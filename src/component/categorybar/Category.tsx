@@ -15,7 +15,7 @@ const category: FC<any> = ({ filterDatabyCategory, currCat }) => {
     }
   }
   useEffect(() => {
-    if (window.innerWidth < 768) {
+    if (window.innerWidth < 992) {
       setIsMobile(true)
     } else setIsMobile(false)
   }, [isMobile]);

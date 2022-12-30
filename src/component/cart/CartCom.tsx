@@ -59,8 +59,6 @@ const CartCom = () => {
     return total;
   }
 
-  console.log('cartData', cartData);
-
   const handleBidAmountChange = (CardItem: any, bidAmount: any) => {
     const count = parseInt(bidAmount, 10);
     if (typeof count !== 'number' || isNaN(count)) {
@@ -101,8 +99,6 @@ const CartCom = () => {
     }
   }
   const handleCheckOut = () => {
-    console.log('isLogin', isLogin);
-
     if (isLogin) {
       history('/checkoutWaddress');
     } else {
