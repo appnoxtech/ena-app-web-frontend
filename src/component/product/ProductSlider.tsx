@@ -11,6 +11,7 @@ import { FC } from 'react';
 
 const ProductSlider:FC<any>= ({productInfo}) => {
   const [isMobile, setIsMobile] = useState(false);
+  
   const images = [
     {
       original:productInfo.image,

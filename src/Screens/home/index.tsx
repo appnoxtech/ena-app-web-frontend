@@ -126,17 +126,6 @@ const Admin: FC<any> = () => {
 
   return (
     <div className='col-12'>
-      {/* <div className='d-flex border_outer justify-content-center align-items-center w-75  mx-auto  bg-light'>
-        <input
-          // onChange={(val)=>setSearchText(val)}
-          // value={searchText}
-          onChange={e => setSearchText(e.target.value)}
-          type='text'
-          placeholder='Search Fruits & Vegetables...'
-          className='search_bar bg-light border-0'
-        />
-        <i className='fa fa-search search-icon mt-3 mb-3 ' aria-hidden='true'></i>
-      </div> */}
       <div className='side-Part rounded-4 bg-white'></div>
       <div className='d-flex flex-column flex-md-column flex-xl-row'>
         <div className='mt-2 pt-2 col-md-12 col-md-2 col-xl-2 mt-3'>
@@ -151,8 +140,6 @@ const Admin: FC<any> = () => {
           productList.length > 0 ?
            <div className='col-12 mx-auto mx-md-0 col-md-12 col-xl-10 '>
               <div className='row d-flex mt-2 mx-auto m-0 p-0 pe-2'>
-                {/* <Filterbar /> */}
-                {/* search product by name */}
                 {productList.map((cardData: any) => (
                   <div className='col-12 col-lg-4 col-md-4 col-xl-3 m-0 d-flex justify-content-center align-item-center p-3 pb-0' key={cardData.productId}>
                     <CardComponent currCat={currCat} cardData={cardData} wishListHandler={wishListHandler} />

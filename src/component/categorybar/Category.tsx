@@ -4,7 +4,8 @@ import { GetAllCategory } from '../../services/product/productService'
 
 const category: FC<any> = ({ filterDatabyCategory, currCat }) => {
   //#region  all state define here
-  const [showdropdown, setShowDropdown] = useState(window.innerWidth < 768 ? false : true)
+  const [windowSize, setWindowSize] = useState(window.innerWidth);
+  const [showdropdown, setShowDropdown] = useState(window.innerWidth < 992 ? false : true);
   const [isMobile, setIsMobile] = useState(false)
   const [categoryList, setCategoryList] = useState([]);
   //#region  defilne all function here
@@ -14,11 +15,28 @@ const category: FC<any> = ({ filterDatabyCategory, currCat }) => {
       setShowDropdown(!showdropdown)
     }
   }
-  useEffect(() => {
-    if (window.innerWidth < 992) {
-      setIsMobile(true)
-    } else setIsMobile(false)
-  }, [isMobile]);
+  // useEffect(() => {
+  //   console.log(window.innerWidth);
+    
+  //   if (window.innerWidth < 992) {
+  //     setIsMobile(true);
+  //   } else {
+  //     setShowDropdown(true);
+  //     setIsMobile(false)
+  //   }
+  // }, [isMobile, window.innerWidth]);
+
+  const windowWidthChangeHandler = (width: number) => {
+    setWindowSize(width);
+    if (window.innerWidth < 1200) {
+      setIsMobile(true);
+      setShowDropdown(false);
+    } else {
+      setShowDropdown(true);
+      setIsMobile(false)
+    }
+  }
+
 
   const getCategoryList = async() => {
     try {
@@ -32,6 +50,8 @@ const category: FC<any> = ({ filterDatabyCategory, currCat }) => {
   }
 
   useEffect(() => {
+    windowWidthChangeHandler(window.innerWidth);
+    window.addEventListener('resize',() => windowWidthChangeHandler(window.innerWidth));
     getCategoryList();
   }, []);
 
@@ -58,9 +78,10 @@ const category: FC<any> = ({ filterDatabyCategory, currCat }) => {
           onClick={() => {dropDowntoggleHandler()}}
           className='fontWeight-700 bgWhite m-0 p-0 linone text-center bgWhite d-flex justify-content-center align-item-center'
         >
-          <li className={isMobile ? 'iconcolor' : 'textblack'}>Categories</li>
+          <li role={isMobile ? 'button' : 'list'} className={isMobile ? 'iconcolor' : 'textblack'}>Categories</li>
           {isMobile && (
             <i
+              role={'button'}
               className={`${
                 showdropdown ? 'fa fa-chevron-circle-up' : 'fa fa-chevron-circle-down dropDownicon'
               } mt-1 mx-4 iconcolor`}

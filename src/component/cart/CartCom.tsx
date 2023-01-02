@@ -147,7 +147,7 @@ const CartCom = () => {
                     : null
                 }
               </div>
-            </div> : <div className='d-flex justify-content-center align-item-center' style={{height: '70vh'}}>
+            </div> : <div className='d-flex justify-content-center align-item-center'>
               <Lottie
                 options={defaultOptions}
                 height={400}

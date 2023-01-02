@@ -52,7 +52,6 @@ const Desktop = () => {
     dispatch(resetUserData());
     navigate('/login');
   }
-  console.log('isLogin', isLogin);
 
 
   return (
@@ -81,11 +80,11 @@ const Desktop = () => {
               <Popover id='popover-positioned-bottom'>
                 <Popover.Body>
                   {isLogin ? (
-                    <NavLink to='/' onClick={() => Logout()}>
+                    <div role={'button'} onClick={() => Logout()}>
                       Logout
-                    </NavLink>
+                    </div>
                   ) : (
-                    <NavLink to='/login'>Log in</NavLink>
+                    <div role={'button'} onClick={() => navigate('/login')}>Log in</div>
                   )}
                 </Popover.Body>
               </Popover>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { IoIosArrowBack } from 'react-icons/all'
 import '../Auth.css'
@@ -9,11 +9,12 @@ import LoginInput from '../../../component/common-components/loginInput'
 import ButtonComp from '../../../component/common-components/buttonComp/ButtonComp'
 
 import { useSignupHook } from '../../../hooks/authHooks/SignupHook'
+import NotificationContext from '../../../context/Notification/NotificationContext'
 
 function Signup() {
   const heading = 'Sign up'
-  const navigate = useNavigate()
-  const handelSignup = useSignupHook()
+  const navigate = useNavigate();
+  const handelSignup = useSignupHook();
   const initialState = {
     firstname: '',
     lastname: '',
@@ -21,7 +22,7 @@ function Signup() {
     password: '',
     confirm_password:''
   }
-  const localErrorState = { firstnameError:'',lastnameError:'', emailError: '', passwordError: ''}
+  const localErrorState = { firstnameError:'',lastnameError:'', emailError: '', passwordError: '', confirm_password: ''};
 
   const [localError, setlocalError] = useState(localErrorState)
 
@@ -33,31 +34,34 @@ function Signup() {
   const {firstname,lastname,email,password} = input
   const user = {firstname,lastname,email,password}
 
-  
   const checkValidation=()=>{
     if(input.firstname!=''){
-      setlocalError({ ...localErrorState, firstnameError: '' })
+      setlocalError({ ...localErrorState, firstnameError: '' });
       if(input.lastname!=''){
-        setlocalError({ ...localErrorState, lastnameError: '' })
+        setlocalError({ ...localErrorState, lastnameError: '' });
         if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input.email)){
-          setlocalError({ ...localErrorState, emailError: '' })
-          if(input.password == input.confirm_password){
-            setlocalError({ ...localErrorState, passwordError: '' })
+          setlocalError({ ...localErrorState, emailError: '' });
+          if(input.password.length < 0) {
+            setlocalError({ ...localErrorState, passwordError: 'Requires Feild' });
+          } else if(input.password.length < 8) {
+            setlocalError({ ...localErrorState, passwordError: 'Password must be of 8 Characters.' });
+          } else if(input.password == input.confirm_password){
+            setlocalError({ ...localErrorState, passwordError: '' });
             return true
           }else{
-            setlocalError({ ...localErrorState, passwordError: 'Password not matched' })
+            setlocalError({ ...localErrorState, confirm_password: 'Password not matched' });
             return false
           }
         }else{
-          setlocalError({ ...localErrorState, emailError: 'Wrong Email' })
+          setlocalError({ ...localErrorState, emailError: 'Wrong Email' });
           return false
         }
       }else{
-        setlocalError({ ...localErrorState, lastnameError: 'Required field' })
+        setlocalError({ ...localErrorState, lastnameError: 'Required field' });
         return false
       }
     }else{
-      setlocalError({ ...localErrorState, firstnameError: 'Required field' })
+      setlocalError({ ...localErrorState, firstnameError: 'Required field' });
       return false
     }
   }
@@ -78,7 +82,7 @@ function Signup() {
 
   return (
     <>
-      <div className='container-fluid mt-4'>
+      <div className='container-fluid mt-4 mb-3'>
         <div className='container'>
           <div className='row'>
             <div className='col-4 text-center d-none d-lg-block'>
@@ -92,11 +96,11 @@ function Signup() {
             </div>
             <div className='col-lg-8 col-md-8 col-sm-12'>
               <IoIosArrowBack
-                className='border mt-3 rounded-3 backicon d-none d-md-block d-lg-block'
+                className='border mt-1 rounded-3 backicon d-none d-md-block d-lg-block'
                 size={30}
                 onClick={() => navigate(-1)}
               />
-              <div className='col-10 mx-auto mt-3 pt-0'>
+              <div className='col-10 mx-auto pt-0'>
                 <p className='mt-1 h3 fontWeight-700'>{heading}</p>
                 <p className='h6'>
                   Already have an account ?
@@ -162,6 +166,9 @@ function Signup() {
                   Input={input}
                   setInput={setinput}
                 />
+                {localError.passwordError == '' ? null : (
+                  <p className='text-danger'>{localError.passwordError}</p>
+                )}
                 <label className='form-label mt-3 h6 d-none d-lg-block d-md-block lable'>
                   Confirm Password
                 </label>
@@ -174,10 +181,10 @@ function Signup() {
                   Input={input}
                   setInput={setinput}
                 />
-                 {localError.passwordError == '' ? null : (
-                  <p className='text-danger'>{localError.passwordError}</p>
+                {localError.confirm_password == '' ? null : (
+                  <p className='text-danger'>{localError.confirm_password}</p>
                 )}
-
+                
                 <ButtonComp
                   navigationHandler={navigationHandler}
                   type='button'

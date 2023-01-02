@@ -94,13 +94,21 @@ const CardComponent: FC<any> = ({ cardData, indexData, wishListHandler, currCat 
     } else {
       handleCountChange(value);
     }
-
-
   }
+
+  const handleEventPropagation = (e) => {    
+     e.stopPropagation();
+  }
+
+  useEffect(() => {
+    const element = document.getElementById('antd-input');
+    element.addEventListener('click', (e) => handleEventPropagation(e));
+  }, []);
 
 
   return (
     <Card
+      onClick={() => navigate('/product/details', {state: {...cardData}})}
       hoverable
       style={{ width: '100%' }}
       cover={
@@ -111,7 +119,7 @@ const CardComponent: FC<any> = ({ cardData, indexData, wishListHandler, currCat 
       <Meta className='ms-1' title={`kn ${cardData.price}/kg`} />
       <div
         className="rounded-2 col-md-12 col-12 d-flex justify-content-between align-items-center mt-3">
-        <div className="col-8 col-md-7">
+        <div id='antd-input' className="col-8 col-md-7" >
           <InputNumber
             type={'number'}
             addonAfter={'Kg'}
@@ -136,7 +144,10 @@ const CardComponent: FC<any> = ({ cardData, indexData, wishListHandler, currCat 
                 shape="circle"
                 icon={<FaTrash />}
                 size={'large'}
-                onClick={handleRemoveFromCart}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleRemoveFromCart();
+                }}
               />
               :
 
@@ -145,7 +156,10 @@ const CardComponent: FC<any> = ({ cardData, indexData, wishListHandler, currCat 
                 shape="circle"
                 icon={<FaCartPlus />}
                 size={'large'}
-                onClick={handleAddtoCart}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleAddtoCart();
+                }}
               />
           }
         </div>
