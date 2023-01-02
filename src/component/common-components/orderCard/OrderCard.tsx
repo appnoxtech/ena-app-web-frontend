@@ -8,10 +8,14 @@ import { GetCartDetailsService } from '../../../services/cart/cartService'
 import { useGetCartList } from '../../../hooks/carts/getCartList'
 import { AddToCartService } from '../../../services/cart/cartService'
 import { CreateOrderService } from '../../../services/order/OrderService'
+import { useDispatch } from 'react-redux'
+import { resetCartCount } from '../../../redux/reducer/cart/CartReducer'
 
 function OrderCard({...prop}) {
   const navigate = useNavigate()
   const cartData = useGetCartList();
+  const dispatch = useDispatch();
+  
   const navigationHandler = async() => {
     const addressId = localStorage.getItem('addressId');
     if(!addressId){
@@ -42,6 +46,8 @@ function OrderCard({...prop}) {
   const createOrder = async (data:any) => {
      try {
       const res = await CreateOrderService(data);
+      localStorage.removeItem('cartData');
+      dispatch(resetCartCount());
       navigate('/orderSuccess');
      } catch (error) {
       alert(error.message)
@@ -55,6 +61,7 @@ function OrderCard({...prop}) {
     }, 0);
     return total;
   }
+
   return (
     <>
       <div className='col-12 row g-0'>
@@ -84,18 +91,6 @@ function OrderCard({...prop}) {
             <div className='col fontWeight-500'>Subtotal</div>
             <div className='col text-end'>{`Kn ${calculateSubTotoal().toFixed(2)}`}</div>
           </div>
-          {/* <div className='col-12 row gx-0'>
-            <div className='col fontWeight-500'>
-              Taxes <i className='fa fa-question-circle' aria-hidden='true'></i>
-            </div>
-            <div className='col text-end'>Kn253</div>
-          </div>
-          <div className='col-12 row gx-0'>
-            <div className='col fontWeight-500'>
-              Delivery <i className='fa fa-question-circle' aria-hidden='true'></i>
-            </div>
-            <div className='col text-end'>Kn25</div>
-          </div> */}
         </div>
         <hr className='mt-3' />
         <div className='col-12 m-0 p-0'>

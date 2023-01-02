@@ -17,7 +17,6 @@ const Order = () => {
   const navigate = useNavigate();
   const [id, setId] = useState('');
   const displayModal = (e: any, id:any) => {
-    console.log('display fn.called');
     setModalShow(true);
     setId(id);
     e.stopPropagation();

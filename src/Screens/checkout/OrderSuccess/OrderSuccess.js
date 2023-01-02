@@ -10,12 +10,8 @@ import './OrderSuccess.css';
 
 export default function OrderSuccess() {
   const navigation = useNavigate();
-  const dispatch = useDispatch();
   const navigationHandler = () => {
     navigation('/order');
-    localStorage.removeItem('cartData');
-    localStorage.removeItem('cartData');
-    dispatch(resetCartCount());
   }
 
   const defaultOptions = {
