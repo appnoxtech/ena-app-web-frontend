@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import Table from 'react-bootstrap/Table'
+import React, { useEffect, useState } from 'react';
+import io from 'socket.io-client';
+import Table from 'react-bootstrap/Table';
 import CustomButton from '../Button/Button';
 import WarningModal from '../WarningModal/WarningModal';
 import './Order.css'
@@ -10,8 +11,13 @@ import { useNavigate } from 'react-router-dom';
 import { getJSDocDeprecatedTag } from 'typescript';
 import OrderCancelModal from '../common-components/modals/OrderCancelModal';
 import '../../assets/global/global.css';
+import { hostname } from '../../GlobalVariable';
+import { useSelector } from 'react-redux';
 
+const socket = io(hostname);
 const Order = () => {
+  const [isConnected, setIsConnected] = useState(socket.connected);
+  const {userId} = useSelector((state:any) => state.user);
   const [modalShow, setModalShow] = useState(false);
   const [orderList, setOrderList] = useState([]);
   const navigate = useNavigate();
@@ -53,6 +59,56 @@ const Order = () => {
   const getDate = (data: any) => {
     var date = new Date(data);
     return date.toLocaleDateString();
+  }
+
+  useEffect(() => {
+    getOrderList();
+
+    socket.on('connect', () => {
+      console.log('Socket is Connected ====>');
+      setIsConnected(true);
+    });
+
+    socket.on('disconnect', () => {
+      setIsConnected(false);
+    });
+
+    socket.emit('join_room', userId);
+
+    socket.on('ORDER_UPDATED', (data) => {
+        console.log('Agent Socket Fn. runned');
+        try {
+          console.log('Agent Data', {...data});
+          if(data){
+            // setOrderList(data);
+            addNewOrder(data);
+           }
+        } catch (error) {
+          console.error('Socket Error', error);
+        }
+    });
+
+    return () => {
+      socket.off('connect');
+      socket.off('disconnect');
+      socket.off('ORDER_UPDATED');
+      socket.off('join_room');
+    };
+  }, []);
+
+  const addNewOrder = async (data) => {
+    console.log('data', data);
+    try {
+        const res = await GetOrderLiveStatus();
+        const list = res.data.result;
+        if (list.length > 0) {
+            const newList = list.filter((item:any) => item._id !== data._id);
+            newList.unshift(data);
+            setOrderList(newList);
+        }
+    } catch (error) {
+        alert(error.message);
+    }
   }
 
   return (

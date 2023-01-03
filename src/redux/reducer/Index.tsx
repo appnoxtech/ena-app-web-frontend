@@ -4,6 +4,7 @@ import UserReducer from './UserDetails/userReducer'
 import { CartReducer } from './cart/CartReducer'
 import CategoriesReducer from './categorie/categorieReducer'
 import { ProductReducer } from './products/ProductReducer'
+import AssignedOrderIdReducer from './order/OrderAssignedReducer'
 
 export const appReducer = combineReducers({
   LoaderReducer: LoaderReducer,
@@ -11,6 +12,7 @@ export const appReducer = combineReducers({
   cart: CartReducer,
   categorie: CategoriesReducer,
   product: ProductReducer,
+  assignedOrderId: AssignedOrderIdReducer,
 });
 
 export const rootReducers = (state, action) => {

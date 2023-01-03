@@ -5,11 +5,15 @@ import { GetOrderLiveStatus } from '../../../services/order/OrderService';
 import OrderCard from '../../admin/orders/OrderCard';
 import NoOrderFound from '../../../assets/animations/noOrderFound.json';
 import { hostname } from '../../../GlobalVariable';
+import { useDispatch, useSelector } from 'react-redux';
+import { UpdateAssignedOrderId } from '../../../redux/reducer/order/OrderAssignedReducer';
 
 const socket = io(hostname);
 
 function AssignedOrderList() {
     const [orderList, setOrderList] = useState([]);
+    const dispatch = useDispatch();
+    const {userId} = useSelector(state => state.user);
     const [isConnected, setIsConnected] = useState(socket.connected);
     const defaultOptions = {
         loop: true,
@@ -28,34 +32,57 @@ function AssignedOrderList() {
         }
     };
 
+
+    //socket listen to change in order status
     useEffect(() => {
         getOrderList();
+
         socket.on('connect', () => {
-          console.log('Hi connection is runned');
+          console.log('Socket is Connected ====>');
           setIsConnected(true);
         });
     
         socket.on('disconnect', () => {
           setIsConnected(false);
         });
-    
+
+        socket.emit('join_room', userId);
+
         socket.on('ORDER_UPDATED', (data) => {
+            console.log('Agent Socket Fn. runned');
             try {
-              console.log({...data});
+              console.log('Agent Data', {...data});
               if(data){
-                setOrderList(data);
+                // setOrderList(data);
+                addNewOrder(data);
                }
             } catch (error) {
-              console.error(error);
+              console.error('Socket Error', error);
             }
-          });
-    
+        });
+
         return () => {
           socket.off('connect');
           socket.off('disconnect');
-          socket.off('ORDER_CREATED');
+          socket.off('ORDER_UPDATED');
+          socket.off('join_room');
         };
       }, []);
+
+      const addNewOrder = async (data) => {
+        console.log('data', data);
+        try {
+            const res = await GetOrderLiveStatus();
+            const list = res.data.result;
+            if (list.length > 0) {
+                list.unshift(data);
+                console.log('list', list);
+                setOrderList(list);
+            }
+        } catch (error) {
+            alert(error.message);
+        }
+      }
 
     return (
         <div className='mt-1 mt-md-4'>

@@ -35,8 +35,11 @@ export const useLoginHook = () => {
               firstName,
               lastName,
               userType,
+              userId,
             } = res.data;
-            const user = {firstName,lastName,userType, isLogin: true};
+            console.log('res.data', res.data);
+            
+            const user = {firstName,lastName,userType, userId, isLogin: true};
             dispatch(updateUserData(user));
             localStorage.setItem('user', JSON.stringify(user));
             dispatch(updateUserData(user));

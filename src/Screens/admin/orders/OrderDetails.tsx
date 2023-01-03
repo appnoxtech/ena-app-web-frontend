@@ -12,8 +12,9 @@ import { GetRiderDetailsById, GetRiderListService } from '../../../services/ride
 import { GetOrderById } from '../../../services/order/OrderService';
 import io from 'socket.io-client';
 import { hostname } from '../../../GlobalVariable';
+import { useSelector } from 'react-redux';
+import OrderCancelModal from '../../../component/common-components/modals/OrderCancelModal';
 
-const socket = io(hostname);
 
 type PropTypes = {
     order: orderType
@@ -24,16 +25,22 @@ const getDate = (data: number) => {
     return date.toLocaleDateString();
 }
 
+const socket = io(hostname);
+
 const OrderDetails: FC<any> = (props) => {
-    const [isConnected, setIsConnected] = useState(socket.connected);
     const [agentModal, setAgentModal] = useState(false);
+    const [isConnected, setIsConnected] = useState(socket.connected);
     const [riderList, setRiderList] = useState([]);
+    const [modalShow, setModalShow] = useState(false);
     const [addressModal, setAddressModal] = useState(false);
     const [order, setOrder]: any = useState({});
+    const [id, setId] = useState('');
     const [addressInfo, setAddressInfo]: any = useState({});
     const [selectedRider, setSelectedRider]: any = useState({});
     const { state } = useLocation();
     const Order = state.order;
+    const orderId = useSelector((state: any) => state.assignedOrderId.orderId);
+    const {userId} = useSelector((state:any) => state.user);
 
     const calcTotal = () => {
         const bidTotal = Order.productList.reduce((total: number, item: products) => {
@@ -82,45 +89,42 @@ const OrderDetails: FC<any> = (props) => {
         }
     };
 
+    console.log('orderId', orderId);
     useEffect(() => {
         updateOrderDetails();
         getRiderList();
-    }, []);
-
-    //socket listen to change in order status
-    useEffect(() => {
+    
         socket.on('connect', () => {
-            console.log('Hi connection is runned');
-            setIsConnected(true);
-          });
-      
-          socket.on('disconnect', () => {
-            setIsConnected(false);
-          });
-
-          socket.on('ORDER_UPDATED', (data) => {
+          console.log('Socket is Connected ====>');
+          setIsConnected(true);
+        });
+    
+        socket.on('disconnect', () => {
+          setIsConnected(false);
+        });
+    
+        socket.emit('join_room', userId);
+    
+        socket.on('ORDER_UPDATED', (data) => {
+            console.log('Agent Socket Fn. runned');
             try {
-              console.log('DATA', { data });
-              // Subscribe to delivery associate
-              if (Order._id) {
-                socket.emit("SUBSCRIBE_TO_ORDER", {
-                  orderId: Order._id,
-                });
-              }
+              console.log('Agent Data', {...data});
+              if(data){
+                // setOrderList(data);
+                setOrder(data);
+               }
             } catch (error) {
-              console.error(error);
+              console.error('Socket Error', error);
             }
-          });
-
-          return () => {
-            console.log('does is change');
-            
-            socket.off('connect');
-            socket.off('disconnect');
-            socket.off('ORDER_UPDATED');
-          };
-    }, []);
-
+        });
+    
+        return () => {
+          socket.off('connect');
+          socket.off('disconnect');
+          socket.off('ORDER_UPDATED');
+          socket.off('join_room');
+        };
+      }, []);
 
     return (
         <div className='mt-1 mt-md-4 mb-2'>
@@ -134,8 +138,17 @@ const OrderDetails: FC<any> = (props) => {
                     </div>
                     <p className='text-body-secondary opacity-50'>{getDate(order.createdAt)}</p>
                 </div>
-                <div className="col-6 col-md-3 d-flex">
-                    <div className='ms-auto me-4'>
+                <div className="col-6 col-md-3 d-flex ms-auto">
+                    {
+                        order.status === 'CANCELED' ? <div className=' me-4'>
+                        {
+                            <button onClick={() => setAgentModal(true)} type="button" className="btn btn-primary">
+                                Canceled Order
+                            </button>
+                        }
+                    </div> : null
+                    }
+                    <div className=' me-4'>
                         {
                             order.assignedTo ?
                                 <button onClick={() => setAgentModal(true)} type="button" className="btn btn-primary">
@@ -240,6 +253,11 @@ const OrderDetails: FC<any> = (props) => {
                         setSelectedRider={setSelectedRider}
                     /> : null
             }
+            <OrderCancelModal
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+                id={id}
+            />
 
         </div>
     )
