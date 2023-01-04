@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react'
 import Lottie from 'react-lottie';
 import io from 'socket.io-client';
 import { GetOrderLiveStatus } from '../../../services/order/OrderService';
-import OrderCard from '../../admin/orders/OrderCard';
+
 import NoOrderFound from '../../../assets/animations/noOrderFound.json';
 import { hostname } from '../../../GlobalVariable';
 import { useDispatch, useSelector } from 'react-redux';
 import { UpdateAssignedOrderId } from '../../../redux/reducer/order/OrderAssignedReducer';
+import OrderCard from '../Card/OrderCard';
 
 const socket = io(hostname);
 
@@ -84,6 +85,17 @@ function AssignedOrderList() {
         }
       }
 
+    const handleOrderTracking = () => {
+        console.log('yoolo');
+        navigator.geolocation.watchPosition((position) => {
+            console.log('position', position);
+            let lat = position.coords.latitude;
+            let lng = position.coords.longitude;
+            console.log({lat, lng});
+            socket.emit('UPDATE_LOCATION', {id: userId, location: {lat, lng}});
+         });
+    }
+
     return (
         <div className='mt-1 mt-md-4'>
             <div className="col-12">
@@ -100,6 +112,7 @@ function AssignedOrderList() {
                                     <div className="col-12 col-md-6 col-xl-4 p-3">
                                         <OrderCard
                                             order={order}
+                                            clickHandler={handleOrderTracking}
                                         />
                                     </div>
                                 )

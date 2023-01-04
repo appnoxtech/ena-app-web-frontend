@@ -1,10 +1,12 @@
-import React,{FC} from 'react';
+import React,{FC, useEffect, useState} from 'react';
 import { Card } from 'antd';
-import { orderType } from '../../../types';
 import { useNavigate } from 'react-router-dom';
 import {EnvironmentOutlined} from '@ant-design/icons';
+import { orderType } from '../../../types';
+
 type PropTypes = {
- order: orderType
+ order: orderType,
+ clickHandler: any,
 };
 
 const getDate = (data: number) => {
@@ -13,7 +15,7 @@ const getDate = (data: number) => {
 }
 
 const setCardBgColor = (status: string) => {
-  if(status === 'CREATED') {
+  if(status === 'ASSIGNED') {
      return 'bgGreen';
   } else if (status === 'CANCELED') {
      return 'bgOrange'
@@ -22,13 +24,14 @@ const setCardBgColor = (status: string) => {
   }
 }
 
-const OrderCard:FC<PropTypes> = ({order}) => {
-  const navigate = useNavigate();
+const OrderCard:FC<PropTypes> = ({order, clickHandler}) => {
+
   return (
     <Card
-      onClick={() => {
-        navigate('/orderDetails', {state: {order: order}})
-      }}
+    //   onClick={() => {
+    //     navigate('/orderDetails', {state: {order: order}})
+    //   }}
+      extra={<EnvironmentOutlined onClick={clickHandler} className='ms-2'  style={{fontSize: '25px', color: '#51BC4A'}} />}
       className={`${setCardBgColor(order.status)}`}
       hoverable
       title={`Order id # ${order._id}`} 

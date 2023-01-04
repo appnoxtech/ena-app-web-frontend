@@ -16,6 +16,7 @@ import { hostname } from '../../../GlobalVariable';
 import { useSelector } from 'react-redux';
 
 import OrderCancelModal from '../../../component/common-components/modals/OrderCancelModal';
+import MapContainer from '../../../component/common-components/mapComponent/MapContainer';
 
 
 type PropTypes = {
@@ -31,12 +32,10 @@ const socket = io(hostname);
 
 const OrderDetails: FC<any> = (props) => {
     const [agentModal, setAgentModal] = useState(false);
+    const [location, setLocation] = useState({});
     const [isConnected, setIsConnected] = useState(socket.connected);
     const [riderList, setRiderList] = useState([]);
-    const [modalShow, setModalShow] = useState(false);
-    const [addressModal, setAddressModal] = useState(false);
     const [order, setOrder]: any = useState({});
-    const [id, setId] = useState('');
     const [addressInfo, setAddressInfo]: any = useState({});
     const [selectedRider, setSelectedRider]: any = useState({});
     const { state } = useLocation();
@@ -107,6 +106,10 @@ const OrderDetails: FC<any> = (props) => {
 
         socket.emit('join_room', userId);
 
+        Order.assignedTo ? socket.emit('join_room', Order.assignedTo) : null;
+
+        socket.emit('join_room', userId);
+
         socket.on('ORDER_UPDATED', (data) => {
             console.log('Agent Socket Fn. runned');
             try {
@@ -120,6 +123,21 @@ const OrderDetails: FC<any> = (props) => {
             }
         });
 
+        socket.on('LOCATION_CHANGED', (data) => {
+            try {
+                console.log('Location Data', { ...data });
+                if (data) {
+                    //setOrder(data);
+                    const location = data.currentLocation;
+                    console.log('location', location);
+                    setLocation(location);
+                }
+            } catch (error) {
+                console.error('Socket Error', error);
+            }
+        });
+
+
         return () => {
             socket.off('connect');
             socket.off('disconnect');
@@ -130,12 +148,12 @@ const OrderDetails: FC<any> = (props) => {
 
     const confirm = () => {
         Modal.confirm({
-          centered: true,
-          title: 'Confirm',
-          icon: <ExclamationCircleOutlined />,
-          content: 'Are you sure !',
-          okText: 'Yes',
-          cancelText: 'No',
+            centered: true,
+            title: 'Confirm',
+            icon: <ExclamationCircleOutlined />,
+            content: 'Are you sure !',
+            okText: 'Yes',
+            cancelText: 'No',
         });
     };
 
@@ -256,6 +274,13 @@ const OrderDetails: FC<any> = (props) => {
                     }
                 </div>
             </div>
+            {
+                (order.assignedTo && Object.keys(location).length > 0) ?
+                    <div className="container">
+                        <MapContainer location={location} />
+                    </div> : null
+            }
+
             {
                 setAgentModal ?
                     <AgentModal
