@@ -12,9 +12,6 @@ const socket = io(hostname);
 function OrderCancelModal(props) {
   const handelCancelOrder = async () => {
     try {
-      // socket.emit("SUBSCRIBE_TO_ORDER", {
-      //   orderId: propsid,
-      // });
       const data = { orderId: props.id }
       const res = await CancelOrder(data);
       await props.refreshList();

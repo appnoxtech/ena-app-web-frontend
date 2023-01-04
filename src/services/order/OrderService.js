@@ -51,3 +51,12 @@ export const GetOrderById = async(id) => {
     });
 }
 
+export const DeassignOrderService = async(data) => {
+    const url = `${API_URL}/order/de-assign-order`;
+    const token = localStorage.getItem('@user_Token');
+    return axios.post(url, data, {
+        headers: {
+            "x-auth-token": token,
+        }
+    });
+}

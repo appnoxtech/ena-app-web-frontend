@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Card } from 'antd';
+import { Card, Modal } from 'antd';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { orderType, products } from '../../../types';
 import { useLocation } from 'react-router-dom';
 import '../../../assets/global/global.css';
@@ -13,6 +14,7 @@ import { GetOrderById } from '../../../services/order/OrderService';
 import io from 'socket.io-client';
 import { hostname } from '../../../GlobalVariable';
 import { useSelector } from 'react-redux';
+
 import OrderCancelModal from '../../../component/common-components/modals/OrderCancelModal';
 
 
@@ -40,7 +42,7 @@ const OrderDetails: FC<any> = (props) => {
     const { state } = useLocation();
     const Order = state.order;
     const orderId = useSelector((state: any) => state.assignedOrderId.orderId);
-    const {userId} = useSelector((state:any) => state.user);
+    const { userId } = useSelector((state: any) => state.user);
 
     const calcTotal = () => {
         const bidTotal = Order.productList.reduce((total: number, item: products) => {
@@ -64,7 +66,7 @@ const OrderDetails: FC<any> = (props) => {
         }
     };
 
-    const getSelectedRiderDetails = async (id:string) => {
+    const getSelectedRiderDetails = async (id: string) => {
         try {
             const res = await GetRiderDetailsById(id);
             console.log('rider details', res.data);
@@ -93,38 +95,49 @@ const OrderDetails: FC<any> = (props) => {
     useEffect(() => {
         updateOrderDetails();
         getRiderList();
-    
+
         socket.on('connect', () => {
-          console.log('Socket is Connected ====>');
-          setIsConnected(true);
+            console.log('Socket is Connected ====>');
+            setIsConnected(true);
         });
-    
+
         socket.on('disconnect', () => {
-          setIsConnected(false);
+            setIsConnected(false);
         });
-    
+
         socket.emit('join_room', userId);
-    
+
         socket.on('ORDER_UPDATED', (data) => {
             console.log('Agent Socket Fn. runned');
             try {
-              console.log('Agent Data', {...data});
-              if(data){
-                // setOrderList(data);
-                setOrder(data);
-               }
+                console.log('Agent Data', { ...data });
+                if (data) {
+                    // setOrderList(data);
+                    setOrder(data);
+                }
             } catch (error) {
-              console.error('Socket Error', error);
+                console.error('Socket Error', error);
             }
         });
-    
+
         return () => {
-          socket.off('connect');
-          socket.off('disconnect');
-          socket.off('ORDER_UPDATED');
-          socket.off('join_room');
+            socket.off('connect');
+            socket.off('disconnect');
+            socket.off('ORDER_UPDATED');
+            socket.off('join_room');
         };
-      }, []);
+    }, []);
+
+    const confirm = () => {
+        Modal.confirm({
+          centered: true,
+          title: 'Confirm',
+          icon: <ExclamationCircleOutlined />,
+          content: 'Are you sure !',
+          okText: 'Yes',
+          cancelText: 'No',
+        });
+    };
 
     return (
         <div className='mt-1 mt-md-4 mb-2'>
@@ -138,27 +151,31 @@ const OrderDetails: FC<any> = (props) => {
                     </div>
                     <p className='text-body-secondary opacity-50'>{getDate(order.createdAt)}</p>
                 </div>
-                <div className="col-6 col-md-3 d-flex ms-auto">
+                <div className="col-6 col-md-3 d-flex flex-column flex-md-row">
                     {
-                        order.status === 'CANCELED' ? <div className=' me-4'>
-                        {
-                            <button onClick={() => setAgentModal(true)} type="button" className="btn btn-primary">
-                                Canceled Order
-                            </button>
-                        }
-                    </div> : null
+                        order.status !== 'CANCELED' ?
+                            <>
+                                <div className='ms-auto me-2 mb-2 mb-md-0'>
+                                    {
+                                        <button onClick={confirm} type="button" className="btn btn-danger">
+                                            Cancel Order
+                                        </button>
+                                    }
+                                </div>
+                                <div className='ms-auto me-2'>
+                                    {
+                                        order.assignedTo ?
+                                            <button onClick={() => setAgentModal(true)} type="button" className="btn btn-primary">
+                                                Deassigned
+                                            </button> :
+                                            <button onClick={() => setAgentModal(true)} type="button" className="btn btn-primary">
+                                                Assign Agent
+                                            </button>
+                                    }
+                                </div>
+                            </>
+                            : null
                     }
-                    <div className=' me-4'>
-                        {
-                            order.assignedTo ?
-                                <button onClick={() => setAgentModal(true)} type="button" className="btn btn-primary">
-                                    Update Agent
-                                </button> :
-                                <button onClick={() => setAgentModal(true)} type="button" className="btn btn-primary">
-                                    Assign Agent
-                                </button>
-                        }
-                    </div>
                 </div>
             </div>
             <div className="col-12 d-flex flex-column flex-lg-row  justify-content-between align-item-center px-lg-4 pb-3">
@@ -246,19 +263,12 @@ const OrderDetails: FC<any> = (props) => {
                         riderList={riderList}
                         onHide={() => {
                             setAgentModal(false)
-                        }
-                        }
+                        }}
                         orderId={order._id}
                         updateOrderDetails={updateOrderDetails}
                         setSelectedRider={setSelectedRider}
                     /> : null
             }
-            <OrderCancelModal
-                show={modalShow}
-                onHide={() => setModalShow(false)}
-                id={id}
-            />
-
         </div>
     )
 }
