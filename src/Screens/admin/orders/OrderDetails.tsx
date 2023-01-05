@@ -1,22 +1,19 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Card, Modal } from 'antd';
+import io from 'socket.io-client';
+import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { orderType, products } from '../../../types';
-import { useLocation } from 'react-router-dom';
 import '../../../assets/global/global.css';
 import './adminOrder.css';
 import OrderSteps from '../../../component/orderSteps/OrderSteps';
-import AddressModal from './AddressModal';
 import AgentModal from './AgentModal';
-import { Button } from 'react-bootstrap';
 import { GetRiderDetailsById, GetRiderListService } from '../../../services/rider/RiderService';
-import { GetOrderById } from '../../../services/order/OrderService';
-import io from 'socket.io-client';
+import { DeassignOrderService, GetOrderById } from '../../../services/order/OrderService';
 import { hostname } from '../../../GlobalVariable';
-import { useSelector } from 'react-redux';
-
-import OrderCancelModal from '../../../component/common-components/modals/OrderCancelModal';
 import MapContainer from '../../../component/common-components/mapComponent/MapContainer';
+import ButtonComp from '../../../component/common-components/buttonComp/ButtonComp';
 
 
 type PropTypes = {
@@ -40,8 +37,8 @@ const OrderDetails: FC<any> = (props) => {
     const [selectedRider, setSelectedRider]: any = useState({});
     const { state } = useLocation();
     const Order = state.order;
-    const orderId = useSelector((state: any) => state.assignedOrderId.orderId);
     const { userId } = useSelector((state: any) => state.user);
+    const [mapModal, showMapModal] = useState(false);
 
     const calcTotal = () => {
         const bidTotal = Order.productList.reduce((total: number, item: products) => {
@@ -55,7 +52,8 @@ const OrderDetails: FC<any> = (props) => {
             const res = await GetRiderListService();
             const list = res.data.data;
             if (list.length > 0) {
-                setRiderList(list);
+                const availableAgent = list.filter((rider:any) => !rider.isAssigned);
+                setRiderList(availableAgent);
             } else {
                 setRiderList(list);
             }
@@ -71,6 +69,10 @@ const OrderDetails: FC<any> = (props) => {
             console.log('rider details', res.data);
             const data = res.data.data;
             setSelectedRider(data);
+            if (data.currentLocation) {
+                const { lat, lng } = data.currentLocation;
+                setLocation({ lat, lng });
+            }
         } catch (error) {
             alert(error.message);
         }
@@ -90,7 +92,6 @@ const OrderDetails: FC<any> = (props) => {
         }
     };
 
-    console.log('orderId', orderId);
     useEffect(() => {
         updateOrderDetails();
         getRiderList();
@@ -157,6 +158,28 @@ const OrderDetails: FC<any> = (props) => {
         });
     };
 
+    const handleDeassignAgent = async () => {
+        try {
+            const data = {
+                orderId: order._id,
+                agentId: order.assignedTo
+            }
+            await DeassignOrderService(data);
+            await updateOrderDetails();
+            alert('Agent Deassigned');
+        } catch (error) {
+            alert(error.message);
+        }
+    }
+
+    console.log('order', order);
+    console.log('location', location);
+
+    const toggleMapModal = () => {
+        showMapModal(true);
+    }
+
+
     return (
         <div className='mt-1 mt-md-4 mb-2'>
             <div className="col-12 d-flex justify-content-between align-item-center py-2">
@@ -183,7 +206,7 @@ const OrderDetails: FC<any> = (props) => {
                                 <div className='ms-auto me-2'>
                                     {
                                         order.assignedTo ?
-                                            <button onClick={() => setAgentModal(true)} type="button" className="btn btn-primary">
+                                            <button onClick={handleDeassignAgent} type="button" className="btn btn-primary">
                                                 Deassigned
                                             </button> :
                                             <button onClick={() => setAgentModal(true)} type="button" className="btn btn-primary">
@@ -258,29 +281,37 @@ const OrderDetails: FC<any> = (props) => {
                         </div>
                     </div>
                 </div>
-                <div className="col-12 col-lg-2 p-2 px-3 shadow rounded mt-3 mt-lg-0">
-                    <div className="col-12 py-1 border-bottom ps-2 mb-3">
-                        <h6>Order History</h6>
+
+                <div className="col-12 col-lg-3 px-3 d-flex flex-column">
+                    <div className="col-12 shadow rounded mt-3 mt-lg-0 mb-3">
+                        <Card title="Order History" bordered={false} style={{ width: '100%' }}>
+                            <OrderSteps />
+                        </Card>
                     </div>
-                    <OrderSteps />
                     {
                         order.assignedTo ?
-                            <div className="site-card-border-less-wrapper">
-                                <Card title="Rider Details" bordered={false} style={{ width: '80%' }}>
+                            <div className="col-12 shadow rounded mt-auto mt-lg-0">
+                                <Card
+                                    title="Rider Details"
+                                    bordered={false}
+                                    style={{ width: '100%' }}
+                                >
                                     <p>Name: {selectedRider.firstName + ' ' + selectedRider.lastName}</p>
                                     <p>Email: {selectedRider.email}</p>
+                                    {
+                                        selectedRider.currentLocation ?
+                                            <ButtonComp
+                                                navigationHandler={toggleMapModal}
+                                                type='button'
+                                                class=' btnRadius border border-0 w-100 h-100 mt-4 fontWeight-600 button themecolor text-light py-2 '
+                                                btvalue='Track Rider' />
+                                            : null
+                                    }
                                 </Card>
                             </div> : null
                     }
                 </div>
             </div>
-            {
-                (order.assignedTo && Object.keys(location).length > 0) ?
-                    <div className="container">
-                        <MapContainer location={location} />
-                    </div> : null
-            }
-
             {
                 setAgentModal ?
                     <AgentModal
@@ -294,6 +325,18 @@ const OrderDetails: FC<any> = (props) => {
                         setSelectedRider={setSelectedRider}
                     /> : null
             }
+            <Modal
+                title="Rider Live Location ."
+                centered
+                open={mapModal}
+                width={1000}
+                footer={false}
+                onCancel={() => showMapModal(false)}
+            >
+                <div className="container">
+                    <MapContainer location={location} />
+                </div>
+            </Modal>
         </div>
     )
 }

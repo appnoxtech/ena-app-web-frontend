@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Lottie from 'react-lottie';
 import io from 'socket.io-client';
-import { GetOrderLiveStatus } from '../../../services/order/OrderService';
+import { GetOrderLiveStatus, OutForDeliveryService } from '../../../services/order/OrderService';
 
 import NoOrderFound from '../../../assets/animations/noOrderFound.json';
 import { hostname } from '../../../GlobalVariable';
@@ -76,7 +76,7 @@ function AssignedOrderList() {
             const res = await GetOrderLiveStatus();
             const list = res.data.result;
             if (list.length > 0) {
-                list.unshift(data);
+                //list.unshift(data);
                 console.log('list', list);
                 setOrderList(list);
             }
@@ -85,15 +85,20 @@ function AssignedOrderList() {
         }
       }
 
-    const handleOrderTracking = () => {
-        console.log('yoolo');
-        navigator.geolocation.watchPosition((position) => {
-            console.log('position', position);
-            let lat = position.coords.latitude;
-            let lng = position.coords.longitude;
-            console.log({lat, lng});
-            socket.emit('UPDATE_LOCATION', {id: userId, location: {lat, lng}});
-         });
+    const handleOrderTracking = async (orderId) => {
+        try {
+            const data = {orderId: orderId};
+            const res = await OutForDeliveryService(data);
+            navigator.geolocation.watchPosition((position) => {
+                console.log('position', position);
+                let lat = position.coords.latitude;
+                let lng = position.coords.longitude;
+                console.log({lat, lng});
+                socket.emit('UPDATE_LOCATION', {id: userId, location: {lat, lng}});
+            });
+        } catch (error) {
+            alert(error.message)
+        }
     }
 
     return (

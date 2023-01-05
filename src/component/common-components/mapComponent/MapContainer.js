@@ -14,9 +14,22 @@ export default function MapContainer({location}) {
 
 function Map({location}) {
   console.log('center', location);
+  const option = useMemo(() => ({
+    disableDefaultUI: true,
+      clickableIcons: false,
+  }), []);
+
   return (
-    <GoogleMap zoom={10} center={location} mapContainerClassName="map-container">
-      <MarkerF position={location} visible={true} />
+    <GoogleMap
+     zoom={30} 
+     center={location} 
+     mapContainerClassName="map-container"
+     options={option}
+    >
+      <MarkerF 
+       position={location} 
+       visible={true}
+     />
     </GoogleMap>
   );
 }

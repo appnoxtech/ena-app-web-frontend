@@ -31,7 +31,7 @@ const OrderCard:FC<PropTypes> = ({order, clickHandler}) => {
     //   onClick={() => {
     //     navigate('/orderDetails', {state: {order: order}})
     //   }}
-      extra={<EnvironmentOutlined onClick={clickHandler} className='ms-2'  style={{fontSize: '25px', color: '#51BC4A'}} />}
+      extra={<EnvironmentOutlined onClick={() => clickHandler(order._id)} className='ms-2'  style={{fontSize: '25px', color: '#51BC4A'}} />}
       className={`${setCardBgColor(order.status)}`}
       hoverable
       title={`Order id # ${order._id}`} 

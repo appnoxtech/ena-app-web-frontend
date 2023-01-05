@@ -4,6 +4,7 @@ import { Steps } from 'antd';
 const description = 'This is a description.';
 const OrderSteps: FC<any> = () => (
   <Steps
+    className='mx-auto'
     direction="vertical"
     current={1}
     items={[

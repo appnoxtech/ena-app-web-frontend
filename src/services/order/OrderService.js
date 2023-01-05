@@ -60,3 +60,13 @@ export const DeassignOrderService = async(data) => {
         }
     });
 }
+
+export const OutForDeliveryService = async(data) => {
+    const url = `${API_URL}/order/out-for-delivery`;
+    const token = localStorage.getItem('@user_Token');
+    return axios.post(url, data, {
+        headers: {
+            "x-auth-token": token,
+        }
+    });
+}
