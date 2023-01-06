@@ -75,7 +75,13 @@ function Map({ location }) {
     disableDefaultUI: true,
     clickableIcons: false,
   }), []);
-
+  if(typeof google === "undefined"){
+    return (
+      <div className="">
+         Loading ....
+      </div>
+    )
+  }
   return (
     <GoogleMap
       zoom={30}
