@@ -97,32 +97,6 @@ const category: FC<any> = ({ filterDatabyCategory, currCat }) => {
                 )
               })
             }
-
-
-            {/* <button
-              onClick={() => {filterDatabyCategory('Fruit');dropDowntoggleHandler()}}
-              className='navlist py-2 py-md-3 border border-0 border-none bgWhite'
-            >
-              <li className='navlist  '>Fruits</li>
-            </button>
-            <button
-              onClick={() => {filterDatabyCategory('Dryfruit');dropDowntoggleHandler()}}
-              className='navlist py-2 py-md-3 border border-0 border-none bgWhite'
-            >
-              <li className='navlist  '>Dry Fruits</li>
-            </button>
-            <button
-              onClick={() => {filterDatabyCategory('Spices');dropDowntoggleHandler()}}
-              className='navlist py-2 py-md-3 border border-0 border-none bgWhite'
-            >
-              <li className='navlist  '>Spices</li>
-            </button>
-            <button
-              onClick={() => {filterDatabyCategory();dropDowntoggleHandler()}}
-              className='navlist py-2 py-md-3 border border-0 border-none bgWhite'
-            >
-              <li className='navlist  '>Canned</li>
-            </button> */}
           </div>
         )}
       </div>

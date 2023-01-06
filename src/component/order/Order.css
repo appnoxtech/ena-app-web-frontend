@@ -64,3 +64,8 @@
     overflow: auto;
 }
 
+.fixedHeightTable-20{
+    height: 20vh !important;
+    overflow: auto;
+}
+

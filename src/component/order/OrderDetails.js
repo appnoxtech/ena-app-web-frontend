@@ -10,9 +10,12 @@ import { GetCartDetailsService } from '../../services/cart/cartService';
 import { GetOrderLiveStatus } from '../../services/order/OrderService';
 import OrderTracking from './OrderTracking';
 import '../../assets/global/global.css';
+import OrderSteps from '../orderSteps/OrderSteps';
+import { Card } from 'antd';
 
 const OrderDetails = () => {
     const [showModal, setShowModal] = useState(false);
+    const order = JSON.parse(localStorage.getItem('orderDetail'));
     const [orderList, setOrderList] = useState([]);
     const displayModal = () => {
         console.log('display fn.called');
@@ -48,16 +51,18 @@ const OrderDetails = () => {
     useEffect(() => {
         const data = localStorage.getItem('orderDetail');
         if (data) {
-            const list = JSON.parse(data);
-            setOrderList(list)
+            const order = JSON.parse(data);
+            setOrderList(order.productList);
         }
     }, []);
 
+    console.log('orderList', order);
+
     return (
-        <div className='container-fluid pb-5 mt-90'>
+        <div className='container-fluid pb-5 mt-5'>
             <div className='side-Part rounded-4 bg-white'></div>
-            <div className='fixedHeightTable col-10 mx-auto'>
-                <Table stickyHeader={true} responsive className='orders_Heading rounded mt-5 mt-md-0'>
+            <div className='fixedHeightTable-20 col-10 mx-auto'>
+                <Table responsive className='orders_Heading rounded mt-5 mt-md-0'>
                     <thead className="header">
                         <tr>
                             <th>Image</th>
@@ -100,63 +105,22 @@ const OrderDetails = () => {
                     </tbody>
                 </Table>
             </div>
-            {/* <div className="order-details col-10 d-flex justify-content-around align-items-center mx-auto">
-                <div className="order-tracking col-3 p-2">
-                    <div className="border border-end-2">
-                        <h4>Tracking Details</h4>
-                    </div>
-                    <div className="progressContainer">
-                        <ProgressBar percent={25} filledBackground="#B54ABC">
-                            <Step>
-                                {({ accomplished, index }) => (
-                                    <div className={`indexedStep ${accomplished ? "accomplished" : ""}`}>
-                                        <div className='dot'>
+            <div className="order-details col-10 d-flex flex-column flex-xl-row justify-content-around align-items-stretch mx-auto border-top pt-4">
+                <Card title="Tracking Details" bordered={true} className='col-12 col-xl-3 my-2 my-xl-0'>
+                    <OrderSteps />
+                </Card>
 
-                                        </div>
-                                        <div className="">
-                                            <h6>Ordered | 20/12/2022</h6> 
-                                        </div>
-                                    </div>
-                                )}
-                            </Step>
-                            <Step>
-                                {({ accomplished, index }) => (
-                                    <div className={`indexedStep ${accomplished ? "accomplished" : ""}`}>
-                                        <div className='dot'>
+                <Card title="Shipping Details" bordered={true} className='col-12 col-xl-3 my-2 my-xl-0'>
+                    <p className='fs-5'>{`${order.addressInfo.buildingName} , ${order.addressInfo.street}, ${order.addressInfo.city} `}</p>
+                    <p className='fs-5'>{`${order.addressInfo.state}, ${order.addressInfo.pincode}`}</p>
+                    <p className='fs-5'>{`Phone: 9667699240`}</p>
+                </Card>
 
-                                        </div>
-                                    </div>
-                                )}
-                            </Step>
-                            <Step>
-                                {({ accomplished, index }) => (
-                                    <div className={`indexedStep ${accomplished ? "accomplished" : ""}`}>
-                                        <div className='dot'>
-
-                                        </div>
-                                    </div>
-                                )}
-                            </Step>
-                        </ProgressBar>
-                    </div>
-                </div>
-                <div className="order-address col-3 p-2 bg-secondary">
-                    <div className="border border-end-2">
-                        <h4>Shipping Details</h4>
-                    </div>
-                    <div className="">
-
-                    </div>
-                </div>
-                <div className="order-payment col-3 p-2 bg-secondary">
-                    <div className="border border-end-2">
-                        <h4>Payments Details</h4>
-                    </div>
-                    <div className="">
-
-                    </div>
-                </div>
-            </div> */}
+                <Card title="Payments Details" bordered={true} className='col-12 col-xl-3 my-2 my-xl-0'>
+                    <p className='fs-5 fw-semibold'>Payment Method</p>
+                    <p className='fs-5 fw-normal text-muted'>Pay On Delivery (POD)</p>
+                </Card>
+            </div>
         </div>
     )
 }

@@ -220,3 +220,15 @@ a:hover{
 .ant-card-body{
   padding-bottom: 10px !important;
 }
+
+.list-card-conatiner{
+  height: 25vh;
+  overflow: hidden;
+}
+
+@media only screen and (max-width: 576px) {
+  .list-card-conatiner{
+    height: 32vh;
+  }
+}
+

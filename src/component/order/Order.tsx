@@ -13,16 +13,21 @@ import OrderCancelModal from '../common-components/modals/OrderCancelModal';
 import '../../assets/global/global.css';
 import { hostname } from '../../GlobalVariable';
 import { useSelector } from 'react-redux';
+import { Modal } from 'antd';
+import MapContainer from '../common-components/mapComponent/MapContainer';
 
 const socket = io(hostname);
 const Order = () => {
   const [isConnected, setIsConnected] = useState(socket.connected);
-  const {userId} = useSelector((state:any) => state.user);
+  const { userId } = useSelector((state: any) => state.user);
   const [modalShow, setModalShow] = useState(false);
   const [orderList, setOrderList] = useState([]);
+  const [mapModal, showMapModal] = useState(false);
+  const [agentId, setAgentId] = useState('');
+
   const navigate = useNavigate();
   const [id, setId] = useState('');
-  const displayModal = (e: any, id:any) => {
+  const displayModal = (e: any, id: any) => {
     console.log('display fn.called');
     setModalShow(true);
     setId(id);
@@ -51,8 +56,8 @@ const Order = () => {
     getOrderList();
   }, []);
 
-  const handleOrderRowClick = (productList: any) => {
-    localStorage.setItem('orderDetail', JSON.stringify(productList));
+  const handleOrderRowClick = (order: any) => {
+    localStorage.setItem('orderDetail', JSON.stringify(order));
     navigate('/orderDetails');
   }
 
@@ -76,16 +81,16 @@ const Order = () => {
     socket.emit('join_room', userId);
 
     socket.on('ORDER_UPDATED', (data) => {
-        console.log('Agent Socket Fn. runned');
-        try {
-          console.log('Agent Data', {...data});
-          if(data){
-            // setOrderList(data);
-            addNewOrder(data);
-           }
-        } catch (error) {
-          console.error('Socket Error', error);
+      console.log('Agent Socket Fn. runned');
+      try {
+        console.log('Agent Data', { ...data });
+        if (data) {
+          // setOrderList(data);
+          addNewOrder(data);
         }
+      } catch (error) {
+        console.error('Socket Error', error);
+      }
     });
 
     return () => {
@@ -99,16 +104,21 @@ const Order = () => {
   const addNewOrder = async (data) => {
     console.log('data', data);
     try {
-        const res = await GetOrderLiveStatus();
-        const list = res.data.result;
-        if (list.length > 0) {
-            const newList = list.filter((item:any) => item._id !== data._id);
-            newList.unshift(data);
-            setOrderList(newList);
-        }
+      const res = await GetOrderLiveStatus();
+      const list = res.data.result;
+      if (list.length > 0) {
+        const newList = list.filter((item: any) => item._id !== data._id);
+        newList.unshift(data);
+        setOrderList(newList);
+      }
     } catch (error) {
-        alert(error.message);
+      alert(error.message);
     }
+  };
+
+  const toggleMapModal = (agent: string) => {
+    setAgentId(agent);
+    showMapModal(true);
   }
 
   return (
@@ -163,39 +173,27 @@ const Order = () => {
                   </div>
                 )} */}
                   <div className=''>
-                    <h5>{data.status === 'CREATED' ? 'Pending' : data.status}</h5>
+                    <h5>{data.status === 'CREATED' ? 'Pending' : data.status === 'OFD' ? 'Out for Delivery' : data.status}</h5>
                   </div>
                 </td>
                 <td>
                   <div className=''>
-                    {/* {
-                    index == 0 ? (
-                      <div className='d- flex align-items-center justify-content-between'>
-                      <CustomButton
-                        props={{ styleName: 'dark px-5  p-0', indexData: 'Track', btnType: 'btn-outline', clickHandler: handleOrderTracking}}
-                      />
-
-                      <CustomButton
-                        props={{ styleName: 'danger px-3 p-0 mt-2', indexData: 'Cancel Order', btnType: 'btn-outline', clickHandler:  displayModal}}
-                      />
-                    </div>
-                    ) : (
-                      <CustomButton
-                        props={{ styleName: 'danger px-3 p-0 mt-2', indexData: 'Cancel Order', btnType: 'btn-outline', clickHandler: displayModal}}
-                      />
-                    )
-                  } */}
                     <CustomButton
-                      props={{ styleName: 'success px-3  p-0', indexData: 'Order Details', btnType: 'btn-outline', clickHandler: () => handleOrderRowClick(data.productList) }}
+                      props={{ styleName: 'success px-3 p-0 w-75', indexData: 'Order Details', btnType: 'btn-outline', clickHandler: () => handleOrderRowClick(data) }}
                     />
                     {
-                      data.status === 'CANCELED' ? null : 
-                      <CustomButton
-                        props={{ styleName: 'danger px-3 p-0 mt-2', indexData: 'Cancel Order', btnType: 'btn-outline', clickHandler: (e) => displayModal(e, data._id) }}
-                      />
+                      data.status === 'CANCELED' ?
+                        null
+                      :
+                        data.status === 'OFD' ?
+                          <CustomButton
+                            props={{ styleName: 'primary px-3 p-0 mt-2 w-75', indexData: 'Track Order', btnType: 'btn-outline', clickHandler: () => toggleMapModal(data.assignedTo) }}
+                          />
+                      :
+                          <CustomButton
+                            props={{ styleName: 'danger px-3 p-0 mt-2', indexData: 'Cancel Order', btnType: 'btn-outline', clickHandler: (e) => displayModal(e, data._id) }}
+                          />
                     }
-                    
-
                   </div>
                 </td>
               </tr>
@@ -209,6 +207,18 @@ const Order = () => {
         id={id}
         refreshList={getOrderList}
       />
+      <Modal
+        title="Order Live Location."
+        centered
+        open={mapModal}
+        width={1000}
+        footer={false}
+        onCancel={() => showMapModal(false)}
+      >
+        <div className="container">
+          <MapContainer agentId={agentId} />
+        </div>
+      </Modal>
     </div>
   )
 }

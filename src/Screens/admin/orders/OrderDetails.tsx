@@ -142,6 +142,7 @@ const OrderDetails: FC<any> = (props) => {
         return () => {
             socket.off('connect');
             socket.off('disconnect');
+            socket.off('LOCATION_CHANGED');
             socket.off('ORDER_UPDATED');
             socket.off('join_room');
         };
@@ -334,7 +335,7 @@ const OrderDetails: FC<any> = (props) => {
                 onCancel={() => showMapModal(false)}
             >
                 <div className="container">
-                    <MapContainer location={location} />
+                    <MapContainer agentId={selectedRider._id} />
                 </div>
             </Modal>
         </div>
