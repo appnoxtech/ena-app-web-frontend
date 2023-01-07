@@ -21,7 +21,7 @@ function Signup() {
     password: '',
     confirm_password:''
   }
-  const localErrorState = { firstnameError:'',lastnameError:'', emailError: '', passwordError: ''}
+  const localErrorState = { firstnameError:'',lastnameError:'', emailError: '', passwordError: '', confirm_password: ''}
 
   const [localError, setlocalError] = useState(localErrorState)
 
@@ -41,12 +41,25 @@ function Signup() {
         setlocalError({ ...localErrorState, lastnameError: '' })
         if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input.email)){
           setlocalError({ ...localErrorState, emailError: '' })
-          if(input.password == input.confirm_password){
-            setlocalError({ ...localErrorState, passwordError: '' })
-            return true
+          if(input.password.length === 0){
+            setlocalError({ ...localErrorState, passwordError: 'Required !' })
+            return false;
+          }else if(input.password.length < 8){
+            setlocalError({ ...localErrorState, passwordError: 'Password must be of 8 digits !' })
+            return false;
           }else{
-            setlocalError({ ...localErrorState, passwordError: 'Password not matched' })
-            return false
+            setlocalError({ ...localErrorState, passwordError: '' })
+            if(input.confirm_password.length === 0){
+              setlocalError({ ...localErrorState, confirm_password: 'Required !' });
+              return false;
+            }
+            else if(input.password !== input.confirm_password){
+              setlocalError({ ...localErrorState, confirm_password: 'Password not matched !' })
+              return false
+            }else{
+              setlocalError({ ...localErrorState, confirm_password: ''  })
+              return true
+            }
           }
         }else{
           setlocalError({ ...localErrorState, emailError: 'Wrong Email' })
@@ -78,7 +91,7 @@ function Signup() {
 
   return (
     <>
-      <div className='container-fluid mt-4'>
+      <div className='container-fluid mt-md-4'>
         <div className='container'>
           <div className='row'>
             <div className='col-4 text-center d-none d-lg-block'>
@@ -96,7 +109,7 @@ function Signup() {
                 size={30}
                 onClick={() => navigate(-1)}
               />
-              <div className='col-10 mx-auto mt-3 pt-0'>
+              <div className='col-10 mx-auto pt-0'>
                 <p className='mt-1 h3 fontWeight-700'>{heading}</p>
                 <p className='h6'>
                   Already have an account ?
@@ -162,6 +175,9 @@ function Signup() {
                   Input={input}
                   setInput={setinput}
                 />
+                 {localError.passwordError == '' ? null : (
+                  <p className='text-danger'>{localError.passwordError}</p>
+                )}
                 <label className='form-label mt-3 h6 d-none d-lg-block d-md-block lable'>
                   Confirm Password
                 </label>
@@ -174,8 +190,8 @@ function Signup() {
                   Input={input}
                   setInput={setinput}
                 />
-                 {localError.passwordError == '' ? null : (
-                  <p className='text-danger'>{localError.passwordError}</p>
+                 {localError.confirm_password == '' ? null : (
+                  <p className='text-danger'>{localError.confirm_password}</p>
                 )}
 
                 <ButtonComp

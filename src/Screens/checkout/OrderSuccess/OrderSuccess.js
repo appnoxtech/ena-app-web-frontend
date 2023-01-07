@@ -1,21 +1,14 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Lottie from 'react-lottie';
+import { useNavigate } from 'react-router-dom';
 import SuccessAnimation from '../../../assets/animations/Success.json';
 import ButtonComp from '../../../component/common-components/buttonComp/ButtonComp';
-import { Button } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { resetCartCount } from '../../../redux/reducer/cart/CartReducer';
 import './OrderSuccess.css';
 
 export default function OrderSuccess() {
   const navigation = useNavigate();
-  const dispatch = useDispatch();
   const navigationHandler = () => {
     navigation('/order');
-    localStorage.removeItem('cartData');
-    localStorage.removeItem('cartData');
-    dispatch(resetCartCount());
   }
 
   const defaultOptions = {

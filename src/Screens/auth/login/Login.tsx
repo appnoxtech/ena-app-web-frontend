@@ -60,7 +60,7 @@ function Login() {
 
   return (
     <>
-      <div className='container-fluid mt-5'>
+      <div className='container-fluid mt-md-4'>
         <div className='container'>
           <div className='row'>
             <div className='col-4 text-center d-none d-lg-block'>

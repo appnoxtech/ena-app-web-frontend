@@ -8,10 +8,13 @@ import { GetCartDetailsService } from '../../../services/cart/cartService'
 import { useGetCartList } from '../../../hooks/carts/getCartList'
 import { AddToCartService } from '../../../services/cart/cartService'
 import { CreateOrderService } from '../../../services/order/OrderService'
+import { useDispatch } from 'react-redux'
+import { resetCartCount } from '../../../redux/reducer/cart/CartReducer'
 
 function OrderCard({...prop}) {
   const navigate = useNavigate()
   const cartData = useGetCartList();
+  const dispatch = useDispatch();
   const navigationHandler = async() => {
     const addressId = localStorage.getItem('addressId');
     if(!addressId){
@@ -41,7 +44,9 @@ function OrderCard({...prop}) {
 
   const createOrder = async (data:any) => {
      try {
-      const res = await CreateOrderService(data);
+      await CreateOrderService(data);
+      localStorage.removeItem('cartData');
+      dispatch(resetCartCount());
       navigate('/orderSuccess');
      } catch (error) {
       alert(error.message)

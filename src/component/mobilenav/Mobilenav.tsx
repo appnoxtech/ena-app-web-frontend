@@ -7,7 +7,8 @@ import { Button, OverlayTrigger, Popover, PopoverBody } from 'react-bootstrap'
 import { useIsLoginHook } from '../../hooks/user/IsLoginHooks'
 import { useGetCartList } from '../../hooks/carts/getCartList'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateUserCart } from '../../redux/reducer/cart/CartReducer'
+import { resetCartCount, updateUserCart } from '../../redux/reducer/cart/CartReducer'
+import { resetUserData } from '../../redux/reducer/UserDetails/userAction'
 
 const Mobilenav = ({ }) => {
   const navigate = useNavigate();
@@ -17,31 +18,37 @@ const Mobilenav = ({ }) => {
   const dispatch = useDispatch();
   const countGlobal = useSelector((state: any) => state.cart.count);
   const [count, setCount] = useState(cartData.length);
-  const MenuItem = [
+  const MenuItem = isLogin ? [
     {
       navName: 'Home',
       path: '/',
     },
     {
-      navName: 'Shop',
-      path: '/shop',
+      navName: 'Orders',
+      path: '/order',
     },
     {
-      navName: 'About',
-      path: '/about',
+      navName: 'Cart',
+      path: '/cart',
+    },
+  ] : [
+    {
+      navName: 'Home',
+      path: '/',
     },
     {
-      navName: 'Contact',
-      path: '/contact',
+      navName: 'Cart',
+      path: '/cart',
     },
   ]
 
   // function for logout
 
   const Logout = () => {
-    localStorage.removeItem('@user_Token');
-    localStorage.removeItem('user');
     localStorage.clear();
+    dispatch(resetUserData());
+    dispatch(resetCartCount());
+    navigate('/login');
   }
   useEffect(() => {
     dispatch(updateUserCart(cartData.length));

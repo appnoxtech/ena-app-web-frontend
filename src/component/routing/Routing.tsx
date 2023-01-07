@@ -57,6 +57,7 @@ function Routing() {
               <AgentsRoutes />
               :null
           }
+          <div className="mb-3"></div>
         <DesktopFooter class='container-fluid footer mt-5 mt-auto' />
        </div>
       </BrowserRouter>
