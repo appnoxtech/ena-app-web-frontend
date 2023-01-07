@@ -3,6 +3,7 @@ import React from "react";
 import Details from "../pages/product/Details"
 import Cart from "../pages/cart/Cart"
 import Login from "../Screens/auth/login/Login"
+import Passchanged from "../Screens/auth/otpVerified/Otpverified";
 import Logincart from "../Screens/auth/logincart/Logincart"
 import ForgetPass from "../Screens/auth/forgetPass/ForgetPass"
 import OtpVar from "../Screens/auth/otpVar/OtpVar"
@@ -28,7 +29,7 @@ const UserRoutes = () => {
           <Route path='/forget_password' element={<ForgetPass />} />
           <Route path='/otp_verification' element={<OtpVar />} />
           <Route path='/resetpass/otpvar' element={<OtpVarForForget />} />
-          {/* <Route path='/otp_verified' element={<OtpVerified />} /> */}
+          <Route path='/otp_verified' element={<Passchanged />} />
           <Route path='/resetPassword' element={<ResetPass />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/addAddress' element={<AddAddress />} />
