@@ -154,9 +154,8 @@ const Admin: FC<any> = () => {
     setCurrCat(value);
   }
 
-
   return (
-    <div className='col-12 mt-3'>
+    <div className='col-12 mt-0 mt-md-3'>
       <div className='col-12 d-flex rounded-4 bg-white mt-2'>
         {
           !isMediumScreen ?
@@ -170,33 +169,36 @@ const Admin: FC<any> = () => {
             </div> : null
         }
       </div>
-      <div className='d-flex flex-column flex-md-column flex-xl-row'>
+      <div className='d-flex flex-column flex-md-column flex-xl-row flex-wrap'>
         {
           isMediumScreen ?
-            <div className="col-12 p-2 d-flex">
-              <div className="col-6 px-2">
-                <SmallSearchBar setSearchText={setSearchText} searchText={searchText} />
-              </div>
-              <div className="col-3">
-                <Select
-                  size={'large'}
-                  defaultValue=''
-                  onChange={handleChange}
-                  style={{ width: 200 }}
-                  options={categoryList}
-                />
-              </div>
-              <div className="col-3 d-flex">
-                <div className="ms-auto">
-                  <Radio.Group value={view} size={'large'} onChange={handleToggleView}>
-                    <Radio.Button value="Grid">Grid</Radio.Button>
-                    <Radio.Button value="List">List</Radio.Button>
-                  </Radio.Group>
+            <div className="col-12 p-2 d-flex flex-column flex-lg-row">
+              <div className="col-12 col-lg-6">
+                  <SmallSearchBar setSearchText={setSearchText} searchText={searchText} />
+               </div>
+              <div className="col-12 col-lg-6 d-flex ps-lg-2 justify-content-space">
+                <div className="col-6 col-lg-8">
+                  <Select
+                    size={'large'}
+                    defaultValue=''
+                    onChange={handleChange}
+                    style={{ width: '100%' }}
+                    options={categoryList}
+                  />
+                </div>
+                <div className="col-6 col-lg-4 d-flex">
+                  <div className="ms-auto">
+                    <Radio.Group value={view} size={'large'} onChange={handleToggleView}>
+                      <Radio.Button value="Grid">Grid</Radio.Button>
+                      <Radio.Button value="List">List</Radio.Button>
+                    </Radio.Group>
+                  </div>
                 </div>
               </div>
+              
             </div>
             :
-            <div className='mt-2 pt-2 col-md-12 col-xl-2 mt-3'>
+            <div className='mt-2 pt-2 col-md-12 col-xl-2 mt-3 px-2'>
               <SmallSearchBar setSearchText={setSearchText} searchText={searchText} />
               <Category
                 filterDatabyCategory={setCurrCat}
@@ -209,13 +211,13 @@ const Admin: FC<any> = () => {
         {
           productList.length > 0 ?
             <div className='col-12 mx-auto mx-md-0 col-md-12 col-xl-10 '>
-              <div className={view === 'Grid' ? 'row d-flex mt-2 mx-auto m-0 p-0 pe-2' : 'mt-3 list-container'}>
+              <div className={view === 'Grid' ? 'row d-flex mt-2 mx-auto m-0 p-0' : 'mt-3 list-container'}>
                 {/* <Filterbar /> */}
                 {/* search product by name */}
                 {productList.map((cardData: any) => (
                   view === 'Grid'
                     ?
-                    <div className='col-12 col-lg-4 col-md-4 col-xl-3 m-0 d-flex justify-content-center align-item-center p-3 pb-0' key={cardData.productId}>
+                    <div className='col-6 col-sm-6 col-lg-4 col-md-4 col-xl-3 mb-2 d-flex justify-content-center align-item-center p-1 p-md-3 pb-0' key={cardData.productId}>
                       <CardComponent currCat={currCat} cardData={cardData} wishListHandler={wishListHandler} view={view} />
                     </div>
                     :
