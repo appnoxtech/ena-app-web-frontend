@@ -5,7 +5,7 @@ import '../Auth.css'
 import '../../../assets/global/global.css'
 import banner from '../../../assets/images/bannerH.png'
 import EnaLogo from '../../../assets/images/enaLogoGreen.png'
-import OtpInput from '../../../component/otpInput/OtpInput'
+import OtpInput from 'react-otp-input';
 import ButtonComp from '../../../component/common-components/buttonComp/ButtonComp'
 import { useVerifyOtpForgetHook } from '../../../hooks/authHooks/VerifyOtpForgetpass'
 import Timer from '../../../component/common-components/timer/Timer'
@@ -13,25 +13,31 @@ import Timer from '../../../component/common-components/timer/Timer'
 function OtpVarForForget() {
   const { state } = useLocation()
   const handleotp = useVerifyOtpForgetHook()
-
-  const [input, setinput] = useState([])
-
-  const result = input.join('')
-  const x = parseInt(result)
+  const [error, setError] = useState('');
+  const [input, setinput] = useState('')
 
   const heading = 'OTP Verification'
   const navigate = useNavigate()
 
   const data = {
     email: state.email,
-    otp: x,
+    otp: input,
     password: state.password,
   }
 
   // ----- navigate handler -----
 
   const navigationHandler = () => {
-    handleotp(data)
+    if (input.length < 4) {
+      setError('Invalid OTP');
+    } else {
+      setError('');
+      handleotp(data);
+    }
+  }
+
+  const handleChange = (otp: any) => {
+    setinput(otp);
   }
 
   return (
@@ -59,10 +65,37 @@ function OtpVarForForget() {
                 <p className='h6'>
                   Enter the verification code we just sent on your email <br /> address.
                 </p>
-                <div className='text-center'>
-                  <OtpInput setInput={setinput} Input={input} />
+                <OtpInput
+                  value={input}
+                  onChange={handleChange}
+                  numInputs={4}
+                  isInputNum={true}
+                  inputStyle={{
+                    type: 'text',
+                    width: 80,
+                    height: 80,
+                    margingLeft: 3,
+                    border: '3px solid #d7dcd2',
+                    borderRadius: '3px',
+                  }}
+                  containerStyle={{
+                    width: '70%',
+                    display: 'flex',
+                    justifyContent: 'space-around',
+                    marginRight: 'auto',
+                    marginLeft: 'auto'
+                  }}
+                  focusStyle={{
+                    border: '3px solid #51BC4A',
+                    borderRadius: '3px',
+                  }}
+                  separator={' '}
+                />
+                <div className="d-flex mt-2" style={{width: '90%'}}>
+                  {error == '' ? null : (
+                    <p className='text-danger ms-auto'>{error}</p>
+                  )}
                 </div>
-                {/* <Timer /> */}
 
                 <ButtonComp
                   navigationHandler={navigationHandler}

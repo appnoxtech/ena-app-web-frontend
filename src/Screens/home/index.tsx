@@ -15,6 +15,7 @@ import Lottie from 'react-lottie';
 import NothingFound from '../../assets/animations/nothing-found.json';
 import './index.css';
 import { increaseCartCount } from '../../redux/reducer/cart/CartReducer';
+import ProductTable from '../../component/ProductTable/ProductTable';
 interface product {
   id: number,
   vegName: string,
@@ -33,7 +34,7 @@ interface Response {
 const Admin: FC<any> = () => {
   const [data, setData] = useState(EnaAppData);
   const [view, setView] = useState('Grid');
-  const [categoryList, setCategoryList] = useState([{value: '', label: 'All'}]);
+  const [categoryList, setCategoryList] = useState([{ value: '', label: 'All' }]);
   const [productList, setProductList]: any = useState([]);
   const [searchText, setSearchText] = useState('');
   const [currPage, setCurrPage] = useState(1);
@@ -92,13 +93,13 @@ const Admin: FC<any> = () => {
     }
   }
 
-  const getCategoryList = async() => {
+  const getCategoryList = async () => {
     try {
       const res = await GetAllCategory();
       const catList = res.data.data;
-      if(catList.length > 0){
-        const data = catList.map((item:any) => ({value: item._id, label: item.categoryName.toUpperCase()}));
-        setCategoryList([{value: '', label: 'All'}, ...data]);
+      if (catList.length > 0) {
+        const data = catList.map((item: any) => ({ value: item._id, label: item.categoryName.toUpperCase() }));
+        setCategoryList([{ value: '', label: 'All' }, ...data]);
       }
     } catch (error) {
       alert(error.message);
@@ -154,9 +155,8 @@ const Admin: FC<any> = () => {
     setCurrCat(value);
   }
 
-
   return (
-    <div className='col-12 mt-3'>
+    <div className='col-12 mt-0 mt-md-3'>
       <div className='col-12 d-flex rounded-4 bg-white mt-2'>
         {
           !isMediumScreen ?
@@ -170,33 +170,36 @@ const Admin: FC<any> = () => {
             </div> : null
         }
       </div>
-      <div className='d-flex flex-column flex-md-column flex-xl-row'>
+      <div className='d-flex flex-column flex-md-column flex-xl-row flex-wrap'>
         {
           isMediumScreen ?
-            <div className="col-12 p-2 d-flex">
-              <div className="col-6 px-2">
+            <div className="col-12 p-2 d-flex flex-column flex-lg-row">
+              <div className="col-12 col-lg-6">
                 <SmallSearchBar setSearchText={setSearchText} searchText={searchText} />
               </div>
-              <div className="col-3">
-                <Select
-                  size={'large'}
-                  defaultValue=''
-                  onChange={handleChange}
-                  style={{ width: 200 }}
-                  options={categoryList}
-                />
-              </div>
-              <div className="col-3 d-flex">
-                <div className="ms-auto">
-                  <Radio.Group value={view} size={'large'} onChange={handleToggleView}>
-                    <Radio.Button value="Grid">Grid</Radio.Button>
-                    <Radio.Button value="List">List</Radio.Button>
-                  </Radio.Group>
+              <div className="col-12 col-lg-6 d-flex ps-lg-2 justify-content-space">
+                <div className="col-6 col-lg-8">
+                  <Select
+                    size={'large'}
+                    defaultValue=''
+                    onChange={handleChange}
+                    style={{ width: '100%' }}
+                    options={categoryList}
+                  />
+                </div>
+                <div className="col-6 col-lg-4 d-flex">
+                  <div className="ms-auto">
+                    <Radio.Group value={view} size={'large'} onChange={handleToggleView}>
+                      <Radio.Button value="Grid">Grid</Radio.Button>
+                      <Radio.Button value="List">List</Radio.Button>
+                    </Radio.Group>
+                  </div>
                 </div>
               </div>
+
             </div>
             :
-            <div className='mt-2 pt-2 col-md-12 col-xl-2 mt-3'>
+            <div className='mt-2 pt-2 col-md-12 col-xl-2 mt-3 px-2'>
               <SmallSearchBar setSearchText={setSearchText} searchText={searchText} />
               <Category
                 filterDatabyCategory={setCurrCat}
@@ -208,22 +211,29 @@ const Admin: FC<any> = () => {
 
         {
           productList.length > 0 ?
-            <div className='col-12 mx-auto mx-md-0 col-md-12 col-xl-10 '>
-              <div className={view === 'Grid' ? 'row d-flex mt-2 mx-auto m-0 p-0 pe-2' : 'mt-3 list-container'}>
+            <div className='col-12 mx-auto mx-md-0 col-md-12 col-xl-10'>
+              <div className={view === 'Grid' ? 'row d-flex mt-2 mx-auto m-0 p-0' : 'mt-3'}>
                 {/* <Filterbar /> */}
                 {/* search product by name */}
-                {productList.map((cardData: any) => (
-                  view === 'Grid'
-                    ?
-                    <div className='col-12 col-lg-4 col-md-4 col-xl-3 m-0 d-flex justify-content-center align-item-center p-3 pb-0' key={cardData.productId}>
-                      <CardComponent currCat={currCat} cardData={cardData} wishListHandler={wishListHandler} view={view} />
-                    </div>
-                    :
-                    <CardComponent currCat={currCat} cardData={cardData} wishListHandler={wishListHandler} view={view} />
-                ))}
-                <div className='col-12 d-flex justify-content-end mt-3'>
-                  <Pagination pageCount={totalPageNum} currPage={currPage} setCurrPage={setCurrPage} />
-                </div>
+                {
+                  view === 'Grid' ?
+                    productList.map((cardData: any) => (
+
+                      <div className='col-6 col-sm-6 col-lg-4 col-md-4 col-xl-3 mb-2 d-flex justify-content-center align-item-center p-1 p-md-3 pb-0' key={cardData.productId}>
+                        <CardComponent currCat={currCat} cardData={cardData} wishListHandler={wishListHandler} view={view} />
+                      </div>
+                      // <CardComponent currCat={currCat} cardData={cardData} wishListHandler={wishListHandler} view={view} />
+                    ))
+                    : <ProductTable ProductList={productList} />
+
+                }
+                {
+                  view === 'Grid' ?
+                    <div className='col-12 d-flex justify-content-end mt-3'>
+                      <Pagination pageCount={totalPageNum} currPage={currPage} setCurrPage={setCurrPage} />
+                    </div> : null
+                }
+
               </div>
             </div>
             :

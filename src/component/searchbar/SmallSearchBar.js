@@ -4,7 +4,7 @@ import { AutoComplete, Input } from 'antd';
 
 
 const SmallSearchBar = ({...prop}) => (
-  <div className="col-12 d-flex ps-md-2 px-2 justify-content-center align-item-center">
+  <div className="col-12 d-flex px-0 justify-content-center align-item-center">
     <AutoComplete
     className='mb-3'
     popupClassName="certain-category-search-dropdown"

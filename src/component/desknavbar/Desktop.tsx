@@ -7,7 +7,7 @@ import { GetCartDetailsService } from '../../services/cart/cartService'
 import { useGetCartList } from '../../hooks/carts/getCartList'
 import { useIsLoginHook } from '../../hooks/user/IsLoginHooks'
 import { useDispatch } from 'react-redux';
-import { updateUserCart } from '../../redux/reducer/cart/CartReducer'
+import { resetCartCount, updateUserCart } from '../../redux/reducer/cart/CartReducer'
 import { resetUserData } from '../../redux/reducer/UserDetails/userAction'
 import './Desktop.css'
 
@@ -47,14 +47,11 @@ const Desktop = () => {
   // function for logout
 
   const Logout = () => {
-    localStorage.removeItem('@user_Token');
-    localStorage.removeItem('user');
     localStorage.clear();
     dispatch(resetUserData());
+    dispatch(resetCartCount());
     navigate('/login');
   }
-  console.log('isLogin', isLogin);
-
 
   return (
     <div className='col-12 px-4 pt-3' style={{ position: 'fixed', top: '0px', left: '0px', backgroundColor: 'white', zIndex: 500 }}>

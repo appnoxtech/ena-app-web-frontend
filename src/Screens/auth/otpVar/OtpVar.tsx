@@ -1,41 +1,53 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import OtpInput from 'react-otp-input';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { IoIosArrowBack } from 'react-icons/all'
 import '../Auth.css'
 import '../../../assets/global/global.css'
 import banner from '../../../assets/images/bannerH.png'
 import EnaLogo from '../../../assets/images/enaLogoGreen.png'
-import OtpInput from '../../../component/otpInput/OtpInput'
 import ButtonComp from '../../../component/common-components/buttonComp/ButtonComp'
 import { useVerifyOtpHook } from '../../../hooks/authHooks/VerifyOtpHook'
 
 function OtpVar() {
   const { state } = useLocation()
   const handleotp = useVerifyOtpHook()
-
-  const [input, setinput] = useState([])
-
-  const result = input.join('')
-  const x = parseInt(result)
-
-  const heading = 'OTP Verification'
+  const [input, setinput] = useState('')
+  const heading = 'OTP Verification';
+  const [error, setError] = useState('');
   const navigate = useNavigate()
 
   const data = {
     email: state.email,
-    otp: x,
+    otp: input,
     password: state.password,
   }
 
-  // ----- navigate handler -----
+  // const data = {
+  //   email: 'shudhanshus1998@gmail.com',
+  //   otp: '1234',
+  //   password: '12345678',
+  // }
+
+
+  // // ----- navigate handler -----
 
   const navigationHandler = () => {
-    handleotp(data)
+    if (input.length < 4) {
+      setError('Invalid OTP');
+    } else {
+      setError('');
+      handleotp(data);
+    }
+  }
+
+  const handleChange = (otp: any) => {
+    setinput(otp);
   }
 
   return (
     <>
-      <div className='container-fluid'>
+      <div className='container-fluid mt-md-4'>
         <div className='container'>
           <div className='row'>
             <div className='col-4 text-center d-none d-lg-block'>
@@ -58,14 +70,43 @@ function OtpVar() {
                 <p className='h6'>
                   Enter the verification code we just sent on your email <br /> address.
                 </p>
-                <div className='text-center'>
-                  <OtpInput setInput={setinput} Input={input} />
+                <OtpInput
+                  value={input}
+                  onChange={handleChange}
+                  numInputs={4}
+                  isInputNum={true}
+                  inputStyle={{
+                    type: 'text',
+                    width: 80,
+                    height: 80,
+                    margingLeft: 3,
+                    border: '3px solid #d7dcd2',
+                    borderRadius: '3px',
+                  }}
+                  containerStyle={{
+                    width: '70%',
+                    display: 'flex',
+                    justifyContent: 'space-around',
+                    marginRight: 'auto',
+                    marginLeft: 'auto'
+                  }}
+                  focusStyle={{
+                    border: '3px solid #51BC4A',
+                    borderRadius: '3px',
+                  }}
+                  separator={' '}
+                />
+                <div className="d-flex mt-2" style={{width: '90%'}}>
+                  {error == '' ? null : (
+                    <p className='text-danger ms-auto'>{error}</p>
+                  )}
                 </div>
+                
 
                 <ButtonComp
                   navigationHandler={navigationHandler}
                   type='button'
-                  class='py-2 w-100 h-100 mt-4 fontWeight-600 button themecolor btnRadius text-light'
+                  class='btn w-100 h-100 mt-4 fontWeight-600 button1'
                   btvalue='Verify'
                 />
               </div>

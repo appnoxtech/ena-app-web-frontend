@@ -226,9 +226,14 @@ a:hover{
   overflow: hidden;
 }
 
+
+
 @media only screen and (max-width: 576px) {
   .list-card-conatiner{
     height: 32vh;
+  }
+  .ant-card-body{
+    padding: 8px !important;
   }
 }
 

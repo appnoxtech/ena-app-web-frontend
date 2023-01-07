@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FaPlus } from 'react-icons/fa';
 import { FaMinus } from 'react-icons/fa';
@@ -18,6 +18,7 @@ import { useAddItemToCartHooks } from '../../../hooks/carts/addintoCart';
 import { useRemoveItemFromCart } from '../../../hooks/carts/removeFromCart';
 import { useGetCartList } from '../../../hooks/carts/getCartList';
 import { useUpdateCartItem } from '../../../hooks/carts/updateCartItem';
+import { useIsLoginHook } from '../../../hooks/user/IsLoginHooks';
 
 const { Meta } = Card;
 
@@ -31,6 +32,8 @@ const CardComponent: FC<any> = ({ cardData, indexData, wishListHandler, currCat,
   const handleRemoveItemFromCart = useRemoveItemFromCart();
   const dispatch = useDispatch()
   const navigate = useNavigate();
+  const {isLogin} = useSelector((state:any) => state.user);
+
   const handleAddtoCart = () => {
     //navigate('/product/details',{state:cardData})
     const data = {
@@ -71,10 +74,14 @@ const CardComponent: FC<any> = ({ cardData, indexData, wishListHandler, currCat,
         setItemCount(item.quantity);
         setIsItemAddedToCart(true)
       } else {
-        setIsItemAddedToCart(false)
+        setItemCount(10);
+        setIsItemAddedToCart(false);
       }
+    }else{
+      setItemCount(10);
+      setIsItemAddedToCart(false);
     }
-  }, [cardData]);
+  }, [cardData, isLogin]);
 
   const handleCountChange = (count: any) => {
     setItemCount(count);
@@ -94,8 +101,6 @@ const CardComponent: FC<any> = ({ cardData, indexData, wishListHandler, currCat,
     } else {
       handleCountChange(value);
     }
-
-
   }
 
   if(view === 'Grid'){
