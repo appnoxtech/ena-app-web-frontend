@@ -9,9 +9,11 @@ import AddressCard from '../../../component/common-components/addressCard/Addres
 import Lottie from 'react-lottie';
 import LoadingAnimation from '../../../assets/animations/Loading.json';
 import { getAddressList } from '../../../services/address/AddressService'
+import useErrorHandler from '../../../services/handler/ErrorHandler'
 
 function CheckoutWaddress() {
   const [address, setAddress] = useState([]);
+  const ShowError = useErrorHandler();
   const [isLoading, setIsLoading] = useState(false);
   const defaultOptions = {
     loop: true,
@@ -23,23 +25,13 @@ function CheckoutWaddress() {
     try {
       const res = await getAddressList();
       const addressData = res.data.data;
-      console.log('addressData', addressData);
       if(addressData.length > 0){
         setAddress(addressData)
       }
     } catch (error) {
-      alert(error.message);
+      ShowError(error);
     }
   };
-
-  // useEffect(() => {
-  //   const data = localStorage.getItem('address');
-  //   console.log('data', data);
-  //   if(data){
-  //     const savedAddress = JSON.parse(data); 
-  //     setAddress(savedAddress);
-  //   }
-  // }, []);
 
   useEffect(() => {
     getAddressListData();

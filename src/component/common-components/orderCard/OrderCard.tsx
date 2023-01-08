@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import carrot from '../../../assets/images/carrot.jpg'
 import '../../../assets/global/global.css'
 import './OrderCard.css'
@@ -10,15 +10,23 @@ import { AddToCartService } from '../../../services/cart/cartService'
 import { CreateOrderService } from '../../../services/order/OrderService'
 import { useDispatch } from 'react-redux'
 import { resetCartCount } from '../../../redux/reducer/cart/CartReducer'
+import NotificationContext from '../../../context/Notification/NotificationContext'
+import useErrorHandler from '../../../services/handler/ErrorHandler'
 
 function OrderCard({...prop}) {
   const navigate = useNavigate()
+  const Notification = useContext(NotificationContext);
+  const ShowError = useErrorHandler();
   const cartData = useGetCartList();
   const dispatch = useDispatch();
   const navigationHandler = async() => {
     const addressId = localStorage.getItem('addressId');
     if(!addressId){
-      return alert('Select Address');
+      return Notification({
+        title: 'Address',
+        description: 'Select Address',
+        type: 'info'
+      })
     }
     try {
       prop.setIsLoading(true);
@@ -36,8 +44,8 @@ function OrderCard({...prop}) {
       const addressId = localStorage.getItem('addressId');
       await createOrder({cartId, addressId});
       prop.setIsLoading(false);
-    } catch (error) {
-       alert(error.message)
+    } catch (error:any) {
+      ShowError(error);
        prop.setIsLoading(false);
     }
   }

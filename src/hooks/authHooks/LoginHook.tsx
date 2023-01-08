@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { updateLoaderState } from '../../redux/reducer/loader/LoaderAction'
 import { LoginServices, forgetpasswordServices } from '../../services/auth/Auth'
 import { updateUserData } from '../../redux/reducer/UserDetails/userAction'
+import { useContext } from 'react'
+import NotificationContext from '../../context/Notification/NotificationContext'
 
 // async fn. to store user Token
 const storeToken = async (token: string) => {
@@ -14,16 +16,16 @@ const storeToken = async (token: string) => {
 }
 
 export const useLoginHook = () => {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const handelLogin = (userData: any, source:any) => {
-    const password = userData.password
-    const userName = userData.email
-    const data = { userName, password }
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const Notification = useContext(NotificationContext);
 
+  const handelLogin = (userData: any, source:any) => {
+    const password = userData.password;
+    const userName = userData.email;
+    const data = { userName, password };
     // started Loader
     dispatch(updateLoaderState(true))
-
     // Call Login Service
     LoginServices(data)
       .then((res) => {
@@ -35,25 +37,29 @@ export const useLoginHook = () => {
               firstName,
               lastName,
               userType,
-              userId,
             } = res.data;
-            console.log('res.data', res.data);
-            
-            const user = {firstName,lastName,userType, userId, isLogin: true};
+            const user = {firstName,lastName,userType, isLogin: true};
             dispatch(updateUserData(user));
             localStorage.setItem('user', JSON.stringify(user));
             dispatch(updateUserData(user));
-            navigate(source);
-            // if(userType === 'customer'){
-              
-            // } else {
-            //   navigate('/admin');
-            // }
-            
+            if(user.userType === 'customer'){
+              navigate(source);
+            }else {
+              navigate('/');
+            }
+            Notification({
+              title: 'Authentication',
+              description: 'Logged In. ',
+              type: 'success'
+            });
             // stop Loader
             dispatch(updateLoaderState(false))
           } else if (res.data.emailVerified == false) {
-            alert('Your account is not verified please click ok to verify.')
+            Notification({
+              title: 'Authentication',
+              description: 'Your account is not verified.',
+              type: 'info'
+            });
             navigate('/otp_verification', { state: { email: userName, password: password } })
           } else {
             // stop Loader
@@ -63,15 +69,19 @@ export const useLoginHook = () => {
       })
       .catch((err) => {
         //change when api upgrade
-        console.log('error', err.message);
-        if(err.message){
-          alert(err.message)
-        }
         if (err.response.data.msg == 'Invalid Credential') {
-          alert('Invalid Password')
+          Notification({
+            title: 'Authentication',
+            description: 'Invalid Credential',
+            type: 'error'
+          });
         }
         if (err.response.data.msg == 'Invalid User') {
-          alert('This email is not have an account.')
+          Notification({
+            title: 'Authentication',
+            description: 'User not found.',
+            type: 'error'
+          });
         }
       })
   }
