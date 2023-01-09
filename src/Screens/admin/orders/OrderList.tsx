@@ -3,9 +3,10 @@ import io from 'socket.io-client';
 import Lottie from 'react-lottie';
 import NoOrderFound from '../../../assets/animations/noOrderFound.json';
 import OrderCard from './OrderCard';
-import { GetOrderLiveStatus } from '../../../services/order/OrderService';
+import { GetOrderHistory, GetOrderLiveStatus } from '../../../services/order/OrderService';
 import { orderType } from '../../../types';
 import { hostname } from '../../../GlobalVariable';
+import { Select } from 'antd';
 
 const socket = io(hostname);
 
@@ -14,13 +15,25 @@ const OrderList: FC<any> = () => {
   const [isConnected, setIsConnected] = useState(socket.connected);
   const [lastPong, setLastPong] = useState(null);
 
-  const getOrderList = async () => {
+  const getOrderList = async (status: string) => {
     try {
-      const res = await GetOrderLiveStatus();
-      const list = res.data.result;
-      if (list.length > 0) {
-        setOrderList(list);
+      if(status === 'live'){
+        const res = await GetOrderLiveStatus();
+        const list = res.data.result;
+        if (list.length > 0) {
+          setOrderList(list);
+        }
+      }else{
+        const res = await GetOrderHistory();
+        const list = res.data.result;
+        console.log('list', list);
+        
+        if(list.length > 0){
+          const data = list.filter((order: orderType) => order.status === status);
+          setOrderList(data);
+        }
       }
+      
     } catch (error) {
       alert(error.message);
     }
@@ -32,7 +45,8 @@ const OrderList: FC<any> = () => {
     animationData: NoOrderFound,
   };
   useEffect(() => {
-    getOrderList();
+    getOrderList('live');
+
     socket.on('connect', () => {
       console.log('Hi connection is runned');
       setIsConnected(true);
@@ -60,20 +74,48 @@ const OrderList: FC<any> = () => {
     };
   }, []);
 
+  const OrderStatus = [
+    {
+      label: 'Current Order',
+      value: 'live'
+    },
+    {
+      label: 'Completed Order',
+      value: 'COMPLETED'
+    },
+    {
+      label: 'Canceled Order',
+      value: 'CANCELED'
+    }
+  ];
+
+  const handleChange = (value: string) => {
+    getOrderList(value);
+  }
+
   return (
     <div className='mt-1 mt-md-4'>
-        <div className="col-12">
-            <div className="ps-4">
+        <div className="col-12 d-flex justify-content-space px-3">
+            <div className="col-3">
               <p className='mt-1 h3 fontWeight-700'>Orders</p>
             </div>
+            <div className="ms-auto col-3">
+            <Select
+              size={'large'}
+              defaultValue='live'
+              onChange={handleChange}
+              style={{ width: '100%' }}
+              options={OrderStatus}
+            />
+            </div>
         </div>
-        <div className="col-12 px-2 d-flex justify-content-center align-item-center">
+        <div className="col-12 px-2 d-flex justify-content-center align-item-center fixedTable-80">
             {
               orderList.length > 0 ? 
                 <div className="container row">
                   {orderList.map((order: orderType) => {
                     return (
-                      <div className="col-12 col-md-6 col-xl-4 p-3">
+                      <div className="col-12 col-md-6 col-xl-4 p-3 h-auto">
                         <OrderCard
                           order={order} 
                         />

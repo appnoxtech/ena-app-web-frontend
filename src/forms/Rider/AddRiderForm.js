@@ -11,10 +11,12 @@ import './AddRiderForm.css';
 import '../../assets/global/global.css';
 import { AddRiderService, UpdateRiderService } from '../../services/rider/RiderService';
 import { notification } from 'antd';
+import useErrorHandler from '../../services/handler/ErrorHandler';
 
 function AddRiderForm(props) {
     const [api, contextHolder] = notification.useNotification();
     const [isUpdate, setIsUpdate] = useState(false);
+    const showError = useErrorHandler();
     const heading = isUpdate ? 'Update Rider' : 'Add Rider';
     const navigate = useNavigate()
     const initialState = {
@@ -28,7 +30,8 @@ function AddRiderForm(props) {
         firstNameError: '',
         lastNameError: '',
         emailError: '',
-        passwordError: ''
+        passwordError: '',
+        confirm_password: '',
     }
 
     const [localError, setlocalError] = useState(localErrorState)
@@ -49,14 +52,15 @@ function AddRiderForm(props) {
             openNotification('Agent Added Successfully !');
             props.onHide();
         } catch (error) {
-            openNotification(error.message);
+            //openNotification(error.message);
+            showError(error);
         }
     }
 
     const handleUpdateAgent = async () => {
         try {
-            const {firstName, lastName, email} = input;
-            const req = await UpdateRiderService({_id: input._id ,firstName, lastName, email});
+            const { firstName, lastName, email } = input;
+            const req = await UpdateRiderService({ _id: input._id, firstName, lastName, email });
             await props.getRiderList();
             openNotification('Agent Updated Successfully !');
             props.onHide();
@@ -82,7 +86,7 @@ function AddRiderForm(props) {
         }
     }, [props.selectedAgent])
 
-    
+
     const checkValidation = () => {
         if (input.firstName != '') {
             setlocalError({ ...localErrorState, firstNameError: '' })
@@ -91,14 +95,27 @@ function AddRiderForm(props) {
                 if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input.email)) {
                     setlocalError({ ...localErrorState, emailError: '' })
                     if (!isUpdate) {
-                        if (input.password == input.confirm_password) {
-                            setlocalError({ ...localErrorState, passwordError: '' })
-                            return true
+                        if (input.password.length === 0) {
+                            setlocalError({ ...localErrorState, passwordError: 'Required !' })
+                            return false;
+                        } else if (input.password.length < 8) {
+                            setlocalError({ ...localErrorState, passwordError: 'Password must be of 8 digits !' })
+                            return false;
                         } else {
-                            setlocalError({ ...localErrorState, passwordError: 'Password not matched' })
-                            return false
+                            setlocalError({ ...localErrorState, passwordError: '' })
+                            if (input.confirm_password.length === 0) {
+                                setlocalError({ ...localErrorState, confirm_password: 'Required !' });
+                                return false;
+                            }
+                            else if (input.password !== input.confirm_password) {
+                                setlocalError({ ...localErrorState, confirm_password: 'Password not matched !' })
+                                return false
+                            } else {
+                                setlocalError({ ...localErrorState, confirm_password: '' })
+                                return true
+                            }
                         }
-                    }else {
+                    } else {
                         return true;
                     }
                 } else {
@@ -140,7 +157,7 @@ function AddRiderForm(props) {
     const updateRider = () => {
         if (checkValidation()) {
             handleUpdateAgent()
-        }else{
+        } else {
             console.log(localError);
         }
     }
@@ -224,6 +241,9 @@ function AddRiderForm(props) {
                                                         Input={input}
                                                         setInput={setinput}
                                                     />
+                                                     {localError.passwordError == '' ? null : (
+                                                        <p className='text-danger'>{localError.passwordError}</p>
+                                                    )}
                                                     <label className='form-label mt-3 h6 d-none d-lg-block d-md-block lable'>
                                                         Confirm Password
                                                     </label>
@@ -236,8 +256,8 @@ function AddRiderForm(props) {
                                                         Input={input}
                                                         setInput={setinput}
                                                     />
-                                                    {localError.passwordError == '' ? null : (
-                                                        <p className='text-danger'>{localError.passwordError}</p>
+                                                    {localError.confirm_password == '' ? null : (
+                                                        <p className='text-danger'>{localError.confirm_password}</p>
                                                     )}
                                                 </> : null
                                         }

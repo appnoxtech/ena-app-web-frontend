@@ -271,7 +271,7 @@ function AddAddress({...prop}) {
             <ButtonComp
               navigationHandler={navigationBack}
               type='button'
-              class='btn py-3 lh-1 border-3 w-100 fontWeight-600 button2 cancel_button'
+              class='btn py-3 lh-1 border-3 w-100 fontWeight-600 button1'
               btvalue='Cancel'
             />
           </div>

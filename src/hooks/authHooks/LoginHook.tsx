@@ -5,6 +5,7 @@ import { LoginServices, forgetpasswordServices } from '../../services/auth/Auth'
 import { updateUserData } from '../../redux/reducer/UserDetails/userAction'
 import { useContext } from 'react'
 import NotificationContext from '../../context/Notification/NotificationContext'
+import useErrorHandler from '../../services/handler/ErrorHandler'
 
 // async fn. to store user Token
 const storeToken = async (token: string) => {
@@ -18,6 +19,7 @@ const storeToken = async (token: string) => {
 export const useLoginHook = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const showError = useErrorHandler();
   const Notification = useContext(NotificationContext);
 
   const handelLogin = (userData: any, source:any) => {
@@ -37,8 +39,9 @@ export const useLoginHook = () => {
               firstName,
               lastName,
               userType,
+              userId,
             } = res.data;
-            const user = {firstName,lastName,userType, isLogin: true};
+            const user = {firstName,lastName,userType, userId, isLogin: true};
             dispatch(updateUserData(user));
             localStorage.setItem('user', JSON.stringify(user));
             dispatch(updateUserData(user));
@@ -69,20 +72,7 @@ export const useLoginHook = () => {
       })
       .catch((err) => {
         //change when api upgrade
-        if (err.response.data.msg == 'Invalid Credential') {
-          Notification({
-            title: 'Authentication',
-            description: 'Invalid Credential',
-            type: 'error'
-          });
-        }
-        if (err.response.data.msg == 'Invalid User') {
-          Notification({
-            title: 'Authentication',
-            description: 'User not found.',
-            type: 'error'
-          });
-        }
+        showError(err);
       })
   }
   return handelLogin

@@ -10,11 +10,13 @@ import { useDispatch } from 'react-redux';
 import { resetCartCount, updateUserCart } from '../../redux/reducer/cart/CartReducer'
 import { resetUserData } from '../../redux/reducer/UserDetails/userAction'
 import './Desktop.css'
+import { Tooltip } from 'antd';
 
 const Desktop = () => {
   const navigate = useNavigate();
   const UserType = useSelector((state: any) => state.user.userType);
   const cartData = useGetCartList();
+  const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
   const isLogin = useIsLoginHook();
   const countGlobal = useSelector((state: any) => state.cart.count);
@@ -33,14 +35,6 @@ const Desktop = () => {
     {
       navName: '',
       path: '/order',
-    },
-    {
-      navName: '',
-      path: '/about',
-    },
-    {
-      navName: '',
-      path: '/contact',
     },
   ]
 
@@ -71,29 +65,29 @@ const Desktop = () => {
           ))}
         </div>
         <div className='d-flex align-items-center justify-content-center'>
-          <OverlayTrigger
-            trigger='focus'
-            key='bottom'
-            placement='bottom'
-            overlay={
-              <Popover id='popover-positioned-bottom'>
-                <Popover.Body>
-                  {isLogin ? (
-                    <NavLink to='/' onClick={() => Logout()}>
-                      Logout
-                    </NavLink>
-                  ) : (
-                    <NavLink to='/login'>Log in</NavLink>
-                  )}
-                </Popover.Body>
-              </Popover>
-            }
-          >
-            <Button className='nav__link' variant=''>
-              <i style={{ fontSize: 46 }} className='fa fa-user-o person-icon' aria-hidden='true'></i>
-            </Button>
-          </OverlayTrigger>
-          {/* <i className='fa fa-heart-o heart_icon' aria-hidden='true'></i> */}
+        <Tooltip color={'white'} placement="bottom" open={isOpen}
+              title={isLogin ? (
+                <NavLink to='/' onClick={() => {
+                  setIsOpen(false)
+                  Logout()
+                }}>
+                  Logout
+                </NavLink>
+              ) : (
+                <NavLink 
+                  to='/login' 
+                  onClick={() => setIsOpen(false)}
+                >Log in</NavLink>
+              )} 
+            >
+              <Button 
+                className='nav__link' 
+                variant=''
+                onClick={() => setIsOpen(!isOpen)}
+              >
+                <i style={{ fontSize: 46 }} className='fa fa-user-o person-icon' aria-hidden='true'></i>
+              </Button>
+            </Tooltip>
           {
             UserType === 'customer' ?
               <NavLink to='/cart'>

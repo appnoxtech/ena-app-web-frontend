@@ -1,20 +1,15 @@
-import React, { FC, useContext, useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { Card, Modal } from 'antd';
 import io from 'socket.io-client';
-import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { orderType, products } from '../../../types';
 import '../../../assets/global/global.css';
-import './adminOrder.css';
+import '../../admin/orders/adminOrder.css';
 import OrderSteps from '../../../component/orderSteps/OrderSteps';
-import AgentModal from './AgentModal';
-import { GetRiderDetailsById, GetRiderListService } from '../../../services/rider/RiderService';
-import { CancelOrder, DeassignOrderService, GetOrderById } from '../../../services/order/OrderService';
+import { GetOrderById, OutForDeliveryService } from '../../../services/order/OrderService';
+import { useSelector } from 'react-redux';
 import { hostname } from '../../../GlobalVariable';
-import MapContainer from '../../../component/common-components/mapComponent/MapContainer';
-import ButtonComp from '../../../component/common-components/buttonComp/ButtonComp';
-import NotificationContext from '../../../context/Notification/NotificationContext';
 
 
 type PropTypes = {
@@ -29,18 +24,12 @@ const getDate = (data: number) => {
 const socket = io(hostname);
 
 const OrderDetails: FC<any> = (props) => {
-    const [agentModal, setAgentModal] = useState(false);
-    const Notification = useContext(NotificationContext);
-    const [location, setLocation] = useState({});
     const [isConnected, setIsConnected] = useState(socket.connected);
-    const [riderList, setRiderList] = useState([]);
     const [order, setOrder]: any = useState({});
+    const {userId} = useSelector((state: any) => state.user);
     const [addressInfo, setAddressInfo]: any = useState({});
-    const [selectedRider, setSelectedRider]: any = useState({});
     const { state } = useLocation();
     const Order = state.order;
-    const { userId } = useSelector((state: any) => state.user);
-    const [mapModal, showMapModal] = useState(false);
 
     const calcTotal = () => {
         const bidTotal = Order.productList.reduce((total: number, item: products) => {
@@ -49,45 +38,11 @@ const OrderDetails: FC<any> = (props) => {
         return bidTotal;
     }
 
-    const getRiderList = async () => {
-        try {
-            const res = await GetRiderListService();
-            const list = res.data.data;
-            if (list.length > 0) {
-                const availableAgent = list.filter((rider: any) => !rider.isAssigned);
-                setRiderList(availableAgent);
-            } else {
-                setRiderList(list);
-            }
-        } catch (error) {
-            console.log(error);
-            alert(error.message);
-        }
-    };
-
-    const getSelectedRiderDetails = async (id: string) => {
-        try {
-            const res = await GetRiderDetailsById(id);
-            console.log('rider details', res.data);
-            const data = res.data.data;
-            setSelectedRider(data);
-            if (data.currentLocation) {
-                const { lat, lng } = data.currentLocation;
-                setLocation({ lat, lng });
-            }
-        } catch (error) {
-            alert(error.message);
-        }
-    }
-
     const updateOrderDetails = async () => {
         try {
             const res = await GetOrderById(Order._id);
             const data = res.data.result;
             setAddressInfo(data.addressInfo);
-            if (data.assignedTo) {
-                getSelectedRiderDetails(data.assignedTo);
-            }
             setOrder(data);
         } catch (error) {
             alert(error.message);
@@ -96,7 +51,6 @@ const OrderDetails: FC<any> = (props) => {
 
     useEffect(() => {
         updateOrderDetails();
-        getRiderList();
 
         socket.on('connect', () => {
             console.log('Socket is Connected ====>');
@@ -109,34 +63,15 @@ const OrderDetails: FC<any> = (props) => {
 
         socket.emit('join_room', userId);
 
-        Order.assignedTo ? socket.emit('join_room', Order.assignedTo) : null;
-
-        socket.emit('join_room', userId);
-
         socket.on('ORDER_UPDATED', (data) => {
             console.log('Agent Socket Fn. runned');
             try {
-                console.log('Agent Data', { ...data });
-                if (data) {
-                    // setOrderList(data);
-                    setOrder(data);
-                }
+              console.log('Agent Data', {...data});
+              if(data){
+                updateOrderDetails();
+               }
             } catch (error) {
-                console.error('Socket Error', error);
-            }
-        });
-
-        socket.on('LOCATION_CHANGED', (data) => {
-            try {
-                console.log('Location Data', { ...data });
-                if (data) {
-                    //setOrder(data);
-                    const location = data.currentLocation;
-                    console.log('location', location);
-                    setLocation(location);
-                }
-            } catch (error) {
-                console.error('Socket Error', error);
+              console.error('Socket Error', error);
             }
         });
 
@@ -144,58 +79,41 @@ const OrderDetails: FC<any> = (props) => {
         return () => {
             socket.off('connect');
             socket.off('disconnect');
-            socket.off('LOCATION_CHANGED');
-            socket.off('ORDER_UPDATED');
             socket.off('join_room');
-            socket.off('Deassigend_Order');
         };
     }, []);
 
-    const handelCancelOrder = async () => {
-        try {
-          const data = { orderId: Order._id }
-          const res = await CancelOrder(data);
-          await updateOrderDetails();
-        } catch (error) {
-          alert(error.message)
-        }
-    }
-    const confirm = () => {
+    const handleStartRide = () => {
         Modal.confirm({
             centered: true,
             title: 'Confirm',
             icon: <ExclamationCircleOutlined />,
             content: 'Are you sure !',
-            onOk: () => handelCancelOrder(),
             okText: 'Yes',
             cancelText: 'No',
         });
     };
 
-    const handleDeassignAgent = async () => {
+    const handleOrderTracking = async (orderId: string, status: string) => {
         try {
-            const data = {
-                orderId: order._id,
-                agentId: order.assignedTo
+            const data = {orderId: orderId, status: status};
+            const res = await OutForDeliveryService(data);
+            let TrackerId: number;
+            console.log('status', res.status);
+            if(res.status === 200){
+                if(status === 'OFD'){
+                    TrackerId = navigator.geolocation.watchPosition((position) => {
+                        let lat = position.coords.latitude;
+                        let lng = position.coords.longitude;
+                        socket.emit('UPDATE_LOCATION', {id: userId, location: {lat, lng}});
+                    });
+                }else{
+                    navigator.geolocation.clearWatch(TrackerId);
+                }
             }
-            await DeassignOrderService(data);
-            await updateOrderDetails();
-            socket.emit('Deassigend_Order', order.assignedTo);
-            Notification({
-                title: 'Notification',
-                description: 'Agent Deassigned',
-                type: 'success'
-            });
         } catch (error) {
-            alert(error.message);
+            alert(error.message)
         }
-    }
-
-    console.log('order', order);
-    console.log('location', location);
-
-    const toggleMapModal = () => {
-        showMapModal(true);
     }
 
 
@@ -213,31 +131,26 @@ const OrderDetails: FC<any> = (props) => {
                 </div>
                 <div className="col-6 col-md-3 d-flex flex-column flex-md-row">
                     {
-                        order.status === 'CREATED' ?
-                            <>
+                        order.status === 'ASSIGNED' ?
                                 <div className='ms-auto me-2 mb-2 mb-md-0'>
                                     {
-                                        <button onClick={confirm} type="button" className="btn btn-danger">
-                                            Cancel Order
+                                        <button onClick={() => handleOrderTracking(order._id, 'OFD')} type="button" className="btn btn-success">
+                                            Start Ride
                                         </button>
                                     }
                                 </div>
-                                <div className="ms-auto me-2">
-                                    <button onClick={() => setAgentModal(true)} type="button" className="btn btn-primary">
-                                        Assign Agent
+                            : order.status === 'OFD' ? 
+                                <div className='ms-auto me-2'>
+                                    <button onClick={() => handleOrderTracking(order._id, 'COMPLETED')} type="button" className="btn btn-primary">
+                                        Complete
                                     </button>
-                                </div>
-                            </>
-                            : order.status === 'ASSIGNED' ? <div className='ms-auto me-2'>
-                                <button onClick={handleDeassignAgent} type="button" className="btn btn-primary">
-                                    Deassigned
-                                </button>
-                            </div> : null
+                                </div> 
+                            : null
                     }
                 </div>
             </div>
             <div className="col-12 d-flex flex-column flex-lg-row  justify-content-between align-item-center px-lg-4 pb-3">
-                <div className="col-12 col-lg-9 shadow p-2 rounded-2">
+                <div className="col-12 shadow p-2 rounded-2">
                     <div className="col-12 py-1 border-bottom ps-2 d-flex justify-content-between align-item-center">
                         <div className="col-6">
                             <h6>Order Items</h6>
@@ -248,7 +161,7 @@ const OrderDetails: FC<any> = (props) => {
                             {
                                 Object.keys(order).length > 1 ? order.productList.map((item: products) => {
                                     return (
-                                        <div className="col-12 d-flex flex-column flex-lg-row justify-content-between align-item-center border-bottom">
+                                        <div className="col-12 d-flex flex-column flex-lg-row justify-content-between align-item-center border-bottom" key={item.productId}>
                                             <div className="col-12 col-lg-3 p-3">
                                                 <img src={item.image} className="rounded w-100 h-100 image-fit" />
                                             </div>
@@ -299,7 +212,7 @@ const OrderDetails: FC<any> = (props) => {
                     </div>
                 </div>
 
-                <div className="col-12 col-lg-3 px-3 d-flex flex-column">
+                {/* <div className="col-12 col-lg-3 px-3 d-flex flex-column">
                     <div className="col-12 shadow rounded mt-3 mt-lg-0 mb-3">
                         <Card title="Order History" bordered={false} style={{ width: '100%' }}>
                             <OrderSteps />
@@ -327,33 +240,8 @@ const OrderDetails: FC<any> = (props) => {
                                 </Card>
                             </div> : null
                     }
-                </div>
+                </div> */}
             </div>
-            {
-                setAgentModal ?
-                    <AgentModal
-                        show={agentModal}
-                        riderList={riderList}
-                        onHide={() => {
-                            setAgentModal(false)
-                        }}
-                        orderId={order._id}
-                        updateOrderDetails={updateOrderDetails}
-                        setSelectedRider={setSelectedRider}
-                    /> : null
-            }
-            <Modal
-                title="Rider Live Location ."
-                centered
-                open={mapModal}
-                width={1000}
-                footer={false}
-                onCancel={() => showMapModal(false)}
-            >
-                <div className="container">
-                    <MapContainer agentId={selectedRider._id} />
-                </div>
-            </Modal>
         </div>
     )
 }

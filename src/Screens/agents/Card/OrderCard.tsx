@@ -1,7 +1,6 @@
 import React,{FC, useEffect, useState} from 'react';
 import { Card } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import {EnvironmentOutlined} from '@ant-design/icons';
 import { orderType } from '../../../types';
 
 type PropTypes = {
@@ -25,13 +24,13 @@ const setCardBgColor = (status: string) => {
 }
 
 const OrderCard:FC<PropTypes> = ({order, clickHandler}) => {
-
+  const navigate = useNavigate();
+  
   return (
     <Card
-    //   onClick={() => {
-    //     navigate('/orderDetails', {state: {order: order}})
-    //   }}
-      extra={<EnvironmentOutlined onClick={() => clickHandler(order._id)} className='ms-2'  style={{fontSize: '25px', color: '#51BC4A'}} />}
+      onClick={() => {
+        navigate('/orderDetails', {state: {order: order}})
+      }}
       className={`${setCardBgColor(order.status)}`}
       hoverable
       title={`Order id # ${order._id}`} 

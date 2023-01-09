@@ -148,7 +148,7 @@ export default function AddProductForm(props) {
         >
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    Add Product
+                    { !isUpdate ? `Add Product` : 'Update Product'}
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body style={{ overFlow: 'auto' }}>
@@ -238,7 +238,10 @@ export default function AddProductForm(props) {
                     <label className='form-label mt-4 h6 h3 d-none d-lg-block d-md-block'>
                         Select Category
                     </label>
-                    <Form.Select aria-label="Select Categorie" className='mt-4 mt-xl-2'
+                    <Form.Select 
+                        aria-label="Select Categorie" 
+                        className='mt-4 mt-xl-2'
+                        value={product.categoryId}
                         onChange={(e) =>
                             setProduct(oldValue => {
                                 return {
@@ -246,7 +249,8 @@ export default function AddProductForm(props) {
                                     categoryId: e.target.value
                                 }
                             })
-                        }>
+                        }
+                    >
                         <option>Select Category</option>
                         {
                             CategoreList.map(item => <option value={item._id}>{item.categoryName}</option>)
@@ -269,6 +273,7 @@ export default function AddProductForm(props) {
                         })} 
                         as="textarea"
                         aria-label="With textarea"
+                        value={product.description}
                      />
                     {localError.description == '' ? null : (
                         <p className='text-danger mt-1'>{localError.description}</p>
@@ -346,7 +351,7 @@ export default function AddProductForm(props) {
                         navigationHandler={handleAddProduct}
                         type='button'
                         class=' btnRadius border border-0 w-100 h-100 mt-4 fontWeight-600 button themecolor text-light py-2 '
-                        btvalue='Add Product'
+                        btvalue={isUpdate ? 'Update Product' : 'Add Product'}
                     />
                 </div>
             </Modal.Body>

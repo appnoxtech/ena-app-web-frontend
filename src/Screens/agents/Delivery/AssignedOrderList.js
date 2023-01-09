@@ -14,7 +14,7 @@ const socket = io(hostname);
 function AssignedOrderList() {
     const [orderList, setOrderList] = useState([]);
     const dispatch = useDispatch();
-    const {userId} = useSelector(state => state.user);
+    const {userId} = useSelector((state) => state.user);
     const [isConnected, setIsConnected] = useState(socket.connected);
     const defaultOptions = {
         loop: true,
@@ -46,9 +46,15 @@ function AssignedOrderList() {
         socket.on('disconnect', () => {
           setIsConnected(false);
         });
-
+        // To create room with the agent Id
         socket.emit('join_room', userId);
+        
+        // Listen for Deassign Order Event
+        socket.on('Deassigend_Order', () => {
+            setOrderList([]);
+        });
 
+        // To Update
         socket.on('ORDER_UPDATED', (data) => {
             console.log('Agent Socket Fn. runned');
             try {
@@ -85,21 +91,7 @@ function AssignedOrderList() {
         }
       }
 
-    const handleOrderTracking = async (orderId) => {
-        try {
-            const data = {orderId: orderId};
-            const res = await OutForDeliveryService(data);
-            navigator.geolocation.watchPosition((position) => {
-                console.log('position', position);
-                let lat = position.coords.latitude;
-                let lng = position.coords.longitude;
-                console.log({lat, lng});
-                socket.emit('UPDATE_LOCATION', {id: userId, location: {lat, lng}});
-            });
-        } catch (error) {
-            alert(error.message)
-        }
-    }
+
 
     return (
         <div className='mt-1 mt-md-4'>
@@ -117,7 +109,6 @@ function AssignedOrderList() {
                                     <div className="col-12 col-md-6 col-xl-4 p-3">
                                         <OrderCard
                                             order={order}
-                                            clickHandler={handleOrderTracking}
                                         />
                                     </div>
                                 )

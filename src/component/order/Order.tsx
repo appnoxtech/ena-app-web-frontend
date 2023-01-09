@@ -5,7 +5,7 @@ import CustomButton from '../Button/Button';
 import WarningModal from '../WarningModal/WarningModal';
 import './Order.css'
 import { GetCartDetailsService } from '../../services/cart/cartService';
-import { GetOrderLiveStatus } from '../../services/order/OrderService';
+import { GetOrderHistory, GetOrderLiveStatus } from '../../services/order/OrderService';
 import { FaBoxOpen } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { getJSDocDeprecatedTag } from 'typescript';
@@ -13,8 +13,9 @@ import OrderCancelModal from '../common-components/modals/OrderCancelModal';
 import '../../assets/global/global.css';
 import { hostname } from '../../GlobalVariable';
 import { useSelector } from 'react-redux';
-import { Modal } from 'antd';
+import { Modal, Select } from 'antd';
 import MapContainer from '../common-components/mapComponent/MapContainer';
+import { orderType } from '../../types';
 
 const socket = io(hostname);
 const Order = () => {
@@ -40,21 +41,29 @@ const Order = () => {
     console.log('function will handle order tracking ..');
   }
 
-  const getOrderList = async () => {
+  const getOrderList = async (status: string) => {
     try {
-      const res = await GetOrderLiveStatus();
-      const list = res.data.result;
-      if (list.length > 0) {
-        setOrderList(list);
+      if(status === 'live'){
+        const res = await GetOrderLiveStatus();
+        const list = res.data.result;
+        if (list.length > 0) {
+          setOrderList(list);
+        }
+      }else{
+        const res = await GetOrderHistory();
+        const list = res.data.result;
+        console.log('list', list);
+        
+        if(list.length > 0){
+          const data = list.filter((order: orderType) => order.status === status);
+          setOrderList(data);
+        }
       }
+      
     } catch (error) {
       alert(error.message);
     }
   };
-
-  useEffect(() => {
-    getOrderList();
-  }, []);
 
   const handleOrderRowClick = (order: any) => {
     localStorage.setItem('orderDetail', JSON.stringify(order));
@@ -67,7 +76,7 @@ const Order = () => {
   }
 
   useEffect(() => {
-    getOrderList();
+    getOrderList('live');
 
     socket.on('connect', () => {
       console.log('Socket is Connected ====>');
@@ -121,9 +130,39 @@ const Order = () => {
     showMapModal(true);
   }
 
+  const OrderStatus = [
+    {
+      label: 'Current Order',
+      value: 'live'
+    },
+    {
+      label: 'Completed Order',
+      value: 'COMPLETED'
+    },
+    {
+      label: 'Canceled Order',
+      value: 'CANCELED'
+    }
+  ];
+
+  const handleChange = (value: string) => {
+    getOrderList(value);
+  }
+
   return (
-    <div className='container-fluid pb-5 mt-90'>
+    <div className='container-fluid pb-5 mt-3'>
       <div className='side-Part rounded-4 bg-white'></div>
+      <div className="col-12 d-flex mb-3">
+            <div className="ms-auto col-3">
+            <Select
+              size={'large'}
+              defaultValue='live'
+              onChange={handleChange}
+              style={{ width: '100%' }}
+              options={OrderStatus}
+            />
+            </div>
+      </div>
       <div className='col-10 mx-auto fixedHeightTable mt-5 mt-md-0'>
         <Table responsive className='orders_Heading rounded' hover bordered>
           <thead>
@@ -182,7 +221,7 @@ const Order = () => {
                       props={{ styleName: 'success px-3 p-0 w-75', indexData: 'Order Details', btnType: 'btn-outline', clickHandler: () => handleOrderRowClick(data) }}
                     />
                     {
-                      data.status === 'CANCELED' ?
+                      (data.status === 'CANCELED' ||  data.status === 'COMPLETED') ?
                         null
                       :
                         data.status === 'OFD' ?

@@ -70,3 +70,13 @@ export const OutForDeliveryService = async(data) => {
         }
     });
 }
+
+export const GetOrderHistory = async() => {
+    const url = `${API_URL}/order/get-order-history`;
+    const token = localStorage.getItem('@user_Token');
+    return axios.get(url, {
+        headers: {
+            "x-auth-token": token,
+        }
+    });
+}
