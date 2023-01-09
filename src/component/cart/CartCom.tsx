@@ -128,10 +128,10 @@ const CartCom = () => {
                     <div>
                       <div className='subTotalCartVal'>
                         <h5>
-                          Subtotal: <span>kn {calculateSubTotal().toFixed(2)} HRK</span>
+                          Subtotal: <span>€ {calculateSubTotal().toFixed(2)}  </span>
                         </h5>
                         <h5>
-                          BidSubtotal: <span>kn {calculateBidSubTotal().toFixed(2)} HRK</span>
+                          BidSubtotal: <span>€ {calculateBidSubTotal().toFixed(2)}  </span>
                         </h5>
                         <div className='infoText'>
                           <img src={infoIcon} alt='info' className='img-fluid' />

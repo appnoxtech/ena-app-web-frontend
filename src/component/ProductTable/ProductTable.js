@@ -1,223 +1,144 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import { styled } from '@mui/material/styles';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { AutoSizer, Column, Table } from 'react-virtualized';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import { FaTrash } from 'react-icons/fa';
+import { FaCartPlus } from 'react-icons/fa';
+import { useAddItemToCartHooks } from '../../hooks/carts/addintoCart';
+import { useDispatch } from 'react-redux';
+import { decreaseCartCount, increaseCartCount } from '../../redux/reducer/cart/CartReducer';
+import { useRemoveItemFromCart } from '../../hooks/carts/removeFromCart';
 
-const classes = {
-  flexContainer: 'ReactVirtualizedDemo-flexContainer',
-  tableRow: 'ReactVirtualizedDemo-tableRow',
-  tableRowHover: 'ReactVirtualizedDemo-tableRowHover',
-  tableCell: 'ReactVirtualizedDemo-tableCell',
-  noClick: 'ReactVirtualizedDemo-noClick',
-};
+const RenderTableRow = ({ product }) => {
+  const [itemCount, setItemCount] = React.useState(10);
+  const [isItemAddedToCart, setIsItemAddedToCart] = React.useState(false);
+  const handleAddItemToCart = useAddItemToCartHooks();
+  const handleRemoveItemFromCart = useRemoveItemFromCart();
+  const dispatch = useDispatch();
 
-const styles = ({ theme }) => ({
-  // temporary right-to-left patch, waiting for
-  // https://github.com/bvaughn/react-virtualized/issues/454
-  '& .ReactVirtualized__Table__headerRow': {
-    ...(theme.direction === 'rtl' && {
-      paddingLeft: '0 !important',
-    }),
-    ...(theme.direction !== 'rtl' && {
-      paddingRight: undefined,
-    }),
-  },
-  [`& .${classes.flexContainer}`]: {
-    display: 'flex',
-    alignItems: 'center',
-    boxSizing: 'border-box',
-  },
-  [`& .${classes.tableRow}`]: {
-    cursor: 'pointer',
-  },
-  [`& .${classes.tableRowHover}`]: {
-    '&:hover': {
-      backgroundColor: theme.palette.grey[200],
-    },
-  },
-  [`& .${classes.tableCell}`]: {
-    flex: 1,
-  },
-  [`& .${classes.noClick}`]: {
-    cursor: 'initial',
-  },
-});
+  React.useEffect(() => {
+    const list = localStorage.getItem('cartData');
 
-class MuiVirtualizedTable extends React.PureComponent {
-  static defaultProps = {
-    headerHeight: 48,
-    rowHeight: 48,
-  };
+    if (list) {
+      const cartList = JSON.parse(list);
+      const item = cartList.find((item) => item.productId === product._id);
+      if (item) {
+        setItemCount(item.quantity);
+        setIsItemAddedToCart(true)
+      } else {
+        setItemCount(10);
+        setIsItemAddedToCart(false);
+      }
+    } else {
+      setItemCount(10);
+      setIsItemAddedToCart(false);
+    }
+  }, []);
 
-  getRowClassName = ({ index }) => {
-    const { onRowClick } = this.props;
-
-    return clsx(classes.tableRow, classes.flexContainer, {
-      [classes.tableRowHover]: index !== -1 && onRowClick != null,
-    });
-  };
-
-  cellRenderer = ({ cellData, columnIndex }) => {
-    const { columns, rowHeight, onRowClick } = this.props;
-    return (
-      <TableCell
-        component="div"
-        className={clsx(classes.tableCell, classes.flexContainer, {
-          [classes.noClick]: onRowClick == null,
-        })}
-        variant="body"
-        style={{ height: rowHeight }}
-        align={
-          (columnIndex != null && columns[columnIndex].numeric) || false
-            ? 'right'
-            : 'left'
-        }
-      >
-        {cellData}
-      </TableCell>
-    );
-  };
-
-  headerRenderer = ({ label, columnIndex }) => {
-    const { headerHeight, columns } = this.props;
-
-    return (
-      <TableCell
-        component="div"
-        className={clsx(classes.tableCell, classes.flexContainer, classes.noClick)}
-        variant="head"
-        style={{ height: headerHeight }}
-        align={columns[columnIndex].numeric || false ? 'right' : 'left'}
-      >
-        <span>{label}</span>
-      </TableCell>
-    );
-  };
-
-  render() {
-    const { columns, rowHeight, headerHeight, ...tableProps } = this.props;
-    return (
-      <AutoSizer>
-        {({ height, width }) => (
-          <Table
-            height={height}
-            width={width}
-            rowHeight={rowHeight}
-            gridStyle={{
-              direction: 'inherit',
-            }}
-            headerHeight={headerHeight}
-            {...tableProps}
-            rowClassName={this.getRowClassName}
-          >
-            {columns.map(({ dataKey, ...other }, index) => {
-              return (
-                <Column
-                  key={dataKey}
-                  headerRenderer={(headerProps) =>
-                    this.headerRenderer({
-                      ...headerProps,
-                      columnIndex: index,
-                    })
-                  }
-                  className={classes.flexContainer}
-                  cellRenderer={this.cellRenderer}
-                  dataKey={dataKey}
-                  {...other}
-                />
-              );
-            })}
-          </Table>
-        )}
-      </AutoSizer>
-    );
+  const handleItemCountChange = (value) => {
+    const count = parseInt(value, 10);
+    if(isNaN(count) || count < 1){
+      return;
+    }
+    setItemCount(value);
   }
-}
 
-MuiVirtualizedTable.propTypes = {
-  columns: PropTypes.arrayOf(
-    PropTypes.shape({
-      dataKey: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired,
-      numeric: PropTypes.bool,
-      width: PropTypes.number.isRequired,
-    }),
-  ).isRequired,
-  headerHeight: PropTypes.number,
-  onRowClick: PropTypes.func,
-  rowHeight: PropTypes.number,
-};
+  const handleAddtoCart = () => {
+    const data = {
+      ...product,
+      productId: product._id,
+      quantity: itemCount,
+      bidAmount: product.price,
+      price: product.price,
+    }
+    handleAddItemToCart(data);
+    dispatch(increaseCartCount());
+    setIsItemAddedToCart(true);
+  }
 
-const VirtualizedTable = styled(MuiVirtualizedTable)(styles);
+  const handleRemoveFromCart = async () => {
+    const data = {
+      productId: product._id,
+      removeProduct: 1
+    };
+    await handleRemoveItemFromCart(data);
+    dispatch(decreaseCartCount());
+    setIsItemAddedToCart(false);
+    setItemCount(10);
+  }
 
-// ---
-
-// const sample = [
-//   ['Frozen yoghurt', 159, 6.0, 24, 4.0],
-//   ['Ice cream sandwich', 237, 9.0, 37, 4.3],
-//   ['Eclair', 262, 16.0, 24, 6.0],
-//   ['Cupcake', 305, 3.7, 67, 4.3],
-//   ['Gingerbread', 356, 16.0, 49, 3.9],
-// ];
-
-// function createData(id, dessert, calories, fat, carbs, protein) {
-//   return { id, dessert, calories, fat, carbs, protein };
-// }
-
-// const rows = [];
-
-// for (let i = 0; i < 200; i += 1) {
-//   const randomSelection = sample[Math.floor(Math.random() * sample.length)];
-//   rows.push(createData(i, ...randomSelection));
-// }
-
-export default function ProductTable({ProductList}) {
   return (
-    <Paper className='mx-auto mt-4' style={{ height: '70vh', width: '95%' }}>
-      <VirtualizedTable
-        rowCount={ProductList.length}
-        rowGetter={({ index }) => ProductList[index]}
-        columns={[
-          {
-            width: 400,
-            label: 'Product Name',
-            dataKey: 'engVegName',
-          },
-          {
-            width: 160,
-            label: 'Price \u00A0(Kg)',
-            dataKey: 'price',
-            numeric: true,
-          },
-          {
-            width: 160,
-            label: 'Min. Qty\u00A0(g)',
-            dataKey: 'orderQuantity',
-            numeric: true,
-          },
-          {
-            width: 160,
-            label: 'Unit',
-            dataKey: 'unit',
-            numeric: true,
-          },
-          {
-            width: 160,
-            label: 'Pcs',
-            dataKey: '',
-            numeric: true,
-          },
-          {
-            width: 160,
-            label: 'Actions',
-            dataKey: '',
-            numeric: true,
-          },
-        ]}
-      />
-    </Paper>
-  );
+    <TableRow
+      key={product._id}
+      sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+    >
+      <TableCell component="th" scope="row">
+        {product.engVegName}
+      </TableCell>
+      <TableCell align="center">{product.price} /(Kg)</TableCell>
+      <TableCell align="center">{product.orderQuantity} /(Kg)</TableCell>
+      <TableCell align="center">{product.unit.toUpperCase()}</TableCell>
+      <TableCell align="center">
+        <TextField
+          id="standard-number"
+          type="number"
+          size='small'
+          disabled={isItemAddedToCart}
+          variant="standard"
+          value={itemCount}
+          onChange={(e) => handleItemCountChange(e.target.value)}
+        />
+      </TableCell>
+      <TableCell align="center">
+        <div className="col-10 ps-5">
+        {
+          isItemAddedToCart ?
+            <Button variant="outlined" onClick={handleRemoveFromCart} fullWidth color="error" size='small' startIcon={<FaTrash />}>
+              Remove
+            </Button> 
+            : 
+            <Button className='ms-auto' onClick={handleAddtoCart} variant="outlined" fullWidth color="success" size='small' startIcon={<FaCartPlus />}>
+              Add
+            </Button>
+        }
+        </div>
+      </TableCell>
+    </TableRow>
+  )
 }
+
+const ProductTable = ({ ProductList }) => {
+  return (
+    <Paper className='mx-auto mt-4' style={{ height: '68vh', width: '95%', overflow: 'auto' }}>
+      <TableContainer component={Paper} style={{ overflowX: "initial" }}>
+        <Table stickyHeader={true}>
+          <TableHead>
+            <TableRow>
+              <TableCell width={320}>Product Name</TableCell>
+              <TableCell width={160} align="center">Price/&nbsp;(Kg) </TableCell>
+              <TableCell width={160} align="center">Min. Qty/&nbsp;(Kg)</TableCell>
+              <TableCell width={160} align="center">Unit</TableCell>
+              <TableCell width={160} align="center">Qty.</TableCell>
+              <TableCell width={260} align="center">Action</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {
+              ProductList.map(product => <RenderTableRow product={product} />)
+            }
+          </TableBody>
+        </Table>
+
+      </TableContainer>
+    </Paper>
+
+  )
+}
+
+export default ProductTable;

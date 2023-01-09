@@ -9,10 +9,12 @@ import { useGetCartList } from '../../hooks/carts/getCartList'
 import { useDispatch, useSelector } from 'react-redux'
 import { resetCartCount, updateUserCart } from '../../redux/reducer/cart/CartReducer'
 import { resetUserData } from '../../redux/reducer/UserDetails/userAction'
+import { Tooltip } from 'antd'
 
 const Mobilenav = ({ }) => {
   const navigate = useNavigate();
   const isLogin = useIsLoginHook();
+  const [isOpen, setIsOpen] = useState(false);
   const cartData = useGetCartList();
   const UserType = useSelector((state: any) => state.user.userType);
   const dispatch = useDispatch();
@@ -97,28 +99,56 @@ const Mobilenav = ({ }) => {
             </div>
           </div>
           <div className='d-flex flex-row  mx-2 justify-content-center align-item-center '>
-            <OverlayTrigger
+            <Tooltip color={'white'} placement="bottom" open={isOpen}
+              title={isLogin ? (
+                <NavLink to='/' onClick={() => {
+                  setIsOpen(false)
+                  Logout()
+                }}>
+                  Logout
+                </NavLink>
+              ) : (
+                <NavLink 
+                  to='/login' 
+                  onClick={() => setIsOpen(false)}
+                >Log in</NavLink>
+              )} 
+            >
+              <Button 
+                className='nav__link' 
+                variant=''
+                onClick={() => setIsOpen(!isOpen)}
+              >
+                <i className='fa fa-user-o fs-2 font-green' aria-hidden='true'></i>
+              </Button>
+            </Tooltip>
+            {/* <OverlayTrigger
               trigger='focus'
               key='bottom'
               placement='bottom'
               overlay={
-                <Popover id='popover-positioned-bottom'>
-                  <PopoverBody>
-                    {isLogin ? (
-                      <NavLink to='/' onClick={() => Logout()}>
-                        Logout
-                      </NavLink>
-                    ) : (
-                      <NavLink to='/login'>Log in</NavLink>
-                    )}
-                  </PopoverBody>
-                </Popover>
+                // <Popover id='popover-positioned-bottom'>
+                //   <PopoverBody>
+                //     {isLogin ? (
+                //       <NavLink to='/' onClick={() => Logout()}>
+                //         Logout
+                //       </NavLink>
+                //     ) : (
+                //       <NavLink to='/login'>Log in</NavLink>
+                //     )}
+                //   </PopoverBody>
+                // </Popover>
+                <Tooltip placement="bottom" title={<NavLink to='/' onClick={() => Logout()}>
+                    Logout
+                    </NavLink>}>
+                    
+                </Tooltip>
               }
             >
               <Button className='nav__link' variant=''>
                 <i className='fa fa-user-o fs-2 font-green' aria-hidden='true'></i>
               </Button>
-            </OverlayTrigger>
+            </OverlayTrigger> */}
             {
               UserType === 'customer' ?
                 <NavLink to='/cart'>

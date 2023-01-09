@@ -32,7 +32,7 @@ const ProductCom:FC<any>= ({data}) => {
                 <div className='productName'>
                   <h5 className='card-title'>{data.vegName} </h5>
                   <p className='card-text w-2 '>
-                    kn 35.2/kg <s className='CrossText'>kn 35.2/kg</s>
+                    € 35.2/kg <s className='CrossText'>€ 35.2/kg</s>
                   </p>
                 </div>
                 {/* <div className='wishListProduct'>

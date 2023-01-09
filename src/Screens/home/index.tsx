@@ -227,12 +227,15 @@ const Admin: FC<any> = () => {
                     : <ProductTable ProductList={productList} />
 
                 }
-                {
+                <div className='col-12 d-flex justify-content-end mt-3'>
+                  <Pagination pageCount={totalPageNum} currPage={currPage} setCurrPage={setCurrPage} />
+                </div>
+                {/* {
                   view === 'Grid' ?
                     <div className='col-12 d-flex justify-content-end mt-3'>
                       <Pagination pageCount={totalPageNum} currPage={currPage} setCurrPage={setCurrPage} />
                     </div> : null
-                }
+                } */}
 
               </div>
             </div>

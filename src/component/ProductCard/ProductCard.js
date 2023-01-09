@@ -36,7 +36,7 @@ const ProductCard = (
                     </div>
                     <div className="col-8 pt-3">
                         <div className="">
-                            <h4 className='font-green'>Seller Price: {`kn ${item.price}`}</h4>
+                            <h4 className='font-green'>Seller Price: {`€ ${item.price}`}</h4>
                         </div>
                         <div className="d-flex">
                             <h7 className='me-2 fontWeight-600'>Quanity: </h7>

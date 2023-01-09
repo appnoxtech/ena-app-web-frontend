@@ -26,6 +26,7 @@ const AdminProductList: FC<any> = () => {
   const getProductList = async(id:any) => {
      try {
       const data = {categoryId: id};
+      setCurrId(id);
       const res = await GetProductListWithDataService(data);
       const list = res.data.result;
       setProductList(list);
@@ -85,7 +86,7 @@ const AdminProductList: FC<any> = () => {
       <div className='container-fluid d-flex flex-column align-items-center justify-content-center'>
         {/* HeadPartList */}
         <div className='col-12 d-flex align-items-center flex-column flex-lg-row justify-content-between'>
-          <SelectCategory changeCategorie={getProductList} />
+          <SelectCategory  changeCategorie={getProductList} />
           <div className='my-4 my-lg-0'>
             <p className='p-0 m-0 headP '>
               Industrial Supplies <span className='text-dark fw-bold'>/Products</span>

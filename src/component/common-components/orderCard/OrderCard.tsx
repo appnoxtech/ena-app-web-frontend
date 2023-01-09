@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import carrot from '../../../assets/images/carrot.jpg'
 import '../../../assets/global/global.css'
 import './OrderCard.css'
@@ -10,15 +10,23 @@ import { AddToCartService } from '../../../services/cart/cartService'
 import { CreateOrderService } from '../../../services/order/OrderService'
 import { useDispatch } from 'react-redux'
 import { resetCartCount } from '../../../redux/reducer/cart/CartReducer'
+import NotificationContext from '../../../context/Notification/NotificationContext'
+import useErrorHandler from '../../../services/handler/ErrorHandler'
 
 function OrderCard({...prop}) {
   const navigate = useNavigate()
+  const Notification = useContext(NotificationContext);
+  const ShowError = useErrorHandler();
   const cartData = useGetCartList();
   const dispatch = useDispatch();
   const navigationHandler = async() => {
     const addressId = localStorage.getItem('addressId');
     if(!addressId){
-      return alert('Select Address');
+      return Notification({
+        title: 'Address',
+        description: 'Select Address',
+        type: 'info'
+      })
     }
     try {
       prop.setIsLoading(true);
@@ -36,8 +44,8 @@ function OrderCard({...prop}) {
       const addressId = localStorage.getItem('addressId');
       await createOrder({cartId, addressId});
       prop.setIsLoading(false);
-    } catch (error) {
-       alert(error.message)
+    } catch (error:any) {
+      ShowError(error);
        prop.setIsLoading(false);
     }
   }
@@ -76,7 +84,7 @@ function OrderCard({...prop}) {
                   <div className='col-6 ps-2'>
                     <div className='col-12 fontWeight-600'>{item.engVegName}</div>
                     <div className='col-12'>Quantity: {item.quantity} KG</div>
-                    <div className='col-12'>kn {item.price}</div>
+                    <div className='col-12'>€ {item.price}</div>
                   </div>
                 </div>
               )
@@ -87,7 +95,7 @@ function OrderCard({...prop}) {
         <div className='col-12 m-0 p-0'>
           <div className='col-12 row gx-0'>
             <div className='col fontWeight-500'>Subtotal</div>
-            <div className='col text-end'>{`Kn ${calculateSubTotoal().toFixed(2)}`}</div>
+            <div className='col text-end'>{`€ ${calculateSubTotoal().toFixed(2)}`}</div>
           </div>
           {/* <div className='col-12 row gx-0'>
             <div className='col fontWeight-500'>
@@ -106,7 +114,7 @@ function OrderCard({...prop}) {
         <div className='col-12 m-0 p-0'>
           <div className='col-12 row gx-0'>
             <div className='col h5 fontWeight-700'>Total</div>
-            <div className='col h5 text-end'>Kn {calculateSubTotoal().toFixed(2)}</div>
+            <div className='col h5 text-end'>€ {calculateSubTotoal().toFixed(2)}</div>
           </div>
           <div className='col-12 mt-3'>
             <div className='col text-end'>

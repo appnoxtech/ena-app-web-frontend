@@ -85,7 +85,7 @@ const OrderDetails = () => {
                                     <h5>{data.engVegName}</h5>
                                 </td>
                                 <td>
-                                    <h6>kn {data.price}/kg</h6>
+                                    <h6>€ {data.price}/kg</h6>
                                 </td>
                                 <td>
                                     <div className=''>
@@ -93,11 +93,11 @@ const OrderDetails = () => {
                                     </div>
                                 </td>
                                 <td>
-                                    <h5>kn {(data.quantity * data.price).toFixed(2)}</h5>
+                                    <h5>€ {(data.quantity * data.price).toFixed(2)}</h5>
                                 </td>
                                 <td>
                                     <div className=''>
-                                        <h5>kn {data.bidAmount ? data.bidAmount : data.price}</h5>
+                                        <h5>€ {data.bidAmount ? data.bidAmount : data.price}</h5>
                                     </div>
                                 </td>
                             </tr>
