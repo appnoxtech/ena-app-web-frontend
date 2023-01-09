@@ -11,6 +11,7 @@ import { resetCartCount, updateUserCart } from '../../redux/reducer/cart/CartRed
 import { resetUserData } from '../../redux/reducer/UserDetails/userAction'
 import './Desktop.css'
 import { Tooltip } from 'antd';
+import useGetNavList from '../../hooks/Nav/GetNavListHook';
 
 const Desktop = () => {
   const navigate = useNavigate();
@@ -27,16 +28,7 @@ const Desktop = () => {
     setCount(countGlobal);
   }, [countGlobal]);
 
-  const MenuItem = [
-    {
-      navName: '',
-      path: '/',
-    },
-    {
-      navName: '',
-      path: '/order',
-    },
-  ]
+  const MenuItem = useGetNavList();
 
   // function for logout
 
@@ -55,7 +47,7 @@ const Desktop = () => {
             <img className='imageProp ' src={Ena} alt='Ena' />
           </div>
         </NavLink>
-        <div className='navOuter '>
+        <div className='navOuter'>
           {MenuItem.map((item, index) => (
             <li className='navli' key={index}>
               <NavLink to={item.path} className='navli mx-4'>

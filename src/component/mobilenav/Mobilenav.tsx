@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { resetCartCount, updateUserCart } from '../../redux/reducer/cart/CartReducer'
 import { resetUserData } from '../../redux/reducer/UserDetails/userAction'
 import { Tooltip } from 'antd'
+import useGetNavList from '../../hooks/Nav/GetNavListHook'
 
 const Mobilenav = ({ }) => {
   const navigate = useNavigate();
@@ -20,29 +21,7 @@ const Mobilenav = ({ }) => {
   const dispatch = useDispatch();
   const countGlobal = useSelector((state: any) => state.cart.count);
   const [count, setCount] = useState(cartData.length);
-  const MenuItem = isLogin ? [
-    {
-      navName: 'Home',
-      path: '/',
-    },
-    {
-      navName: 'Orders',
-      path: '/order',
-    },
-    {
-      navName: 'Cart',
-      path: '/cart',
-    },
-  ] : [
-    {
-      navName: 'Home',
-      path: '/',
-    },
-    {
-      navName: 'Cart',
-      path: '/cart',
-    },
-  ]
+  const MenuItem = useGetNavList();
 
   // function for logout
 
