@@ -258,11 +258,11 @@ const OrderDetails: FC<any> = (props) => {
                                             </div>
                                             <div className="col-12 col-lg-3 d-flex pt-1 pt-lg-3 ps-2 ps-lg-0">
                                                 <h6 className='me-2 text-center'>Bid Price: </h6>
-                                                <h6 className='text-center opacity-50'>$ {isNaN((item.bidAmount * item.quantity)) ? '0.0' : (item.bidAmount * item.quantity).toFixed(2)}</h6>
+                                                <h6 className='text-center opacity-50'>€ {isNaN((item.bidAmount * item.quantity)) ? '0.0' : (item.bidAmount * item.quantity).toFixed(2)}</h6>
                                             </div>
                                             <div className="col-12 col-lg-3 d-flex text-center pt-1 pt-lg-3 ps-2 ps-lg-0">
                                                 <h6 className='me-2 text-center'>Total : </h6>
-                                                <h6 className='text-center opacity-50'>$ {(item.price * item.quantity).toFixed(2)}</h6>
+                                                <h6 className='text-center opacity-50'>€ {(item.price * item.quantity).toFixed(2)}</h6>
                                             </div>
                                         </div>
                                     )
@@ -287,10 +287,10 @@ const OrderDetails: FC<any> = (props) => {
                                             <h5 className='mb-2'>Bid Total :</h5>
                                         </div>
                                         <div className="col-6">
-                                            <h5 className='mb-2 opacity-50'>$ {order.netAmount}</h5>
-                                            <h5 className='mb-2 opacity-50'>$ 0.0</h5>
-                                            <h5 className='mb-2 opacity-50'>$ 0.0</h5>
-                                            <h5 className='mb-2 opacity-50'>$ {isNaN(calcTotal().toFixed(2)) ? '0.0' : calcTotal().toFixed(2)}</h5>
+                                            <h5 className='mb-2 opacity-50'>€ {order.netAmount}</h5>
+                                            <h5 className='mb-2 opacity-50'>€ 0.0</h5>
+                                            <h5 className='mb-2 opacity-50'>€ 0.0</h5>
+                                            <h5 className='mb-2 opacity-50'>€ {isNaN(calcTotal().toFixed(2)) ? '0.0' : calcTotal().toFixed(2)}</h5>
                                         </div>
                                     </div>
                                 </Card>
