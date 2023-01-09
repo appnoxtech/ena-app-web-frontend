@@ -84,7 +84,7 @@ function OrderCard({...prop}) {
                   <div className='col-6 ps-2'>
                     <div className='col-12 fontWeight-600'>{item.engVegName}</div>
                     <div className='col-12'>Quantity: {item.quantity} KG</div>
-                    <div className='col-12'>kn {item.price}</div>
+                    <div className='col-12'>€ {item.price}</div>
                   </div>
                 </div>
               )
@@ -95,7 +95,7 @@ function OrderCard({...prop}) {
         <div className='col-12 m-0 p-0'>
           <div className='col-12 row gx-0'>
             <div className='col fontWeight-500'>Subtotal</div>
-            <div className='col text-end'>{`Kn ${calculateSubTotoal().toFixed(2)}`}</div>
+            <div className='col text-end'>{`€ ${calculateSubTotoal().toFixed(2)}`}</div>
           </div>
           {/* <div className='col-12 row gx-0'>
             <div className='col fontWeight-500'>
@@ -114,7 +114,7 @@ function OrderCard({...prop}) {
         <div className='col-12 m-0 p-0'>
           <div className='col-12 row gx-0'>
             <div className='col h5 fontWeight-700'>Total</div>
-            <div className='col h5 text-end'>Kn {calculateSubTotoal().toFixed(2)}</div>
+            <div className='col h5 text-end'>€ {calculateSubTotoal().toFixed(2)}</div>
           </div>
           <div className='col-12 mt-3'>
             <div className='col text-end'>

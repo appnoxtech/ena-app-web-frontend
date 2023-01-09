@@ -28,7 +28,7 @@ const CartModal:FC<any> = ({showCartModal,closeCartModal,productData}) => {
                                         <div className="cartModalProductDetail">
                                             <h5>Carrot </h5>
                                             <h6>Size : 1kg</h6>
-                                            <h4>kn 35.2</h4>
+                                            <h4>€ 35.2</h4>
                                         </div>
                                     </div>
                                     <div className="cartModalDelete">
@@ -40,7 +40,7 @@ const CartModal:FC<any> = ({showCartModal,closeCartModal,productData}) => {
                     }
                     <div className="cartModalMain">
                         <div className="cartModalSubTotal">
-                            <h5>Subtotal: <span>kn 3568</span></h5>
+                            <h5>Subtotal: <span>€ 3568</span></h5>
                         </div>
                     </div>
                 </Modal.Body>

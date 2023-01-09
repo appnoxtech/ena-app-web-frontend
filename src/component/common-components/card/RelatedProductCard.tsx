@@ -21,7 +21,7 @@ const RelatedProductCard: FC<any> = ({ noutil,reletedProduct }) => {
         <div className='card-body'>
           <h5 className='card-title'>{reletedProduct.vegName} </h5>
           <p className='card-text w-2 '>
-            kn 35.2/kg <s className='crossTextRelated kg_container'>kn 35.2/kg</s>
+            € 35.2/kg <s className='crossTextRelated kg_container'>€ 35.2/kg</s>
           </p>
         </div>
       </div>
