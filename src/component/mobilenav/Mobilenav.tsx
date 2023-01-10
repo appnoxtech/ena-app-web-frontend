@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { resetCartCount, updateUserCart } from '../../redux/reducer/cart/CartReducer'
 import { resetUserData } from '../../redux/reducer/UserDetails/userAction'
 import { Tooltip } from 'antd'
+import useGetNavList from '../../hooks/Nav/GetNavListHook'
 
 const Mobilenav = ({ }) => {
   const navigate = useNavigate();
@@ -20,29 +21,7 @@ const Mobilenav = ({ }) => {
   const dispatch = useDispatch();
   const countGlobal = useSelector((state: any) => state.cart.count);
   const [count, setCount] = useState(cartData.length);
-  const MenuItem = isLogin ? [
-    {
-      navName: 'Home',
-      path: '/',
-    },
-    {
-      navName: 'Orders',
-      path: '/order',
-    },
-    {
-      navName: 'Cart',
-      path: '/cart',
-    },
-  ] : [
-    {
-      navName: 'Home',
-      path: '/',
-    },
-    {
-      navName: 'Cart',
-      path: '/cart',
-    },
-  ]
+  const MenuItem = useGetNavList();
 
   // function for logout
 
@@ -99,29 +78,39 @@ const Mobilenav = ({ }) => {
             </div>
           </div>
           <div className='d-flex flex-row  mx-2 justify-content-center align-item-center '>
-            <Tooltip color={'white'} placement="bottom" open={isOpen}
-              title={isLogin ? (
-                <NavLink to='/' onClick={() => {
-                  setIsOpen(false)
-                  Logout()
-                }}>
-                  Logout
-                </NavLink>
-              ) : (
-                <NavLink 
-                  to='/login' 
-                  onClick={() => setIsOpen(false)}
-                >Log in</NavLink>
-              )} 
-            >
-              <Button 
-                className='nav__link' 
-                variant=''
-                onClick={() => setIsOpen(!isOpen)}
-              >
-                <i className='fa fa-user-o fs-2 font-green' aria-hidden='true'></i>
-              </Button>
-            </Tooltip>
+            {
+              isLogin ?
+                <Button
+                  className='nav__link'
+                  variant=''
+                  onClick={() => navigate('/profile')}
+                >
+                  <i className='px-0 fa fa-user-o fs-2 font-green' aria-hidden='true'></i>
+                </Button>
+                :
+                <Tooltip color={'white'} placement="bottom" open={isOpen}
+                  title={isLogin ? (
+                    <NavLink to='/' onClick={() => {
+                      setIsOpen(false)
+                      Logout()
+                    }}>
+                      Logout
+                    </NavLink>
+                  ) : (
+                    <NavLink
+                      to='/login'
+                      onClick={() => setIsOpen(false)}
+                    >Log in</NavLink>
+                  )}
+                >
+                  <Button
+                    className='nav__link'
+                    variant=''
+                    onClick={() => setIsOpen(!isOpen)}
+                  >
+                    <i className='fa fa-user-o fs-2 font-green' aria-hidden='true'></i>
+                  </Button>
+                </Tooltip>}
             {/* <OverlayTrigger
               trigger='focus'
               key='bottom'
