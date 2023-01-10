@@ -57,7 +57,17 @@ const Desktop = () => {
           ))}
         </div>
         <div className='d-flex align-items-center justify-content-center'>
-          {/* <Tooltip color={'white'} placement="bottom" open={isOpen}
+          {
+            isLogin ?
+              <Button
+                className='nav__link'
+                variant=''
+                onClick={() => navigate('/profile')}
+              >
+                <i style={{ fontSize: 46 }} className='fa fa-user-o person-icon' aria-hidden='true'></i>
+              </Button>
+              :
+              <Tooltip color={'white'} placement="bottom" open={isOpen}
                 title={isLogin ? (
                   <NavLink to='/' onClick={() => {
                     setIsOpen(false)
@@ -66,27 +76,21 @@ const Desktop = () => {
                     Logout
                   </NavLink>
                 ) : (
-                  <NavLink 
-                    to='/login' 
+                  <NavLink
+                    to='/login'
                     onClick={() => setIsOpen(false)}
                   >Log in</NavLink>
-                )} 
+                )}
               >
-                <Button 
-                  className='nav__link' 
+                <Button
+                  className='nav__link'
                   variant=''
                   onClick={() => setIsOpen(!isOpen)}
                 >
                   <i style={{ fontSize: 46 }} className='fa fa-user-o person-icon' aria-hidden='true'></i>
                 </Button>
-          </Tooltip> */}
-          <Button
-            className='nav__link'
-            variant=''
-            onClick={() => navigate('/profile')}
-          >
-            <i style={{ fontSize: 46 }} className='fa fa-user-o person-icon' aria-hidden='true'></i>
-          </Button>
+              </Tooltip>}
+
           {
             UserType === 'customer' ?
               <NavLink to='/cart'>
