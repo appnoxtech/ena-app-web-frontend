@@ -31,3 +31,12 @@ export interface products {
     engVegName : string,
     image : string,
 }
+
+export interface user {
+    firstName?: string,
+    lastName?: string,
+    userType: string,
+    userId?: number,
+    isLogin: boolean,
+    email?: string,
+}

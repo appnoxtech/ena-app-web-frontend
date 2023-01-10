@@ -57,29 +57,36 @@ const Desktop = () => {
           ))}
         </div>
         <div className='d-flex align-items-center justify-content-center'>
-        <Tooltip color={'white'} placement="bottom" open={isOpen}
-              title={isLogin ? (
-                <NavLink to='/' onClick={() => {
-                  setIsOpen(false)
-                  Logout()
-                }}>
-                  Logout
-                </NavLink>
-              ) : (
-                <NavLink 
-                  to='/login' 
-                  onClick={() => setIsOpen(false)}
-                >Log in</NavLink>
-              )} 
-            >
-              <Button 
-                className='nav__link' 
-                variant=''
-                onClick={() => setIsOpen(!isOpen)}
+          {/* <Tooltip color={'white'} placement="bottom" open={isOpen}
+                title={isLogin ? (
+                  <NavLink to='/' onClick={() => {
+                    setIsOpen(false)
+                    Logout()
+                  }}>
+                    Logout
+                  </NavLink>
+                ) : (
+                  <NavLink 
+                    to='/login' 
+                    onClick={() => setIsOpen(false)}
+                  >Log in</NavLink>
+                )} 
               >
-                <i style={{ fontSize: 46 }} className='fa fa-user-o person-icon' aria-hidden='true'></i>
-              </Button>
-            </Tooltip>
+                <Button 
+                  className='nav__link' 
+                  variant=''
+                  onClick={() => setIsOpen(!isOpen)}
+                >
+                  <i style={{ fontSize: 46 }} className='fa fa-user-o person-icon' aria-hidden='true'></i>
+                </Button>
+          </Tooltip> */}
+          <Button
+            className='nav__link'
+            variant=''
+            onClick={() => navigate('/profile')}
+          >
+            <i style={{ fontSize: 46 }} className='fa fa-user-o person-icon' aria-hidden='true'></i>
+          </Button>
           {
             UserType === 'customer' ?
               <NavLink to='/cart'>

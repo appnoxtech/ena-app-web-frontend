@@ -17,6 +17,7 @@ import Order from "../component/order/Order"
 import OrderDetails from "../component/order/OrderDetails"
 import CheckoutWaddress from "../Screens/checkout/checkoutWithAddAddress/CheckoutWaddress"
 import Admin from "../Screens/home";
+import UserProfile from "../Screens/userProfile/UserProfile";
 
 const UserRoutes = () => {
     return (
@@ -39,6 +40,7 @@ const UserRoutes = () => {
           <Route path='/checkoutWaddress' element={<CheckoutWaddress />} />
           <Route path='/order' element={<Order />} />
           <Route path='/orderDetails' element={<OrderDetails />} />
+          <Route path='/profile' element={<UserProfile />} />
           <Route
             path='*'
             element={

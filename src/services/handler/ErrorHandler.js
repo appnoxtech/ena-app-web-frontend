@@ -29,7 +29,14 @@ const useErrorHandler = () => {
                     description: err.response.data.msg,
                     type: 'error'
                 });
-            }else {
+            }else if(err.response.data.errors[0]){
+                return Notification({
+                    title: 'Error',
+                    description: err.response.data.errors[0].msg,
+                    type: 'error'
+                })
+            }
+            else {
                 return Notification({
                     title: 'Error',
                     description: 'Internal Error',
