@@ -26,6 +26,11 @@ export const GetProductListService = async(id) => {
     return axios.post(url);
 }
 
+export const GetProductListViewService = async() => {
+    const url = `${API_URL}/product/get-all-product-list-view`;
+    return axios.get(url);
+}
+
 export const GetProductListWithDataService = async(data) => {
     const url = `${API_URL}/product/get-all-product`;
     console.log('data', data);

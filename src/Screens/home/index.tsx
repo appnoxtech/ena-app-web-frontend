@@ -9,7 +9,7 @@ import CardComponent from '../../component/common-components/card/Card';
 import Pagination from '../../component/common-components/pagination/Pagination';
 import { EnaAppData } from '../../component/dummyData';
 import Searchbar from '../../component/searchbar/Searchbar';
-import { GetAllCategory, GetProductListService, GetProductListWithDataService } from '../../services/product/productService';
+import { GetAllCategory, GetProductListService, GetProductListViewService, GetProductListWithDataService } from '../../services/product/productService';
 import SmallSearchBar from '../../component/searchbar/SmallSearchBar';
 import Lottie from 'react-lottie';
 import NothingFound from '../../assets/animations/nothing-found.json';
@@ -148,7 +148,22 @@ const Admin: FC<any> = () => {
 
   const handleToggleView = (e: RadioChangeEvent) => {
     const { value } = e.target;
-    setView(value);
+    if(value === 'List') {
+      getProductListDetails(value);
+    }else{
+      setView(value);
+    }
+  }
+
+  const getProductListDetails = async(value) => {
+    try {
+      const res = await GetProductListViewService();
+      const list = res.data.data;
+      setProductList(list);
+      setView(value);
+    } catch (error) {
+       alert(error.message);
+    }
   }
 
   const handleChange = (value: string) => {
@@ -227,15 +242,12 @@ const Admin: FC<any> = () => {
                     : <ProductTable ProductList={productList} />
 
                 }
-                <div className='col-12 d-flex justify-content-end mt-3'>
-                  <Pagination pageCount={totalPageNum} currPage={currPage} setCurrPage={setCurrPage} />
-                </div>
-                {/* {
+                {
                   view === 'Grid' ?
                     <div className='col-12 d-flex justify-content-end mt-3'>
                       <Pagination pageCount={totalPageNum} currPage={currPage} setCurrPage={setCurrPage} />
                     </div> : null
-                } */}
+                }
 
               </div>
             </div>
