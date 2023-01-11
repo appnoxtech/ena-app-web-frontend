@@ -19,7 +19,7 @@ const useErrorHandler = () => {
             } else if(err.response.status == 500) {
                 Notification({
                     title: 'Authentication',
-                    description: err.response.data,
+                    description: err.response.data.msg,
                     type: 'error'
                   });
             }
