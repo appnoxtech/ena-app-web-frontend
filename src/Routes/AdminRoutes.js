@@ -9,6 +9,7 @@ import CategoryList from "../Screens/admin/categoryList/CategoryList";
 import RiderList from "../Screens/admin/riders/RiderList";
 import OrderList from "../Screens/admin/orders/OrderList";
 import OrderDetails from "../Screens/admin/orders/OrderDetails";
+import UserProfile from "../Screens/userProfile/UserProfile";
 
 const AdminRoutes = () => {
     return (
@@ -23,6 +24,7 @@ const AdminRoutes = () => {
             <Route path='/all-riders' element={<RiderList />} />
             <Route path='/all-orders' element={<OrderList />} />
             <Route path='/orderDetails' element={<OrderDetails />} />
+            <Route path='/profile' element={<UserProfile />} />
             <Route
                 path='*'
                 element={

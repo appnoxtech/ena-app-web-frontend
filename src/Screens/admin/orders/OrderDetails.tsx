@@ -248,21 +248,23 @@ const OrderDetails: FC<any> = (props) => {
                             {
                                 Object.keys(order).length > 1 ? order.productList.map((item: products) => {
                                     return (
-                                        <div className="col-12 d-flex flex-column flex-lg-row justify-content-between align-item-center border-bottom">
-                                            <div className="col-12 col-lg-3 p-3">
-                                                <img src={item.image} className="rounded w-100 h-100 image-fit" />
+                                        <div className="col-12 d-flex justify-content-between align-item-center border-bottom orderContainer" key={item.productId}>
+                                            <div className="col-3 pt-3">
+                                                <img src={item.image} alt={item.vegName} height={100} width={'100%'} style={{ objectFit: 'contain', objectPosition: 'center' }} />
                                             </div>
-                                            <div className="col-12 col-lg-3 ps-2 pt-2 pt-lg-3">
-                                                <h6 className=''>{item.vegName}</h6>
-                                                <h6 className='opacity-50'>Quantity: {item.quantity}</h6>
-                                            </div>
-                                            <div className="col-12 col-lg-3 d-flex pt-1 pt-lg-3 ps-2 ps-lg-0">
-                                                <h6 className='me-2 text-center'>Bid Price: </h6>
-                                                <h6 className='text-center opacity-50'>€ {isNaN((item.bidAmount * item.quantity)) ? '0.0' : (item.bidAmount * item.quantity).toFixed(2)}</h6>
-                                            </div>
-                                            <div className="col-12 col-lg-3 d-flex text-center pt-1 pt-lg-3 ps-2 ps-lg-0">
-                                                <h6 className='me-2 text-center'>Total : </h6>
-                                                <h6 className='text-center opacity-50'>€ {(item.price * item.quantity).toFixed(2)}</h6>
+                                            <div className="col-9 d-flex flex-column flex-md-row ps-3 ps-md-0">
+                                                <div className="col-12 col-md-4 ps-2 pt-2 pt-md-3">
+                                                    <h6 className=''>{item.vegName}</h6>
+                                                    <h6 className='opacity-50'>Quantity: {item.quantity}</h6>
+                                                </div>
+                                                <div className="col-12 col-md-4 d-flex pt-1 pt-md-3 ps-2 ps-md-0">
+                                                    <h6 className='me-2 text-center'>Bid Price: </h6>
+                                                    <h6 className='text-center opacity-50'>€ {isNaN((item.bidAmount * item.quantity)) ? '0.0' : (item.bidAmount * item.quantity).toFixed(2)}</h6>
+                                                </div>
+                                                <div className="col-12 col-md-4 d-flex text-center pt-1 pt-md-3 ps-2 ps-md-0">
+                                                    <h6 className='me-2 text-center'>Total : </h6>
+                                                    <h6 className='text-center opacity-50'>€ {(item.price * item.quantity).toFixed(2)}</h6>
+                                                </div>
                                             </div>
                                         </div>
                                     )
@@ -270,14 +272,14 @@ const OrderDetails: FC<any> = (props) => {
                             }
                         </div>
                         <div className="col-12 d-flex flex-column flex-lg-row mt-3">
-                            <div className="col-12 col-lg-8 d-flex justify-content-center">
+                            <div className="col-12 col-lg-6 d-flex justify-content-center">
                                 <Card title="Shipping Details" bordered={true} style={{ width: '90%' }}>
                                     <p>{`${addressInfo.buildingName} , ${addressInfo.street}`}</p>
                                     <p>{`${addressInfo.city} , ${addressInfo.state}`}</p>
                                     <p>{addressInfo.pincode}</p>
                                 </Card>
                             </div>
-                            <div className="mt-2 mt-lg-0 col-12 col-lg-4 d-flex justify-content-center">
+                            <div className="mt-2 mt-lg-0 col-12 col-lg-6 d-flex justify-content-center">
                                 <Card title="Billing Details" bordered={true} style={{ width: '90%' }}>
                                     <div className="col-12 d-flex">
                                         <div className="col-6">

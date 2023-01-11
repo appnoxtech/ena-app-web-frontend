@@ -1,4 +1,4 @@
-import React, { useState, FC, useEffect } from 'react';
+import React, { useState, FC, useEffect, useRef } from 'react';
 import { Button, InputNumber, Radio, Select } from 'antd';
 import { FaTrash } from 'react-icons/fa';
 import { FaCartPlus } from 'react-icons/fa';
@@ -37,10 +37,15 @@ const Admin: FC<any> = () => {
   const [categoryList, setCategoryList] = useState([{ value: '', label: 'All' }]);
   const [productList, setProductList]: any = useState([]);
   const [searchText, setSearchText] = useState('');
-  const [currPage, setCurrPage] = useState(1);
+  // const [currPage, setCurrPage] = useState(1);
   const [totalPageNum, setTotalPageNum] = useState(0);
   const [currCat, setCurrCat] = useState('');
   const [isMediumScreen, setIsMediumScreen] = useState(window.innerWidth < 1200 ? true : false);
+  const listInnerRef = useRef();
+  const [currPage, setCurrPage] = useState(1); // storing current page number
+  const [prevPage, setPrevPage] = useState(0); // storing prev page number
+  const [userList, setUserList] = useState([]); // storing list
+  const [wasLastList, setWasLastList] = useState(false); // setting a flag to know the last list
 
   const defaultOptions = {
     loop: true,
@@ -61,7 +66,6 @@ const Admin: FC<any> = () => {
       if (currCat) {
         const data = { categoryId: currCat }
         res = await GetProductListWithDataService(data);
-        setCurrPage(1);
       } else {
         res = await GetProductListService();
       }
@@ -74,24 +78,7 @@ const Admin: FC<any> = () => {
     }
   }
 
-  const handlePagination = async () => {
-    try {
-      let data: any;
-      if (currCat) {
-        data = { categoryId: currCat, pageNo: currPage }
-      } else if (searchText) {
-        data = { subStr: searchText, pageNo: currPage }
-      } else {
-        data = { pageNo: currPage }
-      }
-      const res = await GetProductListWithDataService(data);
-      const list = res.data.result;
-      setProductList(list);
-      // setTotalPageNum(res.data.pageCount);
-    } catch (error) {
-      alert(error.message);
-    }
-  }
+
 
   const getCategoryList = async () => {
     try {
@@ -127,16 +114,49 @@ const Admin: FC<any> = () => {
   }
 
   useEffect(() => {
-    getProductList();
-  }, [currCat]);
+    setCurrPage(1);
+    setPrevPage(0);
+    setWasLastList(false);
+    setProductList([]);
+  }, [currCat, searchText]);
+
+  const handlePagination = async () => {
+    try {
+      let data: any;
+      if (currCat) {
+        data = { categoryId: currCat, pageNo: currPage }
+      } else if (searchText) {
+        data = { subStr: searchText, pageNo: currPage }
+      } else {
+        data = { pageNo: currPage }
+      }
+      const res = await GetProductListWithDataService(data);
+      const list = res.data.result;
+      if (!res.data.result.length) {
+        setWasLastList(true);
+        return;
+      }
+      setPrevPage(currPage);
+      setProductList([...productList, ...list]);
+      // setTotalPageNum(res.data.pageCount);
+    } catch (error) {
+      alert(error.message);
+    }
+  }
+
 
   useEffect(() => {
-    handlePagination();
-  }, [currPage]);
+    const fetchData = async () => {
+      handlePagination();
+    }
+    if (!wasLastList && prevPage !== currPage) {
+      fetchData();
+    }
+  }, [currPage, wasLastList, prevPage, userList]);
 
-  useEffect(() => {
-    handleSearch();
-  }, [searchText]);
+  // useEffect(() => {
+  //   handleSearch();
+  // }, [searchText]);
 
   useEffect(() => {
     getCategoryList();
@@ -148,27 +168,46 @@ const Admin: FC<any> = () => {
 
   const handleToggleView = (e: RadioChangeEvent) => {
     const { value } = e.target;
-    if(value === 'List') {
-      getProductListDetails(value);
-    }else{
-      setView(value);
-    }
+    setView(value);
+    // if (value === 'List') {
+    //   getProductListDetails(value);
+    // } else {
+    //   setView(value);
+    // }
   }
 
-  const getProductListDetails = async(value) => {
+  const getProductListDetails = async (value) => {
     try {
       const res = await GetProductListViewService();
       const list = res.data.data;
       setProductList(list);
       setView(value);
     } catch (error) {
-       alert(error.message);
+      alert(error.message);
     }
   }
 
   const handleChange = (value: string) => {
     setCurrCat(value);
   }
+
+  const onScroll = () => {
+    if (listInnerRef.current) {
+      const { scrollTop, scrollHeight, clientHeight } = listInnerRef.current;
+      // console.log('<-------------------------------------->');
+      
+      // console.log('scrollTop', scrollTop);
+      // console.log('scrollHeight', scrollHeight);
+      // console.log('clientHeight', clientHeight);
+
+      // console.log('<-------------------------------------->');
+
+      if (scrollTop + clientHeight === scrollHeight) {
+        console.log('Call Api');
+        setCurrPage(currPage + 1);
+      }
+    }
+  };
 
   return (
     <div className='col-12 mt-0 mt-md-3'>
@@ -227,9 +266,10 @@ const Admin: FC<any> = () => {
         {
           productList.length > 0 ?
             <div className='col-12 mx-auto mx-md-0 col-md-12 col-xl-10'>
-              <div className={view === 'Grid' ? 'row d-flex mt-2 mx-auto m-0 p-0' : 'mt-3'}>
-                {/* <Filterbar /> */}
-                {/* search product by name */}
+              <div
+                onScroll={onScroll}
+                ref={listInnerRef}
+                className={view === 'Grid' ? 'row d-flex mt-2 mx-auto m-0 p-0 list-conatiner-90' : 'mt-3'}>
                 {
                   view === 'Grid' ?
                     productList.map((cardData: any) => (
@@ -239,17 +279,16 @@ const Admin: FC<any> = () => {
                       </div>
                       // <CardComponent currCat={currCat} cardData={cardData} wishListHandler={wishListHandler} view={view} />
                     ))
-                    : <ProductTable ProductList={productList} />
+                    : <ProductTable currPage={currPage} setCurrPage={setCurrPage} ProductList={productList} />
 
                 }
-                {
+              </div>
+              {/* {
                   view === 'Grid' ?
                     <div className='col-12 d-flex justify-content-end mt-3'>
                       <Pagination pageCount={totalPageNum} currPage={currPage} setCurrPage={setCurrPage} />
                     </div> : null
-                }
-
-              </div>
+                } */}
             </div>
             :
             <div className='col-12 d-flex justify-content-center align-item-center' style={{ height: '72vh' }}>

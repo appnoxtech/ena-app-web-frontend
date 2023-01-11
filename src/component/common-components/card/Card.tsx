@@ -113,7 +113,7 @@ const CardComponent: FC<any> = ({ cardData, indexData, wishListHandler, currCat,
         }
       >
         <Meta className='ms-1' title={cardData.engVegName} />
-        <Meta className='ms-1' title={`€ ${cardData.price}/kg`} />
+        <Meta className='ms-1' title={`kn ${cardData.price}/kg`} />
         <div
           className="rounded-2 col-md-12 col-12 d-flex justify-content-between align-items-center mt-3">
           <div className="col-8 col-md-7">
@@ -167,7 +167,7 @@ const CardComponent: FC<any> = ({ cardData, indexData, wishListHandler, currCat,
     <div className="col-8 col-lg-9 d-flex flex-column flex-lg-row">
       <div className="col-12 col-lg-4 pt-1 pt-sm-3 ps-3">
         <p className='fs-3 fw-semibold'>{cardData.engVegName}</p>
-        <p className='fs-6 text-muted'>{`€ ${cardData.price}/kg`}</p>
+        <p className='fs-6 text-muted'>{`kn ${cardData.price}/kg`}</p>
       </div>
       <div className="mt-auto col-12 col-lg-8 ms-auto d-flex align-content-end p-2">
         <div className="ms-auto d-flex align-items-lg-end flex-column mb-3 me-lg-2">

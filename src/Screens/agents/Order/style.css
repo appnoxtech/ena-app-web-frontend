@@ -1,0 +1,21 @@
+.orderContainer{
+    height: 53%;
+}
+
+@media (min-width: 992px) { 
+    .orderContainer{
+        height: 53% !important;
+    }
+}
+
+@media (max-width: 768px) { 
+    .orderContainer{
+        height: 53% !important;
+    }
+}
+
+.fixedTable-55 {
+   height: 55vh !important;
+   overflow: auto;
+}
+

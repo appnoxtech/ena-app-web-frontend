@@ -1,3 +1,4 @@
+import ReactDOM from 'react-dom';
 import * as React from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -43,7 +44,7 @@ const RenderTableRow = ({ product }) => {
 
   const handleItemCountChange = (value) => {
     const count = parseInt(value, 10);
-    if(isNaN(count) || count < 1){
+    if (isNaN(count) || count < 1) {
       return;
     }
     setItemCount(value);
@@ -97,26 +98,46 @@ const RenderTableRow = ({ product }) => {
       </TableCell>
       <TableCell align="center">
         <div className="col-10 ps-5">
-        {
-          isItemAddedToCart ?
-            <Button variant="outlined" onClick={handleRemoveFromCart} fullWidth color="error" size='small' startIcon={<FaTrash />}>
-              Remove
-            </Button> 
-            : 
-            <Button className='ms-auto' onClick={handleAddtoCart} variant="outlined" fullWidth color="success" size='small' startIcon={<FaCartPlus />}>
-              Add
-            </Button>
-        }
+          {
+            isItemAddedToCart ?
+              <Button variant="outlined" onClick={handleRemoveFromCart} fullWidth color="error" size='small' startIcon={<FaTrash />}>
+                Remove
+              </Button>
+              :
+              <Button className='ms-auto' onClick={handleAddtoCart} variant="outlined" fullWidth color="success" size='small' startIcon={<FaCartPlus />}>
+                Add
+              </Button>
+          }
         </div>
       </TableCell>
     </TableRow>
   )
 }
 
-const ProductTable = ({ ProductList }) => {
+
+
+const ProductTable = ({ ProductList, setCurrPage, currPage }) => {
+  const tableEl = React.useRef()
+
+  const scrollListener = () => {
+    let bottom = tableEl.current.scrollHeight - tableEl.current.clientHeight
+    if (tableEl.current.scrollTop === bottom) {
+      console.log('Reached bottom');
+      setCurrPage(currPage + 1);
+    }
+  }
+
+  React.useLayoutEffect(() => {
+    const tableRef = tableEl.current
+    tableRef.addEventListener('scroll', scrollListener)
+    return () => {
+      tableRef.removeEventListener('scroll', scrollListener)
+    }
+  }, [scrollListener]);
+
   return (
-    <Paper className='mx-auto mt-4' style={{ height: '68vh', width: '95%', overflow: 'auto' }}>
-      <TableContainer component={Paper} style={{ overflowX: "initial" }}>
+    <Paper className='mx-auto mt-4' style={{ height: '68vh', width: '95%', overflow: 'auto' }} ref={tableEl}>
+      <TableContainer component={Paper} style={{ overflowX: "initial" }} >
         <Table stickyHeader={true}>
           <TableHead>
             <TableRow>
@@ -128,7 +149,7 @@ const ProductTable = ({ ProductList }) => {
               <TableCell width={260} align="center">Action</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
+          <TableBody >
             {
               ProductList.map(product => <RenderTableRow product={product} />)
             }

@@ -2,3 +2,8 @@
     height: 70vh;
     overflow-y: auto;
 }
+
+.list-conatiner-90{
+    height: 90vh;
+    overflow-y: auto;
+}
