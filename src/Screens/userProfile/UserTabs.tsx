@@ -1,10 +1,12 @@
 import * as React from 'react';
 import Tabs from '@mui/material/Tabs';
+import { EditOutlined, DeleteFilled, SettingOutlined } from '@ant-design/icons';
+import { Avatar, Card } from 'antd';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import LoginInput from '../../component/common-components/loginInput';
-import { FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField } from '@mui/material';
+import { Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField } from '@mui/material';
 import ButtonComp from '../../component/common-components/buttonComp/ButtonComp';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
@@ -14,6 +16,7 @@ import NotificationContext from '../../context/Notification/NotificationContext'
 import '../../assets/global/global.css';
 import { useDispatch } from 'react-redux';
 import { updateUserData } from '../../redux/reducer/UserDetails/userAction';
+import AddIcon from '@mui/icons-material/Add';
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -99,7 +102,7 @@ export default function UserTabs({ user }) {
                     type: 'success'
                 });
                 setUpdatePassword(initialState);
-                
+
             }
 
         } catch (error) {
@@ -137,17 +140,17 @@ export default function UserTabs({ user }) {
     }
 
     const handleUpdateProfileClick = () => {
-        if(userData.firstName.length <= 0){
+        if (userData.firstName.length <= 0) {
             setUserError({
                 ...userError,
                 firstName: 'Required !'
             })
-        }else if(userData.lastName.length <= 0){
+        } else if (userData.lastName.length <= 0) {
             setUserError({
                 ...userError,
                 lastName: 'Required !'
             })
-        }else{
+        } else {
             setUserError(userErrorInitial);
             handleUpdateProfile();
         }
@@ -201,6 +204,8 @@ export default function UserTabs({ user }) {
         });
     }
 
+    const { Meta } = Card;
+
     return (
         <Box sx={{ width: '100%' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -210,7 +215,19 @@ export default function UserTabs({ user }) {
                         label={isEdit ? "Update Profile" : "Profile Details"}
                         {...a11yProps(0)}
                     />
-                    <Tab label="Change Password" {...a11yProps(1)} />
+                    <Tab
+                        sx={{ fontWeight: 'bold' }}
+                        label="Change Password"
+                        {...a11yProps(1)}
+                    />
+                    {
+                        user.userType === 'customer' ?
+                            <Tab
+                                sx={{ fontWeight: 'bold' }}
+                                label="Manage Address"
+                                {...a11yProps(2)}
+                            /> : null
+                    }
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
@@ -361,6 +378,40 @@ export default function UserTabs({ user }) {
                             btvalue='Change Password'
                         />
 
+                    </div>
+                </div>
+            </TabPanel>
+            <TabPanel value={value} index={2}>
+                <div className="col-12">
+                    <div className="col-12 d-flex mb-2">
+                        <div className="col-6 d-flex align-items-center">
+                            <p className='fs-7 fw-semibold mb-0'>Saved Address</p>
+                        </div>
+                        <div className="col-6 d-flex">
+                            <Button className='ms-auto' variant="outlined" startIcon={<AddIcon />}>
+                                Add Address
+                            </Button>
+                        </div>
+                    </div>
+                    <div className="col-12">
+                        <Card
+                            hoverable
+                            style={{
+                                width: '100%',
+                            }}
+                            actions={[
+                                <EditOutlined key="edit" />,
+                                <DeleteFilled key="ellipsis" color='red' />,
+                            ]}
+                        >
+                            <div>
+                                <p className='fs-7 fw-bold opactity-50 mb-0'>Shudhanshu Choudhary</p>
+                                <p className='fs-7 fw-semibold opacity-50 mb-0'>223-A, Sharmik Kunj, Sector-66, Noida</p>
+                                <p className='fs-7 fw-semibold opacity-50 mb-0'>Mamura</p>
+                                <p className='fs-7 fw-semibold opacity-50 mb-0'>Gautam Budh Nagar - 201301</p>
+                                <p className='fs-7 fw-semibold opacity-50'>Uttar Pardesh</p>
+                            </div>
+                        </Card>
                     </div>
                 </div>
             </TabPanel>

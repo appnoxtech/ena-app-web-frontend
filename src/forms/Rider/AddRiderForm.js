@@ -52,7 +52,6 @@ function AddRiderForm(props) {
             openNotification('Agent Added Successfully !');
             props.onHide();
         } catch (error) {
-            //openNotification(error.message);
             showError(error);
         }
     }
@@ -65,7 +64,8 @@ function AddRiderForm(props) {
             openNotification('Agent Updated Successfully !');
             props.onHide();
         } catch (error) {
-            openNotification(error.message);
+           // openNotification(error.message);
+           showError(error);
         }
     }
 
