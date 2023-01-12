@@ -218,7 +218,7 @@ const Order = () => {
                 <td>
                   <div className=''>
                     <CustomButton
-                      props={{ styleName: 'success px-3 p-0 w-75', indexData: 'Order Details', btnType: 'btn-outline', clickHandler: () => handleOrderRowClick(data) }}
+                      props={{ styleName: 'success px-3 p-0 w-90', indexData: 'Order Details', btnType: 'btn-outline', clickHandler: () => handleOrderRowClick(data) }}
                     />
                     {
                       (data.status === 'CANCELED' ||  data.status === 'COMPLETED') ?
@@ -226,11 +226,11 @@ const Order = () => {
                       :
                         data.status === 'OFD' ?
                           <CustomButton
-                            props={{ styleName: 'primary px-3 p-0 mt-2 w-75', indexData: 'Track Order', btnType: 'btn-outline', clickHandler: () => toggleMapModal(data.assignedTo) }}
+                            props={{ styleName: 'primary px-3 p-0 mt-2 w-90', indexData: 'Track Order', btnType: 'btn-outline', clickHandler: () => toggleMapModal(data.assignedTo) }}
                           />
                       :
                           <CustomButton
-                            props={{ styleName: 'danger px-3 p-0 mt-2', indexData: 'Cancel Order', btnType: 'btn-outline', clickHandler: (e) => displayModal(e, data._id) }}
+                            props={{ styleName: 'danger px-3 p-0 mt-2 w-90', indexData: 'Cancel Order', btnType: 'btn-outline', clickHandler: (e) => displayModal(e, data._id) }}
                           />
                     }
                   </div>

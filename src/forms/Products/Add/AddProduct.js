@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { PlusOutlined } from '@ant-design/icons';
 import Form from 'react-bootstrap/Form';
@@ -10,6 +10,8 @@ import { BiImageAdd } from 'react-icons/bi';
 import { AddProductService, UpdateProductService } from '../../../services/product/productService';
 import { UploadImageService } from '../../../services/imageUpload/uploadImage';
 import './AddProduct.css';
+import useErrorHandler from '../../../services/handler/ErrorHandler';
+import NotificationContext from '../../../context/Notification/NotificationContext';
 
 const initialState = {
     vegName: '',
@@ -18,7 +20,6 @@ const initialState = {
     categoryId: '',
     totalQuantity: '',
     price: '',
-    priceWithTax: '',
     orderQuantity: '',
     description: '',
 }
@@ -28,23 +29,25 @@ const errorInitialState = {
     image: '',
     categoryId: '',
     price: '',
-    priceWithTax: '',
     orderQuantity: '',
     totalQuantity: '',
     description: '',
 }
 
 export default function AddProductForm(props) {
-
+    const showError = useErrorHandler();
     const [localError, setLocalError] = useState(errorInitialState);
     const [product, setProduct] = useState(initialState);
     const CategoreList = useSelector(state => state.categorie.categorieList);
     const [isUpdate, setIsUpdate] = useState(false);
+    const Notification = useContext(NotificationContext);
+
     const productInfo = () => {
-        if(Object.keys(props.product).length > 0){
+        if (Object.keys(props.product).length > 0) {
+            console.log('props.product', props.product);
             setProduct(props.product)
             setIsUpdate(true);
-        }else{
+        } else {
             setProduct(initialState);
             setIsUpdate(false);
         }
@@ -73,35 +76,41 @@ export default function AddProductForm(props) {
 
         if (isErrorLength === 0) {
             try {
-                if(isUpdate){
+                if (isUpdate) {
                     const data = {
                         ...product,
                         price: parseInt(product.price, 10),
-                        priceWithTax: parseInt(product.priceWithTax, 10),
                         orderQuantity: parseInt(product.orderQuantity, 10),
                         totalQuantity: parseInt(product.totalQuantity, 10),
                         unit: 'KG',
                     }
+                    console.log('data', data);
                     const res = await UpdateProductService(data);
                     await props.getProductList();
-                    alert('Product Updated Successfully !');
-                }else{
+                    Notification({
+                        title: 'Notification',
+                        description: 'Product Updated Successfully !',
+                        type: 'success'
+                    })
+                } else {
                     const data = {
                         ...product,
                         price: parseInt(product.price, 10),
-                        priceWithTax: parseInt(product.priceWithTax, 10),
                         orderQuantity: parseInt(product.orderQuantity, 10),
                         totalQuantity: parseInt(product.totalQuantity, 10),
                         unit: 'KG',
                     }
                     const res = await AddProductService(data);
                     await props.getProductList();
-                    alert('Product Added Successfully !');
+                    Notification({
+                        title: 'Notification',
+                        description: 'Product Added Successfully',
+                        type: 'success'
+                    })
                 }
                 props.onHide();
             } catch (error) {
-                console.log('Error');
-                alert(error.message);
+                showError(error);
             }
         }
     }
@@ -148,7 +157,7 @@ export default function AddProductForm(props) {
         >
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    { !isUpdate ? `Add Product` : 'Update Product'}
+                    {!isUpdate ? `Add Product` : 'Update Product'}
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body style={{ overFlow: 'auto' }}>
@@ -182,10 +191,6 @@ export default function AddProductForm(props) {
                                     onDrop={async (acceptedFiles) => {
                                         console.log('acceptedFiles', acceptedFiles[0].path);
                                         await uploadImage(acceptedFiles[0]);
-                                        // setProduct({
-                                        //     ...product,
-                                        //     image: URL.createObjectURL(acceptedFiles[0])
-                                        // })
                                     }}
                                     accept={{ 'image/jpeg': ['.png', '.jpg', '.jpeg'] }}
 
@@ -238,8 +243,8 @@ export default function AddProductForm(props) {
                     <label className='form-label mt-4 h6 h3 d-none d-lg-block d-md-block'>
                         Select Category
                     </label>
-                    <Form.Select 
-                        aria-label="Select Categorie" 
+                    <Form.Select
+                        aria-label="Select Categorie"
                         className='mt-4 mt-xl-2'
                         value={product.categoryId}
                         onChange={(e) =>
@@ -264,17 +269,17 @@ export default function AddProductForm(props) {
                         Description
                     </label>
 
-                    <Form.Control 
+                    <Form.Control
                         onChange={(e) => setProduct(oldValue => {
                             return {
                                 ...oldValue,
                                 description: e.target.value,
                             }
-                        })} 
+                        })}
                         as="textarea"
                         aria-label="With textarea"
                         value={product.description}
-                     />
+                    />
                     {localError.description == '' ? null : (
                         <p className='text-danger mt-1'>{localError.description}</p>
                     )}
@@ -294,23 +299,6 @@ export default function AddProductForm(props) {
 
                     {localError.price == '' ? null : (
                         <p className='text-danger mt-1'>{localError.price}</p>
-                    )}
-
-                    <label className='form-label mt-4 h6 h3 d-none d-lg-block d-md-block'>
-                        Price (Including TAX)
-                    </label>
-                    <LoginInput
-                        type='number'
-                        name='priceWithTax'
-                        id='priceWithTax'
-                        placeholder='Enter Product Price (Including Tax)'
-                        class='form-control mt-4 mt-xl-2'
-                        Input={product}
-                        setInput={setProduct}
-                    />
-
-                    {localError.priceWithTax == '' ? null : (
-                        <p className='text-danger mt-1'>{localError.priceWithTax}</p>
                     )}
 
                     <label className='form-label mt-4 h6 h3 d-none d-lg-block d-md-block'>

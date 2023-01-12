@@ -6,7 +6,19 @@
    margin-bottom: 100px;
 }
 
-@media screen and (max-width: 768px) {
+
+
+@media screen and (min-width: 768px) {
+   .height{
+        margin-top: 80px; 
+     }
+   .bottom{
+      margin-bottom: 150px;
+   }
+}
+
+
+@media screen and (max-width:768px) {
    .height{
         margin-top: 0px; 
      }
@@ -14,6 +26,7 @@
       margin-bottom: 150px;
    }
 }
+
 
 .containe {
    margin: 0px;
