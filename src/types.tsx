@@ -3,7 +3,7 @@
 export interface orderType {
    _id: string,
    userId: string,
-   addressInfo: addressType,
+   addressInfo: addressInfo,
    productList: [products],
    amount: number,
    tax: number,
@@ -12,7 +12,7 @@ export interface orderType {
    createdAt: number,
 }
 
-export interface addressType {
+export interface addressInfo {
     _id: string,
     country: string,
     pincode: number,
@@ -39,4 +39,12 @@ export interface user {
     userId?: number,
     isLogin: boolean,
     email?: string,
+}
+
+export interface addressType {
+    _id?: string,
+    userId: string,
+    name: string,
+    phoneNumber: number,
+    addressInfo: addressInfo,
 }

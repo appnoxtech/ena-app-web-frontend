@@ -1,15 +1,20 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import './AddressCard.css'
+import { addressType } from '../../../types';
 
 function AddressCard(prop:any) {
+  const selectedId = localStorage.getItem('addressId');
+  const handleRadioClick = (address: addressType) => {
+    localStorage.setItem('addressId', address._id);
+    prop.setSelectedAddress(address);
+    prop.setShowAddressList(false);
+  }
   return (
     <>
       <div className={`col-12 border_radius1 ${prop.selected} height_address_card border back-g-lightwhite mb-4 py-4 px-md-5 mx-auto`}>
         <div className='col-12 d-flex justify-content-between'>
           <p className='addressCard_heading'>Address</p>
-          {/* <NavLink to='/changeAddress'><p className='change_addressbtn'>Change Address</p></NavLink> */}
-          <p className='change_addressbtn' onClick={() => prop.setAddress({})}>Change Address</p>
         </div>
         <div className='col-12'>
           <p className=''>{prop.address.name}</p>
@@ -28,7 +33,8 @@ function AddressCard(prop:any) {
               type='radio'
               name='flexRadioDefault'
               id='flexRadioDefault2'
-              onClick={() => localStorage.setItem('addressId', prop.address._id)}
+              checked={prop.address._id === selectedId}
+              onClick={() => handleRadioClick(prop.address)}
             />
           </div>
         </div>
