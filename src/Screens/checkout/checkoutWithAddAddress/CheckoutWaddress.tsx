@@ -9,10 +9,12 @@ import AddressCard from '../../../component/common-components/addressCard/Addres
 import Lottie from 'react-lottie';
 import LoadingAnimation from '../../../assets/animations/Loading.json';
 import { getAddressList } from '../../../services/address/AddressService'
-import useErrorHandler from '../../../services/handler/ErrorHandler'
+import useErrorHandler from '../../../services/handler/ErrorHandler';
 
 function CheckoutWaddress() {
   const [address, setAddress] = useState([]);
+  const [showAddressList, setShowAddressList] = useState(false);
+  const [selectedAddress, setSelectedAddress] = useState({});
   const ShowError = useErrorHandler();
   const [isLoading, setIsLoading] = useState(false);
   const defaultOptions = {
@@ -21,12 +23,14 @@ function CheckoutWaddress() {
     animationData: LoadingAnimation,
   };
 
-  const getAddressListData = async() => {
+  const getAddressListData = async () => {
     try {
       const res = await getAddressList();
       const addressData = res.data.data;
-      if(addressData.length > 0){
-        setAddress(addressData)
+      if (addressData.length > 0) {
+        setAddress([...addressData]);
+        setSelectedAddress({ ...addressData[0] });
+        localStorage.setItem('addressId', addressData[0]._id);
       }
     } catch (error) {
       ShowError(error);
@@ -37,9 +41,6 @@ function CheckoutWaddress() {
     getAddressListData();
   }, []);
 
-
-  console.log('Address', isLoading);
-  
   return (
     <div className='container-fluid mx-0'>
       <div className='row d-flex justify-content-between m-0 p-0'>
@@ -47,31 +48,47 @@ function CheckoutWaddress() {
           <Breadcrumb />
         </div>
         <div className='col-12 d-flex justify-content-center row mx-auto px-md-5'>
-        <div className='col-12 col-lg-8 mx-auto border back-g-lightwhite py-4 border_radius1 px-md-5'>
-          {
-            address.length > 0 ? 
-            <AddressCard address={address[address.length - 1]} setAddress={setAddress} />
-            // address.map(item => {
-            //   return <AddressCard address={item} setAddress={setAddress} />
-            // })
-            :
-            <AddAddressComp setAddress={setAddress} />
-          }
-        </div>
+          <div className='col-12 col-lg-8 mx-auto border back-g-lightwhite py-4 border_radius1 px-md-5'>
+            {
+              showAddressList ? null :
+                <p className='change_addressbtn' onClick={() => setShowAddressList(true)}>Change Address</p>
+            }
+            {
+              !showAddressList ?
+                Object.keys(selectedAddress).length > 0 ?
+                  <AddressCard
+                    address={selectedAddress}
+                    setShowAddressList={setShowAddressList}
+                    setSelectedAddress={setSelectedAddress}
+                  /> : <div className="">Loading ...</div>
+                :
+                <div className="" style={{height: '55vh', overflow: 'auto'}}>
+                 {
+                   address.map(item => (
+                    <AddressCard
+                      address={item}
+                      setShowAddressList={setShowAddressList}
+                      setSelectedAddress={setSelectedAddress}
+                    />
+                  ))
+                 }
+                </div>
+            }
+          </div>
           <div className="col-lg-4 col-12 mt-5 mt-lg-0">
-          <div className="container-fluid px-4 border border_radius1 py-4 back-g-lightwhite">
-            <OrderCard setIsLoading={setIsLoading}  />
+            <div className="container-fluid px-4 border border_radius1 py-4 back-g-lightwhite">
+              <OrderCard setIsLoading={setIsLoading} />
             </div>
           </div>
         </div>
       </div>
       {
         isLoading ? <div className='loading-conatiner'>
-                <Lottie
-                  options={defaultOptions}
-                  height={400}
-                  width={400}
-                />
+          <Lottie
+            options={defaultOptions}
+            height={400}
+            width={400}
+          />
         </div> : null
       }
     </div>

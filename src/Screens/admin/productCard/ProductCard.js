@@ -48,7 +48,6 @@ const openNotification = (message) => {
           />
         }
         actions={[
-          //   <SettingOutlined key="setting" />,
           <EditOutlined size={'large'} key="edit" onClick={() => handleCardEditClick(product)} />,
           <DeleteFilled onClick={() => setModalOpen(true)} size={'large'} key="ellipsis" color='red' />,
         ]}

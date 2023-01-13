@@ -6,23 +6,20 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import ButtonComp from '../buttonComp/ButtonComp'
 import { AddAddressService } from '../../../services/address/AddressService'
 
+const initialState = {
+  username : '',
+  phone: '',
+  state:'',
+  city:'',
+  country: '',
+  pincode:'',
+  addressLine1:'',
+  addressLine2:'',
+}
 function AddAddress({...prop}) {
   const navigate = useNavigate()
   const [isInputDisable, setIsInputDisable] = useState(false);
-  const [input,setinput]=useState({
-    username : '',
-    phone: '',
-    state:'',
-    city:'',
-    country: '',
-    pincode:'',
-    addressLine1:'',
-    addressLine2:'',
-  });
-  
-  console.log(input)
-
-  // console.log(Object.keys(input), 'keyofAllBoect ')
+  const [input,setinput]=useState(initialState);
   
   const contactInfoItem = [
     {
