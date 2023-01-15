@@ -43,7 +43,7 @@ const openNotification = (message) => {
           <img
             alt="vegetable"
             src={product.image}
-            height={297}
+            height={100}
             style={{ objectFit: 'contain', objectPosition: 'center' }}
           />
         }

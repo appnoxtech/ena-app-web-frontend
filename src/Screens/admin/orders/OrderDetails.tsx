@@ -15,6 +15,7 @@ import { hostname } from '../../../GlobalVariable';
 import MapContainer from '../../../component/common-components/mapComponent/MapContainer';
 import ButtonComp from '../../../component/common-components/buttonComp/ButtonComp';
 import NotificationContext from '../../../context/Notification/NotificationContext';
+import useErrorHandler from '../../../services/handler/ErrorHandler';
 
 
 type PropTypes = {
@@ -29,6 +30,7 @@ const getDate = (data: number) => {
 const socket = io(hostname);
 
 const OrderDetails: FC<any> = (props) => {
+    const showError = useErrorHandler();
     const [agentModal, setAgentModal] = useState(false);
     const Notification = useContext(NotificationContext);
     const [location, setLocation] = useState({});
@@ -60,8 +62,7 @@ const OrderDetails: FC<any> = (props) => {
                 setRiderList(list);
             }
         } catch (error) {
-            console.log(error);
-            alert(error.message);
+            showError(error);
         }
     };
 
@@ -76,7 +77,7 @@ const OrderDetails: FC<any> = (props) => {
                 setLocation({ lat, lng });
             }
         } catch (error) {
-            alert(error.message);
+            showError(error);
         }
     }
 
@@ -90,7 +91,7 @@ const OrderDetails: FC<any> = (props) => {
             }
             setOrder(data);
         } catch (error) {
-            alert(error.message);
+            showError(error);
         }
     };
 
@@ -99,7 +100,6 @@ const OrderDetails: FC<any> = (props) => {
         getRiderList();
 
         socket.on('connect', () => {
-            console.log('Socket is Connected ====>');
             setIsConnected(true);
         });
 
@@ -114,7 +114,6 @@ const OrderDetails: FC<any> = (props) => {
         socket.emit('join_room', userId);
 
         socket.on('ORDER_UPDATED', (data) => {
-            console.log('Agent Socket Fn. runned');
             try {
                 console.log('Agent Data', { ...data });
                 if (data) {
@@ -122,7 +121,7 @@ const OrderDetails: FC<any> = (props) => {
                     setOrder(data);
                 }
             } catch (error) {
-                console.error('Socket Error', error);
+                showError(error);
             }
         });
 
@@ -136,7 +135,7 @@ const OrderDetails: FC<any> = (props) => {
                     setLocation(location);
                 }
             } catch (error) {
-                console.error('Socket Error', error);
+                showError(error);
             }
         });
 
@@ -154,10 +153,15 @@ const OrderDetails: FC<any> = (props) => {
     const handelCancelOrder = async () => {
         try {
           const data = { orderId: Order._id }
-          const res = await CancelOrder(data);
+          await CancelOrder(data);
           await updateOrderDetails();
+          Notification({
+            title: 'Notification',
+            description: 'Order Canceled.',
+            type: 'success'
+        });
         } catch (error) {
-          alert(error.message)
+            showError(error);
         }
     }
     const confirm = () => {
