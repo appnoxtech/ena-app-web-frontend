@@ -64,8 +64,12 @@
     overflow: auto;
 }
 
-.fixedHeightTable-20{
-    height: 20vh !important;
+.min-width-646{
+    min-width: 646px;
+}
+
+.fixedHeightTable-60{
+    height: 60vh !important;
     overflow: auto;
 }
 

@@ -109,7 +109,7 @@ const CartCom = () => {
   }
 
   return (
-    <div className='container-fluid' style={{minHeight: '100vh'}}>
+    <div className='container-fluid' style={{ minHeight: '100vh' }}>
       {/* <Searchbar /> */}
       <div className='side-Part rounded-4 bg-white'></div>
       <div className='col-12 mx-auto'>
@@ -119,45 +119,49 @@ const CartCom = () => {
           </div>
           <div className="col-6 d-flex">
             <div className="col-11 col-md-5 col-lg-3 ms-auto">
-              <button className='ms-auto btnRadius border border-0 themecolor py-3 fw-bold text-light col-12' onClick={() => handleCheckOut()}>
-                Checkout
-              </button>
+              {
+                cartList.length ? 
+                  <button className='ms-auto btnRadius border border-0 themecolor py-3 fw-bold text-light col-12' onClick={() => handleCheckOut()}>
+                    Checkout
+                  </button>
+               : null
+              }
             </div>
           </div>
         </div>
         {
           cartList.length > 0 ?
             <div className="col-12">
-               <CartProductTableView
-                    cartList={cartList}
-                    handleRemoveCart={handleRemoveCart}
-                    handleBidAmountChange={handleBidAmountChange}
-                    handleItemCountChange={handleItemCountChange}
-                  />
+              <CartProductTableView
+                cartList={cartList}
+                handleRemoveCart={handleRemoveCart}
+                handleBidAmountChange={handleBidAmountChange}
+                handleItemCountChange={handleItemCountChange}
+              />
               <div className="d-flex">
-                    <div className="col-11 col-sm-6 col-lg-4 ms-auto ps-4 d-flex flex-column">
-                    <TableRow className='ms-auto'>
-                        <TableCell rowSpan={4} />
-                        <TableCell colSpan={4}>
-                            <p className='fs-6 fw-semibold mb-0'>Subtotal</p>
-                        </TableCell>
-                        <TableCell align="right">
-                            <p className='fs-6 fw-semibold mb-0 opacity-50'>
-                                € {calculateSubTotal().toFixed(2)}
-                            </p>
-                        </TableCell>
-                    </TableRow>
-                    <TableRow className='ms-auto'>
-                        <TableCell colSpan={4}>
-                            <p className='fs-6 fw-semibold mb-0'>Total</p>
-                        </TableCell>
-                        <TableCell align="right">
-                            <p className='fs-6 fw-semibold mb-0 opacity-50'>
-                                € {calculateBidSubTotal().toFixed(2)}
-                            </p>
-                        </TableCell>
-                    </TableRow>
-                    </div>
+                <div className="col-11 col-sm-6 col-lg-4 ms-auto ps-4 d-flex flex-column">
+                  <TableRow className='ms-auto'>
+                    <TableCell rowSpan={4} />
+                    <TableCell colSpan={4}>
+                      <p className='fs-6 fw-semibold mb-0'>Subtotal</p>
+                    </TableCell>
+                    <TableCell align="right">
+                      <p className='fs-6 fw-semibold mb-0 opacity-50'>
+                        € {calculateSubTotal().toFixed(2)}
+                      </p>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow className='ms-auto'>
+                    <TableCell colSpan={4}>
+                      <p className='fs-6 fw-semibold mb-0'>Total</p>
+                    </TableCell>
+                    <TableCell align="right">
+                      <p className='fs-6 fw-semibold mb-0 opacity-50'>
+                        € {calculateBidSubTotal().toFixed(2)}
+                      </p>
+                    </TableCell>
+                  </TableRow>
+                </div>
               </div>
             </div> : <div className='d-flex justify-content-center align-item-center' style={{ height: '70vh' }}>
               <Lottie

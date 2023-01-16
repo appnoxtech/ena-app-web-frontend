@@ -32,7 +32,7 @@ function Routing() {
               :null
           }
           <div className="mb-3"></div>
-        <DesktopFooter class='container-fluid footer mt-5 mt-auto' />
+        {/* <DesktopFooter class='container-fluid footer mt-5 mt-auto' /> */}
        </div>
       </BrowserRouter>
     </>

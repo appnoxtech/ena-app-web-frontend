@@ -30,6 +30,8 @@ const getDate = (data: number) => {
 const socket = io(hostname);
 
 const OrderDetails: FC<any> = (props) => {
+    const { state } = useLocation();
+    const Order = state.order;
     const showError = useErrorHandler();
     const [agentModal, setAgentModal] = useState(false);
     const Notification = useContext(NotificationContext);
@@ -37,10 +39,9 @@ const OrderDetails: FC<any> = (props) => {
     const [isConnected, setIsConnected] = useState(socket.connected);
     const [riderList, setRiderList] = useState([]);
     const [order, setOrder]: any = useState({});
-    const [addressInfo, setAddressInfo]: any = useState({});
+    const [addressInfo, setAddressInfo]: any = useState(Order.addressInfo);
     const [selectedRider, setSelectedRider]: any = useState({});
-    const { state } = useLocation();
-    const Order = state.order;
+    
     const { userId } = useSelector((state: any) => state.user);
     const [mapModal, showMapModal] = useState(false);
 
@@ -277,11 +278,15 @@ const OrderDetails: FC<any> = (props) => {
                         </div>
                         <div className="col-12 d-flex flex-column flex-lg-row mt-3">
                             <div className="col-12 col-lg-6 d-flex justify-content-center">
-                                <Card title="Shipping Details" bordered={true} style={{ width: '90%' }}>
-                                    <p>{`${addressInfo.buildingName} , ${addressInfo.street}`}</p>
-                                    <p>{`${addressInfo.city} , ${addressInfo.state}`}</p>
-                                    <p>{addressInfo.pincode}</p>
-                                </Card>
+                                {
+                                    Object.keys(addressInfo).length ? 
+                                        <Card title="Shipping Details" bordered={true} style={{ width: '90%' }}>
+                                            <p>{`${addressInfo.buildingName} , ${addressInfo.street}`}</p>
+                                            <p>{`${addressInfo.city} , ${addressInfo.state}`}</p>
+                                            <p>{addressInfo.pincode}</p>
+                                       </Card>
+                                    : null
+                                }
                             </div>
                             <div className="mt-2 mt-lg-0 col-12 col-lg-6 d-flex justify-content-center">
                                 <Card title="Billing Details" bordered={true} style={{ width: '90%' }}>
