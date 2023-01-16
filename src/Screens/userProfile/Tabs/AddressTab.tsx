@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Lottie from 'react-lottie';
 import { EditOutlined, DeleteFilled, } from '@ant-design/icons';
 import { Card } from 'antd';
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import NoAddressAnimation from '../../../assets/animations/NoAddress.json';
-import { getAddressList } from "../../../services/address/AddressService";
+import { deleteAddressService, getAddressList } from "../../../services/address/AddressService";
 import useErrorHandler from '../../../services/handler/ErrorHandler';
 import '../../../assets/global/global.css';
 import { addressType } from "../../../types";
 import AddressDialog from "../Dialogs/AddressDialog";
+import NotificationContext from "../../../context/Notification/NotificationContext";
 
 const AddressTab = () => {
+    const Notification = useContext(NotificationContext);
     const [addressList, setAddressList] = useState(Array<addressType> || []);
     const [addressDialogOpen, setAddressDialogOpen] = useState(false);
     const [selectedAddress, setSelectedAddress] = useState({});
@@ -55,9 +57,16 @@ const AddressTab = () => {
 
     const handleDeleteAddress = async () => {
         try {
-
+           await deleteAddressService(addressId);
+           await getAddressData();
+           handleClose();
+           Notification({
+            title: 'Notification.',
+            description: 'Address Deleted Successfully.',
+            type: 'success'
+           })
         } catch (error) {
-
+           showError(error);
         }
     }
 

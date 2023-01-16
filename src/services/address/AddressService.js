@@ -24,6 +24,19 @@ export const updateAddressService = async(data, addressId) => {
     });
 }
 
+export const deleteAddressService = async(addressId) => {
+    const url = `${API_URL}/access/delete-address`;
+    const token = localStorage.getItem('@user_Token');
+    return axios.get(url, {
+        params: {
+            addressId,
+        },
+        headers: {
+            "x-auth-token": token,
+        }
+    });
+}
+
 export const getAddressList = async() => {
     const url = `${API_URL}/access/get-address`;
     const token = localStorage.getItem('@user_Token');

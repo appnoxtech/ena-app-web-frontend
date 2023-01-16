@@ -258,9 +258,9 @@ const AddressDialog = ({ open, handleClose, address, getAddressData }) => {
                         <div className="my-3">
                             <TextField
                                 id="outlined-basic"
-                                label="City/ District"
+                                label="City"
                                 variant="outlined"
-                                name='street'
+                                name='city'
                                 value={addressData.city}
                                 onChange={changeHandler}
                                 fullWidth
