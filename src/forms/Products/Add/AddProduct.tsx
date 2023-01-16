@@ -201,7 +201,7 @@ const AddProductForm: React.FC<any> = (props) => {
                                 </>
                             ) : (
                                 <Dropzone
-                                    onDrop={async (acceptedFiles) => {
+                                    onDrop={async (acceptedFiles: any) => {
                                         console.log('acceptedFiles', acceptedFiles[0].path);
                                         await uploadImage(acceptedFiles[0]);
                                     }}
