@@ -107,7 +107,7 @@ const OrderDetails = () => {
             </div>
             <div className="order-details col-10 d-flex flex-column flex-xl-row justify-content-around align-items-stretch mx-auto border-top pt-4">
                 <Card title="Tracking Details" bordered={true} className='col-12 col-xl-3 my-2 my-xl-0'>
-                    <OrderSteps />
+                    <OrderSteps orderStatus={order.status} />
                 </Card>
 
                 <Card title="Shipping Details" bordered={true} className='col-12 col-xl-3 my-2 my-xl-0'>

@@ -34,8 +34,8 @@ const CardComponent: FC<any> = ({ cardData, indexData, wishListHandler, currCat,
   const navigate = useNavigate();
   const {isLogin} = useSelector((state:any) => state.user);
 
-  const handleAddtoCart = () => {
-    //navigate('/product/details',{state:cardData})
+  const handleAddtoCart = (e: any) => {
+    e.stopPropagation();
     const data = {
       ...cardData,
       productId: cardData._id,
@@ -48,8 +48,8 @@ const CardComponent: FC<any> = ({ cardData, indexData, wishListHandler, currCat,
     setIsItemAddedToCart(true);
   }
 
-  const handleRemoveFromCart = async () => {
-    //dispatch(decreaseCartCount());
+  const handleRemoveFromCart = async (e: any) => {
+    e.stopPropagation();
     const data = {
       productId: cardData._id,
       removeProduct: 1
@@ -103,6 +103,12 @@ const CardComponent: FC<any> = ({ cardData, indexData, wishListHandler, currCat,
     }
   }
 
+  useEffect(() => {
+    const selcetedDiv = document.querySelector('.input-container');
+    selcetedDiv.addEventListener('click', (e) => e.stopPropagation());
+    return () => selcetedDiv.removeEventListener('click', (e) => e.stopPropagation());
+  }, []);
+
   if(view === 'Grid'){
     return (
       <Card
@@ -111,12 +117,13 @@ const CardComponent: FC<any> = ({ cardData, indexData, wishListHandler, currCat,
         cover={
           <img alt="example" height={170} width={240} style={{ objectFit: 'contain', objectPosition: 'center' }} src={cardData.image} />
         }
+        onClick={() => navigate('/product/details', {state: {cardData}})}
       >
         <Meta className='ms-1' title={cardData.engVegName} />
         <Meta className='ms-1' title={`kn ${cardData.price}/kg`} />
         <div
           className="rounded-2 col-md-12 col-12 d-flex justify-content-between align-items-center mt-3">
-          <div className="col-8 col-md-7">
+          <div className="col-8 col-md-7 input-container">
             <InputNumber
               type={'number'}
               addonAfter={'Kg'}

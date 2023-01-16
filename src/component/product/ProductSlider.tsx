@@ -50,7 +50,7 @@ const ProductSlider:FC<any>= ({productInfo}) => {
         showNav={false}
       /> */}
 
-      <img src={productInfo.image} className='img-fluid mx-auto'/>
+      
     </div>
   )
 }

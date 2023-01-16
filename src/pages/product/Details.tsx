@@ -6,12 +6,15 @@ import RelatedProduct from '../../component/product/RelatedProduct'
 
 const Details:FC<any> = () => {
   const { state } = useLocation();
+  const {cardData} = state;
   useEffect(() => scrollTo(0,0), []);
+ 
+  
   return (
     <div className=' col-12'>
       <div className='col-12'>
-        <ProductCom data={state}/>
-        <RelatedProduct data={state}/>
+        <ProductCom data={cardData}/>
+        {/* <RelatedProduct data={state}/> */}
       </div>
     </div>
   )

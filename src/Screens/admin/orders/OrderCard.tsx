@@ -2,7 +2,7 @@ import React,{FC} from 'react';
 import { Card } from 'antd';
 import { orderType } from '../../../types';
 import { useNavigate } from 'react-router-dom';
-import {EnvironmentOutlined} from '@ant-design/icons';
+
 type PropTypes = {
  order: orderType
 };
@@ -20,6 +20,20 @@ const setCardBgColor = (status: string) => {
   } else {
     return 'bgblue'
   }
+}
+
+const getStatus = (status: string) => {
+    if(status === 'CANCELED'){
+       return 'Cancelled'
+    }else if(status === 'CREATED'){
+      return 'Created'
+    }else if(status === 'OFD') {
+      return 'Out For Delivery'
+    }else if(status === 'COMPLETED'){
+      return 'Delivered'
+    }else {
+      return status;
+    }
 }
 
 const OrderCard:FC<PropTypes> = ({order}) => {
@@ -42,25 +56,11 @@ const OrderCard:FC<PropTypes> = ({order}) => {
           Total Product: {order.productList.length}
         </p>
         <p className='h6 fontWeight-500'>
-          Order Status: {order.status}
+          Order Status: {getStatus(order.status)}
         </p>
         <p className='h6 fontWeight-500'>
           Order Total: {order.netAmount}
         </p>
-        {/* <div className="col-12 d-flex justify-content-between align-item-center">
-         <p>Total: {order.netAmount}</p>
-         <div className='me-4'>
-            <a 
-              onClick={() => {
-                navigate('/orderDetails', {order: order})
-              }} 
-              className='btn btn-success text-light btnGreen'
-            >
-              View Order
-            </a>
-          </div>
-        </div> */}
-        
       </Card>
   )
 };

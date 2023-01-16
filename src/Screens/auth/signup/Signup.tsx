@@ -39,38 +39,43 @@ function Signup() {
       setlocalError({ ...localErrorState, firstnameError: '' })
       if(input.lastname!=''){
         setlocalError({ ...localErrorState, lastnameError: '' })
-        if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input.email)){
-          setlocalError({ ...localErrorState, emailError: '' })
-          if(input.password.length === 0){
-            setlocalError({ ...localErrorState, passwordError: 'Required !' })
-            return false;
-          }else if(input.password.length < 8){
-            setlocalError({ ...localErrorState, passwordError: 'Password must be of 8 digits !' })
-            return false;
-          }else{
-            setlocalError({ ...localErrorState, passwordError: '' })
-            if(input.confirm_password.length === 0){
-              setlocalError({ ...localErrorState, confirm_password: 'Required !' });
+        if(input.email !== ''){
+          if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input.email)){
+            setlocalError({ ...localErrorState, emailError: '' })
+            if(input.password.length === 0){
+              setlocalError({ ...localErrorState, passwordError: 'Password is Required' })
               return false;
-            }
-            else if(input.password !== input.confirm_password){
-              setlocalError({ ...localErrorState, confirm_password: 'Password not matched !' })
-              return false
+            }else if(input.password.length < 8){
+              setlocalError({ ...localErrorState, passwordError: 'Password must be of 8 digits !' })
+              return false;
             }else{
-              setlocalError({ ...localErrorState, confirm_password: ''  })
-              return true
+              setlocalError({ ...localErrorState, passwordError: '' })
+              if(input.confirm_password.length === 0){
+                setlocalError({ ...localErrorState, confirm_password: 'Please Confirm your Password' });
+                return false;
+              }
+              else if(input.password !== input.confirm_password){
+                setlocalError({ ...localErrorState, confirm_password: 'Password not matched !' })
+                return false
+              }else{
+                setlocalError({ ...localErrorState, confirm_password: ''  })
+                return true
+              }
             }
+          }else{
+            setlocalError({ ...localErrorState, emailError: 'Please enter a valid Email' })
+            return false
           }
         }else{
-          setlocalError({ ...localErrorState, emailError: 'Wrong Email' })
-          return false
+          setlocalError({ ...localErrorState, emailError: 'Email is Required' })
+            return false
         }
       }else{
-        setlocalError({ ...localErrorState, lastnameError: 'Required field' })
+        setlocalError({ ...localErrorState, lastnameError: 'Lastname is Required' })
         return false
       }
     }else{
-      setlocalError({ ...localErrorState, firstnameError: 'Required field' })
+      setlocalError({ ...localErrorState, firstnameError: 'Firstname is Required' })
       return false
     }
   }
@@ -80,7 +85,11 @@ function Signup() {
 
   const navigationHandler = () => {
     if(checkValidation()){
-      handelSignup(user)
+      const data = {
+        ...user,
+        email: user.email.toLowerCase(),
+      }
+      handelSignup(data)
     }
    
   }

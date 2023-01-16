@@ -35,9 +35,9 @@ function CategoryList() {
                             Products <span className='text-dark fw-bold'>/Category</span>
                         </p>
                     </div>
-                    <div className='me-4'>
+                    {/* <div className='me-4'>
                         <a className='btn btn-success text-light btnGreen'>Add Category</a>
-                    </div>
+                    </div> */}
                 </div>
             </div>
             <div className="container row mx-auto">

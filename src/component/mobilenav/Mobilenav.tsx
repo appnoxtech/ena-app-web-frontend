@@ -36,6 +36,11 @@ const Mobilenav = ({ }) => {
     setCount(countGlobal);
   }, [countGlobal]);
 
+  useEffect(() => {
+    const container = document.querySelector('.navlink-container');
+    // container.addEventListener('click', () => )
+  }, [])
+
   return (
     <>
       <div className=' d-flex-column w-100 border'>
@@ -67,10 +72,10 @@ const Mobilenav = ({ }) => {
               <div className='mt-3'>
                 <ul className=''>
                   {MenuItem.map((item, index) => (
-                    <li className='py-2' key={index}>
-                      <NavLink className='h3' to={item.path}>
+                    <li className='py-2 navlink-container' key={index} >
+                      <div aria-label='Close' data-bs-toggle='offcanvas'  className='h3' onClick={()=>navigate(item.path)}  >
                         {item.navName}
-                      </NavLink>
+                      </div>
                     </li>
                   ))}
                 </ul>

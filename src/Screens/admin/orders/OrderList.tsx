@@ -48,7 +48,6 @@ const OrderList: FC<any> = () => {
     getOrderList('live');
 
     socket.on('connect', () => {
-      console.log('Hi connection is runned');
       setIsConnected(true);
     });
 
@@ -58,12 +57,11 @@ const OrderList: FC<any> = () => {
 
     socket.on('ORDER_CREATED', (data) => {
         try {
-          console.log({ ...data });
           if(data){
             setOrderList(data);
            }
         } catch (error) {
-          console.error(error);
+          console.log(error);
         }
       });
 
@@ -84,7 +82,7 @@ const OrderList: FC<any> = () => {
       value: 'COMPLETED'
     },
     {
-      label: 'Canceled Order',
+      label: 'Cancelled Order',
       value: 'CANCELED'
     }
   ];

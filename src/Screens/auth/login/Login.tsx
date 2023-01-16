@@ -27,32 +27,42 @@ function Login() {
   const [localError, setlocalError] = useState(localErrorState)
 
   const checkValidation = () => {
-    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input.email)) {
-      setlocalError({ ...localErrorState, emailError: '' })
-      if (input.password.length >= 8) {
-        setlocalError({
-          ...localErrorState,
-          passwordError: '',
-        })
-        return true
+    if(input.email !== ''){
+      if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input.email)) {
+        setlocalError({ ...localErrorState, emailError: '' })
+        if (input.password.length >= 8) {
+          setlocalError({
+            ...localErrorState,
+            passwordError: '',
+          })
+          return true
+        } else {
+          setlocalError({
+            ...localErrorState,
+            passwordError: 'Please Enter Your 8 digit Password.',
+          })
+          return false
+        }
       } else {
-        setlocalError({
-          ...localErrorState,
-          passwordError: 'please enter 8 digits',
-        })
+        setlocalError({ ...localErrorState, emailError: 'Invalid Email' })
         return false
       }
-    } else {
-      setlocalError({ ...localErrorState, emailError: 'Email is not valid' })
-      return false
+    }else {
+      setlocalError({ ...localErrorState, emailError: 'Email is Required' })
+        return false
     }
+   
   }
 
   // -------- validation Ends -----------
 
   const navigationHandler = () => {
     if (checkValidation()) {
-      handleLogin(input, '/')
+      const data = {
+        email: input.email.toLowerCase(),
+        password: input.password
+      }
+      handleLogin(data, '/');
     }
   }
 

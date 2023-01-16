@@ -20,8 +20,8 @@ const SelectCategory = ({changeCategorie}) => {
           label: 'Dry fruits',
         },
         {
-            key: '63a0198f291ae32acdb68d0c',
-            label: 'Spieces',
+            key: '63a01998291ae32acdb68d0c',
+            label: 'Spices',
         },
         {
             key: '63a0199f291ae32acdb68d0e',

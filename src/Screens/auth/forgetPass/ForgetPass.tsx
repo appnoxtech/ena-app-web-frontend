@@ -26,21 +26,28 @@ function ForgetPass() {
   const [localError, setlocalError] = useState(initialError)
 
   const checkValidation = () => {
-    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input.email)) {
-      setlocalError({ email: '' })
-    } else {
-      setlocalError({ email: 'You have entered an invalid email address!' })
+    if(input.email !== ''){
+      if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input.email)) {
+        setlocalError({ email: '' });
+        return true;
+      } else {
+        setlocalError({ email: 'Please Enter a Valid Email' });
+        return false;
+      }
+    }else{
+      setlocalError({ email: 'Please Enter your Registered Email Id.' });
+      return false;
     }
   }
 
   // -------- navigate handler --------
 
-  const navigationHandler = () => {
-    checkValidation()
-    if (localError.email == '') {
-      handleForgetPass(input)
-    } else {
-      alert('wrong inputs !')
+  const navigationHandler = async () => {
+    if (checkValidation()) {
+      const data = {
+        email: input.email.toLowerCase(),
+      }
+      await handleForgetPass(data);
     }
   }
 

@@ -21,22 +21,46 @@ function ResetPass() {
     password: '',
     confirmPassword: '',
   }
-  const localErrorState = { passwordError: '' }
+  const localErrorState = { passwordError: '', confirmPassword: '' }
 
   const [input, setinput] = useState(initialState)
 
   const [localError, setlocalError] = useState(localErrorState)
 
-  const checkValidation = () => {}
+  const checkValidation = () => {
+    if(input.password !== ''){
+      if(input.password.length >= 8){
+        setlocalError({ ...localErrorState, passwordError: '' });
+        if(input.confirmPassword !== ''){
+          if(input.confirmPassword === input.password){
+            setlocalError({ ...localErrorState, confirmPassword: '' });
+            return true;
+          }else{
+            setlocalError({ ...localErrorState, confirmPassword: "Password doesn't match" });
+            return false;
+          }
+        }else{
+          setlocalError({ ...localErrorState, confirmPassword: 'Please Confirm your Password' });
+          return false;
+        }
+      }else{
+        setlocalError({ ...localErrorState, passwordError: 'Password must be of 8 digits' });
+        return false
+      }
+
+    }else{
+      setlocalError({ ...localErrorState, passwordError: 'Password is Required' });
+      return false;
+    }
+  }
 
   // -------- navigate handler --------
 
-  const navigationHandler = () => {
-    if (input.password == input.confirmPassword && input.password.length >= 8) {
-      setlocalError({ ...localErrorState, passwordError: '' })
-      handleCreatePass(input)
-    } else {
-      setlocalError({ ...localErrorState, passwordError: 'Password not matched' })
+  const navigationHandler = async() => {
+    if (checkValidation()) {
+      await handleCreatePass(input);
+    }else {
+      return
     }
   }
 
@@ -68,6 +92,9 @@ function ResetPass() {
                   Input={input}
                   setInput={setinput}
                 />
+                {localError.passwordError == '' ? null : (
+                  <p className='text-danger mt-1'>{localError.passwordError}</p>
+                )}
                 <label className='form-label mt-3 h6 d-none d-lg-block d-md-block'>
                   Confirm Password
                 </label>
@@ -80,8 +107,8 @@ function ResetPass() {
                   Input={input}
                   setInput={setinput}
                 />
-                {localError.passwordError == '' ? null : (
-                  <p className='text-danger mt-1'>{localError.passwordError}</p>
+                {localError.confirmPassword == '' ? null : (
+                  <p className='text-danger mt-1'>{localError.confirmPassword}</p>
                 )}
                 <ButtonComp
                   navigationHandler={navigationHandler}
