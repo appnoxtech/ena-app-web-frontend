@@ -94,8 +94,6 @@ const CartCom = () => {
         quantity: ItemQuantity,
         price: CardItem.price,
       }
-      console.log('cart update data', data);
-
       const newList = updateCartItem(data);
       setCartList(newList);
     }

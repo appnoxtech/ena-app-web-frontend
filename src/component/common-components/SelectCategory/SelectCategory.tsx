@@ -3,7 +3,7 @@ import { DownOutlined } from '@ant-design/icons';
 import { Dropdown, Space, Typography } from 'antd';
 import { GetAllCategory } from '../../../services/product/productService';
 
-const SelectCategory = ({changeCategorie}) => {
+const SelectCategory: React.FC<any> = ({changeCategorie}) => {
     const [categoryList, setCategoryList] = useState([{}]);
     const [currCat, setCurrCat] = useState('');
     const items = [
@@ -54,17 +54,14 @@ const SelectCategory = ({changeCategorie}) => {
         handleCurrentCategory();
     }, []);
 
-    console.log('categoryList', categoryList);
-    console.log('currCat', typeof currCat);
-
     return (
         <Dropdown
             menu={{
                 items,
-                slot: categoryList.length,
+                slot: categoryList.length.toString(),
                 selectable: true,
                 defaultSelectedKeys: [`${currCat}`],
-                onClick: ({ item, key, keyPath, domEvent }) => changeCategorie(key)
+                onClick: ({ key}) => changeCategorie(key)
             }}
         >
             <Typography.Link>

@@ -4,8 +4,15 @@ import { Button, Card, InputNumber, Space } from 'antd';
 import '../../assets/global/global.css';
 import { useUpdateBidAmount } from '../../hooks/carts/updateBidAmount';
 import { useUpdateCartItem } from '../../hooks/carts/updateCartItem';
+import { orderType, products } from '../../types';
 
-const ProductCard = (
+interface propsType {
+    item: products,
+    handleItemCountChange: (item: products, ItemQuantity: number) => {},
+    handleBidAmountChange: (item: products, bidAmount: number) => {},
+    handleRemoveCart: (item: products) => {}
+}
+const ProductCard: React.FC<propsType> = (
     { item,
       handleItemCountChange, 
       handleBidAmountChange, 
@@ -24,7 +31,6 @@ const ProductCard = (
                     danger
                     shape="circle"
                     icon={<FaTrash />}
-                    size={'medium'}
                     onClick={() => handleRemoveCart(item)}
                 />
             }
@@ -39,18 +45,17 @@ const ProductCard = (
                             <h4 className='font-green'>Seller Price: {`€ ${item.price}`}</h4>
                         </div>
                         <div className="d-flex">
-                            <h7 className='me-2 fontWeight-600'>Quanity: </h7>
-                            <h7>{`${item.quantity} KG`}</h7>
+                            <p className='fs-7 mb-0 me-2 fontWeight-600'>Quanity: </p>
+                            <p className='fs-7 mb-0'>{`${item.quantity} KG`}</p>
                         </div>
                         <div className="d-flex">
-                            <h7 className='me-2 fontWeight-600'>Total: </h7>
-                            <h7>{`${(item.price * item.quantity).toFixed(2)}`}</h7>
+                            <p className='fs-7 mb-0 me-2 fontWeight-600'>Total: </p>
+                            <p className='fs-7 mb-0'>{`${(item.price * item.quantity).toFixed(2)}`}</p>
                         </div>
                         <div className="d-flex">
-                            <h7 className='me-2 fontWeight-600'>Bid Total: </h7>
-                            <h7>{`${(item.bidAmount * item.quantity).toFixed(2)}`}</h7>
+                            <p className='fs-7 mb-0 me-2 fontWeight-600'>Bid Total: </p>
+                            <p className='fs-7 mb-0'>{`${(item.bidAmount * item.quantity).toFixed(2)}`}</p>
                         </div>
-
                     </div>
                 </div>
                 <div className="col-12 col-lg-6 pt-3">
@@ -58,7 +63,6 @@ const ProductCard = (
                         <div className='d-flex col-12 justify-content-between'>
                             <div className="col-4 col-lg-5">
                                 <InputNumber type={'number'} min={1} value={ItemQuantity} onChange={(value) => {
-                                    console.log('value', value);
                                     setItemQuantity(value)
                                 }} />
                             </div>

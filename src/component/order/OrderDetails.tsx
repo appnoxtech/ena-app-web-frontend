@@ -1,52 +1,15 @@
-import React, { useEffect, useState, FC } from 'react';
+import React, { useEffect, useState} from 'react';
 import "react-step-progress-bar/styles.css";
-import { ProgressBar, Step } from "react-step-progress-bar";
+import { Card } from 'antd';
 import Table from 'react-bootstrap/Table'
-import Tomato from '../../assets/images/6-tomato-png-image.png'
-import CustomButton from '../Button/Button';
-import WarningModal from '../WarningModal/WarningModal';
 import './Order.css'
-import { GetCartDetailsService } from '../../services/cart/cartService';
-import { GetOrderLiveStatus } from '../../services/order/OrderService';
-import OrderTracking from './OrderTracking';
 import '../../assets/global/global.css';
 import OrderSteps from '../orderSteps/OrderSteps';
-import { Card } from 'antd';
 
-const OrderDetails = () => {
-    const [showModal, setShowModal] = useState(false);
+
+const OrderDetails: React.FC<any> = () => {
     const order = JSON.parse(localStorage.getItem('orderDetail'));
     const [orderList, setOrderList] = useState([]);
-    const displayModal = () => {
-        console.log('display fn.called');
-
-        setShowModal(true);
-    }
-    const hideModal = () => {
-        setShowModal(false);
-    }
-    const handleOrderTracking = () => {
-        console.log('function will handle order tracking ..');
-    }
-
-    //   const getOrderList = async() => {
-    //     try {
-    //       const res = await GetOrderLiveStatus();
-    //       const list = res.data.result;
-
-    //       if(list.length > 0) {
-    //         list.map((item:any) => {
-    //           setOrderList([...orderList, ...item.productList]);
-    //         })
-    //       }
-    //     } catch (error) {
-    //        alert(error.message);
-    //     }
-    //   };
-
-    //   useEffect(() => {
-    //     getOrderList();
-    //   }, []);
 
     useEffect(() => {
         const data = localStorage.getItem('orderDetail');
@@ -55,8 +18,6 @@ const OrderDetails = () => {
             setOrderList(order.productList);
         }
     }, []);
-
-    console.log('orderList', order);
 
     return (
         <div className='container-fluid pb-5 mt-5'>
@@ -116,11 +77,6 @@ const OrderDetails = () => {
                     <p className='fs-5'>{`${order.addressInfo.state}, ${order.addressInfo.pincode}`}</p>
                     <p className='fs-5'>{`Phone: 9667699240`}</p>
                 </Card>
-
-                {/* <Card title="Payments Details" bordered={true} className='col-12 my-2'>
-                    <p className='fs-5 fw-semibold'>Payment Method</p>
-                    <p className='fs-5 fw-normal text-muted'>Pay On Delivery (POD)</p>
-                </Card> */}
                 </div>
             </div>
             

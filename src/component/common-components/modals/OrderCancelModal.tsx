@@ -1,15 +1,11 @@
-import io from 'socket.io-client';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
 import React from 'react';
+import Modal from 'react-bootstrap/Modal';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
 import ButtonComp from '../buttonComp/ButtonComp';
 import { CancelOrder } from '../../../services/order/OrderService';
-import { hostname } from '../../../GlobalVariable';
 
-const socket = io(hostname);
 
-function OrderCancelModal(props) {
+const OrderCancelModal: React.FC<any> = (props) => {
   const handelCancelOrder = async () => {
     try {
       const data = { orderId: props.id }
@@ -20,7 +16,7 @@ function OrderCancelModal(props) {
       alert(error.message)
     }
   }
-  console.log('id', props.id);
+
   return (
     <Modal
       {...props}

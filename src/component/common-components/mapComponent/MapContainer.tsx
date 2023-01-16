@@ -5,34 +5,34 @@ import { GoogleMap, useLoadScript, MarkerF } from "@react-google-maps/api";
 import './MapContainer.css';
 import { hostname } from "../../../GlobalVariable";
 import { GetRiderDetailsById } from "../../../services/rider/RiderService";
+import useErrorHandler from "../../../services/handler/ErrorHandler";
 
 const socket = io(hostname);
 
-export default function MapContainer({ agentId }) {
+const MapContainer: React.FC<any> = ({ agentId }) => {
   const [isConnected, setIsConnected] = useState(socket.connected);
+  const showError = useErrorHandler()
   const [location, setLocation] = useState({});
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: 'AIzaSyAtJy10hcuCv7AhN6Bxw_Z2OwDSE5-_eHY',
   });
 
-  const getSelectedRiderDetails = async (id) => {
+  const getSelectedRiderDetails = async (id: string) => {
     try {
       const res = await GetRiderDetailsById(id);
-      console.log('rider details', res.data);
       const data = res.data.data;
       if (data.currentLocation) {
         const { lat, lng } = data.currentLocation;
         setLocation({ lat, lng });
       }
     } catch (error) {
-      alert(error.message);
+      showError(error);
     }
   }
 
   useEffect(() => {
     getSelectedRiderDetails(agentId);
     socket.on('connect', () => {
-      console.log('Socket is Connected ====>');
       setIsConnected(true);
     });
 
@@ -44,15 +44,14 @@ export default function MapContainer({ agentId }) {
 
     socket.on('LOCATION_CHANGED', (data) => {
       try {
-        console.log('Location Data', { ...data });
+       // console.log('Location Data', { ...data });
         if (data) {
           //setOrder(data);
           const location = data.currentLocation;
-          console.log('location', location);
           setLocation(location);
         }
       } catch (error) {
-        console.error('Socket Error', error);
+        showError(error)
       }
     });
     return () => {
@@ -96,3 +95,5 @@ function Map({ location }) {
     </GoogleMap>
   );
 }
+
+export default MapContainer;

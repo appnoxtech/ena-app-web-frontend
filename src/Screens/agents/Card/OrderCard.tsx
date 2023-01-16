@@ -5,7 +5,6 @@ import { orderType } from '../../../types';
 
 type PropTypes = {
  order: orderType,
- clickHandler: any,
 };
 
 const getDate = (data: number) => {
@@ -23,7 +22,7 @@ const setCardBgColor = (status: string) => {
   }
 }
 
-const OrderCard:FC<PropTypes> = ({order, clickHandler}) => {
+const OrderCard:FC<PropTypes> = ({order}) => {
   const navigate = useNavigate();
   
   return (
@@ -49,20 +48,6 @@ const OrderCard:FC<PropTypes> = ({order, clickHandler}) => {
         <p className='h6 fontWeight-500'>
           Order Total: {order.netAmount}
         </p>
-        {/* <div className="col-12 d-flex justify-content-between align-item-center">
-         <p>Total: {order.netAmount}</p>
-         <div className='me-4'>
-            <a 
-              onClick={() => {
-                navigate('/orderDetails', {order: order})
-              }} 
-              className='btn btn-success text-light btnGreen'
-            >
-              View Order
-            </a>
-          </div>
-        </div> */}
-        
       </Card>
   )
 };

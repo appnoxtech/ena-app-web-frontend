@@ -15,6 +15,7 @@ import { useAddItemToCartHooks } from '../../hooks/carts/addintoCart';
 import { useDispatch } from 'react-redux';
 import { decreaseCartCount, increaseCartCount } from '../../redux/reducer/cart/CartReducer';
 import { useRemoveItemFromCart } from '../../hooks/carts/removeFromCart';
+import { products } from '../../types';
 
 const RenderTableRow = ({ product }) => {
   const [itemCount, setItemCount] = React.useState(10);
@@ -28,7 +29,7 @@ const RenderTableRow = ({ product }) => {
 
     if (list) {
       const cartList = JSON.parse(list);
-      const item = cartList.find((item) => item.productId === product._id);
+      const item = cartList.find((item: any) => item.productId === product._id);
       if (item) {
         setItemCount(item.quantity);
         setIsItemAddedToCart(true)
@@ -116,10 +117,13 @@ const RenderTableRow = ({ product }) => {
 
 
 
-const ProductTable = ({ ProductList, setCurrPage, currPage }) => {
-  const tableEl = React.useRef()
+const ProductTable: React.FC<any> = ({ ProductList, setCurrPage, currPage }) => {
+  const tableEl = React.useRef<any>()
 
   const scrollListener = () => {
+    if(!tableEl.current){
+      return
+    }
     let bottom = tableEl.current.scrollHeight - tableEl.current.clientHeight
     if (tableEl.current.scrollTop === bottom) {
       console.log('Reached bottom');
@@ -151,7 +155,7 @@ const ProductTable = ({ ProductList, setCurrPage, currPage }) => {
           </TableHead>
           <TableBody >
             {
-              ProductList.map(product => <RenderTableRow product={product} />)
+              ProductList.map((product: any) => <RenderTableRow product={product} />)
             }
           </TableBody>
         </Table>

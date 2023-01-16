@@ -1,12 +1,12 @@
+import React, { Component, useState }  from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import React, { Component, useState }  from 'react';
-import LoginInput from '../loginInput';
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useLoginHook } from '../../../hooks/authHooks/LoginHook';
 import ButtonComp from '../buttonComp/ButtonComp';
+import LoginInput from '../loginInput';
 
-export default function LoginModal(props) {
+const LoginModal: React.FC<any> = (props) => {
     const localErrorState = { emailError: '', passwordError: '' }
     const handleLogin = useLoginHook()
     const [input, setinput] = useState({
@@ -115,3 +115,5 @@ export default function LoginModal(props) {
     </Modal>
   );
 }
+
+export default LoginModal;

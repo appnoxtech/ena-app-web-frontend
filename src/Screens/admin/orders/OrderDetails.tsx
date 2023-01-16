@@ -313,7 +313,7 @@ const OrderDetails: FC<any> = (props) => {
                 <div className="col-12 col-lg-3 px-3 d-flex flex-column">
                     <div className="col-12 shadow rounded mt-3 mt-lg-0 mb-3">
                         <Card title="Order History" bordered={false} style={{ width: '100%' }}>
-                            <OrderSteps />
+                            <OrderSteps orderStatus={order.status} />
                         </Card>
                     </div>
                     {

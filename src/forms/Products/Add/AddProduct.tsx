@@ -34,11 +34,11 @@ const errorInitialState = {
     description: '',
 }
 
-export default function AddProductForm(props) {
+const AddProductForm: React.FC<any> = (props) => {
     const showError = useErrorHandler();
     const [localError, setLocalError] = useState(errorInitialState);
     const [product, setProduct] = useState(initialState);
-    const CategoreList = useSelector(state => state.categorie.categorieList);
+    const CategoreList = useSelector((state: any) => state.categorie.categorieList);
     const [isUpdate, setIsUpdate] = useState(false);
     const Notification = useContext(NotificationContext);
 
@@ -53,28 +53,41 @@ export default function AddProductForm(props) {
         }
     }
 
-    const validation = () => {
-        const error = {};
-        Object.keys(product).forEach(id => {
-            if (product[id] === '') {
-                return error[id] = 'Required'
-            }
-            else {
-                return error[id] = ''
+    // const validation = () => {
+    //     const error = {};
+    //     Object.keys(product).forEach(id => {
+    //         if (product[id] === '') {
+    //             return error[id] = 'Required'
+    //         }
+    //         else {
+    //             return error[id] = ''
+    //         }
+    //     });
+    //     setLocalError(error);
+    //     return error;
+    // }
+
+    const validation = (): boolean => {
+        const error = {...errorInitialState};
+        Object.keys(product).map(key => {
+            if (product[key].length === 0) {
+                error[key] = 'Required !'
             }
         });
-        setLocalError(error);
-        return error;
-    }
+        setLocalError({...error});
+        const errorList = Object.keys(error).filter(key => error[key].length > 0);
+        if (errorList.length === 0) {
+            return true;
+        } else {
+            return false;
+        }
+    };
 
     console.log('CategoreList', CategoreList);
 
     const handleAddProduct = async () => {
-        const error = validation();
-        const isErrorLength = Object.keys(error).filter(id => error[id] !== '').length;
-        console.log('isErrorLength', isErrorLength);
 
-        if (isErrorLength === 0) {
+        if (validation()) {
             try {
                 if (isUpdate) {
                     const data = {
@@ -160,7 +173,7 @@ export default function AddProductForm(props) {
                     {!isUpdate ? `Add Product` : 'Update Product'}
                 </Modal.Title>
             </Modal.Header>
-            <Modal.Body style={{ overFlow: 'auto' }}>
+            <Modal.Body className='overflow-auto'>
                 <div className='col-10 mx-auto pt-0 mt-3'>
                     <div
                         className="d-flex me-3 justify-content-center align-item-center"
@@ -349,3 +362,5 @@ export default function AddProductForm(props) {
         </Modal>
     );
 }
+
+export default AddProductForm
