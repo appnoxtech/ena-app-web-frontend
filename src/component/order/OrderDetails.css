@@ -1,9 +1,0 @@
-.fixedHeightTable{
-    height: 63vh !important;
-    overflow: auto;
-}
-
-.header{
-    position:sticky;
-    top: 0 ;
-}
