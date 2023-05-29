@@ -1,0 +1,87 @@
+/* font weight */
+
+.fontWeight-100{
+    font-weight: 100 !important;
+  }
+  
+  .fontWeight-200{
+    font-weight: 200 !important;
+  }
+  
+  .fontWeight-300{
+    font-weight: 300 !important;
+  }
+  
+  .fontWeight-400{
+    font-weight: 400 !important;
+  }
+  
+  .fontWeight-500{
+    font-weight: 500 !important;
+  }
+  
+  .fontWeight-600{
+    font-weight: 600 !important;
+  }
+  
+  .fontWeight-700{
+    font-weight: 700 !important;
+  }
+  
+  
+  /* font color  */
+  
+  .font-green{
+    color: #51BC4A;
+  }
+  
+  
+  .font-white{
+  color: #fff;
+  }
+  
+  
+  /* background color  */
+  
+  .back-g-green{
+    background: #51BC4A;
+  }
+  
+
+  .back-g-lightwhite{
+    background: #F8F9F7;
+  }
+
+
+  .border_radius1{
+    border-radius: 12px !important;
+  }
+
+  .mt-90{
+    margin-top: 90px;
+  }
+
+  @media screen and (max-width: 576px) {
+    .mt-90{
+      margin-top: 0px;
+    }
+  }
+
+  .text-dots{
+    display: block;
+    color: #333333;
+    opacity: .4;
+    max-width: 98%;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+  }
+
+  .image-fit{
+    object-fit: cover;
+    object-position: center;
+  }
+
+  *:focus {
+    outline: none;
+}

@@ -1,0 +1,49 @@
+.navli {
+  text-decoration: none;
+  list-style: none;
+  color: black;
+  font-weight: 500;
+  line-height: 15px;
+}
+
+.navOuter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  
+
+}
+
+.imageProp {
+  max-width: 90px;
+  height: auto;
+  background-color: #fff;
+}
+.person-icon{
+    width:70px;
+    font-size: 25px;
+}
+.heart_icon{
+    width:70px;
+    font-size: 25px;
+}
+.cart_icon{
+    font-size: 25px;
+}
+
+.nav__link:hover{
+  color:#51BC4A;
+
+};
+
+.cart-container {
+  position: relative;
+}
+
+.cart-count-desk{
+  font-size: large;
+  position: absolute;
+  top: -15px !important;
+  right: 8px !important;
+  color: #51BC4A
+}

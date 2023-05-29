@@ -1,0 +1,75 @@
+
+/*Order Table Heading */
+.orders_Heading thead tr th {
+    width: 100px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    color: #638a65;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color:  #F8F9F7;
+    text-align: center;
+}
+
+.order_image{
+    height:70px;
+    width:70px;
+}
+
+.order_Id{
+    font-size: 13px;
+}
+
+
+
+.shopingCartTableBody td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.orderRow{
+    cursor: pointer;
+    -webkit-transition: background-color 1s ease-out;
+    -moz-transition: background-color 1s ease-out;
+    -o-transition: background-color 1s ease-out;
+    transition: background-color 1s ease-out;
+}
+
+.orderRow:hover{
+    background-color: #baf8be;
+}
+
+.bg-secondary{
+    background-color: #F8F9F7;
+}
+
+.dot{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #B54ABC;
+}
+
+.progressContainer{
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -o-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        transform: rotate(90deg);
+}
+
+.fixedHeightTable{
+    height: 63vh !important;
+    overflow: auto;
+}
+
+.min-width-646{
+    min-width: 646px;
+}
+
+.fixedHeightTable-60{
+    height: 60vh !important;
+    overflow: auto;
+}
+
